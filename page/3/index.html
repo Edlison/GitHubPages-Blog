@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-leetcode/romantointeger" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/13/leetcode/romantointeger/" class="article-date">
+  <time datetime="2020-03-13T09:29:24.134Z" itemprop="datePublished">2020-03-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/13/leetcode/romantointeger/">leetcode/romantointeger</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Roman-to-Integer"><a href="#Roman-to-Integer" class="headerlink" title="Roman to Integer"></a>Roman to Integer</h1><p>Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.</p>
+<p>Symbol       Value<br>I             1<br>V             5<br>X             10<br>L             50<br>C             100<br>D             500<br>M             1000<br>For example, two is written as II in Roman numeral, just two one’s added together. Twelve is written as, XII, which is simply X + II. The number twenty seven is written as XXVII, which is XX + V + II.</p>
+<p>Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:</p>
+<p>I can be placed before V (5) and X (10) to make 4 and 9.<br>X can be placed before L (50) and C (100) to make 40 and 90.<br>C can be placed before D (500) and M (1000) to make 400 and 900.<br>Given a roman numeral, convert it to an integer. Input is guaranteed to be within the range from 1 to 3999.</p>
+<p><strong>Example 1:</strong></p>
+<p>Input: “III”<br>Output: 3  </p>
+<p><strong>Example 2:</strong></p>
+<p>Input: “IV”<br>Output: 4  </p>
+<p><strong>Example 3:</strong></p>
+<p>Input: “IX”<br>Output: 9  </p>
+<p><strong>Example 4:</strong></p>
+<p>Input: “LVIII”<br>Output: 58<br>Explanation: L = 50, V= 5, III = 3.</p>
+<p><strong>Example 5:</strong></p>
+<p>Input: “MCMXCIV”<br>Output: 1994<br>Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">romanToInt</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">char</span>[] array = s.toCharArray();</span><br><span class="line">            <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (trans(array[i]) &gt;= trans(array[i + <span class="number">1</span>])) &#123;</span><br><span class="line">                    sum += trans(array[i]);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    sum -= trans(array[i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (array.length - <span class="number">1</span> &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                sum += trans(array[array.length - <span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> sum;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">trans</span><span class="params">(<span class="keyword">char</span> c)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">switch</span> (c) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">'I'</span>: </span><br><span class="line">                    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            </span><br><span class="line">                <span class="keyword">case</span> <span class="string">'V'</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">case</span> <span class="string">'X'</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">case</span> <span class="string">'L'</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">case</span> <span class="string">'C'</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">case</span> <span class="string">'D'</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="number">500</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">case</span> <span class="string">'M'</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="number">1000</span>;</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>We just need to get right number what each character meaning for. And judge the next character implies whether larger than the current character, then we can get it.</p>
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/roman-to-integer" target="_blank" rel="noopener">https://leetcode-cn.com/problems/roman-to-integer</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/13/leetcode/romantointeger/" data-id="ck8jpnyip000x3ooj9qgmg310" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-leetcode/mergeklist" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/12/leetcode/mergeklist/" class="article-date">
+  <time datetime="2020-03-12T14:26:40.730Z" itemprop="datePublished">2020-03-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/12/leetcode/mergeklist/">leetcode/mergeklist</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Merge-k-Sorted-Lists"><a href="#Merge-k-Sorted-Lists" class="headerlink" title="Merge k Sorted Lists"></a>Merge k Sorted Lists</h1><p>Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.</p>
+<p><strong>Example</strong>:</p>
+<p>Input:<br>[<br>  1-&gt;4-&gt;5,<br>  1-&gt;3-&gt;4,<br>  2-&gt;6<br>]<br>Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">mergeKLists</span><span class="params">(ListNode[] lists)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; nodes = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lists.length; i++) &#123;</span><br><span class="line">            <span class="keyword">while</span> (lists[i] != <span class="keyword">null</span>) &#123;</span><br><span class="line">                nodes.add(lists[i].val);</span><br><span class="line">                lists[i] = lists[i].next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (nodes.size() == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        </span><br><span class="line">        nodes.sort(Comparator.naturalOrder());</span><br><span class="line">        ListNode res = <span class="keyword">new</span> ListNode(nodes.remove(<span class="number">0</span>));</span><br><span class="line">        ListNode p = res;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nodes.size(); i++) &#123;</span><br><span class="line">            p.next = <span class="keyword">new</span> ListNode(nodes.get(i));</span><br><span class="line">            p = p.next;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/merge-k-sorted-lists" target="_blank" rel="noopener">https://leetcode-cn.com/problems/merge-k-sorted-lists</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/12/leetcode/mergeklist/" data-id="ck8jpnyii000p3oojhrtj635u" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-learn/static" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/11/learn/static/" class="article-date">
+  <time datetime="2020-03-11T15:53:05.122Z" itemprop="datePublished">2020-03-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/11/learn/static/">learn/static</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Static-理解"><a href="#Static-理解" class="headerlink" title="Static 理解"></a>Static 理解</h1><h2 id="一-Static关键字的用途"><a href="#一-Static关键字的用途" class="headerlink" title="一. Static关键字的用途"></a>一. Static关键字的用途</h2><p>在《Java编程思想》P86页有这样一段话：</p>
+<p>　　<em>“static方法就是没有this的方法。在static方法内部不能调用非静态方法，反过来是可以的。而且可以在没有创建任何对象的前提下，仅仅通过类本身来调用static方法。这实际上正是static方法的主要用途。”</em></p>
+<p>这段话虽然只是说明了static方法的特殊之处，但是可以看出static关键字的基本作用，简而言之，一句话来描述就是：</p>
+<p>方便在没有创建对象的情况下来进行调用（方法/变量）。</p>
+<p>很显然，被static关键字修饰的方法或者变量不需要依赖于对象来进行访问，只要类被加载了，就可以通过类名去进行访问。</p>
+<p>static可以用来修饰类的成员方法、类的成员变量，另外可以编写static代码块来优化程序性能。</p>
+<p><strong>1. static方法</strong></p>
+<p>static方法一般称作静态方法，由于静态方法不依赖于任何对象就可以进行访问，因此对于静态方法来说，是没有this的，因为它不依附于任何对象，既然都没有对象，就谈不上this了。并且由于这个特性，在静态方法中不能访问类的非静态成员变量和非静态成员方法，因为非静态成员方法/变量都是必须依赖具体的对象才能够被调用。</p>
+<p>但是要注意的是，虽然在静态方法中不能访问非静态成员方法和非静态成员变量，但是在非静态成员方法中是可以访问静态成员方法/变量的。举个简单的例子：</p>
+<p>在上面的代码中，由于print2方法是独立于对象存在的，可以直接用过类名调用。假如说可以在静态方法中访问非静态方法/变量的话，那么如果在main方法中有下面一条语句：</p>
+<p>MyObject.print2();</p>
+<p>此时对象都没有，str2根本就不存在，所以就会产生矛盾了。同样对于方法也是一样，由于你无法预知在print1方法中是否访问了非静态成员变量，所以也禁止在静态成员方法中访问非静态成员方法。</p>
+<p>而对于非静态成员方法，它访问静态成员方法/变量显然是毫无限制的。</p>
+<p>因此，如果说想在不创建对象的情况下调用某个方法，就可以将这个方法设置为static。我们最常见的static方法就是main方法，至于为什么main方法必须是static的，现在就很清楚了。因为程序在执行main方法的时候没有创建任何对象，因此只有通过类名来访问。</p>
+<p>另外记住，关于构造器是否是static方法可参考：<a href="http://blog.csdn.net/qq_17864929/article/details/48006835" target="_blank" rel="noopener">http://blog.csdn.net/qq_17864929/article/details/48006835</a></p>
+<p><strong>2. static变量</strong></p>
+<p>static变量也称作静态变量，静态变量和非静态变量的区别是：静态变量被所有的对象所共享，在内存中只有一个副本，它当且仅当在类初次加载时会被初始化。而非静态变量是对象所拥有的，在创建对象的时候被初始化，存在多个副本，各个对象拥有的副本互不影响。</p>
+<p>static成员变量的初始化顺序按照定义的顺序进行初始化。</p>
+<p><strong>3. static代码块</strong></p>
+<p>static关键字还有一个比较关键的作用就是 用来形成静态代码块以优化程序性能。static块可以置于类中的任何地方，类中可以有多个static块。在类初次被加载的时候，会按照static块的顺序来执行每个static块，并且只会执行一次。</p>
+<p>为什么说static块可以用来优化程序性能，是因为它的特性:只会在类加载的时候执行一次。下面看个例子:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Date birthDate;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(Date birthDate)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.birthDate = birthDate;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isBornBoomer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Date startDate = Date.valueOf(<span class="string">"1946"</span>);</span><br><span class="line">        Date endDate = Date.valueOf(<span class="string">"1964"</span>);</span><br><span class="line">        <span class="keyword">return</span> birthDate.compareTo(startDate)&gt;=<span class="number">0</span> &amp;&amp; birthDate.compareTo(endDate) &lt; <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>isBornBoomer是用来这个人是否是1946-1964年出生的，而每次isBornBoomer被调用的时候，都会生成startDate和birthDate两个对象，造成了空间浪费，如果改成这样效率会更好：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Date birthDate;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Date startDate,endDate;</span><br><span class="line">    <span class="keyword">static</span>&#123;</span><br><span class="line">        startDate = Date.valueOf(<span class="string">"1946"</span>);</span><br><span class="line">        endDate = Date.valueOf(<span class="string">"1964"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(Date birthDate)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.birthDate = birthDate;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isBornBoomer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> birthDate.compareTo(startDate)&gt;=<span class="number">0</span> &amp;&amp; birthDate.compareTo(endDate) &lt; <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因此，很多时候会将一些只需要进行一次的初始化操作都放在static代码块中进行。</p>
+<h2 id="二-Static关键字的误区"><a href="#二-Static关键字的误区" class="headerlink" title="二. Static关键字的误区"></a>二. Static关键字的误区</h2><p><strong>1. static关键字会改变类中成员的访问权限吗？</strong></p>
+<p>有些初学的朋友会将java中的static与C/C++中的static关键字的功能混淆了。在这里只需要记住一点：与C/C++中的static不同，Java中的static关键字不会影响到变量或者方法的作用域。在Java中能够影响到访问权限的只有private、public、protected（包括包访问权限）这几个关键字。static关键字并不会改变变量和方法的访问权限。</p>
+<p><strong>2. 能通过this访问静态成员变量吗？</strong></p>
+<p>虽然对于静态方法来说没有this，那么在非静态方法中能够通过this访问静态成员变量吗？先看下面的一个例子，这段代码输出的结果是什么？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;　　</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> value = <span class="number">33</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Main().printValue();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">printValue</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> value = <span class="number">3</span>;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">33</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>这里面主要考察队this和static的理解。this代表什么？this代表当前对象，那么通过new Main()来调用printValue的话，当前对象就是通过new Main()生成的对象。而static变量是被对象所享有的，因此在printValue中的this.value的值毫无疑问是33。在printValue方法内部的value是局部变量，根本不可能与this关联，所以输出结果是33。在这里永远要记住一点：静态成员变量虽然独立于对象，但是不代表不可以通过对象去访问，所有的静态方法和静态变量都可以通过对象访问（只要访问权限足够）。</p>
+<p><strong>3. static能作用于局部变量么？</strong></p>
+<p>在C/C++中static是可以作用域局部变量的，但是在Java中切记：static是不允许用来修饰局部变量。不要问为什么，这是Java语法的规定。</p>
+<p>具体原因可以参考这篇博文的讨论：<a href="http://www.debugease.com/j2se/178932.html" target="_blank" rel="noopener">http://www.debugease.com/j2se/178932.html</a></p>
+<h2 id="三-常见笔试面试题"><a href="#三-常见笔试面试题" class="headerlink" title="三. 常见笔试面试题"></a>三. 常见笔试面试题</h2><p><strong>1. 下面这段代码的输出结果是什么？</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> <span class="keyword">extends</span> <span class="title">Base</span></span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">static</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"test static"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"test constructor"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Test();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span></span>&#123;</span><br><span class="line">     </span><br><span class="line">    <span class="keyword">static</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"base static"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Base</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"base constructor"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">base static</span></span><br><span class="line"><span class="comment">test static</span></span><br><span class="line"><span class="comment">base constructor</span></span><br><span class="line"><span class="comment">test constructor</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>至于为什么是这个结果，我们先不讨论，先来想一下这段代码具体的执行过程，在执行开始，先要寻找到main方法，因为main方法是程序的入口，但是在执行main方法之前，必须先加载Test类，而在加载Test类的时候发现Test类继承自Base类，因此会转去先加载Base类，在加载Base类的时候，发现有static块，便执行了static块。在Base类加载完成之后，便继续加载Test类，然后发现Test类中也有static块，便执行static块。在加载完所需的类之后，便开始执行main方法。在main方法中执行new Test()的时候会先调用父类的构造器，然后再调用自身的构造器。因此，便出现了上面的输出结果。</p>
+<p><strong>2. 这段代码的输出结果是什么？</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    Person person = <span class="keyword">new</span> Person(<span class="string">"Test"</span>);</span><br><span class="line">    <span class="keyword">static</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"test static"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"test constructor"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> MyClass();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"person static"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"person "</span>+str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> <span class="keyword">extends</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    Person person = <span class="keyword">new</span> Person(<span class="string">"MyClass"</span>);</span><br><span class="line">    <span class="keyword">static</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"myclass static"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyClass</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"myclass constructor"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">test static</span></span><br><span class="line"><span class="comment">myclass static</span></span><br><span class="line"><span class="comment">person static</span></span><br><span class="line"><span class="comment">person Test</span></span><br><span class="line"><span class="comment">test constructor</span></span><br><span class="line"><span class="comment">person MyClass</span></span><br><span class="line"><span class="comment">myclass constructor</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>类似地，我们还是来想一下这段代码的具体执行过程。首先加载Test类，因此会执行Test类中的static块。接着执行new MyClass()，而MyClass类还没有被加载，因此需要加载MyClass类。在加载MyClass类的时候，发现MyClass类继承自Test类，但是由于Test类已经被加载了，所以只需要加载MyClass类，那么就会执行MyClass类的中的static块。在加载完之后，就通过构造器来生成对象。而在生成对象的时候，必须先初始化父类的成员变量，因此会执行Test中的Person person = new Person()，而Person类还没有被加载过，因此会先加载Person类并执行Person类中的static块，接着执行父类的构造器，完成了父类的初始化，然后就来初始化自身了，因此会接着执行MyClass中的Person person = new Person()，最后执行MyClass的构造器。</p>
+<p><strong>3. 这段代码的输出结果是什么？</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">     </span><br><span class="line">    <span class="keyword">static</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"test static 1"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="keyword">static</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"test static 2"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">test static 1</span></span><br><span class="line"><span class="comment">test static 2</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>虽然在main方法中没有任何语句，但是还是会输出，原因上面已经讲述过了。另外，static块可以出现类中的任何地方 <strong>只要不是方法内部，记住，任何方法内部都不行</strong> ，并且执行是按照static块的顺序执行的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/11/learn/static/" data-id="ck8jpnyia000d3ooj90zm5j84" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-learn/innerclass" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/11/learn/innerclass/" class="article-date">
+  <time datetime="2020-03-11T15:49:48.779Z" itemprop="datePublished">2020-03-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/11/learn/innerclass/">learn/innerclass</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="java-内部类和静态内部类的区别"><a href="#java-内部类和静态内部类的区别" class="headerlink" title="java 内部类和静态内部类的区别"></a>java 内部类和静态内部类的区别</h1><p>下面说一说内部类（Inner Class）和静态内部类（Static Nested Class）的区别：<br>定义在一个类内部的类叫内部类，包含内部类的类称为外部类。内部类可以声明public、protected、private等访问限制，可以声明 为abstract的供其他内部类或外部类继承与扩展，或者声明为static、final的，也可以实现特定的接口。外部类按常规的类访问方式使用内部 类，唯一的差别是外部类可以访问内部类的所有方法与属性，包括私有方法与属性。</p>
+<h2 id="一-创建实例"><a href="#一-创建实例" class="headerlink" title="一. 创建实例"></a>一. 创建实例</h2><p>   OutClass.InnerClass obj = outClassInstance.new InnerClass(); //注意是外部类实例.new，内部类</p>
+<p>   AAA.StaticInner in = new AAA.StaticInner();//注意是外部类本身，静态内部类</p>
+<h2 id="二-内部类中的this"><a href="#二-内部类中的this" class="headerlink" title="二. 内部类中的this"></a>二. 内部类中的this</h2><p>   内 部类中的this与其他类一样是指的本身。创建内部类对象时，它会与创造它的外围对象有了某种联系，于是能访问外围类的所有成员，不需任何特殊条件，可理 解为内部类链接到外部类。 用外部类创建内部类对象时，此内部类对象会秘密的捕获一个指向外部类的引用，于是，可以通过这个引用来访问外围类的成员。</p>
+<h2 id="三-外部类访问内部类"><a href="#三-外部类访问内部类" class="headerlink" title="三. 外部类访问内部类"></a>三. 外部类访问内部类</h2><p>   内部类类似外部类的属性，因此访问内部类对象时总是需要一个创建好的外部类对象。内部类对象通过‘外部类名.this.xxx’的形式访问外部类的属性与方法。如：<br>       System.out.println(“Print in inner Outer.index=” + pouter.this.index);<br>       System.out.println(“Print in inner Inner.index=” + this.index);</p>
+<h2 id="四-内部类向上转型"><a href="#四-内部类向上转型" class="headerlink" title="四. 内部类向上转型"></a>四. 内部类向上转型</h2><p>   内部类也可以和普通类一样拥有向上转型的特性。将内部类向上转型为基类型，尤其是接口时，内部类就有了用武之地。如果内部类是private的，只可以被它的外部类问，从而完全隐藏实现的细节。</p>
+<h2 id="五-方法内的类"><a href="#五-方法内的类" class="headerlink" title="五. 方法内的类"></a>五. 方法内的类</h2><p>   方法内创建的类（注意方法中也能定义类），不能加访问修饰符。另外，方法内部的类也不是在调用方法时才会创建的，它们一样也被事先编译了。</p>
+<h2 id="六-静态内部类"><a href="#六-静态内部类" class="headerlink" title="六. 静态内部类"></a>六. 静态内部类</h2><p>   定义静态内部类：在定义内部类的时候，可以在其前面加上一个权限修饰符static。此时这个内部类就变为了静态内部类。</p>
+<p>通常称为嵌套类，当内部类是static时，意味着：</p>
+<p>   [1]要创建嵌套类的对象，并不需要其外围类的对象；</p>
+<p>   [2]不能从嵌套类的对象中访问非静态的外围类对象（不能够从静态内部类的对象中访问外部类的非静态成员）；</p>
+<p>   嵌 套类与普通的内部类还有一个区别：普通内部类的字段与方法，只能放在类的外部层次上，所以普通的内部类不能有static数据和static字段， 也不能包含嵌套类。但是在嵌套类里可以包含所有这些东西。也就是说，在非静态内部类中不可以声明静态成员，只有将某个内部类修饰为静态类，然后才能够在这 个类中定义静态的成员变量与成员方法。</p>
+<p>   另外，在创建静态内部类时不需要将静态内部类的实例绑定在外部类的实例上。普通非静态内部类的 对象是依附在外部类对象之中的，要在一个外部类中定义一个静态的内部类，不需要利用关键字new来创建内部类的实例。静态类和方法只属于类本身，并不属于 该类的对象，更不属于其他外部类的对象。</p>
+<h2 id="七-内部类标识符"><a href="#七-内部类标识符" class="headerlink" title="七. 内部类标识符"></a>七. 内部类标识符</h2><p>   每个类会产生一个.class文件，文件名即为类名。同样，内部类也会产生这么一个.class文件，但是它的名称却不是内部类的类名，而是有着严格的限制：外围类的名字，加上$,再加上内部类名字。</p>
+<h2 id="八-为何要用内部类？"><a href="#八-为何要用内部类？" class="headerlink" title="八. 为何要用内部类？"></a>八. 为何要用内部类？</h2><ol>
+<li><p>内部类一般只为其外部类使用；</p>
+</li>
+<li><p>内部类提供了某种进入外部类的窗户；</p>
+</li>
+<li><p>也是最吸引人的原因，每个内部类都能独立地继承一个接口，而无论外部类是否已经继承了某个接口。因此，内部类使多重继承的解决方案变得更加完整。</p>
+</li>
+</ol>
+<p>加深印象，参考一下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.test.xml;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OutClassTest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> a;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> b;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"outer class static function"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        OutClassTest oc = <span class="keyword">new</span> OutClassTest();</span><br><span class="line">        <span class="comment">// new一个外部类</span></span><br><span class="line">        OutClassTest oc1 = <span class="keyword">new</span> OutClassTest();</span><br><span class="line">        <span class="comment">// 通过外部类的对象new一个非静态的内部类</span></span><br><span class="line">        OutClassTest.InnerClass no_static_inner = oc1.<span class="keyword">new</span> InnerClass();</span><br><span class="line">        <span class="comment">// 调用非静态内部类的方法</span></span><br><span class="line">        System.out.println(no_static_inner.getKey());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 调用静态内部类的静态变量</span></span><br><span class="line">        System.out.println(OutClassTest.InnerStaticClass.static_value);</span><br><span class="line">        <span class="comment">// 不依赖于外部类实例,直接实例化内部静态类</span></span><br><span class="line">        OutClassTest.InnerStaticClass inner = <span class="keyword">new</span> OutClassTest.InnerStaticClass();</span><br><span class="line">        <span class="comment">// 调用静态内部类的非静态方法</span></span><br><span class="line">        System.out.println(inner.getValue());</span><br><span class="line">        <span class="comment">// 调用内部静态类的静态方法</span></span><br><span class="line">        System.out.println(OutClassTest.InnerStaticClass.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">InnerClass</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 只有在静态内部类中才能够声明或定义静态成员</span></span><br><span class="line">        <span class="comment">// private static String tt = "0";</span></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> flag = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">InnerClass</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="comment">// 三.非静态内部类的非静态成员可以访问外部类的非静态变量和静态变量</span></span><br><span class="line">            System.out.println(<span class="string">"InnerClass create a:"</span> + a);</span><br><span class="line">            System.out.println(<span class="string">"InnerClass create b:"</span> + b);</span><br><span class="line">            System.out.println(<span class="string">"InnerClass create flag:"</span> + flag);</span><br><span class="line">            <span class="comment">//</span></span><br><span class="line">            System.out.println(<span class="string">"InnerClass call outer static function"</span>);</span><br><span class="line">            <span class="comment">// 调用外部类的静态方法</span></span><br><span class="line">            test();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span>  String <span class="title">getKey</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"no-static-inner"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">InnerStaticClass</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 静态内部类可以有静态成员，而非静态内部类则不能有静态成员。</span></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> String static_value = <span class="string">"0"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> flag = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">InnerStaticClass</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"InnerClass create a:"</span> + a);</span><br><span class="line">            <span class="comment">// 静态内部类不能够访问外部类的非静态成员</span></span><br><span class="line">            <span class="comment">// System.out.println("InnerClass create b:" + b);</span></span><br><span class="line">            System.out.println(<span class="string">"InnerStaticClass flag is "</span> + flag);</span><br><span class="line">            System.out.println(<span class="string">"InnerStaticClass tt is "</span> + static_value);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="comment">// 静态内部类访问外部类的静态方法</span></span><br><span class="line">            test();</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getMessage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"static-inner"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">OutClassTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// new一个非静态的内部类</span></span><br><span class="line">        InnerClass ic = <span class="keyword">new</span> InnerClass();</span><br><span class="line">        System.out.println(<span class="string">"OuterClass create"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>总结：</strong> </p>
+<ul>
+<li>1.静态内部类可以有静态成员(方法，属性)，而非静态内部类则不能有静态成员(方法，属性)。</li>
+<li>2.静态内部类只能够访问外部类的静态成员,而非静态内部类则可以访问外部类的所有成员(方法，属性)。</li>
+<li>3.实例化一个非静态的内部类的方法：</li>
+<li>a.先生成一个外部类对象实例</li>
+<li>OutClassTest oc1 = new OutClassTest();</li>
+<li>b.通过外部类的对象实例生成内部类对象</li>
+<li>OutClassTest.InnerClass no_static_inner = oc1.new InnerClass();</li>
+<li>4.实例化一个静态内部类的方法：</li>
+<li>a.不依赖于外部类的实例,直接实例化内部类对象</li>
+<li>OutClassTest.InnerStaticClass inner = new OutClassTest.InnerStaticClass();</li>
+<li>b.调用内部静态类的方法或静态变量,通过类名直接调用</li>
+<li>OutClassTest.InnerStaticClass.static_value</li>
+<li>OutClassTest.InnerStaticClass.getMessage()</li>
+</ul>
+<blockquote>
+<p>references:<br><a href="http://hi.baidu.com/zhumulangma/item/bcd478c140427b2cef466532" target="_blank" rel="noopener">http://hi.baidu.com/zhumulangma/item/bcd478c140427b2cef466532</a><br><a href="http://duqiangcise.iteye.com/blog/697476" target="_blank" rel="noopener">http://duqiangcise.iteye.com/blog/697476</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/11/learn/innerclass/" data-id="ck8jpnyi400053ooj4c4p0qzo" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-learn/final" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/11/learn/final/" class="article-date">
+  <time datetime="2020-03-11T13:50:04.608Z" itemprop="datePublished">2020-03-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/11/learn/final/">learn/final</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Final-理解"><a href="#Final-理解" class="headerlink" title="Final 理解"></a>Final 理解</h1><h2 id="一．Final-修饰成员变量的注意事项"><a href="#一．Final-修饰成员变量的注意事项" class="headerlink" title="一．Final 修饰成员变量的注意事项"></a>一．Final 修饰成员变量的注意事项</h2><p>final修饰成员变量，该成员变量必须在创建对象之前进行赋值，否则编译失败<br>final修饰成员变量，固定的不是成员变量拥有的默认值，如果固定的是默认值，那么将导致被final修饰的成员变量的值永远无法修改，只能是默认值，这也不符合语法规则  </p>
+<p>成员变量的赋值有三种实现方式：</p>
+<ul>
+<li>定义成员变量的时候手动赋值</li>
+<li>利用构造器对成员变量进行赋值</li>
+<li>利用set函数进行赋值（也即利用一般的方法进行赋值）</li>
+</ul>
+<p><strong>注意</strong><br>被final修饰的成员变量，只能拥有3中所描述的赋值方法的1，2。3为什么不行？</p>
+<p>解释：如1所描述，被final修饰的成员变量必须在对象创建之前进行赋值，如果方法3可以，那么我们知道对象创建后，才能调用方法3，也就是说成员变量利用方法3进行赋值，会导致成员变量的赋值发生在对象创建之后</p>
+<h2 id="二-为什么被Final修饰的成员变量必须在对象创建之前进行赋值？"><a href="#二-为什么被Final修饰的成员变量必须在对象创建之前进行赋值？" class="headerlink" title="二. 为什么被Final修饰的成员变量必须在对象创建之前进行赋值？"></a>二. 为什么被Final修饰的成员变量必须在对象创建之前进行赋值？</h2><p>理解：<br>被final关键字修饰的东西有一个特点，那就是一旦被修饰，那么它的值也就终生不变，可见final关键字起到了固定的作用，既然起到固定那么，你就要提前告诉final固定的是谁，如果允许被final修饰的成员变量赋值发生在对象创建之后，那么对象创建完成后final固定的值还是未可知的</p>
+<h2 id="三-final修饰成员变量和final修饰局部变量的区别与联系："><a href="#三-final修饰成员变量和final修饰局部变量的区别与联系：" class="headerlink" title="三. final修饰成员变量和final修饰局部变量的区别与联系："></a>三. final修饰成员变量和final修饰局部变量的区别与联系：</h2><ol>
+<li>被final修饰的成员变量与局部变量均具有：一旦赋值，该值就终身不变</li>
+<li>被final修饰的成员变量必须要在创建对象之前进行赋值，否则会编译失败，但是局部变量可以不赋值，但是没有被赋值的局部变量不能够被使用，一旦被使用就会编译失败</li>
+<li>综上：一旦决定使用final关键字来修饰成员变量或者局部变量，一定要做到提前赋值</li>
+</ol>
+<h2 id="四．Final修饰成员方法："><a href="#四．Final修饰成员方法：" class="headerlink" title="四．Final修饰成员方法："></a>四．Final修饰成员方法：</h2><ol>
+<li>final修饰成员方法，该成员方法就不能被子类重写，但是仍然可以被子类继承并可以通过子类对象调用该方法</li>
+</ol>
+<h2 id="五．Final修饰类"><a href="#五．Final修饰类" class="headerlink" title="五．Final修饰类"></a>五．Final修饰类</h2><p>1.final修饰类，该类便不能被其他类继承，但是该类仍然能够创建对象，并且，可以利用该对象调用该类的成员变量或者成员方法</p>
+<h2 id="六．Final使用范围："><a href="#六．Final使用范围：" class="headerlink" title="六．Final使用范围："></a>六．Final使用范围：</h2><p>Final关键字可以修饰类，类的成员变量，类的成员方法，成员方法的局部变量，等等，</p>
+<p>但是final关键字不能用来修饰构造方法？<br>理解：<br>final修饰普通方法，将导致子类无法重写该方法，而构造方法本身就不能够被子类重写，故如果用final修饰，如同多此一举</p>
+<blockquote>
+<p>Reference<br><a href="https://blog.csdn.net/xichengfengyulou/article/details/81155290" target="_blank" rel="noopener">https://blog.csdn.net/xichengfengyulou/article/details/81155290</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/11/learn/final/" data-id="ck8jpnyi200023oojftga4fiv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-leetcode/removeend" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/11/leetcode/removeend/" class="article-date">
+  <time datetime="2020-03-11T13:10:04.043Z" itemprop="datePublished">2020-03-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/11/leetcode/removeend/">leetcode/removeend</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Remove-Nth-Node-From-End-of-List"><a href="#Remove-Nth-Node-From-End-of-List" class="headerlink" title="Remove Nth Node From End of List"></a>Remove Nth Node From End of List</h1><p>Given a linked list, remove the n-th node from the end of list and return its head.</p>
+<p><strong>Example</strong>:</p>
+<p>Given linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5, and n = 2.</p>
+<p>After removing the second node from the end, the linked list becomes 1-&gt;2-&gt;3-&gt;5.</p>
+<p><strong>Note</strong>:</p>
+<p>Given n will always be valid.</p>
+<p><strong>Solution One</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">removeNthFromEnd</span><span class="params">(ListNode head, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        ListNode p = head;</span><br><span class="line">        ListNode temp = head;</span><br><span class="line">        <span class="keyword">int</span> len = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (p == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (p.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            len++;</span><br><span class="line">            p = p.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> loc = len - n;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (loc == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> head.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; loc; i++) &#123;</span><br><span class="line">            temp = temp.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        temp.next = temp.next.next;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Pass one time and get the length of LinkedList, so just count <code>length - n - 1</code> times we can find the pre pointer. All we need to do is point pre pointer.next equal the next of which pointer we should delete.</p>
+<p><strong>Solution Two</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">removeNthFromEnd</span><span class="params">(ListNode head, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        List&lt;ListNode&gt; stack = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        ListNode temp = head;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (temp != <span class="keyword">null</span>) &#123;</span><br><span class="line">            stack.add(temp);</span><br><span class="line">            temp = temp.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ListNode[] list = stack.toArray(<span class="keyword">new</span> ListNode[stack.size()]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ((list.length - n - <span class="number">1</span>) &lt; <span class="number">0</span>) <span class="keyword">return</span> head.next;</span><br><span class="line"></span><br><span class="line">        list[list.length - n - <span class="number">1</span>].next = list[list.length - n].next;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Just let the List structure give a help, we can transfer a <code>LinkedList</code> to an <code>Array</code>. So all we need to do is let <code>list[list.length - n - 1].next</code> equals <code>list[list.length - n].next</code>. </p>
+<p>Base case: if delete the head node we just need to return <code>head.next</code>.</p>
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list" target="_blank" rel="noopener">https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/11/leetcode/removeend/" data-id="ck8jpnyio000w3ooj16n1d6tc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-leetcode/addtwolist" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/10/leetcode/addtwolist/" class="article-date">
+  <time datetime="2020-03-10T14:29:31.892Z" itemprop="datePublished">2020-03-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/10/leetcode/addtwolist/">leetcode/addtwolist</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="两数相加"><a href="#两数相加" class="headerlink" title="两数相加"></a>两数相加</h1><p>给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。</p>
+<p>如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。</p>
+<p>您可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
+<p><strong>示例：</strong></p>
+<p>输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br>输出：7 -&gt; 0 -&gt; 8<br>原因：342 + 465 = 807</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">addTwoNumbers</span><span class="params">(ListNode l1, ListNode l2)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        ListNode head = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        ListNode p = head;</span><br><span class="line">        ListNode pre = p;</span><br><span class="line">        <span class="keyword">int</span> temp;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (l1.next != <span class="keyword">null</span> &amp;&amp; l2.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            temp = l1.val + l2.val;</span><br><span class="line">            <span class="keyword">if</span> (p.val + temp &lt; <span class="number">10</span>) &#123;</span><br><span class="line">                p.val += temp;</span><br><span class="line">                p.next = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">                p = p.next; l1 = l1.next; l2 = l2.next;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                p.val = (p.val + temp) % <span class="number">10</span>;</span><br><span class="line">                p.next = <span class="keyword">new</span> ListNode(<span class="number">1</span>);</span><br><span class="line">                p = p.next; l1 = l1.next; l2 = l2.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        temp = l1.val + l2.val;</span><br><span class="line">        <span class="keyword">if</span> (p.val + temp &lt; <span class="number">10</span>) &#123;</span><br><span class="line">            p.val += temp;</span><br><span class="line">            p.next = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">            pre = p;</span><br><span class="line">            p = p.next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            p.val = (p.val + temp) % <span class="number">10</span>;</span><br><span class="line">            p.next = <span class="keyword">new</span> ListNode(<span class="number">1</span>);</span><br><span class="line">            p = p.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (l1.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            l1 = l1.next;</span><br><span class="line">            <span class="keyword">if</span> (p.val + l1.val &lt; <span class="number">10</span>) &#123;</span><br><span class="line">                p.val += l1.val;</span><br><span class="line">                p.next = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">                pre = p;</span><br><span class="line">                p = p.next;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                p.val = (p.val + l1.val) % <span class="number">10</span>;</span><br><span class="line">                p.next = <span class="keyword">new</span> ListNode(<span class="number">1</span>);</span><br><span class="line">                p = p.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (l2.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            l2 = l2.next;</span><br><span class="line">            <span class="keyword">if</span> (p.val + l2.val &lt; <span class="number">10</span>) &#123;</span><br><span class="line">                p.val += l2.val;</span><br><span class="line">                p.next = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">                pre = p;</span><br><span class="line">                p = p.next;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                p.val = (p.val + l2.val) % <span class="number">10</span>;</span><br><span class="line">                p.next = <span class="keyword">new</span> ListNode(<span class="number">1</span>);</span><br><span class="line">                p = p.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (p.val == <span class="number">0</span>) &#123;</span><br><span class="line">            pre.next = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">执行用时 :3 ms, 在所有 Java 提交中击败了39.78%的用户</span></span><br><span class="line"><span class="comment">内存消耗 :41.1 MB, 在所有 Java 提交中击败了92.22%的用户</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/add-two-numbers" target="_blank" rel="noopener">https://leetcode-cn.com/problems/add-two-numbers</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/10/leetcode/addtwolist/" data-id="ck8jpnyi8000a3ooj8gse6zbe" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-leetcode/hascycle" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/09/leetcode/hascycle/" class="article-date">
+  <time datetime="2020-03-09T09:56:40.686Z" itemprop="datePublished">2020-03-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/09/leetcode/hascycle/">leetcode/hascycle</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="环形链表"><a href="#环形链表" class="headerlink" title="环形链表"></a>环形链表</h1><p>给定一个链表，判断链表中是否有环。</p>
+<p>为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。</p>
+<p><strong>示例 1：</strong></p>
+<p>输入：head = [3,2,0,-4], pos = 1<br>输出：true<br>解释：链表中有一个环，其尾部连接到第二个节点。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        Set&lt;ListNode&gt; container = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (head != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (container.contains(head)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            container.add(head);</span><br><span class="line">            head = head.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="../static/img/container.jpeg" alt="img"><br>Put each <code>ListNode</code> pointer into the <code>Set</code> container.<br>Because every pointer is unique, we just to judge if there’s a pointer’s address we scan has already contained in <code>Set</code>.  </p>
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/linked-list-cycle" target="_blank" rel="noopener">https://leetcode-cn.com/problems/linked-list-cycle</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/09/leetcode/hascycle/" data-id="ck8jpnyid000i3ooj9uj55xhu" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-learn/implements-extends" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/08/learn/implements-extends/" class="article-date">
+  <time datetime="2020-03-08T10:56:21.551Z" itemprop="datePublished">2020-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/08/learn/implements-extends/">learn/implements-extends</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Implements-amp-Extends-的不同"><a href="#Implements-amp-Extends-的不同" class="headerlink" title="Implements &amp; Extends 的不同"></a>Implements &amp; Extends 的不同</h1><p><strong>在类的声明中，通过关键字extends来创建一个类的子类；一个类通过关键字implements声明自己使用一个或者多个接口。</strong></p>
+<ul>
+<li><p>extends 是继承某个类, 继承之后可以使用父类的方法, 也可以重写父类的方法; </p>
+</li>
+<li><p>implements 是实现多个接口, 接口的方法一般为空的, 必须重写才能使用；</p>
+</li>
+<li><p>extends是继承父类，只要那个类不是声明为final或者那个类定义为abstract的就能继承；</p>
+</li>
+<li><p>Java中不支持多重继承，但是可以用接口来实现，这样就要用到implements，继承只能继承一个类，但implements可以实现多个接口，用逗号分开就行了 比如 ：<code>class A extends B implements C,D,E</code>。</p>
+</li>
+</ul>
+<p><strong>接口实现的注意点：</strong>  </p>
+<ul>
+<li><p>实现一个接口就是要实现该接口的所有的方法(抽象类除外)；</p>
+</li>
+<li><p>接口中的方法都是抽象的；</p>
+</li>
+<li><p>多个无关的类可以实现同一个接口，一个类可以实现多个无关的接口。</p>
+</li>
+</ul>
+<p><strong>Implements与Extends的不同</strong></p>
+<p>extends， 可以实现父类，也可以调用父类初始化 this.parent()。而且会覆盖父类定义的变量或者函数。这样的好处是：架构师定义好接口，让工程师实现就可以了。整个项目开发效率和开发成本大大降低。    </p>
+<p>implements，实现父类，子类不可以覆盖父类的方法或者变量。即使子类定义与父类相同的变量或者函数，也会被父类取代掉。  </p>
+<p>这两种实现的具体使用，是要看项目的实际情况，需要实现，不可以修改implements，只定义接口需要具体实现，或者可以被修改扩展性好，用extends。</p>
+<blockquote>
+<p>Reference<br><a href="https://blog.csdn.net/tolcf/article/details/46135645" target="_blank" rel="noopener">https://blog.csdn.net/tolcf/article/details/46135645</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/08/learn/implements-extends/" data-id="ck8jpnyi400043ooj7oa931i9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-leetcode/deletelistduplicates" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/08/leetcode/deletelistduplicates/" class="article-date">
+  <time datetime="2020-03-08T05:20:52.297Z" itemprop="datePublished">2020-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/08/leetcode/deletelistduplicates/">leetcode/deletelistduplicates</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="删除排序链表中的重复元素"><a href="#删除排序链表中的重复元素" class="headerlink" title="删除排序链表中的重复元素"></a>删除排序链表中的重复元素</h1><p>给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。</p>
+<p><strong>示例 1:</strong></p>
+<p>输入: 1-&gt;1-&gt;2<br>输出: 1-&gt;2<br>示例 2:</p>
+<p>输入: 1-&gt;1-&gt;2-&gt;3-&gt;3<br>输出: 1-&gt;2-&gt;3</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">deleteDuplicates</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">       ListNode temp = head;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (temp.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (temp.val == temp.next.val) &#123;</span><br><span class="line">                temp.next = temp.next.next;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            temp = temp.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">执行用时 :1 ms, 在所有 Java 提交中击败了94.59%的用户</span></span><br><span class="line"><span class="comment">内存消耗 :39.3 MB, 在所有 Java 提交中击败了5.00%的用户</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>Base Case: <code>head==null</code><br>Because this is a sorted linked list, we just need to figure out whether the next node’s values equals current node’s value.  </p>
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list" target="_blank" rel="noopener">https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/08/leetcode/deletelistduplicates/" data-id="ck8jpnyib000e3oojgylsfyd9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/04/03/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/31/leetcode/matching/">leetcode/matching</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/30/learn/v2ray-tls/">learn/v2ray-tls</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/29/leetcode/gasstation/">leetcode/gasstation</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/28/leetcode/jumpgame/">leetcode/jumpgame</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
