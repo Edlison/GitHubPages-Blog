@@ -4,17 +4,17 @@
 
 # Site
 title: Edlison
-subtitle: ''
+subtitle: 'recording'
 description: ''
 keywords:
-author: John Doe
-language: en
-timezone: ''
+author: Bolin Shen
+language: zh-CN
+timezone: 'Asia/Shanghai'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
-root: /
+url: http://edlison.com/blog
+root: /blog/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -100,4 +100,4 @@ theme: landscape
 deploy:
   type: git
   repo: https://github.com/Edlison/blog.git
-  branch: master
+  branch: gh-pages
