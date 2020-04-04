@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>learn/implements-extends | Edlison</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Implements &amp; Extends 的不同在类的声明中，通过关键字extends来创建一个类的子类；一个类通过关键字implements声明自己使用一个或者多个接口。  extends 是继承某个类, 继承之后可以使用父类的方法, 也可以重写父类的方法;   implements 是实现多个接口, 接口的方法一般为空的, 必须重写才能使用；  extends是继承父类，只要那个类不是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="learn&#x2F;implements-extends">
+<meta property="og:url" content="http://edlison.com/blog/2020/03/08/learn/implements-extends/index.html">
+<meta property="og:site_name" content="Edlison">
+<meta property="og:description" content="Implements &amp; Extends 的不同在类的声明中，通过关键字extends来创建一个类的子类；一个类通过关键字implements声明自己使用一个或者多个接口。  extends 是继承某个类, 继承之后可以使用父类的方法, 也可以重写父类的方法;   implements 是实现多个接口, 接口的方法一般为空的, 必须重写才能使用；  extends是继承父类，只要那个类不是">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-08T10:56:21.551Z">
+<meta property="article:modified_time" content="2020-03-11T15:48:52.517Z">
+<meta property="article:author" content="Bolin Shen">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="Edlison" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">Edlison</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog/" id="subtitle">coding...</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://edlison.com/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-learn/implements-extends" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/08/learn/implements-extends/" class="article-date">
+  <time datetime="2020-03-08T10:56:21.551Z" itemprop="datePublished">2020-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      learn/implements-extends
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Implements-amp-Extends-的不同"><a href="#Implements-amp-Extends-的不同" class="headerlink" title="Implements &amp; Extends 的不同"></a>Implements &amp; Extends 的不同</h1><p><strong>在类的声明中，通过关键字extends来创建一个类的子类；一个类通过关键字implements声明自己使用一个或者多个接口。</strong></p>
+<ul>
+<li><p>extends 是继承某个类, 继承之后可以使用父类的方法, 也可以重写父类的方法; </p>
+</li>
+<li><p>implements 是实现多个接口, 接口的方法一般为空的, 必须重写才能使用；</p>
+</li>
+<li><p>extends是继承父类，只要那个类不是声明为final或者那个类定义为abstract的就能继承；</p>
+</li>
+<li><p>Java中不支持多重继承，但是可以用接口来实现，这样就要用到implements，继承只能继承一个类，但implements可以实现多个接口，用逗号分开就行了 比如 ：<code>class A extends B implements C,D,E</code>。</p>
+</li>
+</ul>
+<p><strong>接口实现的注意点：</strong>  </p>
+<ul>
+<li><p>实现一个接口就是要实现该接口的所有的方法(抽象类除外)；</p>
+</li>
+<li><p>接口中的方法都是抽象的；</p>
+</li>
+<li><p>多个无关的类可以实现同一个接口，一个类可以实现多个无关的接口。</p>
+</li>
+</ul>
+<p><strong>Implements与Extends的不同</strong></p>
+<p>extends， 可以实现父类，也可以调用父类初始化 this.parent()。而且会覆盖父类定义的变量或者函数。这样的好处是：架构师定义好接口，让工程师实现就可以了。整个项目开发效率和开发成本大大降低。    </p>
+<p>implements，实现父类，子类不可以覆盖父类的方法或者变量。即使子类定义与父类相同的变量或者函数，也会被父类取代掉。  </p>
+<p>这两种实现的具体使用，是要看项目的实际情况，需要实现，不可以修改implements，只定义接口需要具体实现，或者可以被修改扩展性好，用extends。</p>
+<blockquote>
+<p>Reference<br><a href="https://blog.csdn.net/tolcf/article/details/46135645" target="_blank" rel="noopener">https://blog.csdn.net/tolcf/article/details/46135645</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/08/learn/implements-extends/" data-id="ck8lar4mq0009mcoj2b8v4br1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2020/03/09/leetcode/hascycle/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          leetcode/hascycle
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2020/03/08/leetcode/deletelistduplicates/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">leetcode/deletelistduplicates</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">March 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2020/04/03/learn/v2ray/">learn/v2ray</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/04/03/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/04/03/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/03/31/leetcode/matching/">leetcode/matching</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/03/30/learn/v2ray-tls/">learn/v2ray-tls</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Bolin Shen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
