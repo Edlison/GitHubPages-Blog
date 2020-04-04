@@ -1,7 +1,7 @@
-# V2ray Install
+# V2ray
 
-## Application Install
-- Install Script
+## 安装V2ray
+- 安装脚本
 
 执行安装脚本
 
@@ -11,15 +11,19 @@
 
 `$ sudo bash go.sh`
 
-- Start V2ray
+- 运行V2ray
 
 `$ sudo systemctl start v2ray`
 
-## TLS
-- Install Script
+- V2ray配置文件
 
-执行以下命令，acme.sh 会安装到 ~/.acme.sh 目录下。
-`$ curl  https://get.acme.sh | sh`
+`/etc/v2ray/config.json`
+
+## TLS
+- 安装脚本
+
+执行以下命令，acme.sh 会安装到 `~/.acme.sh` 目录下。
+`$ curl https://get.acme.sh | sh`
 
 安装成功后执行 `source ~/.bashrc` 以确保脚本所设置的命令别名生效。
 
@@ -29,27 +33,29 @@
 
 - 分发证书
 
-If your website is running nginx server, acme.sh can use nginx server to issue cert. And acme.sh will restore your nginx conf after the cert is issued, don't worry.
+使用Nginx监听80端口进行证书分发
 
-`acme.sh  --issue  -d example.com  --nginx`
+`$ acme.sh --issue  -d tunnel.edlison.xyz  --nginx`
 
-Standalone Mode
+使用acme自带的standalone进行端口监听
 
-`$ sudo ~/.acme.sh/acme.sh --issue -d mydomain.me --standalone --keylength ec-256`
+`$ acme.sh --issue -d tunnel.edlieon.xyz --standalone`
 
-`--keylength` 表示密钥长度，后面的值可以是 ec-256 、ec-384、2048、3072、4096、8192，带有 ec 表示生成的是 ECC 证书，没有则是 RSA 证书。在安全性上 256 位的 ECC 证书等同于 3072 位的 RSA 证书。
+Example
 
-Ex
+`$ acme.sh --issue -d tunnel.edlison.xyz --nginx --keylength ec-256`
 
-`acme.sh --issue -d tunnel.edlison.xyz --nginx --keylength ec-256`
+`--keylength` 表示密钥长度，后面的值可以是 ec-256 、ec-384、2048、3072、4096、8192，带有 ec 表示生成的是 ECC 证书，没有则是 RSA 证书。在安全性上 256 位的 ECC 证书等同于 3072 位的 RSA 证书
 
 - 更新证书
 
-`$ sudo ~/.acme.sh/acme.sh --renew -d mydomain.com --force --ecc`
+`$ acme.sh --renew -d tunnel.edlison.xyz --force --ecc`
 
-由于 Let's Encrypt 的证书有效期只有 3 个月，因此需要 90 天至少要更新一次证书，acme.sh 脚本会每 60 天自动更新证书。也可以手动更新。
+由于 Let's Encrypt 的证书有效期只有 3 个月，因此需要 90 天至少要更新一次证书，acme.sh 脚本会每 60 天自动更新证书。也可以手动更新。`--ecc`生成的ECC证书
 
 - 安装证书和密钥
+
+将证书安装到V2ray目录下
 
 ```bash
 $ acme.sh --installcert -d tunnel.edlison.xyz --ecc \
@@ -102,22 +108,23 @@ $ acme.sh --installcert -d tunnel.edlison.xyz --ecc \
 
 配置文件
 
-`nginx -c /etc/nginx/nginx.conf`
+`$ nginx -c /etc/nginx/nginx.conf`
 
 启动Nginx
 
-`nginx -s reload`
+`$ nginx -s reload`
 
 - config
 
-*Uncertain*
+Nginx 仅需监听80端口
+
 ```nginx
 server {
         listen       80;
         listen       [::]:80;
         server_name  tunnel.edlison.xyz;
 
-        #return  301 https://$server_name$request_uri;
+        #return  301 https://$server_name$request_uri; // 可以将流量转向https
 
         root         /usr/share/nginx/html;
 
@@ -135,37 +142,6 @@ server {
             location = /50x.html {
         }
     }
-
-# TLS enabled server.
-
-server {
-    listen       443 ssl;
-    listen       [::]:443 ssl;
-    server_name  tunnel.edlison.xyz;
-    root         /usr/share/nginx/html;
-
-    ssl_certificate "/etc/v2ray/v2ray.crt";
-    ssl_certificate_key "/etc/v2ray/v2ray.key";
-    ssl_session_cache shared:SSL:1m;
-    ssl_session_timeout  10m;
-    ssl_ciphers HIGH:!aNULL:!MD5;
-    ssl_prefer_server_ciphers on;
-
-    #Load configuration files for the default server block.
-    include /etc/nginx/default.d/*.conf;
-
-    location / {
-    }
-
-    error_page 404 /404.html;
-        location = /40x.html {
-    }
-
-    error_page 500 502 503 504 /50x.html;
-        location = /50x.html {
-    }
-}
-
 ```
 
 ## WebSocket + TLS + Web
@@ -302,3 +278,17 @@ V2Ray 自 4.18.1 后支持 TLS1.3，如果开启并强制 TLS1.3 请注意 v2ray
 setsebool -P httpd_can_network_connect 1
 请保持服务器和客户端的 wsSettings 严格一致，对于 V2Ray，/ray 和 /ray/ 是不一样的
 较低版本的系统/浏览器可能无法完成握手. 如 Chrome 49/XP SP3, Safari 8/iOS 8.4, Safari 8/OS X 10.10 及更低的版本. 如果你的设备比较旧, 则可以通过在配置中添加较旧的 TLS 协议以完成握手.
+
+## BBR
+
+- 一键安装脚本
+
+`$ wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh && chmod +x bbr.sh && ./bbr.sh`
+
+- 检测内核
+
+`$ uname -r`
+
+- 检测安装情况
+
+`$ sysctl net.ipv4.tcp_available_congestion_control`
