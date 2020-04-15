@@ -11,7 +11,7 @@
 <meta property="og:title" content="Edlison">
 <meta property="og:url" content="http://edlison.com/blog/page/3/index.html">
 <meta property="og:site_name" content="Edlison">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Bolin Shen">
 <meta name="twitter:card" content="summary">
   
@@ -57,7 +57,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://edlison.com/blog"></form>
@@ -67,6 +67,105 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-leetcode/longestpalindromicsubstring" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/17/leetcode/longestpalindromicsubstring/" class="article-date">
+  <time datetime="2020-03-17T15:30:39.003Z" itemprop="datePublished">2020-03-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/17/leetcode/longestpalindromicsubstring/">leetcode/longestpalindromicsubstring</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Longest-Palindromic-Substring"><a href="#Longest-Palindromic-Substring" class="headerlink" title="Longest Palindromic Substring"></a>Longest Palindromic Substring</h1><p>Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.</p>
+<p><strong>Example 1:</strong></p>
+<p>Input: “babad”<br>Output: “bab”<br>Note: “aba” is also a valid answer.</p>
+<p><strong>Example 2:</strong></p>
+<p>Input: “cbbd”<br>Output: “bb”</p>
+<p><img src="../static/img/dp.png" alt="img"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = s.length();</span><br><span class="line">        <span class="keyword">if</span> (len &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">boolean</span>[][] dp = <span class="keyword">new</span> <span class="keyword">boolean</span>[len][len];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">            dp[i][i] = <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> maxLen = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; len; j++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; j; i++) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (s.charAt(i) == s.charAt(j)) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (j - i &lt; <span class="number">3</span>) &#123;</span><br><span class="line">                        dp[i][j] = <span class="keyword">true</span>;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        dp[i][j] = dp[i + <span class="number">1</span>][j - <span class="number">1</span>];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 只要 dp[i][j] == true 成立，就表示子串 s[i, j] 是回文，此时记录回文长度和起始位置</span></span><br><span class="line">                <span class="keyword">if</span> (dp[i][j]) &#123;</span><br><span class="line">                    <span class="keyword">int</span> curLen = j - i + <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">if</span> (curLen &gt; maxLen) &#123;</span><br><span class="line">                        maxLen = curLen;</span><br><span class="line">                        start = i;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s.substring(start, start + maxLen);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/longest-palindromic-substring" target="_blank" rel="noopener">https://leetcode-cn.com/problems/longest-palindromic-substring</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/17/leetcode/longestpalindromicsubstring/" data-id="ck8lar4n0000nmcoj0tk8buti" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-leetcode/longestsubstring" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/16/leetcode/longestsubstring/" class="article-date">
+  <time datetime="2020-03-16T14:24:57.749Z" itemprop="datePublished">2020-03-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/16/leetcode/longestsubstring/">leetcode/longestsubstring</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Longest-Substring-Without-Repeating-Characters"><a href="#Longest-Substring-Without-Repeating-Characters" class="headerlink" title="Longest Substring Without Repeating Characters"></a>Longest Substring Without Repeating Characters</h1><p>Given a string, find the length of the longest substring without repeating characters.</p>
+<p><strong>Example 1:</strong></p>
+<p>Input: “abcabcbb”<br>Output: 3<br>Explanation: The answer is “abc”, with the length of 3. </p>
+<p><strong>Example 2:</strong></p>
+<p>Input: “bbbbb”<br>Output: 1<br>Explanation: The answer is “b”, with the length of 1.</p>
+<p><strong>Example 3:</strong></p>
+<p>Input: “pwwkew”<br>Output: 3<br>Explanation: The answer is “wke”, with the length of 3.<br>             Note that the answer must be a substring, “pwke” is a subsequence and not a substring.</p>
+<p><strong>Solution 1</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    Set&lt;Character&gt; substring = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (s == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> j = i;</span><br><span class="line">        <span class="keyword">while</span> (j &lt; s.length()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!substring.contains(s.charAt(j))) &#123;</span><br><span class="line">                substring.add(s.charAt(j++));</span><br><span class="line">                temp++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                substring.clear();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        res = Math.max(temp, res);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    执行用时 :127 ms, 在所有 Java 提交中击败了10.50%的用户</span></span><br><span class="line"><span class="comment">    内存消耗 :42.3 MB, 在所有 Java 提交中击败了5.02%的用户</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Using too much time, so I read the leetcode document.<br>Here is a <em>SlideWindow</em> method.</p>
+<p><strong>Solution 2</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">plus</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        Set&lt;Character&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = i; </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> (j &lt; s.length()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!set.contains(s.charAt(j))) &#123;</span><br><span class="line">                set.add(s.charAt(j++));</span><br><span class="line">                res = Math.max(res, set.size());</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                set.remove(s.charAt(i++));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">        执行用时 :10 ms, 在所有 Java 提交中击败了64.95%的用户</span></span><br><span class="line"><span class="comment">        内存消耗 :41.6 MB, 在所有 Java 提交中击败了5.02%的用户</span></span><br><span class="line"><span class="comment">        */</span></span><br></pre></td></tr></table></figure>
+<p>We can adjust the <em>SlideWindow</em> by increase <code>i</code> - head pointer and <code>j</code> - rear pointer.<br>This can sharply optimize the complexity of time.</p>
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters" target="_blank" rel="noopener">https://leetcode-cn.com/problems/longest-substring-without-repeating-characters</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/16/leetcode/longestsubstring/" data-id="ck8lar4n2000omcoj42kq37kh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-leetcode/validparentheses" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -275,9 +374,9 @@
 
 
   
-    <article id="post-learn/static" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-notebook/static" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2020/03/11/learn/static/" class="article-date">
+    <a href="/blog/2020/03/11/notebook/static/" class="article-date">
   <time datetime="2020-03-11T15:53:05.122Z" itemprop="datePublished">2020-03-11</time>
 </a>
     
@@ -289,7 +388,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/11/learn/static/">learn/static</a>
+      <a class="article-title" href="/blog/2020/03/11/notebook/static/">notebook/static</a>
     </h1>
   
 
@@ -347,7 +446,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/11/learn/static/" data-id="ck8lar4mp0007mcoj6d94eu51" class="article-share-link">Share</a>
+      <a data-url="http://edlison.com/blog/2020/03/11/notebook/static/" data-id="ck91iwv4g000837oj6mmxfka1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -357,9 +456,9 @@
 
 
   
-    <article id="post-learn/innerclass" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-notebook/innerclass" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2020/03/11/learn/innerclass/" class="article-date">
+    <a href="/blog/2020/03/11/notebook/innerclass/" class="article-date">
   <time datetime="2020-03-11T15:49:48.779Z" itemprop="datePublished">2020-03-11</time>
 </a>
     
@@ -371,7 +470,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/11/learn/innerclass/">learn/innerclass</a>
+      <a class="article-title" href="/blog/2020/03/11/notebook/innerclass/">notebook/innerclass</a>
     </h1>
   
 
@@ -427,7 +526,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/11/learn/innerclass/" data-id="ck8lar4mp0008mcojfddcdrwk" class="article-share-link">Share</a>
+      <a data-url="http://edlison.com/blog/2020/03/11/notebook/innerclass/" data-id="ck91iwv4c000437ojal0nevjr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -437,9 +536,9 @@
 
 
   
-    <article id="post-learn/final" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-notebook/final" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2020/03/11/learn/final/" class="article-date">
+    <a href="/blog/2020/03/11/notebook/final/" class="article-date">
   <time datetime="2020-03-11T13:50:04.608Z" itemprop="datePublished">2020-03-11</time>
 </a>
     
@@ -451,7 +550,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/11/learn/final/">learn/final</a>
+      <a class="article-title" href="/blog/2020/03/11/notebook/final/">notebook/final</a>
     </h1>
   
 
@@ -487,7 +586,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/11/learn/final/" data-id="ck8lar4mo0006mcojcg4mc0lw" class="article-share-link">Share</a>
+      <a data-url="http://edlison.com/blog/2020/03/11/notebook/final/" data-id="ck91iwv4f000737oj7fub2duw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -549,102 +648,11 @@
 
 
   
-    <article id="post-leetcode/addtwolist" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/10/leetcode/addtwolist/" class="article-date">
-  <time datetime="2020-03-10T14:29:31.892Z" itemprop="datePublished">2020-03-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/10/leetcode/addtwolist/">leetcode/addtwolist</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="两数相加"><a href="#两数相加" class="headerlink" title="两数相加"></a>两数相加</h1><p>给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。</p>
-<p>如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。</p>
-<p>您可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
-<p><strong>示例：</strong></p>
-<p>输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br>输出：7 -&gt; 0 -&gt; 8<br>原因：342 + 465 = 807</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">addTwoNumbers</span><span class="params">(ListNode l1, ListNode l2)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        ListNode head = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        ListNode p = head;</span><br><span class="line">        ListNode pre = p;</span><br><span class="line">        <span class="keyword">int</span> temp;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (l1.next != <span class="keyword">null</span> &amp;&amp; l2.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            temp = l1.val + l2.val;</span><br><span class="line">            <span class="keyword">if</span> (p.val + temp &lt; <span class="number">10</span>) &#123;</span><br><span class="line">                p.val += temp;</span><br><span class="line">                p.next = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">                p = p.next; l1 = l1.next; l2 = l2.next;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                p.val = (p.val + temp) % <span class="number">10</span>;</span><br><span class="line">                p.next = <span class="keyword">new</span> ListNode(<span class="number">1</span>);</span><br><span class="line">                p = p.next; l1 = l1.next; l2 = l2.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        temp = l1.val + l2.val;</span><br><span class="line">        <span class="keyword">if</span> (p.val + temp &lt; <span class="number">10</span>) &#123;</span><br><span class="line">            p.val += temp;</span><br><span class="line">            p.next = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">            pre = p;</span><br><span class="line">            p = p.next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            p.val = (p.val + temp) % <span class="number">10</span>;</span><br><span class="line">            p.next = <span class="keyword">new</span> ListNode(<span class="number">1</span>);</span><br><span class="line">            p = p.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (l1.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            l1 = l1.next;</span><br><span class="line">            <span class="keyword">if</span> (p.val + l1.val &lt; <span class="number">10</span>) &#123;</span><br><span class="line">                p.val += l1.val;</span><br><span class="line">                p.next = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">                pre = p;</span><br><span class="line">                p = p.next;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                p.val = (p.val + l1.val) % <span class="number">10</span>;</span><br><span class="line">                p.next = <span class="keyword">new</span> ListNode(<span class="number">1</span>);</span><br><span class="line">                p = p.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (l2.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            l2 = l2.next;</span><br><span class="line">            <span class="keyword">if</span> (p.val + l2.val &lt; <span class="number">10</span>) &#123;</span><br><span class="line">                p.val += l2.val;</span><br><span class="line">                p.next = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">                pre = p;</span><br><span class="line">                p = p.next;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                p.val = (p.val + l2.val) % <span class="number">10</span>;</span><br><span class="line">                p.next = <span class="keyword">new</span> ListNode(<span class="number">1</span>);</span><br><span class="line">                p = p.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (p.val == <span class="number">0</span>) &#123;</span><br><span class="line">            pre.next = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">执行用时 :3 ms, 在所有 Java 提交中击败了39.78%的用户</span></span><br><span class="line"><span class="comment">内存消耗 :41.1 MB, 在所有 Java 提交中击败了92.22%的用户</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Reference<br><a href="https://leetcode-cn.com/problems/add-two-numbers" target="_blank" rel="noopener">https://leetcode-cn.com/problems/add-two-numbers</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/10/leetcode/addtwolist/" data-id="ck8lar4ms000dmcoj1brm4e9i" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode/hascycle" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/09/leetcode/hascycle/" class="article-date">
-  <time datetime="2020-03-09T09:56:40.686Z" itemprop="datePublished">2020-03-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/09/leetcode/hascycle/">leetcode/hascycle</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="环形链表"><a href="#环形链表" class="headerlink" title="环形链表"></a>环形链表</h1><p>给定一个链表，判断链表中是否有环。</p>
-<p>为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。</p>
-<p><strong>示例 1：</strong></p>
-<p>输入：head = [3,2,0,-4], pos = 1<br>输出：true<br>解释：链表中有一个环，其尾部连接到第二个节点。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        Set&lt;ListNode&gt; container = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (head != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (container.contains(head)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            container.add(head);</span><br><span class="line">            head = head.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="../static/img/container.jpeg" alt="img"><br>Put each <code>ListNode</code> pointer into the <code>Set</code> container.<br>Because every pointer is unique, we just to judge if there’s a pointer’s address we scan has already contained in <code>Set</code>.  </p>
-<blockquote>
-<p>Reference<br><a href="https://leetcode-cn.com/problems/linked-list-cycle" target="_blank" rel="noopener">https://leetcode-cn.com/problems/linked-list-cycle</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/09/leetcode/hascycle/" data-id="ck8lar4my000jmcoj9nlxaof7" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/blog/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/page/4/">4</a><a class="page-number" href="/blog/page/5/">5</a><a class="extend next" rel="next" href="/blog/page/4/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/2/">&amp;laquo; 上一页</a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/page/4/">4</a><a class="page-number" href="/blog/page/5/">5</a><a class="extend next" rel="next" href="/blog/page/4/">下一页 &amp;raquo;</a>
   </nav>
 
 </section>
@@ -661,9 +669,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">March 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a></li></ul>
     </div>
   </div>
 
@@ -671,12 +679,20 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/blog/2020/04/03/learn/v2ray/">learn/v2ray</a>
+            <a href="/blog/2020/04/15/ml/lesson1/">ml/lesson1</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/04/08/notebook/java-class/">notebook/java-class</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/04/03/notebook/v2ray/">notebook/v2ray</a>
           </li>
         
           <li>
@@ -685,14 +701,6 @@
         
           <li>
             <a href="/blog/2020/04/03/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/03/31/leetcode/matching/">leetcode/matching</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/03/30/learn/v2ray-tls/">learn/v2ray-tls</a>
           </li>
         
       </ul>
