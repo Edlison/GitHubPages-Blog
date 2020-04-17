@@ -68,6 +68,48 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-notebook/linux-java" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/04/17/notebook/linux-java/" class="article-date">
+  <time datetime="2020-04-17T11:23:29.516Z" itemprop="datePublished">2020-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/04/17/notebook/linux-java/">notebook/linux-java</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux-安装Java在多个版本中切换"><a href="#Linux-安装Java在多个版本中切换" class="headerlink" title="[Linux]安装Java在多个版本中切换"></a>[Linux]安装Java在多个版本中切换</h1><h2 id="查看yum中的Java版本"><a href="#查看yum中的Java版本" class="headerlink" title="查看yum中的Java版本"></a>查看yum中的Java版本</h2><p><code>$ yum search java-1.8</code></p>
+<h2 id="安装JDK"><a href="#安装JDK" class="headerlink" title="安装JDK"></a>安装JDK</h2><p><code>yum install java-1.8.0-openjdk-devel</code></p>
+<p>安装JDK包含JRE</p>
+<p>Java Development EnvironmentKit 为 JDK<br>Java Runtime Environment 为 JRE</p>
+<h2 id="切换Java版本"><a href="#切换Java版本" class="headerlink" title="切换Java版本"></a>切换Java版本</h2><p><code>$ sudo update-alternatives --display java</code> 查看安装了几个java<br><code>$ sudo update-alternatives --config java</code> 设置java的版本<br><code>$ alternatives --config javac</code> 设置javac的版本</p>
+<p>如已手动安装的可以用下面的命令去添加到列表<br><code>$ alternatives --install /usr/bin/java java /usr/java/jdk1.8/bin/java 180000</code><br><code>$ alternatives --install /usr/bin/java javac /usr/java/jdk1.8/bin/javac 180000</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/04/17/notebook/linux-java/" data-id="ck946q4mh0000o5ojg3op41wv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-ml/lesson1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/04/15/ml/lesson1/" class="article-date">
@@ -585,54 +627,6 @@
 
 
   
-    <article id="post-leetcode/delivercookies" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/27/leetcode/delivercookies/" class="article-date">
-  <time datetime="2020-03-27T11:22:16.200Z" itemprop="datePublished">2020-03-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/27/leetcode/delivercookies/">leetcode/delivercookies</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Assign-Cookies"><a href="#Assign-Cookies" class="headerlink" title="Assign Cookies"></a>Assign Cookies</h1><p>Assume you are an awesome parent and want to give your children some cookies. But, you should give each child at most one cookie. Each child i has a greed factor gi, which is the minimum size of a cookie that the child will be content with; and each cookie j has a size sj. If sj &gt;= gi, we can assign the cookie j to the child i, and the child i will be content. Your goal is to maximize the number of your content children and output the maximum number.</p>
-<p>Note:<br>You may assume the greed factor is always positive.<br>You cannot assign more than one cookie to one child.  </p>
-<p>Example 1:<br>Input: [1,2,3], [1,1]</p>
-<p>Output: 1</p>
-<p>Explanation: You have 3 children and 2 cookies. The greed factors of 3 children are 1, 2, 3.<br>And even though you have 2 cookies, since their size is both 1, you could only make the child whose greed factor is 1 content.<br>You need to output 1.<br>Example 2:<br>Input: [1,2], [1,2,3]</p>
-<p>Output: 2</p>
-<p>Explanation: You have 2 children and 3 cookies. The greed factors of 2 children are 1, 2.<br>You have 3 cookies and their sizes are big enough to gratify all of the children,<br>You need to output 2.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findContentChildren</span><span class="params">(<span class="keyword">int</span>[] g, <span class="keyword">int</span>[] s)</span> </span>&#123;</span><br><span class="line">        Arrays.sort(g);</span><br><span class="line">        Arrays.sort(s);</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; i &lt; g.length; i++) &#123;</span><br><span class="line">            <span class="keyword">while</span> (j &lt; s.length) &#123;</span><br><span class="line">                <span class="keyword">if</span> (s[j] &gt;= g[i]) &#123;</span><br><span class="line">                    res++;</span><br><span class="line">                    j++;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    j++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>First we need to sort the array.<br>Then we define 2 pointers to find satisfied results.</p>
-<blockquote>
-<p>Reference<br><a href="https://leetcode-cn.com/problems/assign-cookies" target="_blank" rel="noopener">https://leetcode-cn.com/problems/assign-cookies</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/27/leetcode/delivercookies/" data-id="ck8lar4mx000imcojacuw3pm2" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -669,6 +663,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/04/17/notebook/linux-java/">notebook/linux-java</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/04/15/ml/lesson1/">ml/lesson1</a>
           </li>
         
@@ -682,10 +680,6 @@
         
           <li>
             <a href="/blog/2020/04/03/test/">test</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/04/03/hello-world/">Hello World</a>
           </li>
         
       </ul>
