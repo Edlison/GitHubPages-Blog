@@ -68,6 +68,53 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-notebook/linux-mariadb" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/04/17/notebook/linux-mariadb/" class="article-date">
+  <time datetime="2020-04-17T14:03:46.762Z" itemprop="datePublished">2020-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/04/17/notebook/linux-mariadb/">notebook/linux-mariadb</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Mariadb的使用"><a href="#Mariadb的使用" class="headerlink" title="Mariadb的使用"></a>Mariadb的使用</h1><p>Linux上已经摒弃了Mysql，以下是一些Mariadb的基本用法。</p>
+<h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><p><code>CREATE USER &#39;username&#39;@&#39;host&#39; IDENTIFIED BY &#39;password&#39;;</code></p>
+<h2 id="用户权限"><a href="#用户权限" class="headerlink" title="用户权限"></a>用户权限</h2><p><code>GRANT privileges ON databasename.tablename TO &#39;username&#39;@&#39;host&#39;</code></p>
+<p>查看权限</p>
+<p><code>show grants for &#39;root&#39;@&#39;%&#39;;</code></p>
+<p>例:<br><code>MariaDB [(none)]&gt; grant all on *.* to &#39;root&#39;@&#39;%&#39;;</code><br><code>MariaDB [mysql]&gt; flush privileges;</code><br><code>MariaDB [(none)]&gt; grant all privileges on *.* to &#39;root&#39;@&#39;%&#39; identified by &#39;password&#39;;</code></p>
+<h2 id="查看用户"><a href="#查看用户" class="headerlink" title="查看用户"></a>查看用户</h2><p><code>select user from mysql.user;</code></p>
+<p>查看当前用户</p>
+<p><code>select current_user;</code></p>
+<h2 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h2><p><code>delete from mysql.user where user=&#39;root&#39;;</code></p>
+<h2 id="撤销权限"><a href="#撤销权限" class="headerlink" title="撤销权限"></a>撤销权限</h2><p><code>REVOKE privileges ON databasename.tablename FROM &#39;username&#39;@&#39;host&#39;;</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/04/17/notebook/linux-mariadb/" data-id="ck94bd7tt0000jsojbemccbgd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-notebook/linux-java" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/04/17/notebook/linux-java/" class="article-date">
@@ -576,57 +623,6 @@
 
 
   
-    <article id="post-leetcode/jumpgame" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/28/leetcode/jumpgame/" class="article-date">
-  <time datetime="2020-03-28T08:27:35.769Z" itemprop="datePublished">2020-03-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/28/leetcode/jumpgame/">leetcode/jumpgame</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Jump-Game"><a href="#Jump-Game" class="headerlink" title="Jump Game"></a>Jump Game</h1><p>Given an array of non-negative integers, you are initially positioned at the first index of the array.</p>
-<p>Each element in the array represents your maximum jump length at that position.</p>
-<p>Determine if you are able to reach the last index.</p>
-<p>Example 1:</p>
-<p>Input: [2,3,1,1,4]<br>Output: true<br>Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.<br>Example 2:</p>
-<p>Input: [3,2,1,0,4]<br>Output: false<br>Explanation: You will always arrive at index 3 no matter what. Its maximum<br>             jump length is 0, which makes it impossible to reach the last index.  </p>
-<p><em>Solution 1</em></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">canJump</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] tag = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">        tag[nums.length - <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = nums.length - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= i + nums[i] &amp;&amp; j &lt; nums.length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (tag[j] == <span class="number">1</span>) &#123;</span><br><span class="line">                    tag[i] = <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> tag[<span class="number">0</span>] == <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">执行用时 :580 ms, 在所有 Java 提交中击败了11.08%的用户</span></span><br><span class="line"><span class="comment">内存消耗 :40.6 MB, 在所有 Java 提交中击败了31.49%的用户</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<p><em>Solution 2</em></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">canJump</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = nums.length - <span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = nums.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i + nums[i] &gt;= res) &#123;</span><br><span class="line">                res = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">执行用时 :1 ms, 在所有 Java 提交中击败了99.95%的用户</span></span><br><span class="line"><span class="comment">内存消耗 :40.9 MB, 在所有 Java 提交中击败了24.65%的用户</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-<p>We can use the position of that we can reach the target to record current result.<br>So we just need to calculate whether current position plus current value <code>&gt;=</code> last which can reach the target result, so we can tag current position.</p>
-<blockquote>
-<p>Reference<br><a href="https://leetcode-cn.com/problems/jump-game" target="_blank" rel="noopener">https://leetcode-cn.com/problems/jump-game</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/28/leetcode/jumpgame/" data-id="ck8lar4n2000pmcojb1ahdmlw" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -663,6 +659,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/04/17/notebook/linux-mariadb/">notebook/linux-mariadb</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/04/17/notebook/linux-java/">notebook/linux-java</a>
           </li>
         
@@ -676,10 +676,6 @@
         
           <li>
             <a href="/blog/2020/04/03/notebook/v2ray/">notebook/v2ray</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/04/03/test/">test</a>
           </li>
         
       </ul>
