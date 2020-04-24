@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ml/numpy-training | Edlison</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Numpy训练实例绘制Sigmoid函数与ReLU函数1234567891011121314151617181920212223242526272829303132import numpy as npimport matplotlib.pyplot as plt# 设置图片大小plt.figure(figsize&#x3D;(8, 3))# x为1维数组x &#x3D; np.arange(-10, 10, 0.1)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ml&#x2F;numpy-training">
+<meta property="og:url" content="http://edlison.com/blog/2020/04/24/ml/numpy-training/index.html">
+<meta property="og:site_name" content="Edlison">
+<meta property="og:description" content="Numpy训练实例绘制Sigmoid函数与ReLU函数1234567891011121314151617181920212223242526272829303132import numpy as npimport matplotlib.pyplot as plt# 设置图片大小plt.figure(figsize&#x3D;(8, 3))# x为1维数组x &#x3D; np.arange(-10, 10, 0.1)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-24T14:42:57.056Z">
+<meta property="article:modified_time" content="2020-04-24T14:46:01.346Z">
+<meta property="article:author" content="Bolin Shen">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="Edlison" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">Edlison</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog/" id="subtitle">coding...</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://edlison.com/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ml/numpy-training" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/04/24/ml/numpy-training/" class="article-date">
+  <time datetime="2020-04-24T14:42:57.056Z" itemprop="datePublished">2020-04-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ml/numpy-training
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Numpy训练实例"><a href="#Numpy训练实例" class="headerlink" title="Numpy训练实例"></a>Numpy训练实例</h1><h2 id="绘制Sigmoid函数与ReLU函数"><a href="#绘制Sigmoid函数与ReLU函数" class="headerlink" title="绘制Sigmoid函数与ReLU函数"></a>绘制Sigmoid函数与ReLU函数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置图片大小</span></span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># x为1维数组</span></span><br><span class="line">x = np.arange(<span class="number">-10</span>, <span class="number">10</span>, <span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Sigmoid函数</span></span><br><span class="line">s = <span class="number">1.</span> / (<span class="number">1</span> + np.exp(-x))</span><br><span class="line"></span><br><span class="line"><span class="comment"># ReLU函数</span></span><br><span class="line">y = np.clip(x, a_min=<span class="number">0.</span>, a_max=<span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制Sigmoid函数</span></span><br><span class="line">f = plt.subplot(<span class="number">121</span>)</span><br><span class="line">plt.plot(x, s, color=<span class="string">'r'</span>)</span><br><span class="line">plt.text(<span class="number">-5</span>, <span class="number">0.9</span>, <span class="string">r'$y=\sigma(x)$'</span>, fontsize=<span class="number">13</span>)</span><br><span class="line">currentAxis = plt.gca()</span><br><span class="line">currentAxis.xaxis.set_label_text(<span class="string">'x'</span>, fontsize=<span class="number">15</span>)</span><br><span class="line">currentAxis.yaxis.set_label_text(<span class="string">'y'</span>, fontsize=<span class="number">15</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制ReLU函数</span></span><br><span class="line">f = plt.subplot(<span class="number">122</span>)</span><br><span class="line">plt.plot(x, y, color=<span class="string">'g'</span>)</span><br><span class="line">plt.text(<span class="number">-3</span>, <span class="number">9</span>, <span class="string">r'$y=ReLU(x)$'</span>, fontsize=<span class="number">13</span>)</span><br><span class="line">currentAxis = plt.gca()</span><br><span class="line">currentAxis.xaxis.set_label_text(<span class="string">'x'</span>, fontsize=<span class="number">15</span>)</span><br><span class="line">currentAxis.yaxis.set_label_text(<span class="string">'y'</span>, fontsize=<span class="number">15</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/04/24/ml/numpy-training/" data-id="ck9eb5v050000thojdl9b71b7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2020/04/17/notebook/linux-mariadb/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">notebook/linux-mariadb</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2020/04/24/ml/numpy-training/">ml/numpy-training</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/04/17/notebook/linux-mariadb/">notebook/linux-mariadb</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/04/17/notebook/linux-java/">notebook/linux-java</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/04/15/ml/lesson1/">ml/lesson1</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/04/08/notebook/java-class/">notebook/java-class</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Bolin Shen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

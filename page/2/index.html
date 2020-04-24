@@ -68,6 +68,59 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode/gasstation" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/29/leetcode/gasstation/" class="article-date">
+  <time datetime="2020-03-29T14:04:48.786Z" itemprop="datePublished">2020-03-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/29/leetcode/gasstation/">leetcode/gasstation</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Gas-Station"><a href="#Gas-Station" class="headerlink" title="Gas Station"></a>Gas Station</h1><p>There are N gas stations along a circular route, where the amount of gas at station i is gas[i].</p>
+<p>You have a car with an unlimited gas tank and it costs cost[i] of gas to travel from station i to its next station (i+1). You begin the journey with an empty tank at one of the gas stations.</p>
+<p>Return the starting gas station’s index if you can travel around the circuit once in the clockwise direction, otherwise return -1.</p>
+<p>Note:</p>
+<p>If there exists a solution, it is guaranteed to be unique.<br>Both input arrays are non-empty and have the same length.<br>Each element in the input arrays is a non-negative integer.<br>Example 1:</p>
+<p>Input:<br>gas  = [1,2,3,4,5]<br>cost = [3,4,5,1,2]</p>
+<p>Output: 3</p>
+<p>Explanation:<br>Start at station 3 (index 3) and fill up with 4 unit of gas. Your tank = 0 + 4 = 4<br>Travel to station 4. Your tank = 4 - 1 + 5 = 8<br>Travel to station 0. Your tank = 8 - 2 + 1 = 7<br>Travel to station 1. Your tank = 7 - 3 + 2 = 6<br>Travel to station 2. Your tank = 6 - 4 + 3 = 5<br>Travel to station 3. The cost is 5. Your gas is just enough to travel back to station 3.<br>Therefore, return 3 as the starting index.<br>Example 2:</p>
+<p>Input:<br>gas  = [2,3,4]<br>cost = [3,4,3]</p>
+<p>Output: -1</p>
+<p>Explanation:<br>You can’t start at station 0 or 1, as there is not enough gas to travel to the next station.<br>Let’s start at station 2 and fill up with 4 unit of gas. Your tank = 0 + 4 = 4<br>Travel to station 0. Your tank = 4 - 3 + 2 = 3<br>Travel to station 1. Your tank = 3 - 3 + 3 = 3<br>You cannot travel back to station 2, as it requires 4 unit of gas but you only have 3.<br>Therefore, you can’t travel around the circuit once no matter where you start.</p>
+<p><em>Unsolved</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">canCompleteCircuit</span><span class="params">(<span class="keyword">int</span>[] gas, <span class="keyword">int</span>[] cost)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = gas.length;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> total_tank = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> curr_tank = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> starting_station = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">      total_tank += gas[i] - cost[i];</span><br><span class="line">      curr_tank += gas[i] - cost[i];</span><br><span class="line">      <span class="comment">// If one couldn't get here,</span></span><br><span class="line">      <span class="keyword">if</span> (curr_tank &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// Pick up the next station as the starting one.</span></span><br><span class="line">        starting_station = i + <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// Start with an empty tank.</span></span><br><span class="line">        curr_tank = <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> total_tank &gt;= <span class="number">0</span> ? starting_station : -<span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/gas-station" target="_blank" rel="noopener">https://leetcode-cn.com/problems/gas-station</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/29/leetcode/gasstation/" data-id="ck8lar4mz000lmcojchlgbk7l" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-leetcode/jumpgame" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/03/28/leetcode/jumpgame/" class="article-date">
@@ -506,58 +559,6 @@
 
 
   
-    <article id="post-leetcode/sametree" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/19/leetcode/sametree/" class="article-date">
-  <time datetime="2020-03-19T15:28:56.616Z" itemprop="datePublished">2020-03-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/19/leetcode/sametree/">leetcode/sametree</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Same-Tree"><a href="#Same-Tree" class="headerlink" title="Same Tree"></a>Same Tree</h1><p>Given two binary trees, write a function to check if they are the same or not.</p>
-<p>Two binary trees are considered the same if they are structurally identical and the nodes have the same value.</p>
-<p><strong>Example 1:</strong></p>
-<p>Input:     1         1<br>          / \       / <br>         2   3     2   3</p>
-<pre><code>[1,2,3],   [1,2,3]</code></pre><p>Output: true</p>
-<p><strong>Example 2:</strong></p>
-<p>Input:     1         1<br>          /           <br>         2             2</p>
-<pre><code>[1,2],     [1,null,2]</code></pre><p>Output: false</p>
-<p><strong>Example 3:</strong></p>
-<p>Input:     1         1<br>          / \       / <br>         2   1     1   2</p>
-<pre><code>[1,2,1],   [1,1,2]</code></pre><p>Output: false</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSameTree</span><span class="params">(TreeNode p, TreeNode q)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (p == <span class="keyword">null</span> &amp;&amp; q == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (p == <span class="keyword">null</span> || q == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (p.val != q.val) &#123; <span class="comment">// !!!</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> isSameTree(p.left, q.left) &amp;&amp; isSameTree(p.right, q.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Reference<br><a href="https://leetcode-cn.com/problems/same-tree" target="_blank" rel="noopener">https://leetcode-cn.com/problems/same-tree</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/19/leetcode/sametree/" data-id="ck8lar4nc0014mcojgcdt5ax9" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -594,6 +595,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/04/24/ml/numpy-training/">ml/numpy-training</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/04/17/notebook/linux-mariadb/">notebook/linux-mariadb</a>
           </li>
         
@@ -607,10 +612,6 @@
         
           <li>
             <a href="/blog/2020/04/08/notebook/java-class/">notebook/java-class</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/04/03/notebook/v2ray/">notebook/v2ray</a>
           </li>
         
       </ul>
