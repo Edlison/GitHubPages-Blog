@@ -68,6 +68,52 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode/maxdepth" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/21/leetcode/maxdepth/" class="article-date">
+  <time datetime="2020-03-21T15:57:21.264Z" itemprop="datePublished">2020-03-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/21/leetcode/maxdepth/">leetcode/maxdepth</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="二叉树的最大深度"><a href="#二叉树的最大深度" class="headerlink" title="二叉树的最大深度"></a>二叉树的最大深度</h1><p>给定一个二叉树，找出其最大深度。</p>
+<p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p>
+<p>说明: 叶子节点是指没有子节点的节点。</p>
+<p><strong>示例：</strong><br>给定二叉树 [3,9,20,null,null,15,7]，</p>
+<p>   3<br>   / \<br>  9  20<br>    /  \<br>   15   7<br>返回它的最大深度 3 。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    Queue&lt;Pair&lt;TreeNode, Integer&gt;&gt; stack = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    <span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</span><br><span class="line">      stack.add(<span class="keyword">new</span> Pair(root, <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> depth = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">      Pair&lt;TreeNode, Integer&gt; current = stack.poll();</span><br><span class="line">      root = current.getKey();</span><br><span class="line">      <span class="keyword">int</span> current_depth = current.getValue();</span><br><span class="line">      <span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</span><br><span class="line">        depth = Math.max(depth, current_depth);</span><br><span class="line">        stack.add(<span class="keyword">new</span> Pair(root.left, current_depth + <span class="number">1</span>));</span><br><span class="line">        stack.add(<span class="keyword">new</span> Pair(root.right, current_depth + <span class="number">1</span>));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> depth;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">by LeetCode</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/maximum-depth-of-binary-tree" target="_blank" rel="noopener">https://leetcode-cn.com/problems/maximum-depth-of-binary-tree</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/21/leetcode/maxdepth/" data-id="ck8lar4n3000qmcojgrjn1145" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-leetcode/symmetric" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/03/20/leetcode/symmetric/" class="article-date">
@@ -590,50 +636,6 @@
 
 
   
-    <article id="post-leetcode/mergeklist" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/12/leetcode/mergeklist/" class="article-date">
-  <time datetime="2020-03-12T14:26:40.730Z" itemprop="datePublished">2020-03-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/12/leetcode/mergeklist/">leetcode/mergeklist</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Merge-k-Sorted-Lists"><a href="#Merge-k-Sorted-Lists" class="headerlink" title="Merge k Sorted Lists"></a>Merge k Sorted Lists</h1><p>Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.</p>
-<p><strong>Example</strong>:</p>
-<p>Input:<br>[<br>  1-&gt;4-&gt;5,<br>  1-&gt;3-&gt;4,<br>  2-&gt;6<br>]<br>Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">mergeKLists</span><span class="params">(ListNode[] lists)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; nodes = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lists.length; i++) &#123;</span><br><span class="line">            <span class="keyword">while</span> (lists[i] != <span class="keyword">null</span>) &#123;</span><br><span class="line">                nodes.add(lists[i].val);</span><br><span class="line">                lists[i] = lists[i].next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (nodes.size() == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        </span><br><span class="line">        nodes.sort(Comparator.naturalOrder());</span><br><span class="line">        ListNode res = <span class="keyword">new</span> ListNode(nodes.remove(<span class="number">0</span>));</span><br><span class="line">        ListNode p = res;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nodes.size(); i++) &#123;</span><br><span class="line">            p.next = <span class="keyword">new</span> ListNode(nodes.get(i));</span><br><span class="line">            p = p.next;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Reference<br><a href="https://leetcode-cn.com/problems/merge-k-sorted-lists" target="_blank" rel="noopener">https://leetcode-cn.com/problems/merge-k-sorted-lists</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/12/leetcode/mergeklist/" data-id="ck8lar4n6000umcoj00dudzqq" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -670,6 +672,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/04/28/algorithm/%5BDP%5DMSM/">algorithm/[DP]MSM</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/04/26/algorithm/%5BDP%5DLCS/">algorithm/[DP]LCS</a>
           </li>
         
@@ -683,10 +689,6 @@
         
           <li>
             <a href="/blog/2020/04/17/notebook/linux-java/">notebook/linux-java</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/04/15/ml/lesson1/">ml/lesson1</a>
           </li>
         
       </ul>

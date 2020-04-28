@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>algorithm/[DP]MSM | Edlison</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="矩阵连乘 (Multiplying a sequence of matrices)我们想从两个以上矩阵连乘的式子中得到最佳的次序，使得计算时乘法运算最少。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656">
+<meta property="og:type" content="article">
+<meta property="og:title" content="algorithm&#x2F;[DP]MSM">
+<meta property="og:url" content="http://edlison.com/blog/2020/04/28/algorithm/[DP]MSM/index.html">
+<meta property="og:site_name" content="Edlison">
+<meta property="og:description" content="矩阵连乘 (Multiplying a sequence of matrices)我们想从两个以上矩阵连乘的式子中得到最佳的次序，使得计算时乘法运算最少。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-28T13:22:24.685Z">
+<meta property="article:modified_time" content="2020-04-28T13:27:41.421Z">
+<meta property="article:author" content="Bolin Shen">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="Edlison" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">Edlison</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog/" id="subtitle">coding...</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://edlison.com/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-algorithm/[DP]MSM" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/04/28/algorithm/%5BDP%5DMSM/" class="article-date">
+  <time datetime="2020-04-28T13:22:24.685Z" itemprop="datePublished">2020-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      algorithm/[DP]MSM
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="矩阵连乘-Multiplying-a-sequence-of-matrices"><a href="#矩阵连乘-Multiplying-a-sequence-of-matrices" class="headerlink" title="矩阵连乘 (Multiplying a sequence of matrices)"></a>矩阵连乘 (Multiplying a sequence of matrices)</h1><p>我们想从两个以上矩阵连乘的式子中得到最佳的次序，使得计算时乘法运算最少。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DynamicProgramming</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> N = <span class="number">5</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span>[][] C = <span class="keyword">new</span> <span class="keyword">int</span>[N][N];</span><br><span class="line">		<span class="keyword">int</span>[][] S = <span class="keyword">new</span> <span class="keyword">int</span>[N][N];</span><br><span class="line">		<span class="keyword">int</span>[] r = &#123;<span class="number">4</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;<span class="comment">// 初始化 最小乘运算数组</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">				C[i][j] = <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;<span class="comment">// 初始化 分割位置</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">				S[i][j] = <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> p = <span class="number">2</span>; p &lt;= N; p++) &#123;<span class="comment">// P 为间隔</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, j; i &lt; N - p + <span class="number">1</span>; i++) &#123;<span class="comment">// i 为起始值</span></span><br><span class="line">				j = i + p - <span class="number">1</span>;<span class="comment">// j 为终止值</span></span><br><span class="line">				C[i][j] = C[i][i] + C[i + <span class="number">1</span>][j] + r[i] * r[i + <span class="number">1</span>] * r[j + <span class="number">1</span>];<span class="comment">// 赋 C[i][j] 的初值方便下文比较取得最小值</span></span><br><span class="line">				S[i][j] = i;</span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> k = i; k&lt; j; k++) &#123;<span class="comment">// k 为中间分割值 </span></span><br><span class="line">					<span class="keyword">int</span> temp = C[i][k] + C[k + <span class="number">1</span>][j] + r[i] * r[k + <span class="number">1</span>] * r[j + <span class="number">1</span>];</span><br><span class="line">					</span><br><span class="line">					<span class="keyword">if</span> (temp &lt; C[i][j]) &#123;<span class="comment">// 取得每次分割后的最小值</span></span><br><span class="line">						C[i][j] = temp;</span><br><span class="line">						S[i][j] = k;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">				System.out.print(C[i][j] + <span class="string">"\t"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		System.out.println();</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">				<span class="keyword">if</span> (j &gt; i) System.out.print(S[i][j] + <span class="number">1</span> + <span class="string">"\t"</span>);</span><br><span class="line">				<span class="keyword">else</span> System.out.print(<span class="number">0</span> + <span class="string">"\t"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* result</span></span><br><span class="line"><span class="comment">0	60	132	180	252	</span></span><br><span class="line"><span class="comment">0	0	90	132	207	</span></span><br><span class="line"><span class="comment">0	0	0	72	132	</span></span><br><span class="line"><span class="comment">0	0	0	0	120	</span></span><br><span class="line"><span class="comment">0	0	0	0	0	</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">0	1	2	2	2	</span></span><br><span class="line"><span class="comment">0	0	2	2	2	</span></span><br><span class="line"><span class="comment">0	0	0	3	4	</span></span><br><span class="line"><span class="comment">0	0	0	0	4	</span></span><br><span class="line"><span class="comment">0	0	0	0	0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">(A1 * A2) * ((A3 * A4) * A5)</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/04/28/algorithm/[DP]MSM/" data-id="ck9k4jk4z000098ojhezxhldm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2020/04/26/algorithm/%5BDP%5DLCS/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">algorithm/[DP]LCS</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2020/04/28/algorithm/%5BDP%5DMSM/">algorithm/[DP]MSM</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/04/26/algorithm/%5BDP%5DLCS/">algorithm/[DP]LCS</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/04/24/ml/numpy-training/">ml/numpy-training</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/04/17/notebook/linux-mariadb/">notebook/linux-mariadb</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/04/17/notebook/linux-java/">notebook/linux-java</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Bolin Shen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

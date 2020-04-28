@@ -68,6 +68,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode/matching" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/31/leetcode/matching/" class="article-date">
+  <time datetime="2020-03-31T04:14:47.634Z" itemprop="datePublished">2020-03-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/31/leetcode/matching/">leetcode/matching</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Wildcard-Matching"><a href="#Wildcard-Matching" class="headerlink" title="Wildcard Matching"></a>Wildcard Matching</h1><p>Given an input string (s) and a pattern (p), implement wildcard pattern matching with support for ‘?’ and ‘*’.</p>
+<p>‘?’ Matches any single character.<br>‘*’ Matches any sequence of characters (including the empty sequence).<br>The matching should cover the entire input string (not partial).</p>
+<p>Note:</p>
+<p>s could be empty and contains only lowercase letters a-z.<br>p could be empty and contains only lowercase letters a-z, and characters like ? or *.<br>Example 1:</p>
+<p>Input:<br>s = “aa”<br>p = “a”<br>Output: false<br>Explanation: “a” does not match the entire string “aa”.<br>Example 2:</p>
+<p>Input:<br>s = “aa”<br>p = “*”<br>Output: true<br>Explanation: ‘*’ matches any sequence.<br>Example 3:</p>
+<p>Input:<br>s = “cb”<br>p = “?a”<br>Output: false<br>Explanation: ‘?’ matches ‘c’, but the second letter is ‘a’, which does not match ‘b’.<br>Example 4:</p>
+<p>Input:<br>s = “adceb”<br>p = “<em>a</em>b”<br>Output: true<br>Explanation: The first ‘<em>‘ matches the empty sequence, while the second ‘</em>‘ matches the substring “dce”.<br>Example 5:</p>
+<p>Input:<br>s = “acdcb”<br>p = “a*c?b”<br>Output: false</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isMatch</span><span class="params">(String s, String p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sLen = s.length(), pLen = p.length();</span><br><span class="line">    <span class="keyword">int</span> sIdx = <span class="number">0</span>, pIdx = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> starIdx = -<span class="number">1</span>, sTmpIdx = -<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (sIdx &lt; sLen) &#123;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (pIdx &lt; pLen &amp;&amp; (p.charAt(pIdx) == <span class="string">'?'</span> || p.charAt(pIdx) == s.charAt(sIdx)))&#123;</span><br><span class="line">        ++sIdx;</span><br><span class="line">        ++pIdx;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (pIdx &lt; pLen &amp;&amp; p.charAt(pIdx) == <span class="string">'*'</span>) &#123;</span><br><span class="line"></span><br><span class="line">        starIdx = pIdx;</span><br><span class="line">        sTmpIdx = sIdx;</span><br><span class="line">        ++pIdx;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (starIdx == -<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">        pIdx = starIdx + <span class="number">1</span>;</span><br><span class="line">        sIdx = sTmpIdx + <span class="number">1</span>;</span><br><span class="line">        sTmpIdx = sIdx;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = pIdx; i &lt; pLen; i++)</span><br><span class="line">      <span class="keyword">if</span> (p.charAt(i) != <span class="string">'*'</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/wildcard-matching/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/wildcard-matching/</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/31/leetcode/matching/" data-id="ck8lar4n3000rmcojdl8wcbmn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-notebook/v2ray-tls" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/03/30/notebook/v2ray-tls/" class="article-date">
@@ -538,52 +588,6 @@
 
 
   
-    <article id="post-leetcode/maxdepth" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/21/leetcode/maxdepth/" class="article-date">
-  <time datetime="2020-03-21T15:57:21.264Z" itemprop="datePublished">2020-03-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/21/leetcode/maxdepth/">leetcode/maxdepth</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="二叉树的最大深度"><a href="#二叉树的最大深度" class="headerlink" title="二叉树的最大深度"></a>二叉树的最大深度</h1><p>给定一个二叉树，找出其最大深度。</p>
-<p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p>
-<p>说明: 叶子节点是指没有子节点的节点。</p>
-<p><strong>示例：</strong><br>给定二叉树 [3,9,20,null,null,15,7]，</p>
-<p>   3<br>   / \<br>  9  20<br>    /  \<br>   15   7<br>返回它的最大深度 3 。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    Queue&lt;Pair&lt;TreeNode, Integer&gt;&gt; stack = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    <span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</span><br><span class="line">      stack.add(<span class="keyword">new</span> Pair(root, <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> depth = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">      Pair&lt;TreeNode, Integer&gt; current = stack.poll();</span><br><span class="line">      root = current.getKey();</span><br><span class="line">      <span class="keyword">int</span> current_depth = current.getValue();</span><br><span class="line">      <span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</span><br><span class="line">        depth = Math.max(depth, current_depth);</span><br><span class="line">        stack.add(<span class="keyword">new</span> Pair(root.left, current_depth + <span class="number">1</span>));</span><br><span class="line">        stack.add(<span class="keyword">new</span> Pair(root.right, current_depth + <span class="number">1</span>));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> depth;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">by LeetCode</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Reference<br><a href="https://leetcode-cn.com/problems/maximum-depth-of-binary-tree" target="_blank" rel="noopener">https://leetcode-cn.com/problems/maximum-depth-of-binary-tree</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/21/leetcode/maxdepth/" data-id="ck8lar4n3000qmcojgrjn1145" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -620,6 +624,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/04/28/algorithm/%5BDP%5DMSM/">algorithm/[DP]MSM</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/04/26/algorithm/%5BDP%5DLCS/">algorithm/[DP]LCS</a>
           </li>
         
@@ -633,10 +641,6 @@
         
           <li>
             <a href="/blog/2020/04/17/notebook/linux-java/">notebook/linux-java</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/04/15/ml/lesson1/">ml/lesson1</a>
           </li>
         
       </ul>
