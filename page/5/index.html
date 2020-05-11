@@ -68,6 +68,53 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode/mergelist" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/07/leetcode/mergelist/" class="article-date">
+  <time datetime="2020-03-07T14:19:23.094Z" itemprop="datePublished">2020-03-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/07/leetcode/mergelist/">leetcode/mergelist</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="合并两个有序链表"><a href="#合并两个有序链表" class="headerlink" title="合并两个有序链表"></a>合并两个有序链表</h1><p>将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 </p>
+<p><strong>示例</strong>：</p>
+<p>输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4<br>输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode <span class="title">mergeTwoLists</span><span class="params">(ListNode l1, ListNode l2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (l1 == <span class="keyword">null</span> | l2 == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (l1 == <span class="keyword">null</span> &amp; l2 == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (l1 != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> l1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (l2 != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> l2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ListNode res = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">    ListNode temp = res;</span><br><span class="line">    <span class="keyword">while</span> (l1 != <span class="keyword">null</span> &amp; l2 != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (l1.val &lt;= l2.val) &#123;</span><br><span class="line">            temp.val = l1.val;</span><br><span class="line">            temp.next = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">            temp = temp.next;</span><br><span class="line">            l1 = l1.next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            temp.val = l2.val;</span><br><span class="line">            temp.next = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">            temp = temp.next;</span><br><span class="line">            l2 = l2.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (l1 != <span class="keyword">null</span>) &#123;</span><br><span class="line">        temp.val = l1.val;</span><br><span class="line">        <span class="keyword">while</span> (l1.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            temp.next = <span class="keyword">new</span> ListNode(l1.next.val);</span><br><span class="line">            temp = temp.next;</span><br><span class="line">            l1 = l1.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        temp.val = l2.val;</span><br><span class="line">        <span class="keyword">while</span> (l2.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            temp.next = <span class="keyword">new</span> ListNode(l2.next.val);</span><br><span class="line">             temp = temp.next;</span><br><span class="line">            l2 = l2.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">执行用时 :1 ms, 在所有 Java 提交中击败了83.58%的用户</span></span><br><span class="line"><span class="comment">内存消耗 :38.5 MB, 在所有 Java 提交中击败了51.34%的用户 </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The code is too complicated. I’m going on to simplify it.</p>
+<p>Here is an updated code after I read the official document.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">mergeTwoLists</span><span class="params">(ListNode l1, ListNode l2)</span> </span>&#123;</span><br><span class="line">    ListNode res = <span class="keyword">new</span> ListNode(<span class="number">0</span>);<span class="comment">// Head Pointer</span></span><br><span class="line">    ListNode temp = res;</span><br><span class="line">    <span class="keyword">while</span> (l1 != <span class="keyword">null</span> &amp; l2 != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (l1.val &lt;= l2.val) &#123;</span><br><span class="line">            temp.next = l1;</span><br><span class="line">            l1 = l1.next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            temp.next = l2;</span><br><span class="line">            l2 = l2.next;</span><br><span class="line">        &#125;</span><br><span class="line">        temp = temp.next;</span><br><span class="line">    &#125;</span><br><span class="line">    temp.next = (l1 == <span class="keyword">null</span>) ? l2 : l1;</span><br><span class="line">    <span class="keyword">return</span> res.next;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 执行用时 :1 ms, 在所有 Java 提交中击败了83.58%的用户</span></span><br><span class="line"><span class="comment">内存消耗 :38.2 MB, 在所有 Java 提交中击败了55.50%的用户 </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>This is a nice solution to have a head pointer, which means we haven’t to modified current <code>temp.val</code> and register a new object on the <code>temp.next</code>. Also we needn’t to care whether <code>l1</code> or <code>l2</code> is <code>null</code></strong></p>
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/merge-two-sorted-lists" target="_blank" rel="noopener">https://leetcode-cn.com/problems/merge-two-sorted-lists</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/07/leetcode/mergelist/" data-id="ck8lar4n7000vmcoj2sicgqmp" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-leetcode/buystock" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/03/06/leetcode/buystock/" class="article-date">
@@ -576,55 +623,11 @@
 
 
   
-    <article id="post-notebook/guide" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/03/notebook/guide/" class="article-date">
-  <time datetime="2020-03-03T13:13:41.670Z" itemprop="datePublished">2020-03-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/03/notebook/guide/">notebook/guide</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Welcome-to-GitHub-Pages"><a href="#Welcome-to-GitHub-Pages" class="headerlink" title="Welcome to GitHub Pages"></a>Welcome to GitHub Pages</h2><p>You can use the <a href="https://github.com/Edlison/edlison.github.io/edit/master/index.md" target="_blank" rel="noopener">editor on GitHub</a> to maintain and preview the content for your website in Markdown files.</p>
-<p>Whenever you commit to this repository, GitHub Pages will run <a href="https://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a> to rebuild the pages in your site, from the content in your Markdown files.</p>
-<h3 id="Markdown"><a href="#Markdown" class="headerlink" title="Markdown"></a>Markdown</h3><p>Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Syntax highlighted code block</span><br><span class="line"></span><br><span class="line"><span class="section"># Header 1</span></span><br><span class="line"><span class="section">## Header 2</span></span><br><span class="line"><span class="section">### Header 3</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">- </span>Bulleted</span><br><span class="line"><span class="bullet">- </span>List</span><br><span class="line"></span><br><span class="line"><span class="bullet">1. </span>Numbered</span><br><span class="line"><span class="bullet">2. </span>List</span><br><span class="line"></span><br><span class="line"><span class="strong">**Bold**</span> and <span class="emphasis">_Italic_</span> and <span class="code">`Code`</span> text</span><br><span class="line"></span><br><span class="line">[<span class="string">Link</span>](<span class="link">url</span>) and ![<span class="string">Image</span>](<span class="link">src</span>)</span><br></pre></td></tr></table></figure>
-
-<p>For more details see <a href="https://guides.github.com/features/mastering-markdown/" target="_blank" rel="noopener">GitHub Flavored Markdown</a>.</p>
-<h3 id="Jekyll-Themes"><a href="#Jekyll-Themes" class="headerlink" title="Jekyll Themes"></a>Jekyll Themes</h3><p>Your Pages site will use the layout and styles from the Jekyll theme you have selected in your <a href="https://github.com/Edlison/edlison.github.io/settings" target="_blank" rel="noopener">repository settings</a>. The name of this theme is saved in the Jekyll <code>_config.yml</code> configuration file.</p>
-<h3 id="Support-or-Contact"><a href="#Support-or-Contact" class="headerlink" title="Support or Contact"></a>Support or Contact</h3><p>Having trouble with Pages? Check out our <a href="https://help.github.com/categories/github-pages-basics/" target="_blank" rel="noopener">documentation</a> or <a href="https://github.com/contact" target="_blank" rel="noopener">contact support</a> and we’ll help you sort it out.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/03/notebook/guide/" data-id="ck91iwv4b000237ojhe1camr6" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/blog/page/4/">&amp;laquo; 上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/3/">3</a><a class="page-number" href="/blog/page/4/">4</a><span class="page-number current">5</span>
+    <a class="extend prev" rel="prev" href="/blog/page/4/">&amp;laquo; 上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/3/">3</a><a class="page-number" href="/blog/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/blog/page/6/">6</a><a class="extend next" rel="next" href="/blog/page/6/">下一页 &amp;raquo;</a>
   </nav>
 
 </section>
@@ -643,7 +646,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a></li></ul>
     </div>
   </div>
 
@@ -654,6 +657,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/blog/2020/05/11/notebook/docker-anaconda/">notebook/docker-anaconda</a>
+          </li>
         
           <li>
             <a href="/blog/2020/04/28/algorithm/%5BDP%5DMSM/">algorithm/[DP]MSM</a>
@@ -669,10 +676,6 @@
         
           <li>
             <a href="/blog/2020/04/17/notebook/linux-mariadb/">notebook/linux-mariadb</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/04/17/notebook/linux-java/">notebook/linux-java</a>
           </li>
         
       </ul>
