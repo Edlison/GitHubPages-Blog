@@ -1,4 +1,4 @@
-# CentOS下配置Anaconda环境运行Jupyter
+# 使用Docker配置Anaconda环境运行Jupyter
 
 ## 配置Docker环境
 
