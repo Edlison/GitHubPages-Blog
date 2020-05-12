@@ -68,6 +68,114 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-notebook/implements-extends" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/08/notebook/implements-extends/" class="article-date">
+  <time datetime="2020-03-08T10:56:21.551Z" itemprop="datePublished">2020-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/08/notebook/implements-extends/">notebook/implements-extends</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Implements-amp-Extends-的不同"><a href="#Implements-amp-Extends-的不同" class="headerlink" title="Implements &amp; Extends 的不同"></a>Implements &amp; Extends 的不同</h1><p><strong>在类的声明中，通过关键字extends来创建一个类的子类；一个类通过关键字implements声明自己使用一个或者多个接口。</strong></p>
+<ul>
+<li><p>extends 是继承某个类, 继承之后可以使用父类的方法, 也可以重写父类的方法; </p>
+</li>
+<li><p>implements 是实现多个接口, 接口的方法一般为空的, 必须重写才能使用；</p>
+</li>
+<li><p>extends是继承父类，只要那个类不是声明为final或者那个类定义为abstract的就能继承；</p>
+</li>
+<li><p>Java中不支持多重继承，但是可以用接口来实现，这样就要用到implements，继承只能继承一个类，但implements可以实现多个接口，用逗号分开就行了 比如 ：<code>class A extends B implements C,D,E</code>。</p>
+</li>
+</ul>
+<p><strong>接口实现的注意点：</strong>  </p>
+<ul>
+<li><p>实现一个接口就是要实现该接口的所有的方法(抽象类除外)；</p>
+</li>
+<li><p>接口中的方法都是抽象的；</p>
+</li>
+<li><p>多个无关的类可以实现同一个接口，一个类可以实现多个无关的接口。</p>
+</li>
+</ul>
+<p><strong>Implements与Extends的不同</strong></p>
+<p>extends， 可以实现父类，也可以调用父类初始化 this.parent()。而且会覆盖父类定义的变量或者函数。这样的好处是：架构师定义好接口，让工程师实现就可以了。整个项目开发效率和开发成本大大降低。    </p>
+<p>implements，实现父类，子类不可以覆盖父类的方法或者变量。即使子类定义与父类相同的变量或者函数，也会被父类取代掉。  </p>
+<p>这两种实现的具体使用，是要看项目的实际情况，需要实现，不可以修改implements，只定义接口需要具体实现，或者可以被修改扩展性好，用extends。</p>
+<blockquote>
+<p>Reference<br><a href="https://blog.csdn.net/tolcf/article/details/46135645" target="_blank" rel="noopener">https://blog.csdn.net/tolcf/article/details/46135645</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/08/notebook/implements-extends/" data-id="ck91iwv4e000637oj6ormh8tc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-leetcode/deletelistduplicates" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/08/leetcode/deletelistduplicates/" class="article-date">
+  <time datetime="2020-03-08T05:20:52.297Z" itemprop="datePublished">2020-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/08/leetcode/deletelistduplicates/">leetcode/deletelistduplicates</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="删除排序链表中的重复元素"><a href="#删除排序链表中的重复元素" class="headerlink" title="删除排序链表中的重复元素"></a>删除排序链表中的重复元素</h1><p>给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。</p>
+<p><strong>示例 1:</strong></p>
+<p>输入: 1-&gt;1-&gt;2<br>输出: 1-&gt;2<br>示例 2:</p>
+<p>输入: 1-&gt;1-&gt;2-&gt;3-&gt;3<br>输出: 1-&gt;2-&gt;3</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">deleteDuplicates</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">       ListNode temp = head;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (temp.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (temp.val == temp.next.val) &#123;</span><br><span class="line">                temp.next = temp.next.next;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            temp = temp.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">执行用时 :1 ms, 在所有 Java 提交中击败了94.59%的用户</span></span><br><span class="line"><span class="comment">内存消耗 :39.3 MB, 在所有 Java 提交中击败了5.00%的用户</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>Base Case: <code>head==null</code><br>Because this is a sorted linked list, we just need to figure out whether the next node’s values equals current node’s value.  </p>
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list" target="_blank" rel="noopener">https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/08/leetcode/deletelistduplicates/" data-id="ck8lar4my000kmcojevo3ef0e" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-leetcode/mergelist" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/03/07/leetcode/mergelist/" class="article-date">
@@ -531,98 +639,6 @@
 
 
   
-    <article id="post-leetcode/deleteduplicates" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/03/leetcode/deleteduplicates/" class="article-date">
-  <time datetime="2020-03-03T13:36:04.365Z" itemprop="datePublished">2020-03-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/03/leetcode/deleteduplicates/">leetcode/deleteduplicates</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Day02-删除排序数组的重复项"><a href="#Day02-删除排序数组的重复项" class="headerlink" title="Day02 - 删除排序数组的重复项"></a>Day02 - 删除排序数组的重复项</h1><p>给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。</p>
-<p>不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。</p>
-<p><strong>示例1</strong> </p>
-<p>给定数组 nums = [1,1,2],函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。你不需要考虑数组中超出新长度后面的元素。`</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">removeDuplicates</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> length;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (nums.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        length = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">1</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">while</span> (j &lt; nums.length &amp;&amp; nums[j] == nums[i]) &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (j &gt;= nums.length)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (nums[j] != nums[i]) &#123;</span><br><span class="line">                nums[i + <span class="number">1</span>] = nums[j];</span><br><span class="line">                length++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> length;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">执行用时 :1 ms, 在所有 Java 提交中击败了99.89%的用户</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<p><code>length</code> 记录新数组长度，只需要在原数组中遍历一次与第 <code>i</code> 项比较若不同则将第 <code>j</code> 项赋给第 <code>i+1</code> 项。</p>
-<blockquote>
-<p>Reference<br><a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/03/leetcode/deleteduplicates/" data-id="ck8lar4mv000gmcoj82pk6dbh" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode/twosum" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/03/leetcode/twosum/" class="article-date">
-  <time datetime="2020-03-03T13:36:04.356Z" itemprop="datePublished">2020-03-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/03/leetcode/twosum/">leetcode/twosum</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Day01-两数之和"><a href="#Day01-两数之和" class="headerlink" title="Day01 - 两数之和"></a>Day01 - 两数之和</h1><p>给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。</p>
-<p>你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。</p>
-<p><strong>示例</strong>:</p>
-<p>给定 nums = [2, 7, 11, 15], target = 9</p>
-<p>因为 nums[0] + nums[1] = 2 + 7 = 9所以返回 [0, 1]</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="keyword">int</span>[] two = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = nums.length - <span class="number">1</span>; j &gt; i; j--) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[i] + nums[j] == target) &#123;</span><br><span class="line">                    two[<span class="number">0</span>] = i;</span><br><span class="line">                    two[<span class="number">1</span>] = j;</span><br><span class="line">                    <span class="keyword">return</span> two;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Reference<br><a href="https://leetcode-cn.com/problems/two-sum" target="_blank" rel="noopener">https://leetcode-cn.com/problems/two-sum</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/03/leetcode/twosum/" data-id="ck8lar4nb0012mcojb38z5how" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -659,6 +675,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/05/12/notebook/nginx/">notebook/nginx</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/05/12/notebook/docker-chevereto/">notebook/docker-chevereto</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/05/11/notebook/docker-anaconda/">notebook/docker-anaconda</a>
           </li>
         
@@ -668,14 +692,6 @@
         
           <li>
             <a href="/blog/2020/04/26/algorithm/%5BDP%5DLCS/">algorithm/[DP]LCS</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/04/24/ml/numpy-training/">ml/numpy-training</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/04/17/notebook/linux-mariadb/">notebook/linux-mariadb</a>
           </li>
         
       </ul>

@@ -68,6 +68,114 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode/validparentheses" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/15/leetcode/validparentheses/" class="article-date">
+  <time datetime="2020-03-15T14:42:26.874Z" itemprop="datePublished">2020-03-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/15/leetcode/validparentheses/">leetcode/validparentheses</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Valid-Parentheses"><a href="#Valid-Parentheses" class="headerlink" title="Valid Parentheses"></a>Valid Parentheses</h1><p>Given a string containing just the characters ‘(‘, ‘)’, ‘{‘, ‘}’, ‘[‘ and ‘]’, determine if the input string is valid.</p>
+<p>An input string is valid if:</p>
+<p>Open brackets must be closed by the same type of brackets.<br>Open brackets must be closed in the correct order.<br>Note that an empty string is also considered valid.</p>
+<p><strong>Example 1:</strong></p>
+<p>Input: “()”<br>Output: true</p>
+<p><strong>Example 2:</strong></p>
+<p>Input: “()[]{}”<br>Output: true</p>
+<p><strong>Example 3:</strong></p>
+<p>Input: “(]”<br>Output: false</p>
+<p><strong>Example 4:</strong></p>
+<p>Input: “([)]”<br>Output: false</p>
+<p><strong>Example 5:</strong></p>
+<p>Input: “{[]}”<br>Output: true</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValid</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span>[] charArray = s.toCharArray();</span><br><span class="line">        Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span> (s == <span class="keyword">null</span> || s.length() == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; charArray.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (trans(charArray[i]) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                stack.push(trans(charArray[i]));</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (trans(charArray[i]) &lt; <span class="number">0</span> ) &#123;</span><br><span class="line">                <span class="keyword">if</span> (!stack.isEmpty() &amp;&amp; stack.pop() + trans(charArray[i]) == <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (stack.size() == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">trans</span><span class="params">(<span class="keyword">char</span> c)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (c) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'('</span>: <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">')'</span>: <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'['</span>: <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">']'</span>: <span class="keyword">return</span> -<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'&#123;'</span>: <span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'&#125;'</span>: <span class="keyword">return</span> -<span class="number">3</span>;</span><br><span class="line">            <span class="keyword">default</span>: <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">执行用时 :2 ms, 在所有 Java 提交中击败了91.77%的用户</span></span><br><span class="line"><span class="comment">内存消耗 :37.2 MB, 在所有 Java 提交中击败了5.05%的用户</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Source code is easy to see.</p>
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/valid-parentheses" target="_blank" rel="noopener">https://leetcode-cn.com/problems/valid-parentheses</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/15/leetcode/validparentheses/" data-id="ck8lar4nd0016mcojcucgcetv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-leetcode/maxpublicex" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/14/leetcode/maxpublicex/" class="article-date">
+  <time datetime="2020-03-14T14:51:58.875Z" itemprop="datePublished">2020-03-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/14/leetcode/maxpublicex/">leetcode/maxpublicex</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Longest-Common-Prefix"><a href="#Longest-Common-Prefix" class="headerlink" title="Longest Common Prefix"></a>Longest Common Prefix</h1><p>Write a function to find the longest common prefix string amongst an array of strings.</p>
+<p>If there is no common prefix, return an empty string “”.</p>
+<p><strong>Example 1:</strong></p>
+<p>Input: [“flower”,”flow”,”flight”]<br>Output: “fl”</p>
+<p><strong>Example 2:</strong></p>
+<p>Input: [“dog”,”racecar”,”car”]<br>Output: “”<br>Explanation: There is no common prefix among the input strings.</p>
+<p><strong>Note:</strong></p>
+<p>All given inputs are in lowercase letters a-z.</p>
+<p><em>Unsolved</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input:</span><br><span class="line">[&quot;aa&quot;,&quot;a&quot;]</span><br><span class="line">Output:</span><br><span class="line">&quot;aa&quot;</span><br><span class="line">Answer:</span><br><span class="line">&quot;a&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">longestCommonPrefix</span><span class="params">(String[] strs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (strs == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">        String res = strs[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">char</span>[] resChar = res.toCharArray();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; strs.length; i++) &#123;</span><br><span class="line">            <span class="keyword">char</span>[] tempChar = strs[i].toCharArray();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; tempChar.length &amp; j &lt; resChar.length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (resChar[j] != tempChar[j]) &#123;</span><br><span class="line">                    res = strs[i].substring(<span class="number">0</span>, j);</span><br><span class="line">                    resChar = res.toCharArray();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>LeetCode Solution</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">longestCommonPrefix</span><span class="params">(String[] strs)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (strs.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">   String prefix = strs[<span class="number">0</span>];</span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; strs.length; i++)</span><br><span class="line">       <span class="keyword">while</span> (strs[i].indexOf(prefix) != <span class="number">0</span>) &#123;</span><br><span class="line">           prefix = prefix.substring(<span class="number">0</span>, prefix.length() - <span class="number">1</span>);</span><br><span class="line">           <span class="keyword">if</span> (prefix.isEmpty()) <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">       &#125;        </span><br><span class="line">   <span class="keyword">return</span> prefix;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Nice idea to use substring to find out what index is it. If <code>strs</code> doesn’t have a substring the index can not be 0. All we need to do is cut the <code>prefix</code>‘s length.</p>
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/longest-common-prefix" target="_blank" rel="noopener">https://leetcode-cn.com/problems/longest-common-prefix</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/14/leetcode/maxpublicex/" data-id="ck8lar4n7000wmcojfsalbouj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-leetcode/romantointeger" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/03/13/leetcode/romantointeger/" class="article-date">
@@ -532,114 +640,6 @@
 
 
   
-    <article id="post-notebook/implements-extends" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/08/notebook/implements-extends/" class="article-date">
-  <time datetime="2020-03-08T10:56:21.551Z" itemprop="datePublished">2020-03-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/08/notebook/implements-extends/">notebook/implements-extends</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Implements-amp-Extends-的不同"><a href="#Implements-amp-Extends-的不同" class="headerlink" title="Implements &amp; Extends 的不同"></a>Implements &amp; Extends 的不同</h1><p><strong>在类的声明中，通过关键字extends来创建一个类的子类；一个类通过关键字implements声明自己使用一个或者多个接口。</strong></p>
-<ul>
-<li><p>extends 是继承某个类, 继承之后可以使用父类的方法, 也可以重写父类的方法; </p>
-</li>
-<li><p>implements 是实现多个接口, 接口的方法一般为空的, 必须重写才能使用；</p>
-</li>
-<li><p>extends是继承父类，只要那个类不是声明为final或者那个类定义为abstract的就能继承；</p>
-</li>
-<li><p>Java中不支持多重继承，但是可以用接口来实现，这样就要用到implements，继承只能继承一个类，但implements可以实现多个接口，用逗号分开就行了 比如 ：<code>class A extends B implements C,D,E</code>。</p>
-</li>
-</ul>
-<p><strong>接口实现的注意点：</strong>  </p>
-<ul>
-<li><p>实现一个接口就是要实现该接口的所有的方法(抽象类除外)；</p>
-</li>
-<li><p>接口中的方法都是抽象的；</p>
-</li>
-<li><p>多个无关的类可以实现同一个接口，一个类可以实现多个无关的接口。</p>
-</li>
-</ul>
-<p><strong>Implements与Extends的不同</strong></p>
-<p>extends， 可以实现父类，也可以调用父类初始化 this.parent()。而且会覆盖父类定义的变量或者函数。这样的好处是：架构师定义好接口，让工程师实现就可以了。整个项目开发效率和开发成本大大降低。    </p>
-<p>implements，实现父类，子类不可以覆盖父类的方法或者变量。即使子类定义与父类相同的变量或者函数，也会被父类取代掉。  </p>
-<p>这两种实现的具体使用，是要看项目的实际情况，需要实现，不可以修改implements，只定义接口需要具体实现，或者可以被修改扩展性好，用extends。</p>
-<blockquote>
-<p>Reference<br><a href="https://blog.csdn.net/tolcf/article/details/46135645" target="_blank" rel="noopener">https://blog.csdn.net/tolcf/article/details/46135645</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/08/notebook/implements-extends/" data-id="ck91iwv4e000637oj6ormh8tc" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode/deletelistduplicates" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/08/leetcode/deletelistduplicates/" class="article-date">
-  <time datetime="2020-03-08T05:20:52.297Z" itemprop="datePublished">2020-03-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/08/leetcode/deletelistduplicates/">leetcode/deletelistduplicates</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="删除排序链表中的重复元素"><a href="#删除排序链表中的重复元素" class="headerlink" title="删除排序链表中的重复元素"></a>删除排序链表中的重复元素</h1><p>给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。</p>
-<p><strong>示例 1:</strong></p>
-<p>输入: 1-&gt;1-&gt;2<br>输出: 1-&gt;2<br>示例 2:</p>
-<p>输入: 1-&gt;1-&gt;2-&gt;3-&gt;3<br>输出: 1-&gt;2-&gt;3</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">deleteDuplicates</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">       ListNode temp = head;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (temp.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (temp.val == temp.next.val) &#123;</span><br><span class="line">                temp.next = temp.next.next;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            temp = temp.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">执行用时 :1 ms, 在所有 Java 提交中击败了94.59%的用户</span></span><br><span class="line"><span class="comment">内存消耗 :39.3 MB, 在所有 Java 提交中击败了5.00%的用户</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-<p>Base Case: <code>head==null</code><br>Because this is a sorted linked list, we just need to figure out whether the next node’s values equals current node’s value.  </p>
-<blockquote>
-<p>Reference<br><a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list" target="_blank" rel="noopener">https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/08/leetcode/deletelistduplicates/" data-id="ck8lar4my000kmcojevo3ef0e" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -676,6 +676,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/05/12/notebook/nginx/">notebook/nginx</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/05/12/notebook/docker-chevereto/">notebook/docker-chevereto</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/05/11/notebook/docker-anaconda/">notebook/docker-anaconda</a>
           </li>
         
@@ -685,14 +693,6 @@
         
           <li>
             <a href="/blog/2020/04/26/algorithm/%5BDP%5DLCS/">algorithm/[DP]LCS</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/04/24/ml/numpy-training/">ml/numpy-training</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/04/17/notebook/linux-mariadb/">notebook/linux-mariadb</a>
           </li>
         
       </ul>
