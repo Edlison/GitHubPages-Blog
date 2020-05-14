@@ -5,17 +5,17 @@
   
 
   
-  <title>notebook/implements-extends | Edlison</title>
+  <title>notebook/anaconda | Edlison</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Implements &amp; Extends 的不同在类的声明中，通过关键字extends来创建一个类的子类；一个类通过关键字implements声明自己使用一个或者多个接口。  extends 是继承某个类, 继承之后可以使用父类的方法, 也可以重写父类的方法;   implements 是实现多个接口, 接口的方法一般为空的, 必须重写才能使用；  extends是继承父类，只要那个类不是">
+  <meta name="description" content="MacOS安装Anacondaconda配置文件位置~&#x2F;.condarc 配置zsh环境变量export PATH&#x3D;&#x2F;Applications&#x2F;anaconda3&#x2F;bin:$PATH conda镜像源添加镜像指令(亦可以直接在配置文件中添加)conda config --add channels https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="notebook&#x2F;implements-extends">
-<meta property="og:url" content="http://edlison.com/blog/2020/03/08/notebook/implements-extends/index.html">
+<meta property="og:title" content="notebook&#x2F;anaconda">
+<meta property="og:url" content="http://edlison.com/blog/2020/05/14/notebook/anaconda/index.html">
 <meta property="og:site_name" content="Edlison">
-<meta property="og:description" content="Implements &amp; Extends 的不同在类的声明中，通过关键字extends来创建一个类的子类；一个类通过关键字implements声明自己使用一个或者多个接口。  extends 是继承某个类, 继承之后可以使用父类的方法, 也可以重写父类的方法;   implements 是实现多个接口, 接口的方法一般为空的, 必须重写才能使用；  extends是继承父类，只要那个类不是">
+<meta property="og:description" content="MacOS安装Anacondaconda配置文件位置~&#x2F;.condarc 配置zsh环境变量export PATH&#x3D;&#x2F;Applications&#x2F;anaconda3&#x2F;bin:$PATH conda镜像源添加镜像指令(亦可以直接在配置文件中添加)conda config --add channels https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-03-08T10:56:21.551Z">
-<meta property="article:modified_time" content="2020-03-11T15:48:52.517Z">
+<meta property="article:published_time" content="2020-05-14T11:15:25.527Z">
+<meta property="article:modified_time" content="2020-05-14T11:58:40.135Z">
 <meta property="article:author" content="Bolin Shen">
 <meta name="twitter:card" content="summary">
   
@@ -70,10 +70,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-notebook/implements-extends" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-notebook/anaconda" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2020/03/08/notebook/implements-extends/" class="article-date">
-  <time datetime="2020-03-08T10:56:21.551Z" itemprop="datePublished">2020-03-08</time>
+    <a href="/blog/2020/05/14/notebook/anaconda/" class="article-date">
+  <time datetime="2020-05-14T11:15:25.527Z" itemprop="datePublished">2020-05-14</time>
 </a>
     
   </div>
@@ -84,7 +84,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      notebook/implements-extends
+      notebook/anaconda
     </h1>
   
 
@@ -92,38 +92,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Implements-amp-Extends-的不同"><a href="#Implements-amp-Extends-的不同" class="headerlink" title="Implements &amp; Extends 的不同"></a>Implements &amp; Extends 的不同</h1><p><strong>在类的声明中，通过关键字extends来创建一个类的子类；一个类通过关键字implements声明自己使用一个或者多个接口。</strong></p>
+        <h1 id="MacOS安装Anaconda"><a href="#MacOS安装Anaconda" class="headerlink" title="MacOS安装Anaconda"></a>MacOS安装Anaconda</h1><h2 id="conda配置文件"><a href="#conda配置文件" class="headerlink" title="conda配置文件"></a>conda配置文件</h2><p>位置<br><code>~/.condarc</code></p>
+<p>配置zsh环境变量<br><code>export PATH=/Applications/anaconda3/bin:$PATH</code></p>
+<h2 id="conda镜像源"><a href="#conda镜像源" class="headerlink" title="conda镜像源"></a>conda镜像源</h2><p>添加镜像指令(亦可以直接在配置文件中添加)<br><code>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</code><br><code>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge</code><br><code>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/</code>  </p>
+<p>设置搜索时显示通道地址<br><code>conda config --set show_channel_urls yes</code></p>
+<h2 id="shell虚拟环境"><a href="#shell虚拟环境" class="headerlink" title="shell虚拟环境"></a>shell虚拟环境</h2><p><strong>取消命令行前出现的(base)</strong></p>
 <ul>
-<li><p>extends 是继承某个类, 继承之后可以使用父类的方法, 也可以重写父类的方法; </p>
+<li><p>每次在命令行通过<code>conda deactivate</code>退出base环境回到系统自动的环境</p>
 </li>
-<li><p>implements 是实现多个接口, 接口的方法一般为空的, 必须重写才能使用；</p>
-</li>
-<li><p>extends是继承父类，只要那个类不是声明为final或者那个类定义为abstract的就能继承；</p>
-</li>
-<li><p>Java中不支持多重继承，但是可以用接口来实现，这样就要用到implements，继承只能继承一个类，但implements可以实现多个接口，用逗号分开就行了 比如 ：<code>class A extends B implements C,D,E</code>。</p>
+<li><p><code>conda config --set auto_activate_base false</code></p>
 </li>
 </ul>
-<p><strong>接口实现的注意点：</strong>  </p>
-<ul>
-<li><p>实现一个接口就是要实现该接口的所有的方法(抽象类除外)；</p>
-</li>
-<li><p>接口中的方法都是抽象的；</p>
-</li>
-<li><p>多个无关的类可以实现同一个接口，一个类可以实现多个无关的接口。</p>
-</li>
-</ul>
-<p><strong>Implements与Extends的不同</strong></p>
-<p>extends， 可以实现父类，也可以调用父类初始化 this.parent()。而且会覆盖父类定义的变量或者函数。这样的好处是：架构师定义好接口，让工程师实现就可以了。整个项目开发效率和开发成本大大降低。    </p>
-<p>implements，实现父类，子类不可以覆盖父类的方法或者变量。即使子类定义与父类相同的变量或者函数，也会被父类取代掉。  </p>
-<p>这两种实现的具体使用，是要看项目的实际情况，需要实现，不可以修改implements，只定义接口需要具体实现，或者可以被修改扩展性好，用extends。</p>
-<blockquote>
-<p>Reference<br><a href="https://blog.csdn.net/tolcf/article/details/46135645" target="_blank" rel="noopener">https://blog.csdn.net/tolcf/article/details/46135645</a></p>
-</blockquote>
+<h2 id="安装TensorFlow环境"><a href="#安装TensorFlow环境" class="headerlink" title="安装TensorFlow环境"></a>安装TensorFlow环境</h2><p>新建一个tf环境<br><code>conda create -n tensorflow python=3.7</code></p>
+<p>进入tf环境<br><code>conda activate tensorflow</code></p>
+<p>pip安装tf<br><code>pip install -i https://pypi.tuna.tsinghua.edu.cn/simple tensorflow</code></p>
+<h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><p>安装clean包<br><code>conda install anaconda-clean</code></p>
+<p>文件进行删除<br><code>anaconda-clean</code></p>
+<p>删除Anaconda主文件包(默认路径)<br><code>/opt/anaconda3</code></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/08/notebook/implements-extends/" data-id="ck91iwv4e000637oj6ormh8tc" class="article-share-link">Share</a>
+      <a data-url="http://edlison.com/blog/2020/05/14/notebook/anaconda/" data-id="cka6qc6cn0000ojoj8pr1cjjo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -132,19 +122,10 @@
     
 <nav id="article-nav">
   
-    <a href="/blog/2020/03/09/leetcode/hascycle/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          leetcode/hascycle
-        
-      </div>
-    </a>
   
-  
-    <a href="/blog/2020/03/08/leetcode/deletelistduplicates/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/blog/2020/05/12/notebook/docker/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">leetcode/deletelistduplicates</div>
+      <div class="article-nav-title">notebook/docker</div>
     </a>
   
 </nav>

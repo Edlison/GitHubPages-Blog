@@ -15,7 +15,7 @@
 <meta property="og:description" content="Docker &amp; Docker-ComposeDocker运行docker$ service docker start 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354Management Commands:  container   Man">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-12T15:13:18.969Z">
-<meta property="article:modified_time" content="2020-05-12T15:27:30.162Z">
+<meta property="article:modified_time" content="2020-05-12T15:31:28.048Z">
 <meta property="article:author" content="Bolin Shen">
 <meta name="twitter:card" content="summary">
   
@@ -95,7 +95,10 @@
         <h1 id="Docker-amp-Docker-Compose"><a href="#Docker-amp-Docker-Compose" class="headerlink" title="Docker &amp; Docker-Compose"></a>Docker &amp; Docker-Compose</h1><h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><p>运行docker<br><code>$ service docker start</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">Management Commands:</span><br><span class="line">  container   Manage containers</span><br><span class="line">  image       Manage images</span><br><span class="line">  network     Manage networks</span><br><span class="line">  node        Manage Swarm nodes</span><br><span class="line">  plugin      Manage plugins</span><br><span class="line">  secret      Manage Docker secrets</span><br><span class="line">  service     Manage services</span><br><span class="line">  stack       Manage Docker stacks</span><br><span class="line">  swarm       Manage Swarm</span><br><span class="line">  system      Manage Docker</span><br><span class="line">  volume      Manage volumes</span><br><span class="line"></span><br><span class="line">Commands:</span><br><span class="line">  attach      Attach to a running container</span><br><span class="line">  build       Build an image from a Dockerfile</span><br><span class="line">  commit      Create a new image from a container<span class="string">'s changes</span></span><br><span class="line"><span class="string">  cp          Copy files/folders between a container and the local filesystem</span></span><br><span class="line"><span class="string">  create      Create a new container</span></span><br><span class="line"><span class="string">  diff        Inspect changes on a container'</span>s filesystem</span><br><span class="line">  events      Get real time events from the server</span><br><span class="line">  <span class="built_in">exec</span>        Run a <span class="built_in">command</span> <span class="keyword">in</span> a running container</span><br><span class="line">  <span class="built_in">export</span>      Export a container<span class="string">'s filesystem as a tar archive</span></span><br><span class="line"><span class="string">  history     Show the history of an image</span></span><br><span class="line"><span class="string">  images      List images</span></span><br><span class="line"><span class="string">  import      Import the contents from a tarball to create a filesystem image</span></span><br><span class="line"><span class="string">  info        Display system-wide information</span></span><br><span class="line"><span class="string">  inspect     Return low-level information on Docker objects</span></span><br><span class="line"><span class="string">  kill        Kill one or more running containers</span></span><br><span class="line"><span class="string">  load        Load an image from a tar archive or STDIN</span></span><br><span class="line"><span class="string">  login       Log in to a Docker registry</span></span><br><span class="line"><span class="string">  logout      Log out from a Docker registry</span></span><br><span class="line"><span class="string">  logs        Fetch the logs of a container</span></span><br><span class="line"><span class="string">  pause       Pause all processes within one or more containers</span></span><br><span class="line"><span class="string">  port        List port mappings or a specific mapping for the container</span></span><br><span class="line"><span class="string">  ps          List containers</span></span><br><span class="line"><span class="string">  pull        Pull an image or a repository from a registry</span></span><br><span class="line"><span class="string">  push        Push an image or a repository to a registry</span></span><br><span class="line"><span class="string">  rename      Rename a container</span></span><br><span class="line"><span class="string">  restart     Restart one or more containers</span></span><br><span class="line"><span class="string">  rm          Remove one or more containers</span></span><br><span class="line"><span class="string">  rmi         Remove one or more images</span></span><br><span class="line"><span class="string">  run         Run a command in a new container</span></span><br><span class="line"><span class="string">  save        Save one or more images to a tar archive (streamed to STDOUT by default)</span></span><br><span class="line"><span class="string">  search      Search the Docker Hub for images</span></span><br><span class="line"><span class="string">  start       Start one or more stopped containers</span></span><br><span class="line"><span class="string">  stats       Display a live stream of container(s) resource usage statistics</span></span><br><span class="line"><span class="string">  stop        Stop one or more running containers</span></span><br><span class="line"><span class="string">  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE</span></span><br><span class="line"><span class="string">  top         Display the running processes of a container</span></span><br><span class="line"><span class="string">  unpause     Unpause all processes within one or more containers</span></span><br><span class="line"><span class="string">  update      Update configuration of one or more containers</span></span><br><span class="line"><span class="string">  version     Show the Docker version information</span></span><br><span class="line"><span class="string">  wait        Block until one or more containers stop, then print their exit codes</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker-Compose"></a>Docker-Compose</h2><p>volumes声明过的名称才能用在镜像的volumes挂载<br>镜像中volumes挂载地址也可以使用相对路径</p>
+<h2 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker-Compose"></a>Docker-Compose</h2><p><code>$ docker-compose</code>指令执行当前文件夹下docker-compose.yml文件</p>
+<p>项目运行<br><code>docker-compose up -d</code></p>
+<p>项目停止<br><code>docker-compose down</code></p>
+<p><strong>挂载</strong><br>volumes声明过的名称才能用在镜像的volumes挂载<br>镜像中volumes挂载地址也可以使用相对路径</p>
 
       
     </div>
@@ -108,6 +111,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/blog/2020/05/14/notebook/anaconda/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          notebook/anaconda
+        
+      </div>
+    </a>
   
   
     <a href="/blog/2020/05/12/notebook/nginx/" id="article-nav-older" class="article-nav-link-wrap">
@@ -149,6 +161,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/05/14/notebook/anaconda/">notebook/anaconda</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/05/12/notebook/docker/">notebook/docker</a>
           </li>
         
@@ -162,10 +178,6 @@
         
           <li>
             <a href="/blog/2020/05/11/notebook/docker-anaconda/">notebook/docker-anaconda</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/04/28/algorithm/%5BDP%5DMSM/">algorithm/[DP]MSM</a>
           </li>
         
       </ul>
