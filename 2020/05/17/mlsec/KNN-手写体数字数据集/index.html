@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>mlsec/KNN-手写体数字数据集 | Edlison</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="KNN-手写体数字数据集1234import numpy as npimport matplotlib.pyplot as pltfrom sklearn import datasetsfrom sklearn.neighbors import KNeighborsClassifier   123digits &#x3D; datasets.load_digits()X &#x3D; digits.dataX.sha">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mlsec&#x2F;KNN-手写体数字数据集">
+<meta property="og:url" content="http://edlison.com/blog/2020/05/17/mlsec/KNN-%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E6%95%B0%E6%8D%AE%E9%9B%86/index.html">
+<meta property="og:site_name" content="Edlison">
+<meta property="og:description" content="KNN-手写体数字数据集1234import numpy as npimport matplotlib.pyplot as pltfrom sklearn import datasetsfrom sklearn.neighbors import KNeighborsClassifier   123digits &#x3D; datasets.load_digits()X &#x3D; digits.dataX.sha">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://edlison.com/blog/2020/05/17/mlsec/KNN-%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E6%95%B0%E6%8D%AE%E9%9B%86/data/output_5_1.png">
+<meta property="article:published_time" content="2020-05-17T08:37:20.000Z">
+<meta property="article:modified_time" content="2020-05-17T08:38:09.444Z">
+<meta property="article:author" content="Bolin Shen">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://edlison.com/blog/2020/05/17/mlsec/KNN-%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E6%95%B0%E6%8D%AE%E9%9B%86/data/output_5_1.png">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="Edlison" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">Edlison</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog/" id="subtitle">coding...</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://edlison.com/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-mlsec/KNN-手写体数字数据集" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/05/17/mlsec/KNN-%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E6%95%B0%E6%8D%AE%E9%9B%86/" class="article-date">
+  <time datetime="2020-05-17T08:37:20.000Z" itemprop="datePublished">2020-05-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      mlsec/KNN-手写体数字数据集
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="KNN-手写体数字数据集"><a href="#KNN-手写体数字数据集" class="headerlink" title="KNN-手写体数字数据集"></a>KNN-手写体数字数据集</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">digits = datasets.load_digits()</span><br><span class="line">X = digits.data</span><br><span class="line">X.shape</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>(1797, 64)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y = digits.target</span><br><span class="line">y.shape</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>(1797,)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">one = X[<span class="number">100</span>]</span><br><span class="line">one = one.reshape(<span class="number">8</span>, <span class="number">8</span>)</span><br><span class="line">one</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([[ 0.,  0.,  0.,  2., 13.,  0.,  0.,  0.],
+       [ 0.,  0.,  0.,  8., 15.,  0.,  0.,  0.],
+       [ 0.,  0.,  5., 16.,  5.,  2.,  0.,  0.],
+       [ 0.,  0., 15., 12.,  1., 16.,  4.,  0.],
+       [ 0.,  4., 16.,  2.,  9., 16.,  8.,  0.],
+       [ 0.,  0., 10., 14., 16., 16.,  4.,  0.],
+       [ 0.,  0.,  0.,  0., 13.,  8.,  0.,  0.],
+       [ 0.,  0.,  0.,  0., 13.,  6.,  0.,  0.]])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.imshow(one)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>&lt;matplotlib.image.AxesImage at 0x1a203a9ad0&gt;</code></pre><p><img src="data/output_5_1.png" alt="png"></p>
+<h1 id="分离训练测试集"><a href="#分离训练测试集" class="headerlink" title="分离训练测试集"></a>分离训练测试集</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">train_test_split?</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>[0;31mSignature:[0m [0mtrain_test_split[0m[0;34m([0m[0;34m*[0m[0marrays[0m[0;34m,[0m [0;34m**[0m[0moptions[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;31mDocstring:[0m
+Split arrays or matrices into random train and test subsets
+
+Quick utility that wraps input validation and
+``next(ShuffleSplit().split(X, y))`` and application to input data
+into a single call for splitting (and optionally subsampling) data in a
+oneliner.
+
+Read more in the :ref:`User Guide &lt;cross_validation&gt;`.
+
+Parameters
+----------
+*arrays : sequence of indexables with same length / shape[0]
+    Allowed inputs are lists, numpy arrays, scipy-sparse
+    matrices or pandas dataframes.
+
+test_size : float, int or None, optional (default=None)
+    If float, should be between 0.0 and 1.0 and represent the proportion
+    of the dataset to include in the test split. If int, represents the
+    absolute number of test samples. If None, the value is set to the
+    complement of the train size. If ``train_size`` is also None, it will
+    be set to 0.25.
+
+train_size : float, int, or None, (default=None)
+    If float, should be between 0.0 and 1.0 and represent the
+    proportion of the dataset to include in the train split. If
+    int, represents the absolute number of train samples. If None,
+    the value is automatically set to the complement of the test size.
+
+random_state : int, RandomState instance or None, optional (default=None)
+    If int, random_state is the seed used by the random number generator;
+    If RandomState instance, random_state is the random number generator;
+    If None, the random number generator is the RandomState instance used
+    by `np.random`.
+
+shuffle : boolean, optional (default=True)
+    Whether or not to shuffle the data before splitting. If shuffle=False
+    then stratify must be None.
+
+stratify : array-like or None (default=None)
+    If not None, data is split in a stratified fashion, using this as
+    the class labels.
+
+Returns
+-------
+splitting : list, length=2 * len(arrays)
+    List containing train-test split of inputs.
+
+    .. versionadded:: 0.16
+        If the input is sparse, the output will be a
+        ``scipy.sparse.csr_matrix``. Else, output type is the same as the
+        input type.
+
+Examples
+--------
+&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; from sklearn.model_selection import train_test_split
+&gt;&gt;&gt; X, y = np.arange(10).reshape((5, 2)), range(5)
+&gt;&gt;&gt; X
+array([[0, 1],
+       [2, 3],
+       [4, 5],
+       [6, 7],
+       [8, 9]])
+&gt;&gt;&gt; list(y)
+[0, 1, 2, 3, 4]
+
+&gt;&gt;&gt; X_train, X_test, y_train, y_test = train_test_split(
+...     X, y, test_size=0.33, random_state=42)
+...
+&gt;&gt;&gt; X_train
+array([[4, 5],
+       [0, 1],
+       [6, 7]])
+&gt;&gt;&gt; y_train
+[2, 0, 3]
+&gt;&gt;&gt; X_test
+array([[2, 3],
+       [8, 9]])
+&gt;&gt;&gt; y_test
+[1, 4]
+
+&gt;&gt;&gt; train_test_split(y, shuffle=False)
+[[0, 1, 2], [3, 4]]
+[0;31mFile:[0m      /Applications/anaconda3/lib/python3.7/site-packages/sklearn/model_selection/_split.py
+[0;31mType:[0m      function</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.2</span>)</span><br><span class="line">print(X_train.shape)</span><br><span class="line">print(y_train.shape)</span><br><span class="line">print(X_test.shape)</span><br><span class="line">print(y_test.shape)</span><br></pre></td></tr></table></figure>
+
+<pre><code>(1437, 64)
+(1437,)
+(360, 64)
+(360,)</code></pre><h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KNNClf = KNeighborsClassifier(n_neighbors=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KNNClf.fit(X_train, y_train)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>KNeighborsClassifier(algorithm=&apos;auto&apos;, leaf_size=30, metric=&apos;minkowski&apos;,
+                     metric_params=None, n_jobs=None, n_neighbors=3, p=2,
+                     weights=&apos;uniform&apos;)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">res = KNNClf.predict(X_test)</span><br><span class="line">res</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([3, 4, 8, 5, 5, 7, 0, 3, 1, 4, 7, 5, 5, 8, 0, 7, 4, 7, 1, 7, 9, 4,
+       4, 7, 6, 1, 2, 9, 1, 3, 3, 3, 7, 0, 7, 0, 2, 8, 9, 1, 1, 5, 4, 8,
+       9, 0, 4, 9, 4, 9, 7, 2, 7, 3, 3, 4, 1, 9, 9, 9, 0, 4, 0, 6, 1, 0,
+       0, 3, 6, 2, 3, 2, 8, 5, 9, 3, 1, 1, 6, 9, 8, 1, 2, 3, 2, 6, 8, 8,
+       4, 6, 8, 6, 3, 9, 2, 8, 3, 6, 5, 7, 1, 7, 3, 8, 8, 8, 0, 0, 9, 1,
+       9, 8, 5, 1, 1, 0, 1, 6, 5, 1, 7, 6, 5, 7, 7, 2, 2, 7, 3, 1, 9, 5,
+       9, 5, 5, 3, 8, 4, 9, 5, 4, 6, 0, 5, 4, 8, 6, 1, 2, 8, 0, 9, 0, 9,
+       7, 9, 7, 0, 2, 8, 2, 4, 0, 6, 2, 6, 7, 5, 6, 3, 8, 8, 0, 3, 2, 0,
+       6, 1, 0, 6, 0, 5, 9, 3, 3, 0, 4, 0, 4, 2, 4, 9, 0, 6, 7, 4, 6, 5,
+       9, 7, 2, 2, 3, 3, 0, 3, 9, 4, 9, 8, 5, 6, 9, 0, 1, 3, 5, 0, 5, 1,
+       6, 4, 6, 6, 6, 7, 9, 1, 0, 7, 6, 6, 7, 8, 0, 3, 8, 5, 6, 8, 1, 3,
+       0, 3, 6, 0, 3, 5, 6, 7, 0, 6, 9, 7, 0, 0, 2, 1, 6, 6, 9, 1, 6, 9,
+       8, 7, 0, 2, 5, 1, 8, 6, 4, 3, 8, 2, 9, 2, 8, 4, 6, 4, 8, 9, 3, 1,
+       1, 5, 0, 7, 8, 2, 3, 8, 4, 7, 7, 7, 7, 9, 4, 1, 7, 0, 2, 9, 1, 8,
+       2, 4, 1, 0, 7, 5, 6, 0, 7, 1, 1, 5, 7, 1, 1, 6, 5, 6, 2, 2, 3, 9,
+       7, 5, 3, 1, 5, 9, 9, 2, 5, 1, 6, 8, 2, 2, 4, 2, 1, 0, 6, 1, 2, 9,
+       7, 5, 3, 5, 6, 1, 8, 1])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y_test</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([3, 4, 8, 5, 5, 7, 0, 3, 1, 4, 7, 5, 5, 8, 0, 7, 4, 7, 1, 7, 9, 4,
+       4, 7, 6, 1, 2, 9, 1, 3, 3, 3, 7, 0, 7, 0, 2, 8, 9, 1, 1, 5, 4, 8,
+       9, 0, 4, 9, 4, 9, 7, 2, 7, 8, 3, 4, 1, 9, 9, 9, 0, 4, 0, 6, 1, 0,
+       0, 3, 6, 2, 3, 2, 8, 5, 9, 3, 1, 1, 6, 9, 8, 1, 2, 3, 2, 6, 8, 8,
+       4, 6, 8, 6, 3, 9, 2, 8, 3, 6, 5, 7, 1, 7, 9, 8, 8, 8, 0, 0, 9, 1,
+       4, 8, 5, 1, 1, 0, 1, 6, 5, 1, 7, 6, 5, 7, 7, 2, 2, 7, 3, 1, 9, 5,
+       9, 5, 5, 3, 8, 4, 9, 5, 4, 6, 0, 5, 4, 8, 6, 1, 2, 8, 0, 9, 0, 9,
+       7, 9, 7, 0, 2, 8, 2, 4, 0, 6, 2, 6, 7, 5, 6, 3, 8, 8, 0, 3, 2, 0,
+       6, 1, 0, 6, 0, 5, 9, 3, 3, 0, 4, 0, 4, 2, 4, 9, 0, 6, 7, 4, 6, 5,
+       9, 7, 2, 2, 3, 3, 0, 3, 9, 4, 9, 8, 5, 6, 9, 0, 1, 3, 5, 0, 5, 1,
+       6, 4, 6, 6, 6, 7, 9, 1, 0, 7, 6, 6, 7, 8, 0, 3, 8, 5, 6, 8, 1, 3,
+       0, 3, 6, 0, 3, 5, 6, 7, 0, 6, 9, 7, 0, 0, 2, 1, 6, 6, 9, 1, 6, 9,
+       8, 7, 0, 2, 5, 1, 8, 6, 4, 3, 8, 2, 9, 2, 8, 4, 6, 4, 8, 9, 3, 1,
+       1, 5, 0, 7, 8, 2, 3, 8, 4, 7, 7, 7, 7, 7, 4, 1, 3, 0, 2, 9, 1, 8,
+       2, 4, 1, 0, 7, 5, 6, 0, 7, 1, 1, 5, 7, 1, 1, 6, 5, 6, 2, 2, 3, 9,
+       7, 5, 3, 1, 5, 9, 9, 2, 5, 1, 6, 8, 2, 2, 4, 2, 1, 0, 6, 1, 2, 9,
+       7, 5, 3, 5, 6, 1, 8, 8])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num = sum(res == y_test)</span><br><span class="line">num</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>354</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'accuracy '</span>, num / len(y_test))</span><br></pre></td></tr></table></figure>
+
+<pre><code>accuracy  0.9833333333333333</code></pre><h4 id="使用sklearn中封装的计算精确度的方法"><a href="#使用sklearn中封装的计算精确度的方法" class="headerlink" title="使用sklearn中封装的计算精确度的方法"></a>使用sklearn中封装的计算精确度的方法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score <span class="keyword">as</span> accuracy</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">accuracy(res, y_test)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>0.9833333333333333</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/05/17/mlsec/KNN-%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E6%95%B0%E6%8D%AE%E9%9B%86/" data-id="ckaat5bo70000vaojc0re40jq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2020/05/17/mlsec/KNN-%E9%B8%A2%E5%B0%BE%E8%8A%B1%E6%95%B0%E6%8D%AE%E9%9B%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">mlsec/KNN-鸢尾花数据集</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2020/05/17/mlsec/KNN-%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E6%95%B0%E6%8D%AE%E9%9B%86/">mlsec/KNN-手写体数字数据集</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/05/17/mlsec/KNN-%E9%B8%A2%E5%B0%BE%E8%8A%B1%E6%95%B0%E6%8D%AE%E9%9B%86/">mlsec/KNN-鸢尾花数据集</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/05/17/mlsec/KNN-%E6%89%8B%E5%8A%A8%E5%AE%9E%E7%8E%B0/">mlsec/KNN-手动实现</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/05/17/mlsec/Python-%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E4%B9%8B%E5%8F%AF%E8%A7%86%E5%8C%96%E5%88%86%E6%9E%90/">mlsec/Python-数据探索之可视化分析</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/05/17/mlsec/%E4%BD%BF%E7%94%A8-Pandas-%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2/">mlsec/使用-Pandas-进行数据探索</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Bolin Shen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

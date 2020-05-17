@@ -68,6 +68,280 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode/matching" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/31/leetcode/matching/" class="article-date">
+  <time datetime="2020-03-31T04:14:47.634Z" itemprop="datePublished">2020-03-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/31/leetcode/matching/">leetcode/matching</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Wildcard-Matching"><a href="#Wildcard-Matching" class="headerlink" title="Wildcard Matching"></a>Wildcard Matching</h1><p>Given an input string (s) and a pattern (p), implement wildcard pattern matching with support for ‘?’ and ‘*’.</p>
+<p>‘?’ Matches any single character.<br>‘*’ Matches any sequence of characters (including the empty sequence).<br>The matching should cover the entire input string (not partial).</p>
+<p>Note:</p>
+<p>s could be empty and contains only lowercase letters a-z.<br>p could be empty and contains only lowercase letters a-z, and characters like ? or *.<br>Example 1:</p>
+<p>Input:<br>s = “aa”<br>p = “a”<br>Output: false<br>Explanation: “a” does not match the entire string “aa”.<br>Example 2:</p>
+<p>Input:<br>s = “aa”<br>p = “*”<br>Output: true<br>Explanation: ‘*’ matches any sequence.<br>Example 3:</p>
+<p>Input:<br>s = “cb”<br>p = “?a”<br>Output: false<br>Explanation: ‘?’ matches ‘c’, but the second letter is ‘a’, which does not match ‘b’.<br>Example 4:</p>
+<p>Input:<br>s = “adceb”<br>p = “<em>a</em>b”<br>Output: true<br>Explanation: The first ‘<em>‘ matches the empty sequence, while the second ‘</em>‘ matches the substring “dce”.<br>Example 5:</p>
+<p>Input:<br>s = “acdcb”<br>p = “a*c?b”<br>Output: false</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isMatch</span><span class="params">(String s, String p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sLen = s.length(), pLen = p.length();</span><br><span class="line">    <span class="keyword">int</span> sIdx = <span class="number">0</span>, pIdx = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> starIdx = -<span class="number">1</span>, sTmpIdx = -<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (sIdx &lt; sLen) &#123;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (pIdx &lt; pLen &amp;&amp; (p.charAt(pIdx) == <span class="string">'?'</span> || p.charAt(pIdx) == s.charAt(sIdx)))&#123;</span><br><span class="line">        ++sIdx;</span><br><span class="line">        ++pIdx;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (pIdx &lt; pLen &amp;&amp; p.charAt(pIdx) == <span class="string">'*'</span>) &#123;</span><br><span class="line"></span><br><span class="line">        starIdx = pIdx;</span><br><span class="line">        sTmpIdx = sIdx;</span><br><span class="line">        ++pIdx;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (starIdx == -<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">        pIdx = starIdx + <span class="number">1</span>;</span><br><span class="line">        sIdx = sTmpIdx + <span class="number">1</span>;</span><br><span class="line">        sTmpIdx = sIdx;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = pIdx; i &lt; pLen; i++)</span><br><span class="line">      <span class="keyword">if</span> (p.charAt(i) != <span class="string">'*'</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/wildcard-matching/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/wildcard-matching/</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/31/leetcode/matching/" data-id="ck8lar4n3000rmcojdl8wcbmn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-notebook/v2ray-tls" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/30/notebook/v2ray-tls/" class="article-date">
+  <time datetime="2020-03-29T18:33:16.292Z" itemprop="datePublished">2020-03-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/30/notebook/v2ray-tls/">notebook/v2ray-tls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="TLS"><a href="#TLS" class="headerlink" title="TLS"></a>TLS</h1><p>从 v1.19 起引入了 TLS，TLS 中文译名是传输层安全，如果你没听说过，请 Google 了解一下。以下给出些我认为介绍较好的文章链接：</p>
+<p>SSL/TLS 协议运行机制的概述</p>
+<p>传输层安全协议</p>
+<h1 id="注册一个域名"><a href="#注册一个域名" class="headerlink" title="注册一个域名"></a>注册一个域名</h1><p>如果已经注册有域名了可以跳过。 TLS 需要一个域名，域名有免费的和有付费的，如果你不舍得为一个域名每年花点钱，用个免费域名也可以，但总体来说付费的会优于免费的。为了方便，在本文中我就忽略如何注册购买域名了。关于如何获取域名，具体搜索相关文章教程。</p>
+<p>注册好域名之后务必记得添加一个 A 记录指向你的 VPS!</p>
+<p>以下假设注册的域名为 mydomain.me，请将之替换成自己的域名。</p>
+<h1 id="证书生成"><a href="#证书生成" class="headerlink" title="证书生成"></a>证书生成</h1><p>TLS 是证书认证机制，所以使用 TLS 需要证书，证书也有免费付费的，同样的这里使用免费证书，证书认证机构为 Let’s Encrypt。 证书的生成有许多方法，这里使用的是比较简单的方法：使用 acme.sh 脚本生成，本部分说明部分内容参考于acme.sh README。</p>
+<p>证书有两种，一种是 ECC 证书（内置公钥是 ECDSA 公钥），一种是 RSA 证书（内置 RSA 公钥）。简单来说，同等长度 ECC 比 RSA 更安全,也就是说在具有同样安全性的情况下，ECC 的密钥长度比 RSA 短得多（加密解密会更快）。但问题是 ECC 的兼容性会差一些，Android 4.x 以下和 Windows XP 不支持。只要您的设备不是非常老的老古董，建议使用 ECC 证书。</p>
+<p>以下将给出这两类证书的生成方法，请大家根据自身的情况自行选择其中一种证书类型。</p>
+<p>证书生成只需在服务器上操作。</p>
+<h1 id="安装-acme-sh"><a href="#安装-acme-sh" class="headerlink" title="安装 acme.sh"></a>安装 acme.sh</h1><p>执行以下命令，acme.sh 会安装到 ~/.acme.sh 目录下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$ curl  https://get.acme.sh | sh</span><br><span class="line">% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span><br><span class="line">                               Dload  Upload   Total   Spent    Left  Speed</span><br><span class="line">100   671  100   671    0     0    680      0 --:--:-- --:--:-- --:--:--   679</span><br><span class="line">% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span><br><span class="line">                               Dload  Upload   Total   Spent    Left  Speed</span><br><span class="line">100  112k  100  112k    0     0   690k      0 --:--:-- --:--:-- --:--:--  693k</span><br><span class="line"></span><br><span class="line">[Fri 30 Dec 01:03:32 GMT 2016] Installing from online archive.</span><br><span class="line">[Fri 30 Dec 01:03:32 GMT 2016] Downloading https://github.com/Neilpang/acme.sh/archive/master.tar.gz</span><br><span class="line">[Fri 30 Dec 01:03:33 GMT 2016] Extracting master.tar.gz</span><br><span class="line">[Fri 30 Dec 01:03:33 GMT 2016] Installing to /home/user/.acme.sh</span><br><span class="line">[Fri 30 Dec 01:03:33 GMT 2016] Installed to /home/user/.acme.sh/acme.sh</span><br><span class="line">[Fri 30 Dec 01:03:33 GMT 2016] Installing <span class="built_in">alias</span> to <span class="string">'/home/user/.profile'</span></span><br><span class="line">[Fri 30 Dec 01:03:33 GMT 2016] OK, Close and reopen your terminal to start using acme.sh</span><br><span class="line">[Fri 30 Dec 01:03:33 GMT 2016] Installing cron job</span><br><span class="line">no crontab <span class="keyword">for</span> user</span><br><span class="line">no crontab <span class="keyword">for</span> user</span><br><span class="line">[Fri 30 Dec 01:03:33 GMT 2016] Good, bash is found, so change the shebang to use bash as preferred.</span><br><span class="line">[Fri 30 Dec 01:03:33 GMT 2016] OK</span><br><span class="line">[Fri 30 Dec 01:03:33 GMT 2016] Install success!</span><br></pre></td></tr></table></figure>
+
+<p>安装成功后执行 <code>source ~/.bashrc</code> 以确保脚本所设置的命令别名生效。</p>
+<p>如果安装报错，那么可能是因为系统缺少 acme.sh 所需要的依赖项，acme.sh 的依赖项主要是 socat，我们通过以下命令来安装这些依赖项，然后重新安装一遍 acme.sh:</p>
+<p><code>$ sudo apt-get install openssl cron socat curl</code></p>
+<h1 id="使用-acme-sh-生成证书"><a href="#使用-acme-sh-生成证书" class="headerlink" title="使用 acme.sh 生成证书"></a>使用 acme.sh 生成证书</h1><h1 id="证书生成-1"><a href="#证书生成-1" class="headerlink" title="证书生成"></a>证书生成</h1><p>执行以下命令生成证书：</p>
+<p>以下的命令会临时监听 80 端口，请确保执行该命令前 80 端口没有使用</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo ~/.acme.sh/acme.sh --issue -d mydomain.me --standalone -k ec-256</span></span><br><span class="line">[Fri Dec 30 08:59:12 HKT 2016] Standalone mode.</span><br><span class="line">[Fri Dec 30 08:59:12 HKT 2016] Single domain='mydomain.me'</span><br><span class="line">[Fri Dec 30 08:59:12 HKT 2016] Getting domain auth token for each domain</span><br><span class="line">[Fri Dec 30 08:59:12 HKT 2016] Getting webroot for domain='mydomain.me'</span><br><span class="line">[Fri Dec 30 08:59:12 HKT 2016] _w='no'</span><br><span class="line">[Fri Dec 30 08:59:12 HKT 2016] Getting new-authz for domain='mydomain.me'</span><br><span class="line">[Fri Dec 30 08:59:14 HKT 2016] The new-authz request is ok.</span><br><span class="line">[Fri Dec 30 08:59:14 HKT 2016] mydomain.me is already verified, skip.</span><br><span class="line">[Fri Dec 30 08:59:14 HKT 2016] mydomain.me is already verified, skip http-01.</span><br><span class="line">[Fri Dec 30 08:59:14 HKT 2016] mydomain.me is already verified, skip http-01.</span><br><span class="line">[Fri Dec 30 08:59:14 HKT 2016] Verify finished, start to sign.</span><br><span class="line">[Fri Dec 30 08:59:16 HKT 2016] Cert success.</span><br><span class="line">-----BEGIN CERTIFICATE-----</span><br><span class="line">MIIEMTCCAxmgAwIBAgISA1+gJF5zwUDjNX/6Xzz5fo3lMA0GCSqGSIb3DQEBCwUA</span><br><span class="line">MEoxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MSMwIQYDVQQD</span><br><span class="line">ExpMZXQncyBFbmNyeXB0IEF1dGhvcml0eSBYMzAeFw0xNjEyMjkyMzU5MDBaFw0x</span><br><span class="line">NzAzMjkyMzU5MDBaMBcxFTATBgNVBAMTDHdlYWtzYW5kLmNvbTBZMBMGByqGSM49</span><br><span class="line">****************************************************************</span><br><span class="line">4p40tm0aMB837XQ9jeAXvXulhVH/7/wWZ8/vkUUvuHSCYHagENiq/3DYj4a85Iw9</span><br><span class="line">+6u1r7atYHJ2VwqSamiyTGDQuhc5wdXIQxY/YQQqkAmn5tLsTZnnOavc4plANT40</span><br><span class="line">zweiG8vcIvMVnnkM0TSz8G1yzv1nOkruN3ozQkLMu6YS7lk/ENBN7DBtYVSmJeU2</span><br><span class="line">VAXE+zgRaP7JFOqK6DrOwhyE2LSgae83Wq/XgXxjfIo1Zmn2UmlE0sbdNKBasnf9</span><br><span class="line">gPUI45eltrjcv8FCSTOUcT7PWCa3</span><br><span class="line">-----END CERTIFICATE-----</span><br><span class="line">[Fri Dec 30 08:59:16 HKT 2016] Your cert is in  /root/.acme.sh/mydomain.me_ecc/mydomain.me.cer</span><br><span class="line">[Fri Dec 30 08:59:16 HKT 2016] Your cert key is in  /root/.acme.sh/mydomain.me_ecc/mydomain.me.key</span><br><span class="line">[Fri Dec 30 08:59:16 HKT 2016] The intermediate CA cert is in  /root/.acme.sh/mydomain.me_ecc/ca.cer</span><br><span class="line">[Fri Dec 30 08:59:16 HKT 2016] And the full chain certs is there:  /root/.acme.sh/mydomain.me_ecc/fullchain.cer</span><br></pre></td></tr></table></figure>
+<p><code>-k</code> 表示密钥长度，后面的值可以是 <code>ec-256</code> 、<code>ec-384</code>、<code>2048</code>、<code>3072</code>、<code>4096</code>、<code>8192</code>，带有 <code>ec</code> 表示生成的是 ECC 证书，没有则是 RSA 证书。在安全性上 256 位的 ECC 证书等同于 3072 位的 RSA 证书。</p>
+<p>#证书更新<br>由于 Let’s Encrypt 的证书有效期只有 3 个月，因此需要 90 天至少要更新一次证书，acme.sh 脚本会每 60 天自动更新证书。也可以手动更新。</p>
+<p>手动更新 ECC 证书，执行：</p>
+<p><code>$ sudo ~/.acme.sh/acme.sh --renew -d mydomain.com --force --ecc</code><br>如果是 RSA 证书则执行：</p>
+<p><code>$ sudo ~/.acme.sh/acme.sh --renew -d mydomain.com --force</code><br>由于本例中将证书生成到 /etc/v2ray/ 文件夹，更新证书之后还得把新证书生成到 /etc/v2ray。</p>
+<p>#安装证书和密钥<br>#ECC 证书<br>将证书和密钥安装到 /etc/v2ray 中：</p>
+<p><code>$ sudo ~/.acme.sh/acme.sh --installcert -d mydomain.me --fullchainpath /etc/v2ray/v2ray.crt --keypath /etc/v2ray/v2ray.key --ecc</code><br>#RSA 证书<br><code>$ sudo ~/.acme.sh/acme.sh --installcert -d mydomain.me --fullchainpath /etc/v2ray/v2ray.crt --keypath /etc/v2ray/v2ray.key</code><br>注意：无论什么情况，密钥(即上面的 v2ray.key)都不能泄漏，如果你不幸泄漏了密钥，可以使用 acme.sh 将原证书吊销，再生成新的证书，吊销方法请自行参考 acme.sh 的手册</p>
+<p>#配置 V2Ray<br>#服务器</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"inbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"port"</span>: <span class="number">443</span>, <span class="comment">// 建议使用 443 端口</span></span><br><span class="line">      <span class="attr">"protocol"</span>: <span class="string">"vmess"</span>,    </span><br><span class="line">      <span class="attr">"settings"</span>: &#123;</span><br><span class="line">        <span class="attr">"clients"</span>: [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">"id"</span>: <span class="string">"23ad6b10-8d1a-40f7-8ad0-e3e35cd38297"</span>,  </span><br><span class="line">            <span class="attr">"alterId"</span>: <span class="number">64</span></span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="attr">"network"</span>: <span class="string">"tcp"</span>,</span><br><span class="line">        <span class="attr">"security"</span>: <span class="string">"tls"</span>, <span class="comment">// security 要设置为 tls 才会启用 TLS</span></span><br><span class="line">        <span class="attr">"tlsSettings"</span>: &#123;</span><br><span class="line">          <span class="attr">"certificates"</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">              <span class="attr">"certificateFile"</span>: <span class="string">"/etc/v2ray/v2ray.crt"</span>, <span class="comment">// 证书文件</span></span><br><span class="line">              <span class="attr">"keyFile"</span>: <span class="string">"/etc/v2ray/v2ray.key"</span> <span class="comment">// 密钥文件</span></span><br><span class="line">            &#125;</span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"outbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">      <span class="attr">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#客户端</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"inbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"port"</span>: <span class="number">1080</span>,</span><br><span class="line">      <span class="attr">"protocol"</span>: <span class="string">"socks"</span>,</span><br><span class="line">      <span class="attr">"sniffing"</span>: &#123;</span><br><span class="line">        <span class="attr">"enabled"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"destOverride"</span>: [<span class="string">"http"</span>, <span class="string">"tls"</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"settings"</span>: &#123;</span><br><span class="line">        <span class="attr">"auth"</span>: <span class="string">"noauth"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"outbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">      <span class="attr">"settings"</span>: &#123;</span><br><span class="line">        <span class="attr">"vnext"</span>: [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">"address"</span>: <span class="string">"mydomain.me"</span>, <span class="comment">// tls 需要域名，所以这里应该填自己的域名</span></span><br><span class="line">            <span class="attr">"port"</span>: <span class="number">443</span>,</span><br><span class="line">            <span class="attr">"users"</span>: [</span><br><span class="line">              &#123;</span><br><span class="line">                <span class="attr">"id"</span>: <span class="string">"23ad6b10-8d1a-40f7-8ad0-e3e35cd38297"</span>,</span><br><span class="line">                <span class="attr">"alterId"</span>: <span class="number">64</span></span><br><span class="line">              &#125;</span><br><span class="line">            ]</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="attr">"network"</span>: <span class="string">"tcp"</span>,</span><br><span class="line">        <span class="attr">"security"</span>: <span class="string">"tls"</span> <span class="comment">// 客户端的 security 也要设置为 tls</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#验证<br>一般来说，按照以上步骤操作完成，V2Ray 客户端能够正常联网说明 TLS 已经成功启用。但要是有个可靠的方法来验证是否正常开启 TLS 无疑更令人放心。 验证的方法有很多，我仅介绍一种小白化一点的，便是 Qualys SSL Labs’s SSL Server Test。</p>
+<p>注意：使用 Qualys SSL Labs’s SSL Server Test 要求使用 443 端口，意味着你服务器配置的 inbound.port 应当是 443</p>
+<p>打开 Qualys SSL Labs’s SSL Server Test，在 Hostname 中输入你的域名，点提交，过一会结果就出来了。 </p>
+<p> 这是对于你的 TLS/SSL 的一个总体评分，我这里评分为 A，看来还不错。有这样的界面算是成功了。</p>
+<p> 这是关于证书的信息。从图中可以看出，我的这个证书有效期是从 2016 年 12 月 27 号到 2017 年的 3 月 27 号，密钥是 256 位的 ECC，证书签发机构是 Let’s Encrypt，重要的是最后一行，Trusted 为 Yes，表明我这个证书可信。</p>
+<p>#温馨提醒<br>V2Ray 的 TLS 不是伪装或混淆，这是完整、真正的 TLS。因此才需要域名和证书。后文提到的 WS(WebSocket) 也不是伪装。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/30/notebook/v2ray-tls/" data-id="ck91iwv4i000937oj90ej18t0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-leetcode/gasstation" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/29/leetcode/gasstation/" class="article-date">
+  <time datetime="2020-03-29T14:04:48.786Z" itemprop="datePublished">2020-03-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/29/leetcode/gasstation/">leetcode/gasstation</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Gas-Station"><a href="#Gas-Station" class="headerlink" title="Gas Station"></a>Gas Station</h1><p>There are N gas stations along a circular route, where the amount of gas at station i is gas[i].</p>
+<p>You have a car with an unlimited gas tank and it costs cost[i] of gas to travel from station i to its next station (i+1). You begin the journey with an empty tank at one of the gas stations.</p>
+<p>Return the starting gas station’s index if you can travel around the circuit once in the clockwise direction, otherwise return -1.</p>
+<p>Note:</p>
+<p>If there exists a solution, it is guaranteed to be unique.<br>Both input arrays are non-empty and have the same length.<br>Each element in the input arrays is a non-negative integer.<br>Example 1:</p>
+<p>Input:<br>gas  = [1,2,3,4,5]<br>cost = [3,4,5,1,2]</p>
+<p>Output: 3</p>
+<p>Explanation:<br>Start at station 3 (index 3) and fill up with 4 unit of gas. Your tank = 0 + 4 = 4<br>Travel to station 4. Your tank = 4 - 1 + 5 = 8<br>Travel to station 0. Your tank = 8 - 2 + 1 = 7<br>Travel to station 1. Your tank = 7 - 3 + 2 = 6<br>Travel to station 2. Your tank = 6 - 4 + 3 = 5<br>Travel to station 3. The cost is 5. Your gas is just enough to travel back to station 3.<br>Therefore, return 3 as the starting index.<br>Example 2:</p>
+<p>Input:<br>gas  = [2,3,4]<br>cost = [3,4,3]</p>
+<p>Output: -1</p>
+<p>Explanation:<br>You can’t start at station 0 or 1, as there is not enough gas to travel to the next station.<br>Let’s start at station 2 and fill up with 4 unit of gas. Your tank = 0 + 4 = 4<br>Travel to station 0. Your tank = 4 - 3 + 2 = 3<br>Travel to station 1. Your tank = 3 - 3 + 3 = 3<br>You cannot travel back to station 2, as it requires 4 unit of gas but you only have 3.<br>Therefore, you can’t travel around the circuit once no matter where you start.</p>
+<p><em>Unsolved</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">canCompleteCircuit</span><span class="params">(<span class="keyword">int</span>[] gas, <span class="keyword">int</span>[] cost)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = gas.length;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> total_tank = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> curr_tank = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> starting_station = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">      total_tank += gas[i] - cost[i];</span><br><span class="line">      curr_tank += gas[i] - cost[i];</span><br><span class="line">      <span class="comment">// If one couldn't get here,</span></span><br><span class="line">      <span class="keyword">if</span> (curr_tank &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// Pick up the next station as the starting one.</span></span><br><span class="line">        starting_station = i + <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// Start with an empty tank.</span></span><br><span class="line">        curr_tank = <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> total_tank &gt;= <span class="number">0</span> ? starting_station : -<span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/gas-station" target="_blank" rel="noopener">https://leetcode-cn.com/problems/gas-station</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/29/leetcode/gasstation/" data-id="ck8lar4mz000lmcojchlgbk7l" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-leetcode/jumpgame" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/28/leetcode/jumpgame/" class="article-date">
+  <time datetime="2020-03-28T08:27:35.769Z" itemprop="datePublished">2020-03-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/28/leetcode/jumpgame/">leetcode/jumpgame</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Jump-Game"><a href="#Jump-Game" class="headerlink" title="Jump Game"></a>Jump Game</h1><p>Given an array of non-negative integers, you are initially positioned at the first index of the array.</p>
+<p>Each element in the array represents your maximum jump length at that position.</p>
+<p>Determine if you are able to reach the last index.</p>
+<p>Example 1:</p>
+<p>Input: [2,3,1,1,4]<br>Output: true<br>Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.<br>Example 2:</p>
+<p>Input: [3,2,1,0,4]<br>Output: false<br>Explanation: You will always arrive at index 3 no matter what. Its maximum<br>             jump length is 0, which makes it impossible to reach the last index.  </p>
+<p><em>Solution 1</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">canJump</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] tag = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">        tag[nums.length - <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = nums.length - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= i + nums[i] &amp;&amp; j &lt; nums.length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (tag[j] == <span class="number">1</span>) &#123;</span><br><span class="line">                    tag[i] = <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> tag[<span class="number">0</span>] == <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">执行用时 :580 ms, 在所有 Java 提交中击败了11.08%的用户</span></span><br><span class="line"><span class="comment">内存消耗 :40.6 MB, 在所有 Java 提交中击败了31.49%的用户</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p><em>Solution 2</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">canJump</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = nums.length - <span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = nums.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i + nums[i] &gt;= res) &#123;</span><br><span class="line">                res = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">执行用时 :1 ms, 在所有 Java 提交中击败了99.95%的用户</span></span><br><span class="line"><span class="comment">内存消耗 :40.9 MB, 在所有 Java 提交中击败了24.65%的用户</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>We can use the position of that we can reach the target to record current result.<br>So we just need to calculate whether current position plus current value <code>&gt;=</code> last which can reach the target result, so we can tag current position.</p>
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/jump-game" target="_blank" rel="noopener">https://leetcode-cn.com/problems/jump-game</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/28/leetcode/jumpgame/" data-id="ck8lar4n2000pmcojb1ahdmlw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-leetcode/delivercookies" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/27/leetcode/delivercookies/" class="article-date">
+  <time datetime="2020-03-27T11:22:16.200Z" itemprop="datePublished">2020-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/27/leetcode/delivercookies/">leetcode/delivercookies</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Assign-Cookies"><a href="#Assign-Cookies" class="headerlink" title="Assign Cookies"></a>Assign Cookies</h1><p>Assume you are an awesome parent and want to give your children some cookies. But, you should give each child at most one cookie. Each child i has a greed factor gi, which is the minimum size of a cookie that the child will be content with; and each cookie j has a size sj. If sj &gt;= gi, we can assign the cookie j to the child i, and the child i will be content. Your goal is to maximize the number of your content children and output the maximum number.</p>
+<p>Note:<br>You may assume the greed factor is always positive.<br>You cannot assign more than one cookie to one child.  </p>
+<p>Example 1:<br>Input: [1,2,3], [1,1]</p>
+<p>Output: 1</p>
+<p>Explanation: You have 3 children and 2 cookies. The greed factors of 3 children are 1, 2, 3.<br>And even though you have 2 cookies, since their size is both 1, you could only make the child whose greed factor is 1 content.<br>You need to output 1.<br>Example 2:<br>Input: [1,2], [1,2,3]</p>
+<p>Output: 2</p>
+<p>Explanation: You have 2 children and 3 cookies. The greed factors of 2 children are 1, 2.<br>You have 3 cookies and their sizes are big enough to gratify all of the children,<br>You need to output 2.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findContentChildren</span><span class="params">(<span class="keyword">int</span>[] g, <span class="keyword">int</span>[] s)</span> </span>&#123;</span><br><span class="line">        Arrays.sort(g);</span><br><span class="line">        Arrays.sort(s);</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; i &lt; g.length; i++) &#123;</span><br><span class="line">            <span class="keyword">while</span> (j &lt; s.length) &#123;</span><br><span class="line">                <span class="keyword">if</span> (s[j] &gt;= g[i]) &#123;</span><br><span class="line">                    res++;</span><br><span class="line">                    j++;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    j++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>First we need to sort the array.<br>Then we define 2 pointers to find satisfied results.</p>
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/assign-cookies" target="_blank" rel="noopener">https://leetcode-cn.com/problems/assign-cookies</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/27/leetcode/delivercookies/" data-id="ck8lar4mx000imcojacuw3pm2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-leetcode/substring" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/03/26/leetcode/substring/" class="article-date">
@@ -314,312 +588,6 @@
 
 
   
-    <article id="post-leetcode/maxdepth" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/21/leetcode/maxdepth/" class="article-date">
-  <time datetime="2020-03-21T15:57:21.264Z" itemprop="datePublished">2020-03-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/21/leetcode/maxdepth/">leetcode/maxdepth</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="二叉树的最大深度"><a href="#二叉树的最大深度" class="headerlink" title="二叉树的最大深度"></a>二叉树的最大深度</h1><p>给定一个二叉树，找出其最大深度。</p>
-<p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p>
-<p>说明: 叶子节点是指没有子节点的节点。</p>
-<p><strong>示例：</strong><br>给定二叉树 [3,9,20,null,null,15,7]，</p>
-<p>   3<br>   / \<br>  9  20<br>    /  \<br>   15   7<br>返回它的最大深度 3 。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    Queue&lt;Pair&lt;TreeNode, Integer&gt;&gt; stack = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    <span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</span><br><span class="line">      stack.add(<span class="keyword">new</span> Pair(root, <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> depth = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">      Pair&lt;TreeNode, Integer&gt; current = stack.poll();</span><br><span class="line">      root = current.getKey();</span><br><span class="line">      <span class="keyword">int</span> current_depth = current.getValue();</span><br><span class="line">      <span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</span><br><span class="line">        depth = Math.max(depth, current_depth);</span><br><span class="line">        stack.add(<span class="keyword">new</span> Pair(root.left, current_depth + <span class="number">1</span>));</span><br><span class="line">        stack.add(<span class="keyword">new</span> Pair(root.right, current_depth + <span class="number">1</span>));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> depth;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">by LeetCode</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Reference<br><a href="https://leetcode-cn.com/problems/maximum-depth-of-binary-tree" target="_blank" rel="noopener">https://leetcode-cn.com/problems/maximum-depth-of-binary-tree</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/21/leetcode/maxdepth/" data-id="ck8lar4n3000qmcojgrjn1145" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode/symmetric" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/20/leetcode/symmetric/" class="article-date">
-  <time datetime="2020-03-20T14:56:39.518Z" itemprop="datePublished">2020-03-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/20/leetcode/symmetric/">leetcode/symmetric</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Symmetric-Tree"><a href="#Symmetric-Tree" class="headerlink" title="Symmetric Tree"></a>Symmetric Tree</h1><p>Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).</p>
-<p>For example, this binary tree [1,2,2,3,4,4,3] is symmetric:  </p>
-<p>   1<br>   / \<br>  2   2<br> / \ / \<br>3  4 4  3  </p>
-<p>But the following [1,2,2,null,3,null,3] is not:</p>
-<p>   1<br>   / \<br>  2   2<br>   \   \<br>   3    3  </p>
-<p>Note:<br>Bonus points if you could solve it both recursively and iteratively.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Symmetric</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSymmetric</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> checker(root.left, root.right);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">checker</span><span class="params">(TreeNode left, TreeNode right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left == <span class="keyword">null</span> &amp;&amp; right != <span class="keyword">null</span> || left != <span class="keyword">null</span> &amp;&amp; right == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (left == <span class="keyword">null</span> &amp;&amp; right == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (left.val != right.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> checker(left.left, right.right) &amp;&amp; checker(left.right, right.left);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">执行用时 :0 ms, 在所有 Java 提交中击败了100.00%的用户</span></span><br><span class="line"><span class="comment">内存消耗 :37.4 MB, 在所有 Java 提交中击败了41.58%的用户</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-<p>The base case is that <code>if (root == null)</code>.<br>First divide the problem into smallest piece that we judge the node’s value equals or not.<br>Then we conquer the problem that the node <code>left.left</code> equals <code>right.right</code> and <code>left.right</code> equals <code>right.left</code>.  </p>
-<blockquote>
-<p>Reference<br><a href="https://leetcode-cn.com/problems/symmetric-tree/submissions" target="_blank" rel="noopener">https://leetcode-cn.com/problems/symmetric-tree/submissions</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/20/leetcode/symmetric/" data-id="ck8lar4nb0013mcojbtpyfkva" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode/sametree" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/19/leetcode/sametree/" class="article-date">
-  <time datetime="2020-03-19T15:28:56.616Z" itemprop="datePublished">2020-03-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/19/leetcode/sametree/">leetcode/sametree</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Same-Tree"><a href="#Same-Tree" class="headerlink" title="Same Tree"></a>Same Tree</h1><p>Given two binary trees, write a function to check if they are the same or not.</p>
-<p>Two binary trees are considered the same if they are structurally identical and the nodes have the same value.</p>
-<p><strong>Example 1:</strong></p>
-<p>Input:     1         1<br>          / \       / <br>         2   3     2   3</p>
-<pre><code>[1,2,3],   [1,2,3]</code></pre><p>Output: true</p>
-<p><strong>Example 2:</strong></p>
-<p>Input:     1         1<br>          /           <br>         2             2</p>
-<pre><code>[1,2],     [1,null,2]</code></pre><p>Output: false</p>
-<p><strong>Example 3:</strong></p>
-<p>Input:     1         1<br>          / \       / <br>         2   1     1   2</p>
-<pre><code>[1,2,1],   [1,1,2]</code></pre><p>Output: false</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSameTree</span><span class="params">(TreeNode p, TreeNode q)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (p == <span class="keyword">null</span> &amp;&amp; q == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (p == <span class="keyword">null</span> || q == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (p.val != q.val) &#123; <span class="comment">// !!!</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> isSameTree(p.left, q.left) &amp;&amp; isSameTree(p.right, q.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Reference<br><a href="https://leetcode-cn.com/problems/same-tree" target="_blank" rel="noopener">https://leetcode-cn.com/problems/same-tree</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/19/leetcode/sametree/" data-id="ck8lar4nc0014mcojgcdt5ax9" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode/regularexpressionmatching" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/18/leetcode/regularexpressionmatching/" class="article-date">
-  <time datetime="2020-03-18T13:40:44.255Z" itemprop="datePublished">2020-03-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/18/leetcode/regularexpressionmatching/">leetcode/regularexpressionmatching</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Regular-Expression-Matching"><a href="#Regular-Expression-Matching" class="headerlink" title="Regular Expression Matching"></a>Regular Expression Matching</h1><p>Given an input string (s) and a pattern (p), implement regular expression matching with support for ‘.’ and ‘*’.</p>
-<p>‘.’ Matches any single character.<br>‘*’ Matches zero or more of the preceding element.<br>The matching should cover the entire input string (not partial).</p>
-<p><strong>Note:</strong></p>
-<p>s could be empty and contains only lowercase letters a-z.<br>p could be empty and contains only lowercase letters a-z, and characters like . or <em>.<br>*</em>Example 1:**</p>
-<p>Input:<br>s = “aa”<br>p = “a”<br>Output: false<br>Explanation: “a” does not match the entire string “aa”.  </p>
-<p><strong>Example 2:</strong></p>
-<p>Input:<br>s = “aa”<br>p = “a*”<br>Output: true<br>Explanation: ‘*’ means zero or more of the preceding element, ‘a’. Therefore, by repeating ‘a’ once, it becomes “aa”.    </p>
-<p><strong>Example 3:</strong></p>
-<p>Input:<br>s = “ab”<br>p = “.*”<br>Output: true<br>Explanation: “.*” means “zero or more (*) of any character (.)”.  </p>
-<p><strong>Example 4:</strong></p>
-<p>Input:<br>s = “aab”<br>p = “c<em>a</em>b”<br>Output: true<br>Explanation: c can be repeated 0 times, a can be repeated 1 time. Therefore, it matches “aab”.  </p>
-<p><strong>Example 5:</strong></p>
-<p>Input:<br>s = “mississippi”<br>p = “mis<em>is*p</em>.”<br>Output: false  </p>
-<p><em>Unsolved</em></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isMatch</span><span class="params">(String text, String pattern)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (pattern.isEmpty()) <span class="keyword">return</span> text.isEmpty();</span><br><span class="line">        <span class="keyword">boolean</span> first_match = (!text.isEmpty() &amp;&amp;</span><br><span class="line">                               (pattern.charAt(<span class="number">0</span>) == text.charAt(<span class="number">0</span>) || pattern.charAt(<span class="number">0</span>) == <span class="string">'.'</span>));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (pattern.length() &gt;= <span class="number">2</span> &amp;&amp; pattern.charAt(<span class="number">1</span>) == <span class="string">'*'</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> (isMatch(text, pattern.substring(<span class="number">2</span>)) ||</span><br><span class="line">                    (first_match &amp;&amp; isMatch(text.substring(<span class="number">1</span>), pattern)));</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> first_match &amp;&amp; isMatch(text.substring(<span class="number">1</span>), pattern.substring(<span class="number">1</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">https://leetcode-cn.com/problems/regular-expression-matching/solution/zheng-ze-biao-da-shi-pi-pei-by-leetcode/</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Reference<br><a href="https://leetcode-cn.com/problems/regular-expression-matching" target="_blank" rel="noopener">https://leetcode-cn.com/problems/regular-expression-matching</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/18/leetcode/regularexpressionmatching/" data-id="ck8lar4n9000ymcoj2zu07edh" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-notebook/linux-user" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/18/notebook/linux-user/" class="article-date">
-  <time datetime="2020-03-18T12:53:15.929Z" itemprop="datePublished">2020-03-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/18/notebook/linux-user/">notebook/linux-user</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Linux-创建用户"><a href="#Linux-创建用户" class="headerlink" title="[Linux]创建用户"></a>[Linux]创建用户</h1><h2 id="linux下创建用户-一）"><a href="#linux下创建用户-一）" class="headerlink" title="linux下创建用户(一）"></a>linux下创建用户(一）</h2><p>Linux 系统是一个多用户多任务的分时操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系统。用户的账号一方面可以帮助系统管理员对使用系统的用户进行跟踪，并控制他们对系统资源的访问；另一方面也可以帮助用户组织文件，并为用户提供安全性保护。每个用户账号都拥有一个惟一的用户名和各自的口令。用户在登录时键入正确的用户名和口令后，就能够进入系统和自己的主目录。</p>
-<p>实现用户账号的管理，要完成的工作主要有如下几个方面：<br>· 用户账号的添加、删除与修改。<br>· 用户口令的管理。<br>· 用户组的管理。</p>
-<p>一、Linux系统用户账号的管理</p>
-<p>用户账号的管理工作主要涉及到用户账号的添加、修改和删除。<br>添加用户账号就是在系统中创建一个新账号，然后为新账号分配用户号、用户组、主目录和登录Shell等资源。<br>刚添加的账号是被锁定的，无法使用。</p>
-<p>1、添加新的用户账号使用useradd命令，其语法如下：</p>
-<p>代码:<br>useradd 选项 用户名<br>其中各选项含义如下：  </p>
-<p>代码:<br>-c comment 指定一段注释性描述。<br>-d 目录 指定用户主目录，如果此目录不存在，则同时使用-m选项，可以创建主目录。<br>-g 用户组 指定用户所属的用户组。<br>-G 用户组，用户组 指定用户所属的附加组。<br>-s Shell文件 指定用户的登录Shell。<br>-u 用户号 指定用户的用户号，如果同时有-o选项，则可以重复使用其他用户的标识号。  </p>
-<p>用户名 指定新账号的登录名。</p>
-<p>例1：<br>代码:<br><code># useradd –d /usr/sam -m sam</code><br>此命令创建了一个用户sam，<br>其中-d和-m选项用来为登录名sam产生一个主目录/usr/sam（/usr为默认的用户主目录所在的父目录）。  </p>
-<p>例2：<br>代码:<br><code># useradd -s /bin/sh -g group –G adm,root gem</code><br>此命令新建了一个用户gem，该用户的登录Shell是/bin/sh，它属于group用户组，同时又属于adm和root用户组，其中group用户组是其主组。</p>
-<p>这里可能新建组：#groupadd group及groupadd adm　<br>增加用户账号就是在/etc/passwd文件中为新用户增加一条记录，同时更新其他系统文件如/etc/shadow, /etc/group等。<br>Linux提供了集成的系统管理工具userconf，它可以用来对用户账号进行统一管理。  </p>
-<p>2、删除帐号</p>
-<p>如果一个用户的账号不再使用，可以从系统中删除。删除用户账号就是要将/etc/passwd等系统文件中的该用户记录删除，必要时还删除用户的主目录。删除一个已有的用户账号使用userdel命令，其格式如下：</p>
-<p>代码:<br>userdel 选项 用户名</p>
-<p>常用的选项是-r，它的作用是把用户的主目录一起删除。<br>例如：</p>
-<p>代码:<br><code># userdel sam</code>  </p>
-<p>此命令删除用户sam在系统文件中（主要是/etc/passwd, /etc/shadow, /etc/group等）的记录，同时删除用户的主目录。</p>
-<p>3、修改帐号</p>
-<p>修改用户账号就是根据实际情况更改用户的有关属性，如用户号、主目录、用户组、登录Shell等。<br>修改已有用户的信息使用usermod命令，其格式如下：</p>
-<p>代码:<br>usermod 选项 用户名  </p>
-<p>常用的选项包括-c, -d, -m, -g, -G, -s, -u以及-o等，这些选项的意义与useradd命令中的选项一样，可以为用户指定新的资源值。另外，有些系统可以使用如下选项：</p>
-<p>代码:<br>-l 新用户名  </p>
-<p>这个选项指定一个新的账号，即将原来的用户名改为新的用户名。<br>例如：<br>代码:<br><code># usermod -s /bin/ksh -d /home/z –g developer sam</code><br>此命令将用户sam的登录Shell修改为ksh，主目录改为/home/z，用户组改为developer。</p>
-<p>4、用户口令的管理</p>
-<p>用户管理的一项重要内容是用户口令的管理。用户账号刚创建时没有口令，但是被系统锁定，无法使用，必须为其指定口令后才可以使用，即使是指定空口令。<br>指定和修改用户口令的Shell命令是passwd。超级用户可以为自己和其他用户指定口令，普通用户只能用它修改自己的口令。命令的格式为：<br>代码:  </p>
-<p>passwd 选项 用户名<br>可使用的选项：  </p>
-<p>代码:<br>-l 锁定口令，即禁用账号。<br>-u 口令解锁。<br>-d 使账号无口令。<br>-f 强迫用户下次登录时修改口令。<br>如果默认用户名，则修改当前用户的口令。  </p>
-<p>例如，假设当前用户是sam，则下面的命令修改该用户自己的口令：</p>
-<p>代码:<br><code>$ passwd</code><br>Old password:<strong>**</strong><br>New password:<strong>***</strong><br>Re-enter new password:<strong>***</strong>  </p>
-<p>如果是超级用户，可以用下列形式指定任何用户的口令：</p>
-<p>代码:<br><code># passwd sam</code><br>New password:<strong>***</strong><br>Re-enter new password:<strong>***</strong>  </p>
-<p>普通用户修改自己的口令时，passwd命令会先询问原口令，验证后再要求用户输入两遍新口令，如果两次输入的口令一致，则将这个口令指定给用户；而超级用户为用户指定口令时，就不需要知道原口令。</p>
-<p>为了系统安全起见，用户应该选择比较复杂的口令，例如最好使用8位长的口令，口令中包含有大写、小写字母和数字，并且应该与姓名、生日等不相同。</p>
-<p>为用户指定空口令时，执行下列形式的命令：</p>
-<p>代码:<br><code># passwd -d sam</code></p>
-<p>此命令将用户sam的口令删除，这样用户sam下一次登录时，系统就不再询问口令。  </p>
-<p>passwd命令还可以用-l(lock)选项锁定某一用户，使其不能登录，例如：</p>
-<p>代码:<br><code># passwd -l sam</code></p>
-<h2 id="linux下创建用户-二）"><a href="#linux下创建用户-二）" class="headerlink" title="linux下创建用户(二）"></a>linux下创建用户(二）</h2><p>二、Linux系统用户组的管理</p>
-<p>每个用户都有一个用户组，系统可以对一个用户组中的所有用户进行集中管理。不同Linux 系统对用户组的规定有所不同，如Linux下的用户属于与它同名的用户组，这个用户组在创建用户时同时创建。<br>用户组的管理涉及用户组的添加、删除和修改。组的增加、删除和修改实际上就是对/etc/group文件的更新。</p>
-<p>1、增加一个新的用户组使用groupadd命令。其格式如下：</p>
-<p>代码:<br>groupadd 选项 用户组  </p>
-<p>可以使用的选项有：<br>代码:<br>-g GID 指定新用户组的组标识号（GID）。<br>-o 一般与-g选项同时使用，表示新用户组的GID可以与系统已有用户组的GID相同。</p>
-<p>例1：</p>
-<p>代码:<br><code># groupadd group1</code>  </p>
-<p>此命令向系统中增加了一个新组group1，新组的组标识号是在当前已有的最大组标识号的基础上加1。</p>
-<p>例2：</p>
-<p>代码:<br><code># groupadd -g 101 group2</code></p>
-<p>此命令向系统中增加了一个新组group2，同时指定新组的组标识号是101。</p>
-<p>2、如果要删除一个已有的用户组，使用groupdel命令，其格式如下：</p>
-<p>代码:<br>groupdel 用户组</p>
-<p>例如：</p>
-<p>代码:<br><code># groupdel group1</code></p>
-<p>此命令从系统中删除组group1。</p>
-<p>3、修改用户组的属性使用groupmod命令。其语法如下：</p>
-<p>代码:<br>groupmod 选项 用户组</p>
-<p>常用的选项有：<br>代码:<br>-g GID 为用户组指定新的组标识号。<br>-o 与-g选项同时使用，用户组的新GID可以与系统已有用户组的GID相同。<br>-n新用户组 将用户组的名字改为新名字</p>
-<p>例1：</p>
-<p>代码:<br><code># groupmod -g 102 group2</code></p>
-<p>此命令将组group2的组标识号修改为102。</p>
-<p>例2：</p>
-<p>代码:<br><code># groupmod –g 10000 -n group3 group2</code>  </p>
-<p>此命令将组group2的标识号改为10000，组名修改为group3。</p>
-<p>4、如果一个用户同时属于多个用户组，那么用户可以在用户组之间切换，以便具有其他用户组的权限。用户可以在登录后，使用命令newgrp切换到其他用户组，这个命令的参数就是目的用户组。例如：</p>
-<p>代码:<br><code>$ newgrp root</code></p>
-<p>这条命令将当前用户切换到root用户组，前提条件是root用户组确实是该用户的主组或附加组。类似于用户账号的管理，用户组的管理也可以通过集成的系统管理工具来完成。</p>
-<p>让Linux系统中的普通用户也有超级用户的权限</p>
-<blockquote>
-<p>Reference<br><a href="https://www.cnblogs.com/ylan2009/articles/2321177.h" target="_blank" rel="noopener">https://www.cnblogs.com/ylan2009/articles/2321177.h</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/18/notebook/linux-user/" data-id="ck91iwv4j000a37oj8f4fc4oh" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -656,23 +624,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2020/05/14/notebook/anaconda/">notebook/anaconda</a>
+            <a href="/blog/2020/05/17/mlsec/KNN-%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E6%95%B0%E6%8D%AE%E9%9B%86/">mlsec/KNN-手写体数字数据集</a>
           </li>
         
           <li>
-            <a href="/blog/2020/05/12/notebook/docker/">notebook/docker</a>
+            <a href="/blog/2020/05/17/mlsec/KNN-%E9%B8%A2%E5%B0%BE%E8%8A%B1%E6%95%B0%E6%8D%AE%E9%9B%86/">mlsec/KNN-鸢尾花数据集</a>
           </li>
         
           <li>
-            <a href="/blog/2020/05/12/notebook/nginx/">notebook/nginx</a>
+            <a href="/blog/2020/05/17/mlsec/KNN-%E6%89%8B%E5%8A%A8%E5%AE%9E%E7%8E%B0/">mlsec/KNN-手动实现</a>
           </li>
         
           <li>
-            <a href="/blog/2020/05/12/notebook/docker-chevereto/">notebook/docker-chevereto</a>
+            <a href="/blog/2020/05/17/mlsec/Python-%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E4%B9%8B%E5%8F%AF%E8%A7%86%E5%8C%96%E5%88%86%E6%9E%90/">mlsec/Python-数据探索之可视化分析</a>
           </li>
         
           <li>
-            <a href="/blog/2020/05/11/notebook/docker-anaconda/">notebook/docker-anaconda</a>
+            <a href="/blog/2020/05/17/mlsec/%E4%BD%BF%E7%94%A8-Pandas-%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2/">mlsec/使用-Pandas-进行数据探索</a>
           </li>
         
       </ul>

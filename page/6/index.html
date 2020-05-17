@@ -68,6 +68,272 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode/buystock" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/06/leetcode/buystock/" class="article-date">
+  <time datetime="2020-03-06T13:56:34.203Z" itemprop="datePublished">2020-03-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/06/leetcode/buystock/">leetcode/buystock</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="买卖股票的最佳时机"><a href="#买卖股票的最佳时机" class="headerlink" title="买卖股票的最佳时机"></a>买卖股票的最佳时机</h1><p>给定一个数组，它的第 i 个元素是一支给定的股票在第 i 天的价格。</p>
+<p>设计一个算法来计算你所能获取的最大利润。你最多可以完成 两笔 交易。</p>
+<p>注意: 你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p>
+<p><strong>示例 1:</strong></p>
+<p>输入: [3,3,5,0,0,3,1,4]<br>输出: 6<br>解释: 在第 4 天（股票价格 = 0）的时候买入，在第 6 天（股票价格 = 3）的时候卖出，这笔交易所能获得利润 = 3-0 = 3 。<br>     随后，在第 7 天（股票价格 = 1）的时候买入，在第 8 天 （股票价格 = 4）的时候卖出，这笔交易所能获得利润 = 4-1 = 3 。</p>
+<p><strong>示例 2:</strong></p>
+<p>输入: [1,2,3,4,5]<br>输出: 4<br>解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。<br>     注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。<br>     因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。</p>
+<p><strong>示例 3:</strong></p>
+<p>输入: [7,6,4,3,1]<br>输出: 0<br>解释: 在这个情况下, 没有交易完成, 所以最大利润为 0。 </p>
+<p>动态规划<br>涉及到多个状态 首先画出状态图</p>
+<p><img src="~/../../static/img/1.png" alt="Image"><br>我们控制其中三个状态</p>
+<ul>
+<li>天数</li>
+<li>购买次数</li>
+<li>当前股票状态（0为未持有；1为持有）</li>
+</ul>
+<p>以无限次购买股票为例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> n = prices.length;</span><br><span class="line">    <span class="keyword">int</span> dp_0 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> dp_1 = Integer.MIN_VALUE;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        dp_0 = Math.max(dp_0, dp_1 + prices[i]);</span><br><span class="line">        dp_1 = Math.max(dp_1, dp_0 - prices[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dp_0;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">执行用时 :3 ms, 在所有 Java 提交中击败了10.65%的用户</span></span><br><span class="line"><span class="comment">内存消耗 :42.3 MB, 在所有 Java 提交中击败了5.01%的用户</span></span><br><span class="line"><span class="comment">本题可以不必使用DP以达到更快的速度</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>该例中由于无限次购买可以省略购买次数<br>dp_0的含义为：当前未持有股票<br>其只能由dp_0保持不变或dp_1出售得来选取最大值  </p>
+<p>其中base case（最简单的情况）的赋值：</p>
+<ul>
+<li>一开始未持有的状态为0；</li>
+<li>一开始持有的状态不可能存在故赋值最小值  </li>
+</ul>
+<p>在该题中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> n = prices.length;</span><br><span class="line">    <span class="keyword">int</span> dp_2_0 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> dp_2_1 = Integer.MIN_VALUE;</span><br><span class="line">    <span class="keyword">int</span> dp_1_0 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> dp_1_1 = Integer.MIN_VALUE;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        dp_1_1 = Math.max(dp_1_1, - prices[i]);     <span class="comment">// !!! - prices[i]</span></span><br><span class="line">        dp_1_0 = Math.max(dp_1_0, dp_1_1 + prices[i]);</span><br><span class="line">        dp_2_1 = Math.max(dp_2_1, dp_1_0 - prices[i]);</span><br><span class="line">        dp_2_0 = Math.max(dp_2_0, dp_2_1 + prices[i]);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> dp_2_0;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">执行用时 :3 ms, 在所有 Java 提交中击败了82.59%的用户</span></span><br><span class="line"><span class="comment">内存消耗 :41.9 MB, 在所有 Java 提交中击败了23.33%的用户</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+<p>由于是第二次售出</p>
+<p><strong>注意</strong></p>
+<ul>
+<li><strong>第一次直接持有的状态只能是购入股票故其只能从<code>(dp_1_1, - prices[i])</code>中选取最大值</strong></li>
+<li><strong>第二次持有因为状态转移只能从第一次未持有转移来故其从<code>(dp_2_1, dp_1_0)</code>中选取最大值</strong></li>
+</ul>
+<p>base case（最简单的情况）的赋值：  </p>
+<ul>
+<li>第一次未持有的状态金额肯定为0；  </li>
+<li>第一次持有的状态不存在故赋值<code>MIN_VALUE</code>；  </li>
+<li>第二次未持有的状态赋值0；  </li>
+<li>第二次持有的状态因为不可能直接持有故赋值<code>MIN_VALUE</code>  </li>
+</ul>
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii" target="_blank" rel="noopener">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii</a><br><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii" target="_blank" rel="noopener">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/06/leetcode/buystock/" data-id="ck8lar4mx000hmcoj6usc6z24" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-leetcode/mostclose" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/05/leetcode/mostclose/" class="article-date">
+  <time datetime="2020-03-05T14:04:46.441Z" itemprop="datePublished">2020-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/05/leetcode/mostclose/">leetcode/mostclose</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="最接近的三数之和"><a href="#最接近的三数之和" class="headerlink" title="最接近的三数之和"></a>最接近的三数之和</h1><p>给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。</p>
+<p><strong>例如</strong></p>
+<p>给定数组 nums = [-1，2，1，-4], 和 target = 1.<br>与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">threeSumClosest</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> temp = nums[<span class="number">0</span>] + nums[<span class="number">1</span>] + nums[<span class="number">2</span>];</span><br><span class="line">        <span class="keyword">int</span> res = temp;</span><br><span class="line">        <span class="keyword">int</span> min = Math.abs(temp - target);</span><br><span class="line">        <span class="keyword">int</span> tempMin;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length - <span class="number">2</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> left = i + <span class="number">1</span>, right = nums.length - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">                temp = nums[i] + nums[left] + nums[right];</span><br><span class="line">                tempMin = Math.abs(temp - target);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (tempMin &lt; min) &#123;</span><br><span class="line">                    min = tempMin;</span><br><span class="line">                    res = temp;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (temp &lt; target) &#123;</span><br><span class="line">                    left++;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (temp &gt; target) &#123;</span><br><span class="line">                    right--;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> target;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">执行用时 :5 ms, 在所有 Java 提交中击败了95.39%的用户</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>数组首先排序，循环n次，左右指针在<code>i ~ nums.length - 1</code>范围内移动，判定<code>left</code>&lt;<code>right</code>.<br><code>min</code>用来存储最小差值，当有三数之和与<code>target</code>小于该值便将其赋值给<code>res</code>.</p>
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/3sum-closest" target="_blank" rel="noopener">https://leetcode-cn.com/problems/3sum-closest</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/05/leetcode/mostclose/" data-id="ck8lar4n4000smcojgs0o6kit" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-leetcode/threesum" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/04/leetcode/threesum/" class="article-date">
+  <time datetime="2020-03-04T11:53:56.148Z" itemprop="datePublished">2020-03-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/04/leetcode/threesum/">leetcode/threesum</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="三数之和-Unsolved"><a href="#三数之和-Unsolved" class="headerlink" title="三数之和(Unsolved)"></a>三数之和(Unsolved)</h1><p>给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。</p>
+<p>注意：答案中不可以包含重复的三元组。</p>
+<p><strong>示例</strong>：</p>
+<p>给定数组 nums = [-1, 0, 1, 2, -1, -4]，</p>
+<p>满足要求的三元组集合为：<br>[<br>  [-1, 0, 1],<br>  [-1, -1, 2]<br>]</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; threeSum(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums == <span class="keyword">null</span> || nums.length &lt;= <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> Collections.emptyList();</span><br><span class="line">    &#125;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; result = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    Arrays.sort(nums);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length - <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="comment">// 加速1：c为非负数，就不能满足a+b+c=0了</span></span><br><span class="line">        <span class="keyword">if</span> (nums[i] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 加速2：跳过计算过的数据，同时防止结果重复</span></span><br><span class="line">        <span class="keyword">if</span> (i != <span class="number">0</span> &amp;&amp; nums[i] == nums[i-<span class="number">1</span>]) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> head = i + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> tail = nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (head &lt; tail) &#123;</span><br><span class="line">            <span class="keyword">int</span> sum = -(nums[head] + nums[tail]);</span><br><span class="line">            <span class="keyword">if</span> (sum == nums[i]) &#123;</span><br><span class="line">                result.add(Arrays.asList(nums[i], nums[head], nums[tail]));</span><br><span class="line">                <span class="comment">// 加速3：跳过计算过的数据，同时防止结果重复</span></span><br><span class="line">                <span class="keyword">while</span> (head &lt; tail &amp;&amp; nums[head] == nums[head+<span class="number">1</span>]) &#123;</span><br><span class="line">                    head++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">while</span> (head &lt; tail &amp;&amp; nums[tail] == nums[tail-<span class="number">1</span>]) &#123;</span><br><span class="line">                    tail--;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (sum &lt;= nums[i]) &#123;</span><br><span class="line">                tail--;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                head++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/3sum/solution/san-shu-zhi-he-javajian-ji-ti-jie-by-wang-zi-hao-z/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/3sum/solution/san-shu-zhi-he-javajian-ji-ti-jie-by-wang-zi-hao-z/</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/04/leetcode/threesum/" data-id="ck8lar4nd0015mcojg9i9anoh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-notebook/aop" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/03/notebook/aop/" class="article-date">
+  <time datetime="2020-03-03T15:13:33.650Z" itemprop="datePublished">2020-03-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/03/notebook/aop/">notebook/aop</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="面向切面编程"><a href="#面向切面编程" class="headerlink" title="面向切面编程"></a>面向切面编程</h1><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>在软件业，AOP为Aspect Oriented Programming的缩写，意为：面向切面编程，通过预编译方式和运行期间动态代理实现程序功能的统一维护的一种技术。AOP是OOP的延续，是软件开发中的一个热点，也是Spring框架中的一个重要内容，是函数式编程的一种衍生范型。利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。</p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Aspect Oriented Programming（AOP）是较为热门的一个话题。AOP，国内大致译作“面向切面编程”。</p>
+<p>“面向切面编程”,这样的名字并不是非常容易理解，且容易产生一些误导。有些人认为“OOP/OOD11即将落伍，AOP是新一代软件开发方式”。显然，发言者并没有理解AOP的含义。Aspect，的确是“方面”的意思。不过，汉语传统语义中的“方面”，大多数情况下指的是一件事情的不同维度、或者说不同角度上的特性，比如我们常说：“这件事情要从几个方面来看待”，往往意思是：需要从不同的角度来看待同一个事物。这里的“方面”，指的是事物的外在特性在不同观察角度下的体现。而在AOP中，Aspect的含义，可能更多的理解为“切面”比较合适。</p>
+<p>可以通过预编译方式和运行期动态代理实现在不修改源代码的情况下给程序动态统一添加功能的一种技术。AOP实际是GoF设计模式的延续，设计模式孜孜不倦追求的是调用者和被调用者之间的解耦,提高代码的灵活性和可扩展性，AOP可以说也是这种目标的一种实现。</p>
+<p>在Spring中提供了面向切面编程的丰富支持，允许通过分离应用的业务逻辑与系统级服务（例如审计（auditing）和事务（transaction）管理）进行内聚性的开发。应用对象只实现它们应该做的——完成业务逻辑——仅此而已。它们并不负责（甚至是意识）其它的系统级关注点，例如日志或事务支持。</p>
+<p>主要功能</p>
+<p>日志记录，性能统计，安全控制，事务处理，异常处理等等。</p>
+<p>主要意图</p>
+<p>将日志记录，性能统计，安全控制，事务处理，异常处理等代码从业务逻辑代码中划分出来，通过对这些行为的分离，我们希望可以将它们独立到非指导业务逻辑的方法中，进而改变这些行为的时候不影响业务逻辑的代码。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/03/notebook/aop/" data-id="ck91iwv4a000137oj2i4v1uw9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-notebook/ioc" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/03/notebook/ioc/" class="article-date">
+  <time datetime="2020-03-03T15:07:46.547Z" itemprop="datePublished">2020-03-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/03/notebook/ioc/">notebook/ioc</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="控制反转"><a href="#控制反转" class="headerlink" title="控制反转"></a>控制反转</h1><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>控制反转（Inversion of Control，缩写为IoC），是面向对象编程中的一种设计原则，可以用来减低计算机代码之间的耦合度。其中最常见的方式叫做依赖注入（Dependency Injection，简称DI），还有一种方式叫“依赖查找”（Dependency Lookup）。通过控制反转，对象在被创建的时候，由一个调控系统内所有对象的外界实体将其所依赖的对象的引用传递给它。也可以说，依赖被注入到对象中。</p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Class A中用到了Class B的对象b，一般情况下，需要在A的代码中显式的new一个B的对象。</p>
+<p>采用依赖注入技术之后，A的代码只需要定义一个私有的B对象，不需要直接new来获得这个对象，而是通过相关的容器控制程序来将B对象在外部new出来并注入到A类里的引用中。而具体获取的方法、对象被获取时的状态由配置文件（如XML）来指定。</p>
+<h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><p>IoC可以认为是一种全新的设计模式，但是理论和时间成熟相对较晚，并没有包含在GoF中。<br>Interface Driven Design接口驱动，接口驱动有很多好处，可以提供不同灵活的子类实现，增加代码稳定和健壮性等等，但是接口一定是需要实现的，也就是如下语句迟早要执行：AInterface a = new AInterfaceImp(); 这样一来，耦合关系就产生了，如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">classA</span><br><span class="line">&#123;</span><br><span class="line">    AInterface a;</span><br><span class="line"> </span><br><span class="line">    A()&#123;&#125;</span><br><span class="line">     </span><br><span class="line">    AMethod()<span class="comment">//一个方法</span></span><br><span class="line">    &#123;</span><br><span class="line">        a = <span class="keyword">new</span> AInterfaceImp();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Class A与AInterfaceImp就是依赖关系，如果想使用AInterface的另外一个实现就需要更改代码了。当然我们可以建立一个Factory来根据条件生成想要的AInterface的具体实现，即：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">InterfaceImplFactory</span><br><span class="line">&#123;</span><br><span class="line">   <span class="function">AInterface <span class="title">create</span><span class="params">(Object condition)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(condition == condA)</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">new</span> AInterfaceImpA();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span>(condition == condB)</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">new</span> AInterfaceImpB();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">      &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">new</span> AInterfaceImp();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>表面上是在一定程度上缓解了以上问题，但实质上这种代码耦合并没有改变。通过IoC模式可以彻底解决这种耦合，它把耦合从代码中移出去，放到统一的XML 文件中，通过一个容器在需要的时候把这个依赖关系形成，即把需要的接口实现注入到需要它的类中，这可能就是“依赖注入”说法的来源了。</p>
+<p>IoC模式，系统中通过引入实现了IoC模式的IoC容器，即可由IoC容器来管理对象的生命周期、依赖关系等，从而使得应用程序的配置和依赖性规范与实际的应用程序代码分离。其中一个特点就是通过文本的配置文件进行应用程序组件间相互关系的配置，而不用重新修改并编译具体的代码。</p>
+<p>当前比较知名的IoC容器有：Pico Container、Avalon 、Spring、JBoss、HiveMind、EJB等。</p>
+<p>在上面的几个IoC容器中，轻量级的有Pico Container、Avalon、Spring、HiveMind等，超重量级的有EJB，而半轻半重的有容器有JBoss，Jdon等。</p>
+<p>可以把IoC模式看作工厂模式的升华，把IoC容器看作是一个大工厂，只不过这个大工厂里要生成的对象都是在XML文件中给出定义的。利用Java 的“反射”编程，根据XML中给出的类定义生成相应的对象。从实现来看，以前在工厂模式里写死了的对象，IoC模式改为配置XML文件，这就把工厂和要生成的对象两者隔离，极大提高了灵活性和可维护性。</p>
+<p>IoC中最基本的Java技术就是“反射”编程。通俗的说，反射就是根据给出的类名（字符串）来生成对象。这种编程方式可以让应用在运行时才动态决定生成哪一种对象。反射的应用是很广泛的，像Hibernate、Spring中都是用“反射”做为最基本的技术手段。</p>
+<p>在过去，反射编程方式相对于正常的对象生成方式要慢10几倍，这也许也是当时为什么反射技术没有普遍应用开来的原因。但经SUN改良优化后，反射方式生成对象和通常对象生成方式，速度已经相差不大了（但依然有一倍以上的差距）。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/03/notebook/ioc/" data-id="ck91iwv4d000537oj71032mzq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-notebook/design-pattern" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/03/03/notebook/design-pattern/" class="article-date">
@@ -390,23 +656,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2020/05/14/notebook/anaconda/">notebook/anaconda</a>
+            <a href="/blog/2020/05/17/mlsec/KNN-%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E6%95%B0%E6%8D%AE%E9%9B%86/">mlsec/KNN-手写体数字数据集</a>
           </li>
         
           <li>
-            <a href="/blog/2020/05/12/notebook/docker/">notebook/docker</a>
+            <a href="/blog/2020/05/17/mlsec/KNN-%E9%B8%A2%E5%B0%BE%E8%8A%B1%E6%95%B0%E6%8D%AE%E9%9B%86/">mlsec/KNN-鸢尾花数据集</a>
           </li>
         
           <li>
-            <a href="/blog/2020/05/12/notebook/nginx/">notebook/nginx</a>
+            <a href="/blog/2020/05/17/mlsec/KNN-%E6%89%8B%E5%8A%A8%E5%AE%9E%E7%8E%B0/">mlsec/KNN-手动实现</a>
           </li>
         
           <li>
-            <a href="/blog/2020/05/12/notebook/docker-chevereto/">notebook/docker-chevereto</a>
+            <a href="/blog/2020/05/17/mlsec/Python-%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E4%B9%8B%E5%8F%AF%E8%A7%86%E5%8C%96%E5%88%86%E6%9E%90/">mlsec/Python-数据探索之可视化分析</a>
           </li>
         
           <li>
-            <a href="/blog/2020/05/11/notebook/docker-anaconda/">notebook/docker-anaconda</a>
+            <a href="/blog/2020/05/17/mlsec/%E4%BD%BF%E7%94%A8-Pandas-%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2/">mlsec/使用-Pandas-进行数据探索</a>
           </li>
         
       </ul>
