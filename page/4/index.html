@@ -68,6 +68,60 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode/recoverbinarytree" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/24/leetcode/recoverbinarytree/" class="article-date">
+  <time datetime="2020-03-24T15:09:28.255Z" itemprop="datePublished">2020-03-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/24/leetcode/recoverbinarytree/">leetcode/recoverbinarytree</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Recover-Binary-Search-Tree"><a href="#Recover-Binary-Search-Tree" class="headerlink" title="Recover Binary Search Tree"></a>Recover Binary Search Tree</h1><p>Two elements of a binary search tree (BST) are swapped by mistake.</p>
+<p>Recover the tree without changing its structure.</p>
+<p>Example 1:</p>
+<p>Input: [1,3,null,null,2]</p>
+<p>   1<br>  /<br> 3<br>  <br>   2</p>
+<p>Output: [3,1,null,null,2]</p>
+<p>   3<br>  /<br> 1<br>  <br>   2<br>Example 2:</p>
+<p>Input: [3,1,4,null,null,2]</p>
+<p>  3<br> / <br>1   4<br>   /<br>  2</p>
+<p>Output: [2,1,4,null,null,3]</p>
+<p>  2<br> / <br>1   4<br>   /<br>  3<br>Follow up:</p>
+<p>A solution using O(n) space is pretty straight forward.<br>Could you devise a constant space solution?</p>
+<p><em>Unsolved</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">inorder</span><span class="params">(TreeNode root, List&lt;Integer&gt; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">    inorder(root.left, nums);</span><br><span class="line">    nums.add(root.val);</span><br><span class="line">    inorder(root.right, nums);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">int</span>[] findTwoSwapped(List&lt;Integer&gt; nums) &#123;</span><br><span class="line">    <span class="keyword">int</span> n = nums.size();</span><br><span class="line">    <span class="keyword">int</span> x = -<span class="number">1</span>, y = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">      <span class="keyword">if</span> (nums.get(i + <span class="number">1</span>) &lt; nums.get(i)) &#123;</span><br><span class="line">        y = nums.get(i + <span class="number">1</span>);</span><br><span class="line">        <span class="comment">// first swap occurence</span></span><br><span class="line">        <span class="keyword">if</span> (x == -<span class="number">1</span>) x = nums.get(i);</span><br><span class="line">        <span class="comment">// second swap occurence</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;x, y&#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">recover</span><span class="params">(TreeNode r, <span class="keyword">int</span> count, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (r != <span class="keyword">null</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (r.val == x || r.val == y) &#123;</span><br><span class="line">        r.val = r.val == x ? y : x;</span><br><span class="line">        <span class="keyword">if</span> (--count == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      recover(r.left, count, x, y);</span><br><span class="line">      recover(r.right, count, x, y);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">recoverTree</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; nums = <span class="keyword">new</span> ArrayList();</span><br><span class="line">    inorder(root, nums);</span><br><span class="line">    <span class="keyword">int</span>[] swapped = findTwoSwapped(nums);</span><br><span class="line">    recover(root, <span class="number">2</span>, swapped[<span class="number">0</span>], swapped[<span class="number">1</span>]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/recover-binary-search-tree" target="_blank" rel="noopener">https://leetcode-cn.com/problems/recover-binary-search-tree</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/24/leetcode/recoverbinarytree/" data-id="ck8lar4n4000tmcoj369z56tt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-leetcode/binarysearch" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/03/23/leetcode/binarysearch/" class="article-date">
@@ -565,60 +619,6 @@
 
 
   
-    <article id="post-leetcode/validparentheses" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/15/leetcode/validparentheses/" class="article-date">
-  <time datetime="2020-03-15T14:42:26.874Z" itemprop="datePublished">2020-03-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/15/leetcode/validparentheses/">leetcode/validparentheses</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Valid-Parentheses"><a href="#Valid-Parentheses" class="headerlink" title="Valid Parentheses"></a>Valid Parentheses</h1><p>Given a string containing just the characters ‘(‘, ‘)’, ‘{‘, ‘}’, ‘[‘ and ‘]’, determine if the input string is valid.</p>
-<p>An input string is valid if:</p>
-<p>Open brackets must be closed by the same type of brackets.<br>Open brackets must be closed in the correct order.<br>Note that an empty string is also considered valid.</p>
-<p><strong>Example 1:</strong></p>
-<p>Input: “()”<br>Output: true</p>
-<p><strong>Example 2:</strong></p>
-<p>Input: “()[]{}”<br>Output: true</p>
-<p><strong>Example 3:</strong></p>
-<p>Input: “(]”<br>Output: false</p>
-<p><strong>Example 4:</strong></p>
-<p>Input: “([)]”<br>Output: false</p>
-<p><strong>Example 5:</strong></p>
-<p>Input: “{[]}”<br>Output: true</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValid</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span>[] charArray = s.toCharArray();</span><br><span class="line">        Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span> (s == <span class="keyword">null</span> || s.length() == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; charArray.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (trans(charArray[i]) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                stack.push(trans(charArray[i]));</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (trans(charArray[i]) &lt; <span class="number">0</span> ) &#123;</span><br><span class="line">                <span class="keyword">if</span> (!stack.isEmpty() &amp;&amp; stack.pop() + trans(charArray[i]) == <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (stack.size() == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">trans</span><span class="params">(<span class="keyword">char</span> c)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (c) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'('</span>: <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">')'</span>: <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'['</span>: <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">']'</span>: <span class="keyword">return</span> -<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'&#123;'</span>: <span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'&#125;'</span>: <span class="keyword">return</span> -<span class="number">3</span>;</span><br><span class="line">            <span class="keyword">default</span>: <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">执行用时 :2 ms, 在所有 Java 提交中击败了91.77%的用户</span></span><br><span class="line"><span class="comment">内存消耗 :37.2 MB, 在所有 Java 提交中击败了5.05%的用户</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Source code is easy to see.</p>
-<blockquote>
-<p>Reference<br><a href="https://leetcode-cn.com/problems/valid-parentheses" target="_blank" rel="noopener">https://leetcode-cn.com/problems/valid-parentheses</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/15/leetcode/validparentheses/" data-id="ck8lar4nd0016mcojcucgcetv" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -642,7 +642,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a></li></ul>
     </div>
   </div>
 
@@ -653,6 +653,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/blog/2020/06/17/notebook/grpc/">notebook/grpc</a>
+          </li>
         
           <li>
             <a href="/blog/2020/05/29/notebook/docker-gitlab/">notebook/docker-gitlab</a>
@@ -668,10 +672,6 @@
         
           <li>
             <a href="/blog/2020/05/17/mlsec/KNN-%E9%B8%A2%E5%B0%BE%E8%8A%B1%E6%95%B0%E6%8D%AE%E9%9B%86/">mlsec/KNN-鸢尾花数据集</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/05/17/mlsec/KNN-%E6%89%8B%E5%8A%A8%E5%AE%9E%E7%8E%B0/">mlsec/KNN-手动实现</a>
           </li>
         
       </ul>

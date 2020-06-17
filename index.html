@@ -68,6 +68,49 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-notebook/grpc" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/06/17/notebook/grpc/" class="article-date">
+  <time datetime="2020-06-17T00:22:38.832Z" itemprop="datePublished">2020-06-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/06/17/notebook/grpc/">notebook/grpc</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="gRPC入门"><a href="#gRPC入门" class="headerlink" title="gRPC入门"></a>gRPC入门</h1><h2 id="下载依赖"><a href="#下载依赖" class="headerlink" title="下载依赖"></a>下载依赖</h2><p><code>pip install grpc</code><br><code>pip install proto</code><br><code>pip install grpc-tools</code>  </p>
+<h2 id="设置接口"><a href="#设置接口" class="headerlink" title="设置接口"></a>设置接口</h2><p>在.proto文件中定义接口</p>
+<h2 id="生成文件"><a href="#生成文件" class="headerlink" title="生成文件"></a>生成文件</h2><p><code>python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. api.proto</code></p>
+<h2 id="proto示例"><a href="#proto示例" class="headerlink" title="proto示例"></a>proto示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">syntax &#x3D; &quot;proto3&quot;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; The greeting service definition.</span><br><span class="line">service Greeter &#123;</span><br><span class="line">  &#x2F;&#x2F; Sends a greeting</span><br><span class="line">  rpc SayHello (HelloRequest) returns (HelloReply) &#123;&#125;</span><br><span class="line">  &#x2F;&#x2F; Sends another greeting</span><br><span class="line">  rpc SayHelloAgain (HelloRequest) returns (HelloReply) &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; The request message containing the user&#39;s name.</span><br><span class="line">message HelloRequest &#123;</span><br><span class="line">  string name &#x3D; 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; The response message containing the greetings</span><br><span class="line">message HelloReply &#123;</span><br><span class="line">  string message &#x3D; 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="server示例"><a href="#server示例" class="headerlink" title="server示例"></a>server示例</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Greeter</span><span class="params">(api_pb2_grpc.GreeterServicer)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">SayHello</span><span class="params">(self, request, context)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> api_pb2.HelloReply(message=<span class="string">'Hello, %s!'</span> % request.name)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">SayHelloAgain</span><span class="params">(self, request, context)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> api_pb2.HelloReply(message=<span class="string">'Hello again, %s!'</span> % request.name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">serve</span><span class="params">()</span>:</span></span><br><span class="line">    server = grpc.server(futures.ThreadPoolExecutor(max_workers=<span class="number">4</span>))</span><br><span class="line">    api_pb2_grpc.add_GreeterServicer_to_server(Greeter(), server)</span><br><span class="line">    server.add_insecure_port(<span class="string">'localhost:50051'</span>)</span><br><span class="line">    server.start()</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            time.sleep(<span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span>)</span><br><span class="line">    <span class="keyword">except</span> KeyboardInterrupt:</span><br><span class="line">        server.stop(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    serve()</span><br></pre></td></tr></table></figure>
+
+<h2 id="client示例"><a href="#client示例" class="headerlink" title="client示例"></a>client示例</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">()</span>:</span></span><br><span class="line">  channel = grpc.insecure_channel(<span class="string">'localhost:50051'</span>)</span><br><span class="line">  stub = api_pb2_grpc.GreeterStub(channel)</span><br><span class="line">  response = stub.SayHello(api_pb2.HelloRequest(name=<span class="string">'you'</span>))</span><br><span class="line">  print(<span class="string">"Greeter client received: "</span> + response.message)</span><br><span class="line">  response = stub.SayHelloAgain(api_pb2.HelloRequest(name=<span class="string">'you'</span>))</span><br><span class="line">  print(<span class="string">"Greeter client received: "</span> + response.message)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    run()</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/06/17/notebook/grpc/" data-id="ckbimehhx0000ixoj7ak6dgwc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-notebook/docker-gitlab" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/05/29/notebook/docker-gitlab/" class="article-date">
@@ -4141,46 +4184,6 @@ dtype: object</code></pre><p><code>apply()</code> 方法也可以应用函数至
 
 
   
-    <article id="post-notebook/nginx" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/05/12/notebook/nginx/" class="article-date">
-  <time datetime="2020-05-12T02:38:10.989Z" itemprop="datePublished">2020-05-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/05/12/notebook/nginx/">notebook/nginx</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h1><p>检测配置文件<br><code>nginx -t</code></p>
-<p>重启服务<br><code>nginx -s reload</code></p>
-<p>若重启报错 先运行<br><code>nginx -c /etc/nginx/nginx.conf</code></p>
-<p>SSL config</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">  server &#123;</span><br><span class="line">      listen       80 default_server;</span><br><span class="line">      listen       [::]:80 default_server;</span><br><span class="line">      server_name  api.gfgf.tech;</span><br><span class="line">      root         &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html;</span><br><span class="line"></span><br><span class="line">   return 301 https:&#x2F;&#x2F;$server_name$request_uri;</span><br><span class="line"></span><br><span class="line">      # Load configuration files for the default server block.</span><br><span class="line">      include &#x2F;etc&#x2F;nginx&#x2F;default.d&#x2F;*.conf;</span><br><span class="line"></span><br><span class="line">      location &#x2F; &#123;</span><br><span class="line">              proxy_pass http:&#x2F;&#x2F;127.0.0.1:21000;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      error_page 404 &#x2F;404.html;</span><br><span class="line">          location &#x3D; &#x2F;40x.html &#123;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      error_page 500 502 503 504 &#x2F;50x.html;</span><br><span class="line">          location &#x3D; &#x2F;50x.html &#123;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  server &#123;</span><br><span class="line">      listen       443 ssl http2 default_server;</span><br><span class="line">      listen       [::]:443 ssl http2 default_server;</span><br><span class="line">      server_name  api.gfgf.tech;</span><br><span class="line">      root         &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html;</span><br><span class="line"></span><br><span class="line">      ssl_certificate &quot;&#x2F;root&#x2F;.acme.sh&#x2F;api.gfgf.tech&#x2F;api.gfgf.tech.cer&quot;;</span><br><span class="line">      ssl_certificate_key &quot;&#x2F;root&#x2F;.acme.sh&#x2F;api.gfgf.tech&#x2F;api.gfgf.tech.key&quot;;</span><br><span class="line">      ssl_session_cache shared:SSL:1m;</span><br><span class="line">      ssl_session_timeout  10m;</span><br><span class="line">      ssl_ciphers HIGH:!aNULL:!MD5;</span><br><span class="line">      ssl_prefer_server_ciphers on;</span><br><span class="line"></span><br><span class="line">      # Load configuration files for the default server block.</span><br><span class="line">      include &#x2F;etc&#x2F;nginx&#x2F;default.d&#x2F;*.conf;</span><br><span class="line"></span><br><span class="line">      location &#x2F; &#123;</span><br><span class="line">proxy_pass http:&#x2F;&#x2F;localhost:21000;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      error_page 404 &#x2F;404.html;</span><br><span class="line">          location &#x3D; &#x2F;40x.html &#123;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      error_page 500 502 503 504 &#x2F;50x.html;</span><br><span class="line">          location &#x3D; &#x2F;50x.html &#123;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/05/12/notebook/nginx/" data-id="cka3bx7ok0001cmojeiyx0358" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -4204,7 +4207,7 @@ dtype: object</code></pre><p><code>apply()</code> 方法也可以应用函数至
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a></li></ul>
     </div>
   </div>
 
@@ -4215,6 +4218,10 @@ dtype: object</code></pre><p><code>apply()</code> 方法也可以应用函数至
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/blog/2020/06/17/notebook/grpc/">notebook/grpc</a>
+          </li>
         
           <li>
             <a href="/blog/2020/05/29/notebook/docker-gitlab/">notebook/docker-gitlab</a>
@@ -4230,10 +4237,6 @@ dtype: object</code></pre><p><code>apply()</code> 方法也可以应用函数至
         
           <li>
             <a href="/blog/2020/05/17/mlsec/KNN-%E9%B8%A2%E5%B0%BE%E8%8A%B1%E6%95%B0%E6%8D%AE%E9%9B%86/">mlsec/KNN-鸢尾花数据集</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/05/17/mlsec/KNN-%E6%89%8B%E5%8A%A8%E5%AE%9E%E7%8E%B0/">mlsec/KNN-手动实现</a>
           </li>
         
       </ul>
