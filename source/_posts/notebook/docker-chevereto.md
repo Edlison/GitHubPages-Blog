@@ -61,5 +61,12 @@ volumes:
 对应挂载到当前文件夹中的php.ini文件(**注意** php.ini文件需要先创建 否则docker会自动创建同名文件夹)
 `- ./php.ini:/usr/local/etc/php/php.ini:rw`
 
+php.ini
+```ini
+memory_limit = 256M;
+upload_max_filesize = 100M;
+post_max_size = 100M;
+```
+
 运行Docker-Compose  
 `docker-compose up -d`
