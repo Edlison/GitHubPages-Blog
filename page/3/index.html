@@ -68,6 +68,84 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-notebook/linux-java" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/04/17/notebook/linux-java/" class="article-date">
+  <time datetime="2020-04-17T11:23:29.516Z" itemprop="datePublished">2020-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/04/17/notebook/linux-java/">notebook/linux-java</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux-安装Java在多个版本中切换"><a href="#Linux-安装Java在多个版本中切换" class="headerlink" title="[Linux]安装Java在多个版本中切换"></a>[Linux]安装Java在多个版本中切换</h1><h2 id="查看yum中的Java版本"><a href="#查看yum中的Java版本" class="headerlink" title="查看yum中的Java版本"></a>查看yum中的Java版本</h2><p><code>$ yum search java-1.8</code></p>
+<h2 id="安装JDK"><a href="#安装JDK" class="headerlink" title="安装JDK"></a>安装JDK</h2><p><code>yum install java-1.8.0-openjdk-devel</code></p>
+<p>安装JDK包含JRE</p>
+<p>Java Development EnvironmentKit 为 JDK<br>Java Runtime Environment 为 JRE</p>
+<h2 id="切换Java版本"><a href="#切换Java版本" class="headerlink" title="切换Java版本"></a>切换Java版本</h2><p><code>$ sudo update-alternatives --display java</code> 查看安装了几个java<br><code>$ sudo update-alternatives --config java</code> 设置java的版本<br><code>$ alternatives --config javac</code> 设置javac的版本</p>
+<p>如已手动安装的可以用下面的命令去添加到列表<br><code>$ alternatives --install /usr/bin/java java /usr/java/jdk1.8/bin/java 180000</code><br><code>$ alternatives --install /usr/bin/java javac /usr/java/jdk1.8/bin/javac 180000</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/04/17/notebook/linux-java/" data-id="ck946q4mh0000o5ojg3op41wv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ml/lesson1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/04/15/ml/lesson1/" class="article-date">
+  <time datetime="2020-04-15T14:07:08.873Z" itemprop="datePublished">2020-04-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/04/15/ml/lesson1/">ml/lesson1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="波士顿房价预测"><a href="#波士顿房价预测" class="headerlink" title="波士顿房价预测"></a>波士顿房价预测</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">()</span>:</span></span><br><span class="line">    datafile = <span class="string">'./data/housing.data'</span></span><br><span class="line">    data = np.fromfile(datafile, sep=<span class="string">' '</span>)</span><br><span class="line"></span><br><span class="line">    feature_names = [<span class="string">'CRIM'</span>, <span class="string">'ZN'</span>, <span class="string">'INDUS'</span>, <span class="string">'CHAS'</span>, <span class="string">'NOX'</span>, <span class="string">'RM'</span>, <span class="string">'AGE'</span>, <span class="string">'DIS'</span>,</span><br><span class="line">                     <span class="string">'RAD'</span>, <span class="string">'TAX'</span>, <span class="string">'PTRATIO'</span>, <span class="string">'B'</span>, <span class="string">'LSTAT'</span>, <span class="string">'MEDV'</span>]</span><br><span class="line">    feature_num = len(feature_names)</span><br><span class="line">    data = data.reshape([data.shape[<span class="number">0</span>] // feature_num, feature_num])</span><br><span class="line"></span><br><span class="line">    ratio = <span class="number">0.8</span></span><br><span class="line">    offset = int(data.shape[<span class="number">0</span>] * ratio)</span><br><span class="line">    training_data = data[:offset]</span><br><span class="line"></span><br><span class="line">    maximums, minimums, avgs = training_data.max(axis=<span class="number">0</span>), training_data.min(axis=<span class="number">0</span>), training_data.sum(axis=<span class="number">0</span>) / \</span><br><span class="line">                               training_data.shape[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(feature_num):</span><br><span class="line">        data[:, i] = (data[:, i] - avgs[i]) / (maximums[i] - minimums[i])</span><br><span class="line"></span><br><span class="line">    training_data = data[:offset]</span><br><span class="line">    test_data = data[offset:]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> training_data, test_data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Network</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, num_of_weights)</span>:</span></span><br><span class="line">        <span class="comment"># 随机产生w的初始值</span></span><br><span class="line">        <span class="comment"># 为了保持程序每次运行结果的一致性，此处设置固定的随机数种子</span></span><br><span class="line">        np.random.seed(<span class="number">0</span>)</span><br><span class="line">        self.w = np.random.randn(num_of_weights, <span class="number">1</span>)</span><br><span class="line">        self.b = <span class="number">0.</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        z = np.dot(x, self.w) + self.b</span><br><span class="line">        <span class="keyword">return</span> z</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">loss</span><span class="params">(self, z, y)</span>:</span></span><br><span class="line">        error = z - y</span><br><span class="line">        cost = error * error</span><br><span class="line">        cost = np.mean(cost)</span><br><span class="line">        <span class="keyword">return</span> cost</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">gradient</span><span class="params">(self, x, y)</span>:</span></span><br><span class="line">        z = self.forward(x)</span><br><span class="line">        gradient_w = (z - y) * x</span><br><span class="line">        gradient_w = np.mean(gradient_w, axis=<span class="number">0</span>)</span><br><span class="line">        gradient_w = gradient_w[:, np.newaxis]</span><br><span class="line">        gradient_b = (z - y)</span><br><span class="line">        gradient_b = np.mean(gradient_b)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> gradient_w, gradient_b</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">update</span><span class="params">(self, gradient_w, gradient_b, eta=<span class="number">0.01</span>)</span>:</span></span><br><span class="line">        self.w = self.w - eta * gradient_w</span><br><span class="line">        self.b = self.b - eta * gradient_b</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, x, y, iterations=<span class="number">100</span>, eta=<span class="number">0.01</span>)</span>:</span></span><br><span class="line">        losses = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(iterations):</span><br><span class="line">            z = self.forward(x)</span><br><span class="line">            L = self.loss(z, y)</span><br><span class="line">            gradient_w, gradient_b = self.gradient(x, y)</span><br><span class="line">            self.update(gradient_w, gradient_b, eta)</span><br><span class="line">            losses.append(L)</span><br><span class="line">            <span class="keyword">if</span> (i + <span class="number">1</span>) % <span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">                print(<span class="string">'iter &#123;&#125;, loss &#123;&#125;'</span>.format(i, L))</span><br><span class="line">        <span class="keyword">return</span> losses</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取数据</span></span><br><span class="line">train_data, test_data = load_data()</span><br><span class="line">x = train_data[:, :<span class="number">-1</span>]</span><br><span class="line">y = train_data[:, <span class="number">-1</span>:]</span><br><span class="line"><span class="comment"># 创建网络</span></span><br><span class="line">net = Network(<span class="number">13</span>)</span><br><span class="line">num_iterations=<span class="number">1000</span></span><br><span class="line"><span class="comment"># 启动训练</span></span><br><span class="line">losses = net.train(x,y, iterations=num_iterations, eta=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 画出损失函数的变化趋势</span></span><br><span class="line">plot_x = np.arange(num_iterations)</span><br><span class="line">plot_y = np.array(losses)</span><br><span class="line">plt.plot(plot_x, plot_y)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NetworkOfSGD</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, num_of_weights)</span>:</span></span><br><span class="line">        <span class="comment"># 随机产生w的初始值</span></span><br><span class="line">        <span class="comment"># 为了保持程序每次运行结果的一致性，此处设置固定的随机数种子</span></span><br><span class="line">        <span class="comment"># np.random.seed(0)</span></span><br><span class="line">        self.w = np.random.randn(num_of_weights, <span class="number">1</span>)</span><br><span class="line">        self.b = <span class="number">0.</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        z = np.dot(x, self.w) + self.b</span><br><span class="line">        <span class="keyword">return</span> z</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">loss</span><span class="params">(self, z, y)</span>:</span></span><br><span class="line">        error = z - y</span><br><span class="line">        num_samples = error.shape[<span class="number">0</span>]</span><br><span class="line">        cost = error * error</span><br><span class="line">        cost = np.sum(cost) / num_samples</span><br><span class="line">        <span class="keyword">return</span> cost</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">gradient</span><span class="params">(self, x, y)</span>:</span></span><br><span class="line">        z = self.forward(x)</span><br><span class="line">        N = x.shape[<span class="number">0</span>]</span><br><span class="line">        gradient_w = <span class="number">1.</span> / N * np.sum((z - y) * x, axis=<span class="number">0</span>)</span><br><span class="line">        gradient_w = gradient_w[:, np.newaxis]</span><br><span class="line">        gradient_b = <span class="number">1.</span> / N * np.sum(z - y)</span><br><span class="line">        <span class="keyword">return</span> gradient_w, gradient_b</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">update</span><span class="params">(self, gradient_w, gradient_b, eta=<span class="number">0.01</span>)</span>:</span></span><br><span class="line">        self.w = self.w - eta * gradient_w</span><br><span class="line">        self.b = self.b - eta * gradient_b</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, training_data, num_epoches, batch_size=<span class="number">10</span>, eta=<span class="number">0.01</span>)</span>:</span></span><br><span class="line">        n = len(training_data)</span><br><span class="line">        losses = []</span><br><span class="line">        <span class="keyword">for</span> epoch_id <span class="keyword">in</span> range(num_epoches):</span><br><span class="line">            <span class="comment"># 在每轮迭代开始之前，将训练数据的顺序随机的打乱，</span></span><br><span class="line">            <span class="comment"># 然后再按每次取batch_size条数据的方式取出</span></span><br><span class="line">            np.random.shuffle(training_data)</span><br><span class="line">            <span class="comment"># 将训练数据进行拆分，每个mini_batch包含batch_size条的数据</span></span><br><span class="line">            mini_batches = [training_data[k:k + batch_size] <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">0</span>, n, batch_size)]</span><br><span class="line">            <span class="keyword">for</span> iter_id, mini_batch <span class="keyword">in</span> enumerate(mini_batches):</span><br><span class="line">                <span class="comment"># print(self.w.shape)</span></span><br><span class="line">                <span class="comment"># print(self.b)</span></span><br><span class="line">                x = mini_batch[:, :<span class="number">-1</span>]</span><br><span class="line">                y = mini_batch[:, <span class="number">-1</span>:]</span><br><span class="line">                a = self.forward(x)</span><br><span class="line">                loss = self.loss(a, y)</span><br><span class="line">                gradient_w, gradient_b = self.gradient(x, y)</span><br><span class="line">                self.update(gradient_w, gradient_b, eta)</span><br><span class="line">                losses.append(loss)</span><br><span class="line">                print(<span class="string">'Epoch &#123;:3d&#125; / iter &#123;:3d&#125;, loss = &#123;:.4f&#125;'</span>.</span><br><span class="line">                      format(epoch_id, iter_id, loss))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> losses</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取数据</span></span><br><span class="line">train_data, test_data = load_data()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建网络</span></span><br><span class="line">net = NetworkOfSGD(<span class="number">13</span>)</span><br><span class="line"><span class="comment"># 启动训练</span></span><br><span class="line">losses = net.train(train_data, num_epoches=<span class="number">50</span>, batch_size=<span class="number">100</span>, eta=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 画出损失函数的变化趋势</span></span><br><span class="line">plot_x = np.arange(len(losses))</span><br><span class="line">plot_y = np.array(losses)</span><br><span class="line">plt.plot(plot_x, plot_y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/04/15/ml/lesson1/" data-id="ck91iwv3z000037ojcwvr5plb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-notebook/java-class" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/04/08/notebook/java-class/" class="article-date">
@@ -549,106 +627,6 @@
 
 
   
-    <article id="post-leetcode/delivercookies" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/27/leetcode/delivercookies/" class="article-date">
-  <time datetime="2020-03-27T11:22:16.200Z" itemprop="datePublished">2020-03-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/27/leetcode/delivercookies/">leetcode/delivercookies</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Assign-Cookies"><a href="#Assign-Cookies" class="headerlink" title="Assign Cookies"></a>Assign Cookies</h1><p>Assume you are an awesome parent and want to give your children some cookies. But, you should give each child at most one cookie. Each child i has a greed factor gi, which is the minimum size of a cookie that the child will be content with; and each cookie j has a size sj. If sj &gt;= gi, we can assign the cookie j to the child i, and the child i will be content. Your goal is to maximize the number of your content children and output the maximum number.</p>
-<p>Note:<br>You may assume the greed factor is always positive.<br>You cannot assign more than one cookie to one child.  </p>
-<p>Example 1:<br>Input: [1,2,3], [1,1]</p>
-<p>Output: 1</p>
-<p>Explanation: You have 3 children and 2 cookies. The greed factors of 3 children are 1, 2, 3.<br>And even though you have 2 cookies, since their size is both 1, you could only make the child whose greed factor is 1 content.<br>You need to output 1.<br>Example 2:<br>Input: [1,2], [1,2,3]</p>
-<p>Output: 2</p>
-<p>Explanation: You have 2 children and 3 cookies. The greed factors of 2 children are 1, 2.<br>You have 3 cookies and their sizes are big enough to gratify all of the children,<br>You need to output 2.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findContentChildren</span><span class="params">(<span class="keyword">int</span>[] g, <span class="keyword">int</span>[] s)</span> </span>&#123;</span><br><span class="line">        Arrays.sort(g);</span><br><span class="line">        Arrays.sort(s);</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; i &lt; g.length; i++) &#123;</span><br><span class="line">            <span class="keyword">while</span> (j &lt; s.length) &#123;</span><br><span class="line">                <span class="keyword">if</span> (s[j] &gt;= g[i]) &#123;</span><br><span class="line">                    res++;</span><br><span class="line">                    j++;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    j++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>First we need to sort the array.<br>Then we define 2 pointers to find satisfied results.</p>
-<blockquote>
-<p>Reference<br><a href="https://leetcode-cn.com/problems/assign-cookies" target="_blank" rel="noopener">https://leetcode-cn.com/problems/assign-cookies</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/27/leetcode/delivercookies/" data-id="ck8lar4mx000imcojacuw3pm2" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode/substring" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/26/leetcode/substring/" class="article-date">
-  <time datetime="2020-03-26T05:04:00.758Z" itemprop="datePublished">2020-03-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/26/leetcode/substring/">leetcode/substring</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Is-Subsequence"><a href="#Is-Subsequence" class="headerlink" title="Is Subsequence"></a>Is Subsequence</h1><p>Given a string s and a string t, check if s is subsequence of t.</p>
-<p>You may assume that there is only lower case English letters in both s and t. t is potentially a very long (length ~= 500,000) string, and s is a short string (&lt;=100).</p>
-<p>A subsequence of a string is a new string which is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (ie, “ace” is a subsequence of “abcde” while “aec” is not).</p>
-<p>Example 1:<br>s = “abc”, t = “ahbgdc”</p>
-<p>Return true.</p>
-<p>Example 2:<br>s = “axc”, t = “ahbgdc”</p>
-<p>Return false.</p>
-<p>Follow up:<br>If there are lots of incoming S, say S1, S2, … , Sk where k &gt;= 1B, and you want to check one by one to see if T has its subsequence. In this scenario, how would you change your code?</p>
-<p><em>Overtime</em></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSubsequence</span><span class="params">(String s, String t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s.length() == <span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        </span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; t.length() - s.length(); i++) &#123;</span><br><span class="line">                    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">int</span> cur = i;</span><br><span class="line">                    <span class="keyword">while</span> (cur &lt; t.length() &amp;&amp; res &lt; s.length()) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (t.charAt(cur) == s.charAt(res)) res++;</span><br><span class="line">        </span><br><span class="line">                        cur++;</span><br><span class="line">        </span><br><span class="line">                        <span class="keyword">if</span> (res == s.length()) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        </span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSubsequence</span><span class="params">(String s, String t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++) &#123;</span><br><span class="line">            res = t.indexOf(s.charAt(i), res + <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (res == -<span class="number">1</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">执行用时 :1 ms, 在所有 Java 提交中击败了90.09%的用户</span></span><br><span class="line"><span class="comment">内存消耗 :44.2 MB, 在所有 Java 提交中击败了100.00%的用户</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Reference<br><a href="https://leetcode-cn.com/problems/is-subsequence" target="_blank" rel="noopener">https://leetcode-cn.com/problems/is-subsequence</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/26/leetcode/substring/" data-id="ck8lar4na0011mcoj2hafdifs" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -685,6 +663,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/07/26/nlp/week-2/">nlp/week-2</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/07/26/notebook/docker-nextcloud/">notebook/docker-nextcloud</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/07/14/nlp/week-1/">nlp/week-1</a>
           </li>
         
@@ -694,14 +680,6 @@
         
           <li>
             <a href="/blog/2020/05/29/notebook/docker-gitlab/">notebook/docker-gitlab</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/05/28/notebook/docker-compose/">notebook/docker-compose</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/05/17/mlsec/KNN-%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E6%95%B0%E6%8D%AE%E9%9B%86/">mlsec/KNN-手写体数字数据集</a>
           </li>
         
       </ul>

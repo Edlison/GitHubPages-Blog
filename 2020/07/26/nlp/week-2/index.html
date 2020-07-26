@@ -5,17 +5,17 @@
   
 
   
-  <title>notebook/implements-extends | Edlison</title>
+  <title>nlp/week-2 | Edlison</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Implements &amp; Extends 的不同在类的声明中，通过关键字extends来创建一个类的子类；一个类通过关键字implements声明自己使用一个或者多个接口。  extends 是继承某个类, 继承之后可以使用父类的方法, 也可以重写父类的方法;   implements 是实现多个接口, 接口的方法一般为空的, 必须重写才能使用；  extends是继承父类，只要那个类不是">
+  <meta name="description" content="Week 2深度学习与神经网络基础，pytorch基础。 神经网络训练过程 将DataSet生成iter(train_iter, test_iter), 每个iter由X,y构成 (X:Sample的所有特征[samples * features], y:真实标签). 计算y_hat (y_hat:通过构造的神经网络模型得到的预测值). 计算损失函数 (均方差, 交叉熵). 对所有params梯度">
 <meta property="og:type" content="article">
-<meta property="og:title" content="notebook&#x2F;implements-extends">
-<meta property="og:url" content="http://edlison.com/blog/2020/03/08/notebook/implements-extends/index.html">
+<meta property="og:title" content="nlp&#x2F;week-2">
+<meta property="og:url" content="http://edlison.com/blog/2020/07/26/nlp/week-2/index.html">
 <meta property="og:site_name" content="Edlison">
-<meta property="og:description" content="Implements &amp; Extends 的不同在类的声明中，通过关键字extends来创建一个类的子类；一个类通过关键字implements声明自己使用一个或者多个接口。  extends 是继承某个类, 继承之后可以使用父类的方法, 也可以重写父类的方法;   implements 是实现多个接口, 接口的方法一般为空的, 必须重写才能使用；  extends是继承父类，只要那个类不是">
+<meta property="og:description" content="Week 2深度学习与神经网络基础，pytorch基础。 神经网络训练过程 将DataSet生成iter(train_iter, test_iter), 每个iter由X,y构成 (X:Sample的所有特征[samples * features], y:真实标签). 计算y_hat (y_hat:通过构造的神经网络模型得到的预测值). 计算损失函数 (均方差, 交叉熵). 对所有params梯度">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-03-08T10:56:21.551Z">
-<meta property="article:modified_time" content="2020-03-11T15:48:52.517Z">
+<meta property="article:published_time" content="2020-07-26T10:28:47.408Z">
+<meta property="article:modified_time" content="2020-07-26T19:15:24.271Z">
 <meta property="article:author" content="Bolin Shen">
 <meta name="twitter:card" content="summary">
   
@@ -70,10 +70,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-notebook/implements-extends" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-nlp/week-2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2020/03/08/notebook/implements-extends/" class="article-date">
-  <time datetime="2020-03-08T10:56:21.551Z" itemprop="datePublished">2020-03-08</time>
+    <a href="/blog/2020/07/26/nlp/week-2/" class="article-date">
+  <time datetime="2020-07-26T10:28:47.408Z" itemprop="datePublished">2020-07-26</time>
 </a>
     
   </div>
@@ -84,7 +84,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      notebook/implements-extends
+      nlp/week-2
     </h1>
   
 
@@ -92,38 +92,45 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Implements-amp-Extends-的不同"><a href="#Implements-amp-Extends-的不同" class="headerlink" title="Implements &amp; Extends 的不同"></a>Implements &amp; Extends 的不同</h1><p><strong>在类的声明中，通过关键字extends来创建一个类的子类；一个类通过关键字implements声明自己使用一个或者多个接口。</strong></p>
+        <h1 id="Week-2"><a href="#Week-2" class="headerlink" title="Week 2"></a>Week 2</h1><p>深度学习与神经网络基础，pytorch基础。</p>
+<h2 id="神经网络训练过程"><a href="#神经网络训练过程" class="headerlink" title="神经网络训练过程"></a>神经网络训练过程</h2><ul>
+<li>将DataSet生成iter(train_iter, test_iter), 每个iter由X,y构成 (X:Sample的所有特征[samples * features], y:真实标签).</li>
+<li>计算y_hat (y_hat:通过构造的神经网络模型得到的预测值).</li>
+<li>计算损失函数 (均方差, 交叉熵).</li>
+<li>对所有params梯度清零.</li>
+<li>loss.backward反向传播, 对损失函数求梯度, 也就是得所有的到权重和偏置的梯度param.grad.</li>
+<li>params带入梯度下降算法, 更新params.</li>
+<li>每个epoch后, 将测试数据带入训练后的网络模型中计算准确率.</li>
+</ul>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p><strong>1. W初始化</strong><br>首先介绍一下我们不应该做的事情（即初始化为0）。需要注意的是我们并不知道在训练神经网络中每一个权重最后的值，但是如果进行了恰当的数据归一化后，我们可以有理由认为有一半的权重是正的，另一半是负的。令所有权重都初始化为0这个一个听起来还蛮合理的想法也许是一个我们假设中最好的一个假设了。但结果正确是一个错误(的想法)，因为如果神经网络计算出来的输出值都一个样，那么反向传播算法计算出来的梯度值一样，并且参数更新值也一样(w=w−α∗dw)。更一般地说，如果权重初始化为同一个值，网络就不可能不对称(即是对称的)。</p>
+<p><strong>2. 梯度清零</strong><br>每次反向传播前需要将params的梯度清零，否则每次计算的梯度为上一个梯度的累加。</p>
+<p><strong>3. 反向传播</strong><br>计算的是给定图的叶子结点的梯度，对Loss函数进行反向传播计算所得即为所有的W与b。</p>
+<p><strong>4. python方法</strong><br>method()代表执行完该函数<br>method仅函数对象</p>
+<p><strong>5. 二分类问题不小心将最后一层设为10维</strong><br>最后训练出来的权重使得结果在0, 1上的概率更大，不排除最后的结果为2 ~ 9。</p>
+<p><strong>6. 网络的层次</strong><br>每一层为激活函数</p>
+<p>层数-1 为连接层 连接层对应[W, b]</p>
+<p>X = [batch_size * features]  </p>
 <ul>
-<li><p>extends 是继承某个类, 继承之后可以使用父类的方法, 也可以重写父类的方法; </p>
+<li><p>第一层输入为([-1, features])  </p>
 </li>
-<li><p>implements 是实现多个接口, 接口的方法一般为空的, 必须重写才能使用；</p>
+<li><p>矩阵计算: [-1, features] * [W1(input_num, hidden_num)] + b1  </p>
 </li>
-<li><p>extends是继承父类，只要那个类不是声明为final或者那个类定义为abstract的就能继承；</p>
+<li><p>隐藏层输入为(input_num, hidden_num)  </p>
 </li>
-<li><p>Java中不支持多重继承，但是可以用接口来实现，这样就要用到implements，继承只能继承一个类，但implements可以实现多个接口，用逗号分开就行了 比如 ：<code>class A extends B implements C,D,E</code>。</p>
+<li><p>矩阵计算: [-1, hidden_num] * [W2(hidden_num, output_num)] + b2  </p>
+</li>
+<li><p>输出层为(hidden_num, output_num)  </p>
+</li>
+<li><p>最终矩阵格式: [-1, output_num]</p>
 </li>
 </ul>
-<p><strong>接口实现的注意点：</strong>  </p>
-<ul>
-<li><p>实现一个接口就是要实现该接口的所有的方法(抽象类除外)；</p>
-</li>
-<li><p>接口中的方法都是抽象的；</p>
-</li>
-<li><p>多个无关的类可以实现同一个接口，一个类可以实现多个无关的接口。</p>
-</li>
-</ul>
-<p><strong>Implements与Extends的不同</strong></p>
-<p>extends， 可以实现父类，也可以调用父类初始化 this.parent()。而且会覆盖父类定义的变量或者函数。这样的好处是：架构师定义好接口，让工程师实现就可以了。整个项目开发效率和开发成本大大降低。    </p>
-<p>implements，实现父类，子类不可以覆盖父类的方法或者变量。即使子类定义与父类相同的变量或者函数，也会被父类取代掉。  </p>
-<p>这两种实现的具体使用，是要看项目的实际情况，需要实现，不可以修改implements，只定义接口需要具体实现，或者可以被修改扩展性好，用extends。</p>
-<blockquote>
-<p>Reference<br><a href="https://blog.csdn.net/tolcf/article/details/46135645" target="_blank" rel="noopener">https://blog.csdn.net/tolcf/article/details/46135645</a></p>
-</blockquote>
+<p>最后一层输出不加激活函数 含义？？？</p>
+<p><strong>7. 特殊第一层input输入层</strong><br>输入的特征可能type为Long, 一定要转为float.<br>batch_size与input_num无关, 但features一定与input_num相等.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/08/notebook/implements-extends/" data-id="ck91iwv4e000637oj6ormh8tc" class="article-share-link">Share</a>
+      <a data-url="http://edlison.com/blog/2020/07/26/nlp/week-2/" data-id="ckd3h9jf00001rcojegdped30" class="article-share-link">Share</a>
       
       
     </footer>
@@ -132,19 +139,10 @@
     
 <nav id="article-nav">
   
-    <a href="/blog/2020/03/09/leetcode/hascycle/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          leetcode/hascycle
-        
-      </div>
-    </a>
   
-  
-    <a href="/blog/2020/03/08/leetcode/deletelistduplicates/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/blog/2020/07/26/notebook/docker-nextcloud/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">leetcode/deletelistduplicates</div>
+      <div class="article-nav-title">notebook/docker-nextcloud</div>
     </a>
   
 </nav>
