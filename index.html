@@ -159,16 +159,35 @@
 <li><p>最终矩阵格式: [-1, output_num]</p>
 </li>
 </ul>
-<p>最后一层输出不加激活函数 含义？？？<br>隐藏层没有激活函数 含义？？？</p>
 <p><strong>7. 特殊第一层input输入层</strong><br>输入的特征可能type为Long, 一定要转为float.<br>batch_size与input_num无关, 但features一定与input_num相等.</p>
 <p><strong>8. X.permute</strong><br>model的forward必须要X.permute(1, 0)<br><code>LSTM(batch_first=True)</code>没用？？？</p>
 <p><strong>9. python路径问题</strong><br>相对路径取决于调用该函数的python文件位置，不是子函数所在python文件相对于文件的位置。</p>
-<p>torch.no_grad()???<br>model.eval()???</p>
 <p><strong>10. pytorch使用GPU计算</strong>  </p>
 <ul>
 <li>训练及评价集需要X.cuda()将数据移至GPU  </li>
 <li>model与loss函数需要model.cuda(), loss.cuda()移至GPU</li>
 </ul>
+<p><strong>11. 导出数据</strong><br>TestLoader导出预测结果时，一定不能将导入的数据Shuffle!!!</p>
+<p><strong>12. pad</strong><br><code>&lt;pad&gt;</code>对应一个随机生成的向量</p>
+<p><strong>13. torch.no_grad()</strong>  </p>
+<ul>
+<li>requires_grad=True 要求计算梯度</li>
+<li>requires_grad=False 不要求计算梯度</li>
+<li>with torch.no_grad()或者@torch.no_grad()中的数据不需要计算梯度，也不会进行反向传播</li>
+</ul>
+<p>即使一个tensor（命名为x）的requires_grad = True，由x得到的新tensor（命名为w-标量）requires_grad也为False，且grad_fn也为None,即不会对w求导。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">x = torch.randn(<span class="number">10</span>, <span class="number">5</span>, requires_grad = <span class="literal">True</span>)</span><br><span class="line">y = torch.randn(<span class="number">10</span>, <span class="number">5</span>, requires_grad = <span class="literal">True</span>)</span><br><span class="line">z = torch.randn(<span class="number">10</span>, <span class="number">5</span>, requires_grad = <span class="literal">True</span>)</span><br><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">    w = x + y + z</span><br><span class="line">    print(w.requires_grad)</span><br><span class="line">    print(w.grad_fn)</span><br><span class="line">    print(w.requires_grad)</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="literal">None</span></span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>14. train()/eval()</strong>  </p>
+<ul>
+<li><p>在训练模型时，前面加上<code>model.train()</code><br>启用 BatchNormalization 和 Dropout</p>
+</li>
+<li><p>在测试模型时，前面加上<code>model.eval()</code><br>不启用 BatchNormalization 和 Dropout<br>即使不训练，它也会改变权值。这是model中含有batch normalization层所带来的的性质。</p>
+</li>
+</ul>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>最后一层输出不加激活函数 含义(最后预测值是数值最大的 因此没有影响)？？？</p>
+<p>隐藏层没有激活函数 含义？？？</p>
+<p><code>LSTM(batch_first=True)</code>没用？？？</p>
 <h2 id="词向量框架"><a href="#词向量框架" class="headerlink" title="词向量框架"></a>词向量框架</h2><ul>
 <li>拿到每个样本</li>
 <li>每个样本分词</li>
