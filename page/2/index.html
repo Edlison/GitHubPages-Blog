@@ -68,6 +68,580 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-mlsec/KNN-手写体数字数据集" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/05/17/mlsec/KNN-%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E6%95%B0%E6%8D%AE%E9%9B%86/" class="article-date">
+  <time datetime="2020-05-17T08:37:20.000Z" itemprop="datePublished">2020-05-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/05/17/mlsec/KNN-%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E6%95%B0%E6%8D%AE%E9%9B%86/">mlsec/KNN-手写体数字数据集</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="KNN-手写体数字数据集"><a href="#KNN-手写体数字数据集" class="headerlink" title="KNN-手写体数字数据集"></a>KNN-手写体数字数据集</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">digits = datasets.load_digits()</span><br><span class="line">X = digits.data</span><br><span class="line">X.shape</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>(1797, 64)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y = digits.target</span><br><span class="line">y.shape</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>(1797,)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">one = X[<span class="number">100</span>]</span><br><span class="line">one = one.reshape(<span class="number">8</span>, <span class="number">8</span>)</span><br><span class="line">one</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([[ 0.,  0.,  0.,  2., 13.,  0.,  0.,  0.],
+       [ 0.,  0.,  0.,  8., 15.,  0.,  0.,  0.],
+       [ 0.,  0.,  5., 16.,  5.,  2.,  0.,  0.],
+       [ 0.,  0., 15., 12.,  1., 16.,  4.,  0.],
+       [ 0.,  4., 16.,  2.,  9., 16.,  8.,  0.],
+       [ 0.,  0., 10., 14., 16., 16.,  4.,  0.],
+       [ 0.,  0.,  0.,  0., 13.,  8.,  0.,  0.],
+       [ 0.,  0.,  0.,  0., 13.,  6.,  0.,  0.]])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.imshow(one)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>&lt;matplotlib.image.AxesImage at 0x1a203a9ad0&gt;</code></pre><p><img src="data/output_5_1.png" alt="png"></p>
+<h1 id="分离训练测试集"><a href="#分离训练测试集" class="headerlink" title="分离训练测试集"></a>分离训练测试集</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">train_test_split?</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>[0;31mSignature:[0m [0mtrain_test_split[0m[0;34m([0m[0;34m*[0m[0marrays[0m[0;34m,[0m [0;34m**[0m[0moptions[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;31mDocstring:[0m
+Split arrays or matrices into random train and test subsets
+
+Quick utility that wraps input validation and
+``next(ShuffleSplit().split(X, y))`` and application to input data
+into a single call for splitting (and optionally subsampling) data in a
+oneliner.
+
+Read more in the :ref:`User Guide &lt;cross_validation&gt;`.
+
+Parameters
+----------
+*arrays : sequence of indexables with same length / shape[0]
+    Allowed inputs are lists, numpy arrays, scipy-sparse
+    matrices or pandas dataframes.
+
+test_size : float, int or None, optional (default=None)
+    If float, should be between 0.0 and 1.0 and represent the proportion
+    of the dataset to include in the test split. If int, represents the
+    absolute number of test samples. If None, the value is set to the
+    complement of the train size. If ``train_size`` is also None, it will
+    be set to 0.25.
+
+train_size : float, int, or None, (default=None)
+    If float, should be between 0.0 and 1.0 and represent the
+    proportion of the dataset to include in the train split. If
+    int, represents the absolute number of train samples. If None,
+    the value is automatically set to the complement of the test size.
+
+random_state : int, RandomState instance or None, optional (default=None)
+    If int, random_state is the seed used by the random number generator;
+    If RandomState instance, random_state is the random number generator;
+    If None, the random number generator is the RandomState instance used
+    by `np.random`.
+
+shuffle : boolean, optional (default=True)
+    Whether or not to shuffle the data before splitting. If shuffle=False
+    then stratify must be None.
+
+stratify : array-like or None (default=None)
+    If not None, data is split in a stratified fashion, using this as
+    the class labels.
+
+Returns
+-------
+splitting : list, length=2 * len(arrays)
+    List containing train-test split of inputs.
+
+    .. versionadded:: 0.16
+        If the input is sparse, the output will be a
+        ``scipy.sparse.csr_matrix``. Else, output type is the same as the
+        input type.
+
+Examples
+--------
+&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; from sklearn.model_selection import train_test_split
+&gt;&gt;&gt; X, y = np.arange(10).reshape((5, 2)), range(5)
+&gt;&gt;&gt; X
+array([[0, 1],
+       [2, 3],
+       [4, 5],
+       [6, 7],
+       [8, 9]])
+&gt;&gt;&gt; list(y)
+[0, 1, 2, 3, 4]
+
+&gt;&gt;&gt; X_train, X_test, y_train, y_test = train_test_split(
+...     X, y, test_size=0.33, random_state=42)
+...
+&gt;&gt;&gt; X_train
+array([[4, 5],
+       [0, 1],
+       [6, 7]])
+&gt;&gt;&gt; y_train
+[2, 0, 3]
+&gt;&gt;&gt; X_test
+array([[2, 3],
+       [8, 9]])
+&gt;&gt;&gt; y_test
+[1, 4]
+
+&gt;&gt;&gt; train_test_split(y, shuffle=False)
+[[0, 1, 2], [3, 4]]
+[0;31mFile:[0m      /Applications/anaconda3/lib/python3.7/site-packages/sklearn/model_selection/_split.py
+[0;31mType:[0m      function</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.2</span>)</span><br><span class="line">print(X_train.shape)</span><br><span class="line">print(y_train.shape)</span><br><span class="line">print(X_test.shape)</span><br><span class="line">print(y_test.shape)</span><br></pre></td></tr></table></figure>
+
+<pre><code>(1437, 64)
+(1437,)
+(360, 64)
+(360,)</code></pre><h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KNNClf = KNeighborsClassifier(n_neighbors=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KNNClf.fit(X_train, y_train)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>KNeighborsClassifier(algorithm=&apos;auto&apos;, leaf_size=30, metric=&apos;minkowski&apos;,
+                     metric_params=None, n_jobs=None, n_neighbors=3, p=2,
+                     weights=&apos;uniform&apos;)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">res = KNNClf.predict(X_test)</span><br><span class="line">res</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([3, 4, 8, 5, 5, 7, 0, 3, 1, 4, 7, 5, 5, 8, 0, 7, 4, 7, 1, 7, 9, 4,
+       4, 7, 6, 1, 2, 9, 1, 3, 3, 3, 7, 0, 7, 0, 2, 8, 9, 1, 1, 5, 4, 8,
+       9, 0, 4, 9, 4, 9, 7, 2, 7, 3, 3, 4, 1, 9, 9, 9, 0, 4, 0, 6, 1, 0,
+       0, 3, 6, 2, 3, 2, 8, 5, 9, 3, 1, 1, 6, 9, 8, 1, 2, 3, 2, 6, 8, 8,
+       4, 6, 8, 6, 3, 9, 2, 8, 3, 6, 5, 7, 1, 7, 3, 8, 8, 8, 0, 0, 9, 1,
+       9, 8, 5, 1, 1, 0, 1, 6, 5, 1, 7, 6, 5, 7, 7, 2, 2, 7, 3, 1, 9, 5,
+       9, 5, 5, 3, 8, 4, 9, 5, 4, 6, 0, 5, 4, 8, 6, 1, 2, 8, 0, 9, 0, 9,
+       7, 9, 7, 0, 2, 8, 2, 4, 0, 6, 2, 6, 7, 5, 6, 3, 8, 8, 0, 3, 2, 0,
+       6, 1, 0, 6, 0, 5, 9, 3, 3, 0, 4, 0, 4, 2, 4, 9, 0, 6, 7, 4, 6, 5,
+       9, 7, 2, 2, 3, 3, 0, 3, 9, 4, 9, 8, 5, 6, 9, 0, 1, 3, 5, 0, 5, 1,
+       6, 4, 6, 6, 6, 7, 9, 1, 0, 7, 6, 6, 7, 8, 0, 3, 8, 5, 6, 8, 1, 3,
+       0, 3, 6, 0, 3, 5, 6, 7, 0, 6, 9, 7, 0, 0, 2, 1, 6, 6, 9, 1, 6, 9,
+       8, 7, 0, 2, 5, 1, 8, 6, 4, 3, 8, 2, 9, 2, 8, 4, 6, 4, 8, 9, 3, 1,
+       1, 5, 0, 7, 8, 2, 3, 8, 4, 7, 7, 7, 7, 9, 4, 1, 7, 0, 2, 9, 1, 8,
+       2, 4, 1, 0, 7, 5, 6, 0, 7, 1, 1, 5, 7, 1, 1, 6, 5, 6, 2, 2, 3, 9,
+       7, 5, 3, 1, 5, 9, 9, 2, 5, 1, 6, 8, 2, 2, 4, 2, 1, 0, 6, 1, 2, 9,
+       7, 5, 3, 5, 6, 1, 8, 1])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y_test</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([3, 4, 8, 5, 5, 7, 0, 3, 1, 4, 7, 5, 5, 8, 0, 7, 4, 7, 1, 7, 9, 4,
+       4, 7, 6, 1, 2, 9, 1, 3, 3, 3, 7, 0, 7, 0, 2, 8, 9, 1, 1, 5, 4, 8,
+       9, 0, 4, 9, 4, 9, 7, 2, 7, 8, 3, 4, 1, 9, 9, 9, 0, 4, 0, 6, 1, 0,
+       0, 3, 6, 2, 3, 2, 8, 5, 9, 3, 1, 1, 6, 9, 8, 1, 2, 3, 2, 6, 8, 8,
+       4, 6, 8, 6, 3, 9, 2, 8, 3, 6, 5, 7, 1, 7, 9, 8, 8, 8, 0, 0, 9, 1,
+       4, 8, 5, 1, 1, 0, 1, 6, 5, 1, 7, 6, 5, 7, 7, 2, 2, 7, 3, 1, 9, 5,
+       9, 5, 5, 3, 8, 4, 9, 5, 4, 6, 0, 5, 4, 8, 6, 1, 2, 8, 0, 9, 0, 9,
+       7, 9, 7, 0, 2, 8, 2, 4, 0, 6, 2, 6, 7, 5, 6, 3, 8, 8, 0, 3, 2, 0,
+       6, 1, 0, 6, 0, 5, 9, 3, 3, 0, 4, 0, 4, 2, 4, 9, 0, 6, 7, 4, 6, 5,
+       9, 7, 2, 2, 3, 3, 0, 3, 9, 4, 9, 8, 5, 6, 9, 0, 1, 3, 5, 0, 5, 1,
+       6, 4, 6, 6, 6, 7, 9, 1, 0, 7, 6, 6, 7, 8, 0, 3, 8, 5, 6, 8, 1, 3,
+       0, 3, 6, 0, 3, 5, 6, 7, 0, 6, 9, 7, 0, 0, 2, 1, 6, 6, 9, 1, 6, 9,
+       8, 7, 0, 2, 5, 1, 8, 6, 4, 3, 8, 2, 9, 2, 8, 4, 6, 4, 8, 9, 3, 1,
+       1, 5, 0, 7, 8, 2, 3, 8, 4, 7, 7, 7, 7, 7, 4, 1, 3, 0, 2, 9, 1, 8,
+       2, 4, 1, 0, 7, 5, 6, 0, 7, 1, 1, 5, 7, 1, 1, 6, 5, 6, 2, 2, 3, 9,
+       7, 5, 3, 1, 5, 9, 9, 2, 5, 1, 6, 8, 2, 2, 4, 2, 1, 0, 6, 1, 2, 9,
+       7, 5, 3, 5, 6, 1, 8, 8])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num = sum(res == y_test)</span><br><span class="line">num</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>354</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'accuracy '</span>, num / len(y_test))</span><br></pre></td></tr></table></figure>
+
+<pre><code>accuracy  0.9833333333333333</code></pre><h4 id="使用sklearn中封装的计算精确度的方法"><a href="#使用sklearn中封装的计算精确度的方法" class="headerlink" title="使用sklearn中封装的计算精确度的方法"></a>使用sklearn中封装的计算精确度的方法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score <span class="keyword">as</span> accuracy</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">accuracy(res, y_test)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>0.9833333333333333</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/05/17/mlsec/KNN-%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E6%95%B0%E6%8D%AE%E9%9B%86/" data-id="ckaat5bo70000vaojc0re40jq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mlsec/KNN-鸢尾花数据集" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/05/17/mlsec/KNN-%E9%B8%A2%E5%B0%BE%E8%8A%B1%E6%95%B0%E6%8D%AE%E9%9B%86/" class="article-date">
+  <time datetime="2020-05-17T08:36:25.969Z" itemprop="datePublished">2020-05-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/05/17/mlsec/KNN-%E9%B8%A2%E5%B0%BE%E8%8A%B1%E6%95%B0%E6%8D%AE%E9%9B%86/">mlsec/KNN-鸢尾花数据集</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="KNN-鸢尾花数据集"><a href="#KNN-鸢尾花数据集" class="headerlink" title="KNN-鸢尾花数据集"></a>KNN-鸢尾花数据集</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用sklearn本地数据集中的鸢尾花数据集"><a href="#使用sklearn本地数据集中的鸢尾花数据集" class="headerlink" title="使用sklearn本地数据集中的鸢尾花数据集"></a>使用sklearn本地数据集中的鸢尾花数据集</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iris = datasets.load_iris()</span><br><span class="line">iris.keys()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>dict_keys([&apos;data&apos;, &apos;target&apos;, &apos;target_names&apos;, &apos;DESCR&apos;, &apos;feature_names&apos;, &apos;filename&apos;])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X = iris.data</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Y = iris.target</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X.shape</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>(150, 4)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Y.shape</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>(150,)</code></pre><h1 id="手动分离测试数据"><a href="#手动分离测试数据" class="headerlink" title="手动分离测试数据"></a>手动分离测试数据</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">shuffled_indexes = np.random.permutation(len(X))</span><br><span class="line">shuffled_indexes</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([ 47,  10, 144,  57, 135,  58,  36, 136,  73, 109,  64,  15, 104,
+       143, 108,  83,  23, 126, 125, 131, 137,  22,  16,  29, 118,  31,
+        33,  52,  32, 132,  45,  38,  78, 139,  30,  37,  61,  97, 122,
+        56, 107,  66, 114,  87,  43,  76,  84,  79, 142,  70,  77,  42,
+         7, 138, 141, 120, 129,  44,  24,  53, 116,  13,  91, 119,  93,
+         6,  60,  50,  67,  20,  54,  71,  89,  68,  21, 133, 148,  81,
+        25,  48, 130, 127,  28,  90,  82, 146, 100, 105,  80,  94,  14,
+        55, 111, 106, 101, 103,  35,  99,   3,  26,  69, 124,  95,  96,
+       140,  46,  19,  34,  75,  59,   1, 117, 121,  49, 110,   0, 115,
+        72,   9,  18, 149,  40, 145,  92, 123,  51,   4,  11,  39,  85,
+        62, 147, 102,  74,   2,  86,   8,  17,   5,  27, 112, 128,  12,
+        65,  41, 134,  63,  88, 113,  98])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">test_ratio = <span class="number">0.2</span></span><br><span class="line">test_size = int(len(X) * test_ratio)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">test_indexes = shuffled_indexes[:test_size]</span><br><span class="line">train_indexes = shuffled_indexes[test_size:]</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">X_train = X[train_indexes]</span><br><span class="line">Y_train = Y[train_indexes]</span><br><span class="line"></span><br><span class="line">X_test = X[test_indexes]</span><br><span class="line">Y_test = Y[test_indexes]</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(X_train.shape);print(Y_train.shape);print(X_test.shape);print(Y_test.shape)</span><br></pre></td></tr></table></figure>
+
+<pre><code>(120, 4)
+(120,)
+(30, 4)
+(30,)</code></pre><h1 id="使用sklearn分离"><a href="#使用sklearn分离" class="headerlink" title="使用sklearn分离"></a>使用sklearn分离</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">train_test_split?</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>[0;31mSignature:[0m [0mtrain_test_split[0m[0;34m([0m[0;34m*[0m[0marrays[0m[0;34m,[0m [0;34m**[0m[0moptions[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;31mDocstring:[0m
+Split arrays or matrices into random train and test subsets
+
+Quick utility that wraps input validation and
+``next(ShuffleSplit().split(X, y))`` and application to input data
+into a single call for splitting (and optionally subsampling) data in a
+oneliner.
+
+Read more in the :ref:`User Guide &lt;cross_validation&gt;`.
+
+Parameters
+----------
+*arrays : sequence of indexables with same length / shape[0]
+    Allowed inputs are lists, numpy arrays, scipy-sparse
+    matrices or pandas dataframes.
+
+test_size : float, int or None, optional (default=None)
+    If float, should be between 0.0 and 1.0 and represent the proportion
+    of the dataset to include in the test split. If int, represents the
+    absolute number of test samples. If None, the value is set to the
+    complement of the train size. If ``train_size`` is also None, it will
+    be set to 0.25.
+
+train_size : float, int, or None, (default=None)
+    If float, should be between 0.0 and 1.0 and represent the
+    proportion of the dataset to include in the train split. If
+    int, represents the absolute number of train samples. If None,
+    the value is automatically set to the complement of the test size.
+
+random_state : int, RandomState instance or None, optional (default=None)
+    If int, random_state is the seed used by the random number generator;
+    If RandomState instance, random_state is the random number generator;
+    If None, the random number generator is the RandomState instance used
+    by `np.random`.
+
+shuffle : boolean, optional (default=True)
+    Whether or not to shuffle the data before splitting. If shuffle=False
+    then stratify must be None.
+
+stratify : array-like or None (default=None)
+    If not None, data is split in a stratified fashion, using this as
+    the class labels.
+
+Returns
+-------
+splitting : list, length=2 * len(arrays)
+    List containing train-test split of inputs.
+
+    .. versionadded:: 0.16
+        If the input is sparse, the output will be a
+        ``scipy.sparse.csr_matrix``. Else, output type is the same as the
+        input type.
+
+Examples
+--------
+&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; from sklearn.model_selection import train_test_split
+&gt;&gt;&gt; X, y = np.arange(10).reshape((5, 2)), range(5)
+&gt;&gt;&gt; X
+array([[0, 1],
+       [2, 3],
+       [4, 5],
+       [6, 7],
+       [8, 9]])
+&gt;&gt;&gt; list(y)
+[0, 1, 2, 3, 4]
+
+&gt;&gt;&gt; X_train, X_test, y_train, y_test = train_test_split(
+...     X, y, test_size=0.33, random_state=42)
+...
+&gt;&gt;&gt; X_train
+array([[4, 5],
+       [0, 1],
+       [6, 7]])
+&gt;&gt;&gt; y_train
+[2, 0, 3]
+&gt;&gt;&gt; X_test
+array([[2, 3],
+       [8, 9]])
+&gt;&gt;&gt; y_test
+[1, 4]
+
+&gt;&gt;&gt; train_test_split(y, shuffle=False)
+[[0, 1, 2], [3, 4]]
+[0;31mFile:[0m      /Applications/anaconda3/lib/python3.7/site-packages/sklearn/model_selection/_split.py
+[0;31mType:[0m      function</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=<span class="number">0.2</span>, random_state=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">print(X_train.shape)</span><br><span class="line">print(Y_train.shape)</span><br><span class="line">print(X_test.shape)</span><br><span class="line">print(Y_test.shape)</span><br></pre></td></tr></table></figure>
+
+<pre><code>(120, 4)
+(120,)
+(30, 4)
+(30,)</code></pre><h1 id="使用sklearn中的KNN分离器测试"><a href="#使用sklearn中的KNN分离器测试" class="headerlink" title="使用sklearn中的KNN分离器测试"></a>使用sklearn中的KNN分离器测试</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br><span class="line">KNeighborsClassifier?</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>[0;31mInit signature:[0m
+[0mKNeighborsClassifier[0m[0;34m([0m[0;34m[0m
+[0;34m[0m    [0mn_neighbors[0m[0;34m=[0m[0;36m5[0m[0;34m,[0m[0;34m[0m
+[0;34m[0m    [0mweights[0m[0;34m=[0m[0;34m&apos;uniform&apos;[0m[0;34m,[0m[0;34m[0m
+[0;34m[0m    [0malgorithm[0m[0;34m=[0m[0;34m&apos;auto&apos;[0m[0;34m,[0m[0;34m[0m
+[0;34m[0m    [0mleaf_size[0m[0;34m=[0m[0;36m30[0m[0;34m,[0m[0;34m[0m
+[0;34m[0m    [0mp[0m[0;34m=[0m[0;36m2[0m[0;34m,[0m[0;34m[0m
+[0;34m[0m    [0mmetric[0m[0;34m=[0m[0;34m&apos;minkowski&apos;[0m[0;34m,[0m[0;34m[0m
+[0;34m[0m    [0mmetric_params[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m[0;34m[0m
+[0;34m[0m    [0mn_jobs[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m[0;34m[0m
+[0;34m[0m    [0;34m**[0m[0mkwargs[0m[0;34m,[0m[0;34m[0m
+[0;34m[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;31mDocstring:[0m     
+Classifier implementing the k-nearest neighbors vote.
+
+Read more in the :ref:`User Guide &lt;classification&gt;`.
+
+Parameters
+----------
+n_neighbors : int, optional (default = 5)
+    Number of neighbors to use by default for :meth:`kneighbors` queries.
+
+weights : str or callable, optional (default = &apos;uniform&apos;)
+    weight function used in prediction.  Possible values:
+
+    - &apos;uniform&apos; : uniform weights.  All points in each neighborhood
+      are weighted equally.
+    - &apos;distance&apos; : weight points by the inverse of their distance.
+      in this case, closer neighbors of a query point will have a
+      greater influence than neighbors which are further away.
+    - [callable] : a user-defined function which accepts an
+      array of distances, and returns an array of the same shape
+      containing the weights.
+
+algorithm : {&apos;auto&apos;, &apos;ball_tree&apos;, &apos;kd_tree&apos;, &apos;brute&apos;}, optional
+    Algorithm used to compute the nearest neighbors:
+
+    - &apos;ball_tree&apos; will use :class:`BallTree`
+    - &apos;kd_tree&apos; will use :class:`KDTree`
+    - &apos;brute&apos; will use a brute-force search.
+    - &apos;auto&apos; will attempt to decide the most appropriate algorithm
+      based on the values passed to :meth:`fit` method.
+
+    Note: fitting on sparse input will override the setting of
+    this parameter, using brute force.
+
+leaf_size : int, optional (default = 30)
+    Leaf size passed to BallTree or KDTree.  This can affect the
+    speed of the construction and query, as well as the memory
+    required to store the tree.  The optimal value depends on the
+    nature of the problem.
+
+p : integer, optional (default = 2)
+    Power parameter for the Minkowski metric. When p = 1, this is
+    equivalent to using manhattan_distance (l1), and euclidean_distance
+    (l2) for p = 2. For arbitrary p, minkowski_distance (l_p) is used.
+
+metric : string or callable, default &apos;minkowski&apos;
+    the distance metric to use for the tree.  The default metric is
+    minkowski, and with p=2 is equivalent to the standard Euclidean
+    metric. See the documentation of the DistanceMetric class for a
+    list of available metrics.
+    If metric is &quot;precomputed&quot;, X is assumed to be a distance matrix and
+    must be square during fit. X may be a :term:`Glossary &lt;sparse graph&gt;`,
+    in which case only &quot;nonzero&quot; elements may be considered neighbors.
+
+metric_params : dict, optional (default = None)
+    Additional keyword arguments for the metric function.
+
+n_jobs : int or None, optional (default=None)
+    The number of parallel jobs to run for neighbors search.
+    ``None`` means 1 unless in a :obj:`joblib.parallel_backend` context.
+    ``-1`` means using all processors. See :term:`Glossary &lt;n_jobs&gt;`
+    for more details.
+    Doesn&apos;t affect :meth:`fit` method.
+
+Attributes
+----------
+classes_ : array of shape (n_classes,)
+    Class labels known to the classifier
+
+effective_metric_ : string or callble
+    The distance metric used. It will be same as the `metric` parameter
+    or a synonym of it, e.g. &apos;euclidean&apos; if the `metric` parameter set to
+    &apos;minkowski&apos; and `p` parameter set to 2.
+
+effective_metric_params_ : dict
+    Additional keyword arguments for the metric function. For most metrics
+    will be same with `metric_params` parameter, but may also contain the
+    `p` parameter value if the `effective_metric_` attribute is set to
+    &apos;minkowski&apos;.
+
+outputs_2d_ : bool
+    False when `y`&apos;s shape is (n_samples, ) or (n_samples, 1) during fit
+    otherwise True.
+
+Examples
+--------
+&gt;&gt;&gt; X = [[0], [1], [2], [3]]
+&gt;&gt;&gt; y = [0, 0, 1, 1]
+&gt;&gt;&gt; from sklearn.neighbors import KNeighborsClassifier
+&gt;&gt;&gt; neigh = KNeighborsClassifier(n_neighbors=3)
+&gt;&gt;&gt; neigh.fit(X, y)
+KNeighborsClassifier(...)
+&gt;&gt;&gt; print(neigh.predict([[1.1]]))
+[0]
+&gt;&gt;&gt; print(neigh.predict_proba([[0.9]]))
+[[0.66666667 0.33333333]]
+
+See also
+--------
+RadiusNeighborsClassifier
+KNeighborsRegressor
+RadiusNeighborsRegressor
+NearestNeighbors
+
+Notes
+-----
+See :ref:`Nearest Neighbors &lt;neighbors&gt;` in the online documentation
+for a discussion of the choice of ``algorithm`` and ``leaf_size``.
+
+.. warning::
+
+   Regarding the Nearest Neighbors algorithms, if it is found that two
+   neighbors, neighbor `k+1` and `k`, have identical distances
+   but different labels, the results will depend on the ordering of the
+   training data.
+
+https://en.wikipedia.org/wiki/K-nearest_neighbor_algorithm
+[0;31mFile:[0m           /Applications/anaconda3/lib/python3.7/site-packages/sklearn/neighbors/_classification.py
+[0;31mType:[0m           ABCMeta
+[0;31mSubclasses:[0m     </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">KNNClf = KNeighborsClassifier(n_neighbors=<span class="number">3</span>)</span><br><span class="line">KNNClf.fit(X_train, Y_train)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>KNeighborsClassifier(algorithm=&apos;auto&apos;, leaf_size=30, metric=&apos;minkowski&apos;,
+                     metric_params=None, n_jobs=None, n_neighbors=3, p=2,
+                     weights=&apos;uniform&apos;)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">res = KNNClf.predict(X_test)</span><br><span class="line">res</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([0, 1, 1, 0, 2, 1, 2, 0, 0, 2, 1, 0, 2, 1, 1, 0, 1, 1, 0, 0, 1, 1,
+       1, 0, 2, 1, 0, 0, 1, 2])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Y_test</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([0, 1, 1, 0, 2, 1, 2, 0, 0, 2, 1, 0, 2, 1, 1, 0, 1, 1, 0, 0, 1, 1,
+       1, 0, 2, 1, 0, 0, 1, 2])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acc = sum(res == Y_test)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'accuracy '</span>, acc / len(Y_test))</span><br></pre></td></tr></table></figure>
+
+<pre><code>accuracy  1.0</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/05/17/mlsec/KNN-%E9%B8%A2%E5%B0%BE%E8%8A%B1%E6%95%B0%E6%8D%AE%E9%9B%86/" data-id="ckaat5boe0002vaojg8iybnjo" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-mlsec/KNN-手动实现" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/05/17/mlsec/KNN-%E6%89%8B%E5%8A%A8%E5%AE%9E%E7%8E%B0/" class="article-date">
@@ -3630,94 +4204,6 @@ dtype: object</code></pre><p><code>apply()</code> 方法也可以应用函数至
 
 
   
-    <article id="post-algorithm/[DP]MSM" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/04/28/algorithm/%5BDP%5DMSM/" class="article-date">
-  <time datetime="2020-04-28T13:22:24.685Z" itemprop="datePublished">2020-04-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/04/28/algorithm/%5BDP%5DMSM/">algorithm/[DP]MSM</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="矩阵连乘-Multiplying-a-sequence-of-matrices"><a href="#矩阵连乘-Multiplying-a-sequence-of-matrices" class="headerlink" title="矩阵连乘 (Multiplying a sequence of matrices)"></a>矩阵连乘 (Multiplying a sequence of matrices)</h1><p>我们想从两个以上矩阵连乘的式子中得到最佳的次序，使得计算时乘法运算最少。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DynamicProgramming</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> N = <span class="number">5</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span>[][] C = <span class="keyword">new</span> <span class="keyword">int</span>[N][N];</span><br><span class="line">		<span class="keyword">int</span>[][] S = <span class="keyword">new</span> <span class="keyword">int</span>[N][N];</span><br><span class="line">		<span class="keyword">int</span>[] r = &#123;<span class="number">4</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;<span class="comment">// 初始化 最小乘运算数组</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">				C[i][j] = <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;<span class="comment">// 初始化 分割位置</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">				S[i][j] = <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> p = <span class="number">2</span>; p &lt;= N; p++) &#123;<span class="comment">// P 为间隔</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, j; i &lt; N - p + <span class="number">1</span>; i++) &#123;<span class="comment">// i 为起始值</span></span><br><span class="line">				j = i + p - <span class="number">1</span>;<span class="comment">// j 为终止值</span></span><br><span class="line">				C[i][j] = C[i][i] + C[i + <span class="number">1</span>][j] + r[i] * r[i + <span class="number">1</span>] * r[j + <span class="number">1</span>];<span class="comment">// 赋 C[i][j] 的初值方便下文比较取得最小值</span></span><br><span class="line">				S[i][j] = i;</span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> k = i; k&lt; j; k++) &#123;<span class="comment">// k 为中间分割值 </span></span><br><span class="line">					<span class="keyword">int</span> temp = C[i][k] + C[k + <span class="number">1</span>][j] + r[i] * r[k + <span class="number">1</span>] * r[j + <span class="number">1</span>];</span><br><span class="line">					</span><br><span class="line">					<span class="keyword">if</span> (temp &lt; C[i][j]) &#123;<span class="comment">// 取得每次分割后的最小值</span></span><br><span class="line">						C[i][j] = temp;</span><br><span class="line">						S[i][j] = k;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">				System.out.print(C[i][j] + <span class="string">"\t"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		System.out.println();</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">				<span class="keyword">if</span> (j &gt; i) System.out.print(S[i][j] + <span class="number">1</span> + <span class="string">"\t"</span>);</span><br><span class="line">				<span class="keyword">else</span> System.out.print(<span class="number">0</span> + <span class="string">"\t"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* result</span></span><br><span class="line"><span class="comment">0	60	132	180	252	</span></span><br><span class="line"><span class="comment">0	0	90	132	207	</span></span><br><span class="line"><span class="comment">0	0	0	72	132	</span></span><br><span class="line"><span class="comment">0	0	0	0	120	</span></span><br><span class="line"><span class="comment">0	0	0	0	0	</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">0	1	2	2	2	</span></span><br><span class="line"><span class="comment">0	0	2	2	2	</span></span><br><span class="line"><span class="comment">0	0	0	3	4	</span></span><br><span class="line"><span class="comment">0	0	0	0	4	</span></span><br><span class="line"><span class="comment">0	0	0	0	0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">(A1 * A2) * ((A3 * A4) * A5)</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/04/28/algorithm/[DP]MSM/" data-id="ck9k4jk4z000098ojhezxhldm" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-algorithm/[DP]LCS" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/04/26/algorithm/%5BDP%5DLCS/" class="article-date">
-  <time datetime="2020-04-26T13:48:21.868Z" itemprop="datePublished">2020-04-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/04/26/algorithm/%5BDP%5DLCS/">algorithm/[DP]LCS</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="最长公共子序列-Longest-Common-Subsequence"><a href="#最长公共子序列-Longest-Common-Subsequence" class="headerlink" title="最长公共子序列 (Longest Common Subsequence)"></a>最长公共子序列 (Longest Common Subsequence)</h1><p>给定两个字符串 text1 和 text2，返回这两个字符串的最长公共子序列的长度。</p>
-<p>一个字符串的 子序列 是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。<br>例如，”ace” 是 “abcde” 的子序列，但 “aec” 不是 “abcde” 的子序列。两个字符串的「公共子序列」是这两个字符串所共同拥有的子序列。</p>
-<p>若这两个字符串没有公共子序列，则返回 0。</p>
-<p>示例:</p>
-<p>输入：text1 = “abcde”, text2 = “ace”<br>输出：3<br>解释：最长公共子序列是 “ace”，它的长度为 3。  </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DynamicProgramming</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		String A = <span class="string">"xzyzzyx"</span>;</span><br><span class="line">		String B = <span class="string">"zxyyzxz"</span>;</span><br><span class="line">		String res = <span class="string">""</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[A.length() + <span class="number">1</span>][B.length() + <span class="number">1</span>];</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= A.length(); i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= B.length(); j++) &#123;</span><br><span class="line">				<span class="keyword">if</span> (i == <span class="number">0</span> || j == <span class="number">0</span>) &#123;</span><br><span class="line">					dp[i][j] = <span class="number">0</span>;</span><br><span class="line">					<span class="keyword">continue</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				</span><br><span class="line">				<span class="keyword">if</span> (A.charAt(i - <span class="number">1</span>) == B.charAt(j - <span class="number">1</span>)) &#123;</span><br><span class="line">					dp[i][j] = dp[i - <span class="number">1</span>][j - <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">					<span class="keyword">continue</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				</span><br><span class="line">				<span class="keyword">if</span> (A.charAt(i - <span class="number">1</span>) != B.charAt(j - <span class="number">1</span>)) &#123;</span><br><span class="line">					dp[i][j] = Math.max(dp[i - <span class="number">1</span>][j], dp[i][j - <span class="number">1</span>]);</span><br><span class="line">					<span class="keyword">continue</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> row = A.length();</span><br><span class="line">		<span class="keyword">int</span> col = B.length();</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span> (row &gt; <span class="number">0</span> &amp;&amp; col &gt; <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (dp[row - <span class="number">1</span>][col - <span class="number">1</span>] &lt; dp[row][col]) &#123;</span><br><span class="line">				res = res + A.charAt(row - <span class="number">1</span>);</span><br><span class="line">				row--; col--;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				row--;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		System.out.println(<span class="string">"DP matrix is below: "</span>);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= A.length(); i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= B.length(); j++) &#123;</span><br><span class="line">				System.out.print(dp[i][j] + <span class="string">" "</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		System.out.print(<span class="string">"One of th LCS is: "</span>);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = res.length() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">			System.out.print(res.charAt(i));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* result</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">DP matrix is below: </span></span><br><span class="line"><span class="comment">0 0 0 0 0 0 0 0 </span></span><br><span class="line"><span class="comment">0 0 1 1 1 1 1 1 </span></span><br><span class="line"><span class="comment">0 1 1 1 1 2 2 2 </span></span><br><span class="line"><span class="comment">0 1 1 2 2 2 2 2 </span></span><br><span class="line"><span class="comment">0 1 1 2 2 3 3 3 </span></span><br><span class="line"><span class="comment">0 1 1 2 2 3 3 4 </span></span><br><span class="line"><span class="comment">0 1 1 2 3 3 3 4 </span></span><br><span class="line"><span class="comment">0 1 2 2 3 3 4 4 </span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">One of th LCS is: xyzx</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<p>典型的动态规划问题</p>
-<p>首先声明一个以字符串A为行B为列的二维数组。</p>
-<ul>
-<li>当<code>i=0</code>或<code>j=0</code>时<code>dp[i][j]=0</code></li>
-<li>当<code>ai=bi</code>时<code>dp[i][j]=dp[i-1][j-1]</code>(对应位置相等的话公共子串在<code>row-1</code>,<code>col-1</code>的情况下加1.)</li>
-<li>当<code>ai!=bi</code>时<code>dp[i][j]=max{dp[i-1][j], dp[i][j-1]}</code>(不想等则取字符串A,B上一个相邻字符最长公共子串.)</li>
-</ul>
-<p>最后显示一个最长子串时必须<strong>从后向前</strong>判断，顺序判断出的可能不是最长的子串。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/04/26/algorithm/[DP]LCS/" data-id="ck9h7ridu00001mojhs51fhc8" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -3741,7 +4227,7 @@ dtype: object</code></pre><p><code>apply()</code> 方法也可以应用函数至
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a></li></ul>
     </div>
   </div>
 
@@ -3754,6 +4240,14 @@ dtype: object</code></pre><p><code>apply()</code> 方法也可以应用函数至
       <ul>
         
           <li>
+            <a href="/blog/2020/09/15/notebook/docker-lineloss/">notebook/docker-lineloss</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/09/13/paper/AttentionIsAllYouNeed/">paper/AttentionIsAllYouNeed</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/08/16/notebook/Authentication&Authorization/">notebook/Authentication&amp;Authorization</a>
           </li>
         
@@ -3763,14 +4257,6 @@ dtype: object</code></pre><p><code>apply()</code> 方法也可以应用函数至
         
           <li>
             <a href="/blog/2020/07/26/nlp/week-2/">nlp/week-2</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/07/26/notebook/docker-nextcloud/">notebook/docker-nextcloud</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/07/14/nlp/week-1/">nlp/week-1</a>
           </li>
         
       </ul>

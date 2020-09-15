@@ -68,6 +68,107 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-notebook/docker-lineloss" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/09/15/notebook/docker-lineloss/" class="article-date">
+  <time datetime="2020-09-15T04:11:47.114Z" itemprop="datePublished">2020-09-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/09/15/notebook/docker-lineloss/">notebook/docker-lineloss</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Docker-部署-Lineloss"><a href="#Docker-部署-Lineloss" class="headerlink" title="Docker 部署 Lineloss"></a>Docker 部署 Lineloss</h1><h2 id="拉取redhat镜像"><a href="#拉取redhat镜像" class="headerlink" title="拉取redhat镜像"></a>拉取redhat镜像</h2><p><code>docker pull yjjy0921/redhat7.2</code></p>
+<h2 id="进入镜像换yum源"><a href="#进入镜像换yum源" class="headerlink" title="进入镜像换yum源"></a>进入镜像换yum源</h2><ul>
+<li>rpm安装wget(docker cp host.path cotainer:container.path)</li>
+<li>wget下载yum相关包</li>
+<li>rpm安装下载的相关包</li>
+</ul>
+<p><strong>报错：</strong><br>python-urlgrabber &gt;= 3.10-8 is needed by yum-3.4.3-167.el7.centos.noarch<br>rpm &gt;= 0:4.11.3-22 is needed by yum-3.4.3-167.el7.centos.noarch</p>
+<p>查询存在的python-urlgrabber包<br><code>rpm -q python-urlgrabber</code></p>
+<p>删除python-urlgrabber包<br><code>rpm -e python-urlgrabber</code></p>
+<p>更新rpm包<br><code>rpm -Uvh rpm-4.11.3-43.el7.x86_64.rpm --nodeps</code></p>
+<h2 id="创建aliyun-repo"><a href="#创建aliyun-repo" class="headerlink" title="创建aliyun.repo"></a>创建aliyun.repo</h2><p><code>cd /etc/yum.repo.d/</code><br><code>vim aliyun.repo</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[base]</span><br><span class="line">name&#x3D;CentOS-$releasever - Base</span><br><span class="line">baseurl&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;centos&#x2F;7.8.2003&#x2F;os&#x2F;$basearch&#x2F;</span><br><span class="line">gpgcheck&#x3D;1</span><br><span class="line">gpgkey&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;centos&#x2F;7.8.2003&#x2F;os&#x2F;x86_64&#x2F;RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#released updates</span><br><span class="line">[updates]</span><br><span class="line">name&#x3D;CentOS-$releasever - Updates</span><br><span class="line">baseurl&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;centos&#x2F;7.8.2003&#x2F;updates&#x2F;$basearch&#x2F;</span><br><span class="line">gpgcheck&#x3D;1</span><br><span class="line">gpgkey&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;centos&#x2F;7.8.2003&#x2F;os&#x2F;x86_64&#x2F;RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[extras]</span><br><span class="line">name&#x3D;CentOS-$releasever - Extras</span><br><span class="line">baseurl&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;centos&#x2F;7.8.2003&#x2F;extras&#x2F;&#x2F;$basearch&#x2F;</span><br><span class="line">gpgcheck&#x3D;1</span><br><span class="line">gpgkey&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;centos&#x2F;7.8.2003&#x2F;os&#x2F;x86_64&#x2F;RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line">[centosplus]</span><br><span class="line">name&#x3D;CentOS-$releasever - Plus</span><br><span class="line">baseurl&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;centos&#x2F;7.8.2003&#x2F;centosplus&#x2F;&#x2F;$basearch&#x2F;</span><br><span class="line">gpgcheck&#x3D;1</span><br><span class="line">enabled&#x3D;0</span><br></pre></td></tr></table></figure>
+
+<p>清除redhat.repo<br><code>mv redhat.repo redhat.temp</code></p>
+<p>检验yum配置成功<br><code>yum update -y --skip-broken</code></p>
+<p>安装mariadb<br><code>yum install</code></p>
+<h2 id="复制文件"><a href="#复制文件" class="headerlink" title="复制文件"></a>复制文件</h2><p>容器内新建文件夹<br><code>mkdir /home/xs_project/java</code><br><code>mkdir /home/xs_project/python</code><br><code>mkdir /home/xs_project/sql</code></p>
+<p>将文件复制到容器内<br><code>cp RuoYi.jar containerID:/home/xs_project/java</code><br><code>cp LineLoss.zip containerID:/home/xs_project/python</code><br><code>cp lineloss.sql containerID:/home/xs_project/sql</code></p>
+<h2 id="容器提交成镜像"><a href="#容器提交成镜像" class="headerlink" title="容器提交成镜像"></a>容器提交成镜像</h2><p><code>docker commit -a &quot;userid&quot; -m &quot;comment&quot; containerID imageName:tag</code></p>
+<h2 id="镜像上传仓库"><a href="#镜像上传仓库" class="headerlink" title="镜像上传仓库"></a>镜像上传仓库</h2><p><code>docker push userName/imageName</code></p>
+<p><strong>注意</strong></p>
+<p>tag命令修改为规范的镜像名<br><code>docker tag lineloss:latest edlison/lineloss</code></p>
+<p>push到用户仓库<br><code>docker push edlison/lineloss</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/09/15/notebook/docker-lineloss/" data-id="ckf3hvm1t0000mwojfov2dxlc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-paper/AttentionIsAllYouNeed" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/09/13/paper/AttentionIsAllYouNeed/" class="article-date">
+  <time datetime="2020-09-13T12:32:41.635Z" itemprop="datePublished">2020-09-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/09/13/paper/AttentionIsAllYouNeed/">paper/AttentionIsAllYouNeed</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Attention-Is-All-You-Need"><a href="#Attention-Is-All-You-Need" class="headerlink" title="Attention Is All You Need"></a>Attention Is All You Need</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>我们提出一种全新的简洁的网络架构–Transfomer，它完全基于Attention机制，舍弃了循环与卷积。</p>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 Introduction"></a>1 Introduction</h2><p>Transformer的并行性很好的解决了RNN模型的序列化输入输出。</p>
+<h2 id="2-Background"><a href="#2-Background" class="headerlink" title="2 Background"></a>2 Background</h2><h2 id="3-Model-Architecture"><a href="#3-Model-Architecture" class="headerlink" title="3 Model Architecture"></a>3 Model Architecture</h2><p>大部分序列神经网络模型都具有encoder-decoder结构。</p>
+<h3 id="3-1-Encoder-and-Decoder-Stacks"><a href="#3-1-Encoder-and-Decoder-Stacks" class="headerlink" title="3.1 Encoder and Decoder Stacks"></a>3.1 Encoder and Decoder Stacks</h3><p>encoder由6个相同的层构成，每一层有两个子层。第一个是一个多Attention机制，第二个是一个简单的全连接feed-forward网络。两个子层中间部署一个参差网络，后接一个正则化。</p>
+<p>decoder也是由6个相同的层构成。除了两个子层外中间还加入了一个第三子层Multi-head Attention.</p>
+<h3 id="3-2-Attention"><a href="#3-2-Attention" class="headerlink" title="3.2 Attention"></a>3.2 Attention</h3><p>Attention 是一个Query和一个key-value</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/09/13/paper/AttentionIsAllYouNeed/" data-id="ckf3hvm1y0001mwojhyqlfqah" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-notebook/Authentication&amp;Authorization" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/08/16/notebook/Authentication&Authorization/" class="article-date">
@@ -681,580 +782,6 @@
 
 
   
-    <article id="post-mlsec/KNN-手写体数字数据集" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/05/17/mlsec/KNN-%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E6%95%B0%E6%8D%AE%E9%9B%86/" class="article-date">
-  <time datetime="2020-05-17T08:37:20.000Z" itemprop="datePublished">2020-05-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/05/17/mlsec/KNN-%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E6%95%B0%E6%8D%AE%E9%9B%86/">mlsec/KNN-手写体数字数据集</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="KNN-手写体数字数据集"><a href="#KNN-手写体数字数据集" class="headerlink" title="KNN-手写体数字数据集"></a>KNN-手写体数字数据集</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">digits = datasets.load_digits()</span><br><span class="line">X = digits.data</span><br><span class="line">X.shape</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>(1797, 64)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y = digits.target</span><br><span class="line">y.shape</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>(1797,)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">one = X[<span class="number">100</span>]</span><br><span class="line">one = one.reshape(<span class="number">8</span>, <span class="number">8</span>)</span><br><span class="line">one</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>array([[ 0.,  0.,  0.,  2., 13.,  0.,  0.,  0.],
-       [ 0.,  0.,  0.,  8., 15.,  0.,  0.,  0.],
-       [ 0.,  0.,  5., 16.,  5.,  2.,  0.,  0.],
-       [ 0.,  0., 15., 12.,  1., 16.,  4.,  0.],
-       [ 0.,  4., 16.,  2.,  9., 16.,  8.,  0.],
-       [ 0.,  0., 10., 14., 16., 16.,  4.,  0.],
-       [ 0.,  0.,  0.,  0., 13.,  8.,  0.,  0.],
-       [ 0.,  0.,  0.,  0., 13.,  6.,  0.,  0.]])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.imshow(one)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>&lt;matplotlib.image.AxesImage at 0x1a203a9ad0&gt;</code></pre><p><img src="data/output_5_1.png" alt="png"></p>
-<h1 id="分离训练测试集"><a href="#分离训练测试集" class="headerlink" title="分离训练测试集"></a>分离训练测试集</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">train_test_split?</span><br></pre></td></tr></table></figure>
-
-
-<pre><code>[0;31mSignature:[0m [0mtrain_test_split[0m[0;34m([0m[0;34m*[0m[0marrays[0m[0;34m,[0m [0;34m**[0m[0moptions[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;31mDocstring:[0m
-Split arrays or matrices into random train and test subsets
-
-Quick utility that wraps input validation and
-``next(ShuffleSplit().split(X, y))`` and application to input data
-into a single call for splitting (and optionally subsampling) data in a
-oneliner.
-
-Read more in the :ref:`User Guide &lt;cross_validation&gt;`.
-
-Parameters
-----------
-*arrays : sequence of indexables with same length / shape[0]
-    Allowed inputs are lists, numpy arrays, scipy-sparse
-    matrices or pandas dataframes.
-
-test_size : float, int or None, optional (default=None)
-    If float, should be between 0.0 and 1.0 and represent the proportion
-    of the dataset to include in the test split. If int, represents the
-    absolute number of test samples. If None, the value is set to the
-    complement of the train size. If ``train_size`` is also None, it will
-    be set to 0.25.
-
-train_size : float, int, or None, (default=None)
-    If float, should be between 0.0 and 1.0 and represent the
-    proportion of the dataset to include in the train split. If
-    int, represents the absolute number of train samples. If None,
-    the value is automatically set to the complement of the test size.
-
-random_state : int, RandomState instance or None, optional (default=None)
-    If int, random_state is the seed used by the random number generator;
-    If RandomState instance, random_state is the random number generator;
-    If None, the random number generator is the RandomState instance used
-    by `np.random`.
-
-shuffle : boolean, optional (default=True)
-    Whether or not to shuffle the data before splitting. If shuffle=False
-    then stratify must be None.
-
-stratify : array-like or None (default=None)
-    If not None, data is split in a stratified fashion, using this as
-    the class labels.
-
-Returns
--------
-splitting : list, length=2 * len(arrays)
-    List containing train-test split of inputs.
-
-    .. versionadded:: 0.16
-        If the input is sparse, the output will be a
-        ``scipy.sparse.csr_matrix``. Else, output type is the same as the
-        input type.
-
-Examples
---------
-&gt;&gt;&gt; import numpy as np
-&gt;&gt;&gt; from sklearn.model_selection import train_test_split
-&gt;&gt;&gt; X, y = np.arange(10).reshape((5, 2)), range(5)
-&gt;&gt;&gt; X
-array([[0, 1],
-       [2, 3],
-       [4, 5],
-       [6, 7],
-       [8, 9]])
-&gt;&gt;&gt; list(y)
-[0, 1, 2, 3, 4]
-
-&gt;&gt;&gt; X_train, X_test, y_train, y_test = train_test_split(
-...     X, y, test_size=0.33, random_state=42)
-...
-&gt;&gt;&gt; X_train
-array([[4, 5],
-       [0, 1],
-       [6, 7]])
-&gt;&gt;&gt; y_train
-[2, 0, 3]
-&gt;&gt;&gt; X_test
-array([[2, 3],
-       [8, 9]])
-&gt;&gt;&gt; y_test
-[1, 4]
-
-&gt;&gt;&gt; train_test_split(y, shuffle=False)
-[[0, 1, 2], [3, 4]]
-[0;31mFile:[0m      /Applications/anaconda3/lib/python3.7/site-packages/sklearn/model_selection/_split.py
-[0;31mType:[0m      function</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.2</span>)</span><br><span class="line">print(X_train.shape)</span><br><span class="line">print(y_train.shape)</span><br><span class="line">print(X_test.shape)</span><br><span class="line">print(y_test.shape)</span><br></pre></td></tr></table></figure>
-
-<pre><code>(1437, 64)
-(1437,)
-(360, 64)
-(360,)</code></pre><h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KNNClf = KNeighborsClassifier(n_neighbors=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KNNClf.fit(X_train, y_train)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>KNeighborsClassifier(algorithm=&apos;auto&apos;, leaf_size=30, metric=&apos;minkowski&apos;,
-                     metric_params=None, n_jobs=None, n_neighbors=3, p=2,
-                     weights=&apos;uniform&apos;)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">res = KNNClf.predict(X_test)</span><br><span class="line">res</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>array([3, 4, 8, 5, 5, 7, 0, 3, 1, 4, 7, 5, 5, 8, 0, 7, 4, 7, 1, 7, 9, 4,
-       4, 7, 6, 1, 2, 9, 1, 3, 3, 3, 7, 0, 7, 0, 2, 8, 9, 1, 1, 5, 4, 8,
-       9, 0, 4, 9, 4, 9, 7, 2, 7, 3, 3, 4, 1, 9, 9, 9, 0, 4, 0, 6, 1, 0,
-       0, 3, 6, 2, 3, 2, 8, 5, 9, 3, 1, 1, 6, 9, 8, 1, 2, 3, 2, 6, 8, 8,
-       4, 6, 8, 6, 3, 9, 2, 8, 3, 6, 5, 7, 1, 7, 3, 8, 8, 8, 0, 0, 9, 1,
-       9, 8, 5, 1, 1, 0, 1, 6, 5, 1, 7, 6, 5, 7, 7, 2, 2, 7, 3, 1, 9, 5,
-       9, 5, 5, 3, 8, 4, 9, 5, 4, 6, 0, 5, 4, 8, 6, 1, 2, 8, 0, 9, 0, 9,
-       7, 9, 7, 0, 2, 8, 2, 4, 0, 6, 2, 6, 7, 5, 6, 3, 8, 8, 0, 3, 2, 0,
-       6, 1, 0, 6, 0, 5, 9, 3, 3, 0, 4, 0, 4, 2, 4, 9, 0, 6, 7, 4, 6, 5,
-       9, 7, 2, 2, 3, 3, 0, 3, 9, 4, 9, 8, 5, 6, 9, 0, 1, 3, 5, 0, 5, 1,
-       6, 4, 6, 6, 6, 7, 9, 1, 0, 7, 6, 6, 7, 8, 0, 3, 8, 5, 6, 8, 1, 3,
-       0, 3, 6, 0, 3, 5, 6, 7, 0, 6, 9, 7, 0, 0, 2, 1, 6, 6, 9, 1, 6, 9,
-       8, 7, 0, 2, 5, 1, 8, 6, 4, 3, 8, 2, 9, 2, 8, 4, 6, 4, 8, 9, 3, 1,
-       1, 5, 0, 7, 8, 2, 3, 8, 4, 7, 7, 7, 7, 9, 4, 1, 7, 0, 2, 9, 1, 8,
-       2, 4, 1, 0, 7, 5, 6, 0, 7, 1, 1, 5, 7, 1, 1, 6, 5, 6, 2, 2, 3, 9,
-       7, 5, 3, 1, 5, 9, 9, 2, 5, 1, 6, 8, 2, 2, 4, 2, 1, 0, 6, 1, 2, 9,
-       7, 5, 3, 5, 6, 1, 8, 1])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y_test</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>array([3, 4, 8, 5, 5, 7, 0, 3, 1, 4, 7, 5, 5, 8, 0, 7, 4, 7, 1, 7, 9, 4,
-       4, 7, 6, 1, 2, 9, 1, 3, 3, 3, 7, 0, 7, 0, 2, 8, 9, 1, 1, 5, 4, 8,
-       9, 0, 4, 9, 4, 9, 7, 2, 7, 8, 3, 4, 1, 9, 9, 9, 0, 4, 0, 6, 1, 0,
-       0, 3, 6, 2, 3, 2, 8, 5, 9, 3, 1, 1, 6, 9, 8, 1, 2, 3, 2, 6, 8, 8,
-       4, 6, 8, 6, 3, 9, 2, 8, 3, 6, 5, 7, 1, 7, 9, 8, 8, 8, 0, 0, 9, 1,
-       4, 8, 5, 1, 1, 0, 1, 6, 5, 1, 7, 6, 5, 7, 7, 2, 2, 7, 3, 1, 9, 5,
-       9, 5, 5, 3, 8, 4, 9, 5, 4, 6, 0, 5, 4, 8, 6, 1, 2, 8, 0, 9, 0, 9,
-       7, 9, 7, 0, 2, 8, 2, 4, 0, 6, 2, 6, 7, 5, 6, 3, 8, 8, 0, 3, 2, 0,
-       6, 1, 0, 6, 0, 5, 9, 3, 3, 0, 4, 0, 4, 2, 4, 9, 0, 6, 7, 4, 6, 5,
-       9, 7, 2, 2, 3, 3, 0, 3, 9, 4, 9, 8, 5, 6, 9, 0, 1, 3, 5, 0, 5, 1,
-       6, 4, 6, 6, 6, 7, 9, 1, 0, 7, 6, 6, 7, 8, 0, 3, 8, 5, 6, 8, 1, 3,
-       0, 3, 6, 0, 3, 5, 6, 7, 0, 6, 9, 7, 0, 0, 2, 1, 6, 6, 9, 1, 6, 9,
-       8, 7, 0, 2, 5, 1, 8, 6, 4, 3, 8, 2, 9, 2, 8, 4, 6, 4, 8, 9, 3, 1,
-       1, 5, 0, 7, 8, 2, 3, 8, 4, 7, 7, 7, 7, 7, 4, 1, 3, 0, 2, 9, 1, 8,
-       2, 4, 1, 0, 7, 5, 6, 0, 7, 1, 1, 5, 7, 1, 1, 6, 5, 6, 2, 2, 3, 9,
-       7, 5, 3, 1, 5, 9, 9, 2, 5, 1, 6, 8, 2, 2, 4, 2, 1, 0, 6, 1, 2, 9,
-       7, 5, 3, 5, 6, 1, 8, 8])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num = sum(res == y_test)</span><br><span class="line">num</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>354</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'accuracy '</span>, num / len(y_test))</span><br></pre></td></tr></table></figure>
-
-<pre><code>accuracy  0.9833333333333333</code></pre><h4 id="使用sklearn中封装的计算精确度的方法"><a href="#使用sklearn中封装的计算精确度的方法" class="headerlink" title="使用sklearn中封装的计算精确度的方法"></a>使用sklearn中封装的计算精确度的方法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score <span class="keyword">as</span> accuracy</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">accuracy(res, y_test)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>0.9833333333333333</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/05/17/mlsec/KNN-%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E6%95%B0%E6%8D%AE%E9%9B%86/" data-id="ckaat5bo70000vaojc0re40jq" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-mlsec/KNN-鸢尾花数据集" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/05/17/mlsec/KNN-%E9%B8%A2%E5%B0%BE%E8%8A%B1%E6%95%B0%E6%8D%AE%E9%9B%86/" class="article-date">
-  <time datetime="2020-05-17T08:36:25.969Z" itemprop="datePublished">2020-05-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/05/17/mlsec/KNN-%E9%B8%A2%E5%B0%BE%E8%8A%B1%E6%95%B0%E6%8D%AE%E9%9B%86/">mlsec/KNN-鸢尾花数据集</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="KNN-鸢尾花数据集"><a href="#KNN-鸢尾花数据集" class="headerlink" title="KNN-鸢尾花数据集"></a>KNN-鸢尾花数据集</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br></pre></td></tr></table></figure>
-
-<h4 id="使用sklearn本地数据集中的鸢尾花数据集"><a href="#使用sklearn本地数据集中的鸢尾花数据集" class="headerlink" title="使用sklearn本地数据集中的鸢尾花数据集"></a>使用sklearn本地数据集中的鸢尾花数据集</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iris = datasets.load_iris()</span><br><span class="line">iris.keys()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>dict_keys([&apos;data&apos;, &apos;target&apos;, &apos;target_names&apos;, &apos;DESCR&apos;, &apos;feature_names&apos;, &apos;filename&apos;])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X = iris.data</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Y = iris.target</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X.shape</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>(150, 4)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Y.shape</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>(150,)</code></pre><h1 id="手动分离测试数据"><a href="#手动分离测试数据" class="headerlink" title="手动分离测试数据"></a>手动分离测试数据</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">shuffled_indexes = np.random.permutation(len(X))</span><br><span class="line">shuffled_indexes</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>array([ 47,  10, 144,  57, 135,  58,  36, 136,  73, 109,  64,  15, 104,
-       143, 108,  83,  23, 126, 125, 131, 137,  22,  16,  29, 118,  31,
-        33,  52,  32, 132,  45,  38,  78, 139,  30,  37,  61,  97, 122,
-        56, 107,  66, 114,  87,  43,  76,  84,  79, 142,  70,  77,  42,
-         7, 138, 141, 120, 129,  44,  24,  53, 116,  13,  91, 119,  93,
-         6,  60,  50,  67,  20,  54,  71,  89,  68,  21, 133, 148,  81,
-        25,  48, 130, 127,  28,  90,  82, 146, 100, 105,  80,  94,  14,
-        55, 111, 106, 101, 103,  35,  99,   3,  26,  69, 124,  95,  96,
-       140,  46,  19,  34,  75,  59,   1, 117, 121,  49, 110,   0, 115,
-        72,   9,  18, 149,  40, 145,  92, 123,  51,   4,  11,  39,  85,
-        62, 147, 102,  74,   2,  86,   8,  17,   5,  27, 112, 128,  12,
-        65,  41, 134,  63,  88, 113,  98])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">test_ratio = <span class="number">0.2</span></span><br><span class="line">test_size = int(len(X) * test_ratio)</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">test_indexes = shuffled_indexes[:test_size]</span><br><span class="line">train_indexes = shuffled_indexes[test_size:]</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">X_train = X[train_indexes]</span><br><span class="line">Y_train = Y[train_indexes]</span><br><span class="line"></span><br><span class="line">X_test = X[test_indexes]</span><br><span class="line">Y_test = Y[test_indexes]</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(X_train.shape);print(Y_train.shape);print(X_test.shape);print(Y_test.shape)</span><br></pre></td></tr></table></figure>
-
-<pre><code>(120, 4)
-(120,)
-(30, 4)
-(30,)</code></pre><h1 id="使用sklearn分离"><a href="#使用sklearn分离" class="headerlink" title="使用sklearn分离"></a>使用sklearn分离</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">train_test_split?</span><br></pre></td></tr></table></figure>
-
-
-<pre><code>[0;31mSignature:[0m [0mtrain_test_split[0m[0;34m([0m[0;34m*[0m[0marrays[0m[0;34m,[0m [0;34m**[0m[0moptions[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;31mDocstring:[0m
-Split arrays or matrices into random train and test subsets
-
-Quick utility that wraps input validation and
-``next(ShuffleSplit().split(X, y))`` and application to input data
-into a single call for splitting (and optionally subsampling) data in a
-oneliner.
-
-Read more in the :ref:`User Guide &lt;cross_validation&gt;`.
-
-Parameters
-----------
-*arrays : sequence of indexables with same length / shape[0]
-    Allowed inputs are lists, numpy arrays, scipy-sparse
-    matrices or pandas dataframes.
-
-test_size : float, int or None, optional (default=None)
-    If float, should be between 0.0 and 1.0 and represent the proportion
-    of the dataset to include in the test split. If int, represents the
-    absolute number of test samples. If None, the value is set to the
-    complement of the train size. If ``train_size`` is also None, it will
-    be set to 0.25.
-
-train_size : float, int, or None, (default=None)
-    If float, should be between 0.0 and 1.0 and represent the
-    proportion of the dataset to include in the train split. If
-    int, represents the absolute number of train samples. If None,
-    the value is automatically set to the complement of the test size.
-
-random_state : int, RandomState instance or None, optional (default=None)
-    If int, random_state is the seed used by the random number generator;
-    If RandomState instance, random_state is the random number generator;
-    If None, the random number generator is the RandomState instance used
-    by `np.random`.
-
-shuffle : boolean, optional (default=True)
-    Whether or not to shuffle the data before splitting. If shuffle=False
-    then stratify must be None.
-
-stratify : array-like or None (default=None)
-    If not None, data is split in a stratified fashion, using this as
-    the class labels.
-
-Returns
--------
-splitting : list, length=2 * len(arrays)
-    List containing train-test split of inputs.
-
-    .. versionadded:: 0.16
-        If the input is sparse, the output will be a
-        ``scipy.sparse.csr_matrix``. Else, output type is the same as the
-        input type.
-
-Examples
---------
-&gt;&gt;&gt; import numpy as np
-&gt;&gt;&gt; from sklearn.model_selection import train_test_split
-&gt;&gt;&gt; X, y = np.arange(10).reshape((5, 2)), range(5)
-&gt;&gt;&gt; X
-array([[0, 1],
-       [2, 3],
-       [4, 5],
-       [6, 7],
-       [8, 9]])
-&gt;&gt;&gt; list(y)
-[0, 1, 2, 3, 4]
-
-&gt;&gt;&gt; X_train, X_test, y_train, y_test = train_test_split(
-...     X, y, test_size=0.33, random_state=42)
-...
-&gt;&gt;&gt; X_train
-array([[4, 5],
-       [0, 1],
-       [6, 7]])
-&gt;&gt;&gt; y_train
-[2, 0, 3]
-&gt;&gt;&gt; X_test
-array([[2, 3],
-       [8, 9]])
-&gt;&gt;&gt; y_test
-[1, 4]
-
-&gt;&gt;&gt; train_test_split(y, shuffle=False)
-[[0, 1, 2], [3, 4]]
-[0;31mFile:[0m      /Applications/anaconda3/lib/python3.7/site-packages/sklearn/model_selection/_split.py
-[0;31mType:[0m      function</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=<span class="number">0.2</span>, random_state=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">print(X_train.shape)</span><br><span class="line">print(Y_train.shape)</span><br><span class="line">print(X_test.shape)</span><br><span class="line">print(Y_test.shape)</span><br></pre></td></tr></table></figure>
-
-<pre><code>(120, 4)
-(120,)
-(30, 4)
-(30,)</code></pre><h1 id="使用sklearn中的KNN分离器测试"><a href="#使用sklearn中的KNN分离器测试" class="headerlink" title="使用sklearn中的KNN分离器测试"></a>使用sklearn中的KNN分离器测试</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br><span class="line">KNeighborsClassifier?</span><br></pre></td></tr></table></figure>
-
-
-<pre><code>[0;31mInit signature:[0m
-[0mKNeighborsClassifier[0m[0;34m([0m[0;34m[0m
-[0;34m[0m    [0mn_neighbors[0m[0;34m=[0m[0;36m5[0m[0;34m,[0m[0;34m[0m
-[0;34m[0m    [0mweights[0m[0;34m=[0m[0;34m&apos;uniform&apos;[0m[0;34m,[0m[0;34m[0m
-[0;34m[0m    [0malgorithm[0m[0;34m=[0m[0;34m&apos;auto&apos;[0m[0;34m,[0m[0;34m[0m
-[0;34m[0m    [0mleaf_size[0m[0;34m=[0m[0;36m30[0m[0;34m,[0m[0;34m[0m
-[0;34m[0m    [0mp[0m[0;34m=[0m[0;36m2[0m[0;34m,[0m[0;34m[0m
-[0;34m[0m    [0mmetric[0m[0;34m=[0m[0;34m&apos;minkowski&apos;[0m[0;34m,[0m[0;34m[0m
-[0;34m[0m    [0mmetric_params[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m[0;34m[0m
-[0;34m[0m    [0mn_jobs[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m[0;34m[0m
-[0;34m[0m    [0;34m**[0m[0mkwargs[0m[0;34m,[0m[0;34m[0m
-[0;34m[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;31mDocstring:[0m     
-Classifier implementing the k-nearest neighbors vote.
-
-Read more in the :ref:`User Guide &lt;classification&gt;`.
-
-Parameters
-----------
-n_neighbors : int, optional (default = 5)
-    Number of neighbors to use by default for :meth:`kneighbors` queries.
-
-weights : str or callable, optional (default = &apos;uniform&apos;)
-    weight function used in prediction.  Possible values:
-
-    - &apos;uniform&apos; : uniform weights.  All points in each neighborhood
-      are weighted equally.
-    - &apos;distance&apos; : weight points by the inverse of their distance.
-      in this case, closer neighbors of a query point will have a
-      greater influence than neighbors which are further away.
-    - [callable] : a user-defined function which accepts an
-      array of distances, and returns an array of the same shape
-      containing the weights.
-
-algorithm : {&apos;auto&apos;, &apos;ball_tree&apos;, &apos;kd_tree&apos;, &apos;brute&apos;}, optional
-    Algorithm used to compute the nearest neighbors:
-
-    - &apos;ball_tree&apos; will use :class:`BallTree`
-    - &apos;kd_tree&apos; will use :class:`KDTree`
-    - &apos;brute&apos; will use a brute-force search.
-    - &apos;auto&apos; will attempt to decide the most appropriate algorithm
-      based on the values passed to :meth:`fit` method.
-
-    Note: fitting on sparse input will override the setting of
-    this parameter, using brute force.
-
-leaf_size : int, optional (default = 30)
-    Leaf size passed to BallTree or KDTree.  This can affect the
-    speed of the construction and query, as well as the memory
-    required to store the tree.  The optimal value depends on the
-    nature of the problem.
-
-p : integer, optional (default = 2)
-    Power parameter for the Minkowski metric. When p = 1, this is
-    equivalent to using manhattan_distance (l1), and euclidean_distance
-    (l2) for p = 2. For arbitrary p, minkowski_distance (l_p) is used.
-
-metric : string or callable, default &apos;minkowski&apos;
-    the distance metric to use for the tree.  The default metric is
-    minkowski, and with p=2 is equivalent to the standard Euclidean
-    metric. See the documentation of the DistanceMetric class for a
-    list of available metrics.
-    If metric is &quot;precomputed&quot;, X is assumed to be a distance matrix and
-    must be square during fit. X may be a :term:`Glossary &lt;sparse graph&gt;`,
-    in which case only &quot;nonzero&quot; elements may be considered neighbors.
-
-metric_params : dict, optional (default = None)
-    Additional keyword arguments for the metric function.
-
-n_jobs : int or None, optional (default=None)
-    The number of parallel jobs to run for neighbors search.
-    ``None`` means 1 unless in a :obj:`joblib.parallel_backend` context.
-    ``-1`` means using all processors. See :term:`Glossary &lt;n_jobs&gt;`
-    for more details.
-    Doesn&apos;t affect :meth:`fit` method.
-
-Attributes
-----------
-classes_ : array of shape (n_classes,)
-    Class labels known to the classifier
-
-effective_metric_ : string or callble
-    The distance metric used. It will be same as the `metric` parameter
-    or a synonym of it, e.g. &apos;euclidean&apos; if the `metric` parameter set to
-    &apos;minkowski&apos; and `p` parameter set to 2.
-
-effective_metric_params_ : dict
-    Additional keyword arguments for the metric function. For most metrics
-    will be same with `metric_params` parameter, but may also contain the
-    `p` parameter value if the `effective_metric_` attribute is set to
-    &apos;minkowski&apos;.
-
-outputs_2d_ : bool
-    False when `y`&apos;s shape is (n_samples, ) or (n_samples, 1) during fit
-    otherwise True.
-
-Examples
---------
-&gt;&gt;&gt; X = [[0], [1], [2], [3]]
-&gt;&gt;&gt; y = [0, 0, 1, 1]
-&gt;&gt;&gt; from sklearn.neighbors import KNeighborsClassifier
-&gt;&gt;&gt; neigh = KNeighborsClassifier(n_neighbors=3)
-&gt;&gt;&gt; neigh.fit(X, y)
-KNeighborsClassifier(...)
-&gt;&gt;&gt; print(neigh.predict([[1.1]]))
-[0]
-&gt;&gt;&gt; print(neigh.predict_proba([[0.9]]))
-[[0.66666667 0.33333333]]
-
-See also
---------
-RadiusNeighborsClassifier
-KNeighborsRegressor
-RadiusNeighborsRegressor
-NearestNeighbors
-
-Notes
------
-See :ref:`Nearest Neighbors &lt;neighbors&gt;` in the online documentation
-for a discussion of the choice of ``algorithm`` and ``leaf_size``.
-
-.. warning::
-
-   Regarding the Nearest Neighbors algorithms, if it is found that two
-   neighbors, neighbor `k+1` and `k`, have identical distances
-   but different labels, the results will depend on the ordering of the
-   training data.
-
-https://en.wikipedia.org/wiki/K-nearest_neighbor_algorithm
-[0;31mFile:[0m           /Applications/anaconda3/lib/python3.7/site-packages/sklearn/neighbors/_classification.py
-[0;31mType:[0m           ABCMeta
-[0;31mSubclasses:[0m     </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">KNNClf = KNeighborsClassifier(n_neighbors=<span class="number">3</span>)</span><br><span class="line">KNNClf.fit(X_train, Y_train)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>KNeighborsClassifier(algorithm=&apos;auto&apos;, leaf_size=30, metric=&apos;minkowski&apos;,
-                     metric_params=None, n_jobs=None, n_neighbors=3, p=2,
-                     weights=&apos;uniform&apos;)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">res = KNNClf.predict(X_test)</span><br><span class="line">res</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>array([0, 1, 1, 0, 2, 1, 2, 0, 0, 2, 1, 0, 2, 1, 1, 0, 1, 1, 0, 0, 1, 1,
-       1, 0, 2, 1, 0, 0, 1, 2])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Y_test</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>array([0, 1, 1, 0, 2, 1, 2, 0, 0, 2, 1, 0, 2, 1, 1, 0, 1, 1, 0, 0, 1, 1,
-       1, 0, 2, 1, 0, 0, 1, 2])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acc = sum(res == Y_test)</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'accuracy '</span>, acc / len(Y_test))</span><br></pre></td></tr></table></figure>
-
-<pre><code>accuracy  1.0</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/05/17/mlsec/KNN-%E9%B8%A2%E5%B0%BE%E8%8A%B1%E6%95%B0%E6%8D%AE%E9%9B%86/" data-id="ckaat5boe0002vaojg8iybnjo" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -1278,7 +805,7 @@ https://en.wikipedia.org/wiki/K-nearest_neighbor_algorithm
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a></li></ul>
     </div>
   </div>
 
@@ -1291,6 +818,14 @@ https://en.wikipedia.org/wiki/K-nearest_neighbor_algorithm
       <ul>
         
           <li>
+            <a href="/blog/2020/09/15/notebook/docker-lineloss/">notebook/docker-lineloss</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/09/13/paper/AttentionIsAllYouNeed/">paper/AttentionIsAllYouNeed</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/08/16/notebook/Authentication&Authorization/">notebook/Authentication&amp;Authorization</a>
           </li>
         
@@ -1300,14 +835,6 @@ https://en.wikipedia.org/wiki/K-nearest_neighbor_algorithm
         
           <li>
             <a href="/blog/2020/07/26/nlp/week-2/">nlp/week-2</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/07/26/notebook/docker-nextcloud/">notebook/docker-nextcloud</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/07/14/nlp/week-1/">nlp/week-1</a>
           </li>
         
       </ul>
