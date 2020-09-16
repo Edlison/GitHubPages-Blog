@@ -68,6 +68,48 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-notebook/implements-extends-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/09/16/notebook/implements-extends-2/" class="article-date">
+  <time datetime="2020-09-16T03:31:35.238Z" itemprop="datePublished">2020-09-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/09/16/notebook/implements-extends-2/">notebook/implements-extends-2</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Java中继承与实现的思考"><a href="#Java中继承与实现的思考" class="headerlink" title="Java中继承与实现的思考"></a>Java中继承与实现的思考</h1><p>继承(extend): 继承传达的意思是is-a, 比如Cat is an Animal.</p>
+<p>实现(Implement): 实现传达的意思是able一种能力, 比如Cat is swimmable.</p>
+<h2 id="extend"><a href="#extend" class="headerlink" title="extend"></a>extend</h2><p>比较灵活可以继承抽象类，也可以继承实体类。<br>抽象类可以定义非抽象方法与抽象方法，如果有抽象方法则子类必须继承，如果子类没有重写非抽象方法则子类的实例使用的是父类的方法。</p>
+<p><strong>多态</strong><br>如果实例化一个子类赋给一个父类(例: Animal cat = new Cat())， 则只能够使用父类中的field与method，如果method被子类重写则会调用子类的method。</p>
+<h2 id="implement"><a href="#implement" class="headerlink" title="implement"></a>implement</h2><p>比较严格，若实现则必须实现所有方法。<br>其中的field都是static final修饰的，且只能被实现的子类获取。method不能有body，但是如果static修饰则可以有body(怎么用？)。</p>
+<p><strong>多态</strong><br>如果实例化一个子类赋给一个接口(例: Swimmable cat = new Cat())，则只能够使用该接口的field并且无法获得field。<br>如果一个子类继承了一个实现了该接口的父类则可以重写方法，如果没有重写则(Swimmable cat = new Cat())中cat获取的方法则是父类中实现的方法。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/09/16/notebook/implements-extends-2/" data-id="ckf4vgmyv0000giojf19p23kp" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-notebook/docker-lineloss" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/09/15/notebook/docker-lineloss/" class="article-date">
@@ -758,51 +800,11 @@
 
 
   
-    <article id="post-notebook/docker-compose" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/05/28/notebook/docker-compose/" class="article-date">
-  <time datetime="2020-05-28T14:21:43.661Z" itemprop="datePublished">2020-05-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/05/28/notebook/docker-compose/">notebook/docker-compose</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker-Compose"></a>Docker-Compose</h1><h2 id="运行指令"><a href="#运行指令" class="headerlink" title="运行指令"></a>运行指令</h2><p><code>docker-compose</code>指令执行当前文件夹下docker-compose.yml文件</p>
-<p>项目运行<br><code>docker-compose up -d</code></p>
-<p>项目停止<br><code>docker-compose down</code></p>
-<h2 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h2><p>volumes声明过的名称才能用在镜像的volumes挂载<br>镜像中volumes挂载地址也可以使用相对路径</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/05/28/notebook/docker-compose/" data-id="ckar2gyvz0000x2oj620zb72r" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/7/">7</a><a class="extend next" rel="next" href="/blog/page/2/">下一页 &amp;raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/8/">8</a><a class="extend next" rel="next" href="/blog/page/2/">下一页 &amp;raquo;</a>
   </nav>
 
 </section>
@@ -834,6 +836,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/09/16/notebook/implements-extends-2/">notebook/implements-extends-2</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/09/15/notebook/docker-lineloss/">notebook/docker-lineloss</a>
           </li>
         
@@ -847,10 +853,6 @@
         
           <li>
             <a href="/blog/2020/08/02/nlp/word2vec/">nlp/word2vec</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/07/26/nlp/week-2/">nlp/week-2</a>
           </li>
         
       </ul>
