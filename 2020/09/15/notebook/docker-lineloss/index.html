@@ -7,15 +7,15 @@
   
   <title>notebook/docker-lineloss | Edlison</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Docker 部署 Lineloss拉取redhat镜像docker pull yjjy0921&#x2F;redhat7.2 进入镜像换yum源 rpm安装wget(docker cp host.path cotainer:container.path) wget下载yum相关包 rpm安装下载的相关包  报错：python-urlgrabber &gt;&#x3D; 3.10-8 is needed by yum">
+  <meta name="description" content="Docker 部署 Lineloss1 拉取redhat镜像docker pull yjjy0921&#x2F;redhat7.2 2 进入镜像换yum源 rpm安装wget(docker cp host.path cotainer:container.path) wget下载yum相关包 rpm安装下载的相关包  报错：python-urlgrabber &gt;&#x3D; 3.10-8 is needed by">
 <meta property="og:type" content="article">
 <meta property="og:title" content="notebook&#x2F;docker-lineloss">
 <meta property="og:url" content="http://edlison.com/blog/2020/09/15/notebook/docker-lineloss/index.html">
 <meta property="og:site_name" content="Edlison">
-<meta property="og:description" content="Docker 部署 Lineloss拉取redhat镜像docker pull yjjy0921&#x2F;redhat7.2 进入镜像换yum源 rpm安装wget(docker cp host.path cotainer:container.path) wget下载yum相关包 rpm安装下载的相关包  报错：python-urlgrabber &gt;&#x3D; 3.10-8 is needed by yum">
+<meta property="og:description" content="Docker 部署 Lineloss1 拉取redhat镜像docker pull yjjy0921&#x2F;redhat7.2 2 进入镜像换yum源 rpm安装wget(docker cp host.path cotainer:container.path) wget下载yum相关包 rpm安装下载的相关包  报错：python-urlgrabber &gt;&#x3D; 3.10-8 is needed by">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-09-15T04:11:47.114Z">
-<meta property="article:modified_time" content="2020-09-15T05:04:32.449Z">
+<meta property="article:modified_time" content="2020-09-16T02:24:01.263Z">
 <meta property="article:author" content="Bolin Shen">
 <meta name="twitter:card" content="summary">
   
@@ -92,23 +92,39 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Docker-部署-Lineloss"><a href="#Docker-部署-Lineloss" class="headerlink" title="Docker 部署 Lineloss"></a>Docker 部署 Lineloss</h1><h2 id="拉取redhat镜像"><a href="#拉取redhat镜像" class="headerlink" title="拉取redhat镜像"></a>拉取redhat镜像</h2><p><code>docker pull yjjy0921/redhat7.2</code></p>
-<h2 id="进入镜像换yum源"><a href="#进入镜像换yum源" class="headerlink" title="进入镜像换yum源"></a>进入镜像换yum源</h2><ul>
+        <h1 id="Docker-部署-Lineloss"><a href="#Docker-部署-Lineloss" class="headerlink" title="Docker 部署 Lineloss"></a>Docker 部署 Lineloss</h1><h2 id="1-拉取redhat镜像"><a href="#1-拉取redhat镜像" class="headerlink" title="1 拉取redhat镜像"></a>1 拉取redhat镜像</h2><p><code>docker pull yjjy0921/redhat7.2</code></p>
+<h2 id="2-进入镜像换yum源"><a href="#2-进入镜像换yum源" class="headerlink" title="2 进入镜像换yum源"></a>2 进入镜像换yum源</h2><ul>
 <li>rpm安装wget(docker cp host.path cotainer:container.path)</li>
 <li>wget下载yum相关包</li>
 <li>rpm安装下载的相关包</li>
 </ul>
 <p><strong>报错：</strong><br>python-urlgrabber &gt;= 3.10-8 is needed by yum-3.4.3-167.el7.centos.noarch<br>rpm &gt;= 0:4.11.3-22 is needed by yum-3.4.3-167.el7.centos.noarch</p>
-<p>查询存在的python-urlgrabber包<br><code>rpm -q python-urlgrabber</code></p>
+<p>查询存在的python-urlgrabber包<br><code>rpm -q python-urlgrabber</code>~~</p>
 <p>删除python-urlgrabber包<br><code>rpm -e python-urlgrabber</code></p>
 <p>更新rpm包<br><code>rpm -Uvh rpm-4.11.3-43.el7.x86_64.rpm --nodeps</code></p>
-<h2 id="创建aliyun-repo"><a href="#创建aliyun-repo" class="headerlink" title="创建aliyun.repo"></a>创建aliyun.repo</h2><p><code>cd /etc/yum.repo.d/</code><br><code>vim aliyun.repo</code></p>
+<h2 id="3-创建aliyun-repo"><a href="#3-创建aliyun-repo" class="headerlink" title="3 创建aliyun.repo"></a>3 创建aliyun.repo</h2><p><code>cd /etc/yum.repo.d/</code><br><code>vim aliyun.repo</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[base]</span><br><span class="line">name&#x3D;CentOS-$releasever - Base</span><br><span class="line">baseurl&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;centos&#x2F;7.8.2003&#x2F;os&#x2F;$basearch&#x2F;</span><br><span class="line">gpgcheck&#x3D;1</span><br><span class="line">gpgkey&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;centos&#x2F;7.8.2003&#x2F;os&#x2F;x86_64&#x2F;RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#released updates</span><br><span class="line">[updates]</span><br><span class="line">name&#x3D;CentOS-$releasever - Updates</span><br><span class="line">baseurl&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;centos&#x2F;7.8.2003&#x2F;updates&#x2F;$basearch&#x2F;</span><br><span class="line">gpgcheck&#x3D;1</span><br><span class="line">gpgkey&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;centos&#x2F;7.8.2003&#x2F;os&#x2F;x86_64&#x2F;RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[extras]</span><br><span class="line">name&#x3D;CentOS-$releasever - Extras</span><br><span class="line">baseurl&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;centos&#x2F;7.8.2003&#x2F;extras&#x2F;&#x2F;$basearch&#x2F;</span><br><span class="line">gpgcheck&#x3D;1</span><br><span class="line">gpgkey&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;centos&#x2F;7.8.2003&#x2F;os&#x2F;x86_64&#x2F;RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line">[centosplus]</span><br><span class="line">name&#x3D;CentOS-$releasever - Plus</span><br><span class="line">baseurl&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;centos&#x2F;7.8.2003&#x2F;centosplus&#x2F;&#x2F;$basearch&#x2F;</span><br><span class="line">gpgcheck&#x3D;1</span><br><span class="line">enabled&#x3D;0</span><br></pre></td></tr></table></figure>
 
 <p>清除redhat.repo<br><code>mv redhat.repo redhat.temp</code></p>
 <p>检验yum配置成功<br><code>yum update -y --skip-broken</code></p>
-<p>安装mariadb<br><code>yum install</code></p>
-<h2 id="复制文件"><a href="#复制文件" class="headerlink" title="复制文件"></a>复制文件</h2><p>容器内新建文件夹<br><code>mkdir /home/xs_project/java</code><br><code>mkdir /home/xs_project/python</code><br><code>mkdir /home/xs_project/sql</code></p>
+<h2 id="4-安装mariadb"><a href="#4-安装mariadb" class="headerlink" title="4 安装mariadb"></a>4 安装mariadb</h2><p>安装<br><code>yum install -y mysql</code></p>
+<p><strong>注意</strong><br>docker无法使用systemctl指令使mysql后台运行</p>
+<p>查看容器配置文件<br><code>docker inspect containerID</code></p>
+<p><em>修改已经运行的容器配置文件</em><br><code>/usr/lib/docker...</code></p>
+<p>运行镜像时需要<br><code>docker run --privileged --name=lineloss -d -it edlison/lineloss /usr/sbin/init</code></p>
+<p><code>--privileged</code>赋予额外权限<br><code>/usr/sbin/init</code>将cmd设置为这个 dbus服务就会运行</p>
+<p><code>systemctl start mariadb</code> 启动服务<br><code>systemctl enable mariadb</code> 设置开机启动<br><code>systemctl restart mariadb</code> 重新启动<br><code>systemctl stop mariadb.service</code> 停止MariaDB</p>
+<p>初始化数据库<br><code>mysql_secure_installation</code></p>
+<p>设置密码<br><code>mysqladmin -u root password &#39;newpassword&#39;</code></p>
+<p>导入数据<br><code>create database lineloss;</code><br><code>use lineloss;</code><br><code>source /home/xs_project/sql/lineloss.sql</code></p>
+<h2 id="5-Java环境"><a href="#5-Java环境" class="headerlink" title="5 Java环境"></a>5 Java环境</h2><p>安装Java<br><code>yum install java</code></p>
+<h2 id="6-Python环境"><a href="#6-Python环境" class="headerlink" title="6 Python环境"></a>6 Python环境</h2><p>安装python3<br><code>yum install python3</code></p>
+<p>安装依赖<br><code>pip3 install Flask</code><br><code>pip3 install flask_sqlalchemy</code><br><code>pip3 install pymysql</code><br><code>pip3 install numpy</code><br><code>pip3 install sklearn</code><br><code>pip3 install jieba</code><br><code>pip3 install pandas</code><br><code>pip3 install statsmodels</code></p>
+<h2 id="7-运行测试"><a href="#7-运行测试" class="headerlink" title="7 运行测试"></a>7 运行测试</h2><p>运行镜像<br><code>docker run --privileged --name=lineloss -d -p 18084:18084 -it edlison/lineloss /usr/sbin/init</code></p>
+<p>Java<br><code>cd /home/xs_project/java</code><br><code>java -jar RuoYi.jar</code></p>
+<p>Python<br><code>cd /home/xs_project/python/LineLoss</code><br><code>python3 service.py</code></p>
+<h2 id="8-Dockerfile"><a href="#8-Dockerfile" class="headerlink" title="8 Dockerfile"></a>8 Dockerfile</h2><p>只是构建镜像？？？不便于执行镜像内程序？？？</p>
+<h2 id="9-其他"><a href="#9-其他" class="headerlink" title="9 其他"></a>9 其他</h2><h2 id="复制文件"><a href="#复制文件" class="headerlink" title="复制文件"></a>复制文件</h2><p>容器内新建文件夹<br><code>mkdir /home/xs_project/java</code><br><code>mkdir /home/xs_project/python</code><br><code>mkdir /home/xs_project/sql</code></p>
 <p>将文件复制到容器内<br><code>cp RuoYi.jar containerID:/home/xs_project/java</code><br><code>cp LineLoss.zip containerID:/home/xs_project/python</code><br><code>cp lineloss.sql containerID:/home/xs_project/sql</code></p>
 <h2 id="容器提交成镜像"><a href="#容器提交成镜像" class="headerlink" title="容器提交成镜像"></a>容器提交成镜像</h2><p><code>docker commit -a &quot;userid&quot; -m &quot;comment&quot; containerID imageName:tag</code></p>
 <h2 id="镜像上传仓库"><a href="#镜像上传仓库" class="headerlink" title="镜像上传仓库"></a>镜像上传仓库</h2><p><code>docker push userName/imageName</code></p>
