@@ -68,6 +68,53 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-notebook/docker-chevereto" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/05/12/notebook/docker-chevereto/" class="article-date">
+  <time datetime="2020-05-11T16:42:22.347Z" itemprop="datePublished">2020-05-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/05/12/notebook/docker-chevereto/">notebook/docker-chevereto</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="使用Docker搭建图床"><a href="#使用Docker搭建图床" class="headerlink" title="使用Docker搭建图床"></a>使用Docker搭建图床</h1><p>安装容器编排工具Compose<br><code>pip3 install docker-compose</code></p>
+<p>pull镜像<br><code>docker pull mariadb:latest</code><br><code>docker pull nmtan/chevereto:latest</code>  </p>
+<p>使用Docker-Compose启动<br><code>mkdir cheverto/</code><br><code>cd cheverto</code><br><code>touch docker-compose.yaml</code></p>
+<p>docker-compose.yaml配置文件</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">db:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mariadb</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">database:/var/lib/mysql:rw</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">private</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">MYSQL_ROOT_PASSWORD:</span> <span class="string">chevereto_root</span></span><br><span class="line">      <span class="attr">MYSQL_DATABASE:</span> <span class="string">chevereto</span></span><br><span class="line">      <span class="attr">MYSQL_USER:</span> <span class="string">chevereto</span></span><br><span class="line">      <span class="attr">MYSQL_PASSWORD:</span> <span class="string">chevereto</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">chevereto:</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">db</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nmtan/chevereto</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">private</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">CHEVERETO_DB_HOST:</span> <span class="string">db</span></span><br><span class="line">      <span class="attr">CHEVERETO_DB_USERNAME:</span> <span class="string">chevereto</span></span><br><span class="line">      <span class="attr">CHEVERETO_DB_PASSWORD:</span> <span class="string">chevereto</span></span><br><span class="line">      <span class="attr">CHEVERETO_DB_NAME:</span> <span class="string">chevereto</span></span><br><span class="line">      <span class="attr">CHEVERETO_DB_PREFIX:</span> <span class="string">chv_</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">chevereto_images:/var/www/html/images:rw</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">chevereto_php_config:/usr/local/etc/php:rw</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">12000</span><span class="string">:80</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">private:</span></span><br><span class="line"><span class="attr">volumes:</span></span><br><span class="line">  <span class="attr">database:</span></span><br><span class="line">  <span class="attr">chevereto_images:</span></span><br><span class="line">  <span class="attr">chevereto_php_config:</span></span><br></pre></td></tr></table></figure>
+
+<p>对应挂载到当前文件夹中的php.ini文件(<strong>注意</strong> php.ini文件需要先创建 否则docker会自动创建同名文件夹)<br><code>- ./php.ini:/usr/local/etc/php/php.ini:rw</code></p>
+<p>php.ini</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">memory_limit</span> = <span class="number">256</span>M<span class="comment">;</span></span><br><span class="line"><span class="attr">upload_max_filesize</span> = <span class="number">100</span>M<span class="comment">;</span></span><br><span class="line"><span class="attr">post_max_size</span> = <span class="number">100</span>M<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<p>运行Docker-Compose<br><code>docker-compose up -d</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/05/12/notebook/docker-chevereto/" data-id="cka3bx7od0000cmoj3rt32a1i" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-notebook/docker-anaconda" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/05/11/notebook/docker-anaconda/" class="article-date">
@@ -540,43 +587,6 @@
 
 
   
-    <article id="post-test" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/04/03/test/" class="article-date">
-  <time datetime="2020-04-03T09:50:37.295Z" itemprop="datePublished">2020-04-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/04/03/test/">test</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h1><p>Just for test</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/04/03/test/" data-id="ck8lar4m40001mcoj2ju93krc" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -613,6 +623,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/09/18/paper/XLNet/">paper/XLNet</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/09/16/notebook/implements-extends-2/">notebook/implements-extends-2</a>
           </li>
         
@@ -621,15 +635,11 @@
           </li>
         
           <li>
-            <a href="/blog/2020/09/13/paper/AttentionIsAllYouNeed/">paper/AttentionIsAllYouNeed</a>
+            <a href="/blog/2020/09/13/paper/Attention/">paper/Attention</a>
           </li>
         
           <li>
             <a href="/blog/2020/08/16/notebook/Authentication&Authorization/">notebook/Authentication&amp;Authorization</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/08/02/nlp/word2vec/">nlp/word2vec</a>
           </li>
         
       </ul>
