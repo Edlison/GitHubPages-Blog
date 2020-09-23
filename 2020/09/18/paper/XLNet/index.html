@@ -15,12 +15,11 @@
 <meta property="og:description" content="XLNet Generalized Autoregressive Pretraining for Language UnderstandingAbstractBert基于去噪自编码器的预训练模型，性能优于自回归语言模型的预训练方法。而由于mask一部分输入，bert忽略了被mask位置之间的依赖关系。 XLNet基于此优缺点可以  通过最大化所有可能的因式分解顺序的对数似然，学习双向语境信息 用自">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190810224951812.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNzk0NzE1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190810224951812.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNzk0NzE1Ng==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190810225020688.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNzk0NzE1Ng==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://pic3.zhimg.com/80/v2-05d785e9d8f810d118e4fa93f8e9b39f_1440w.jpg">
 <meta property="og:image" content="https://picb.zhimg.com/80/v2-2bb1a60af4fe2fa751647fdce48e337c_1440w.jpg">
 <meta property="article:published_time" content="2020-09-18T09:33:11.939Z">
-<meta property="article:modified_time" content="2020-09-18T12:32:49.368Z">
+<meta property="article:modified_time" content="2020-09-18T16:58:28.103Z">
 <meta property="article:author" content="Bolin Shen">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190810224951812.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNzk0NzE1Ng==,size_16,color_FFFFFF,t_70">
@@ -108,8 +107,7 @@
 <p>作者从自回归(autoregressive)和自编码(autoencoding)两大范式分析了当前的预训练语言模型。</p>
 <h1 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1 介绍"></a>1 介绍</h1><h2 id="1-1-AutoRegression与AutoEncoding两大阵营"><a href="#1-1-AutoRegression与AutoEncoding两大阵营" class="headerlink" title="1.1 AutoRegression与AutoEncoding两大阵营"></a>1.1 AutoRegression与AutoEncoding两大阵营</h2><p>XLNet是一个类似BERT的模型，XLNet是一种通用的自回归预训练方法。</p>
 <h3 id="自回归-AutoRegression-语言模型"><a href="#自回归-AutoRegression-语言模型" class="headerlink" title="自回归(AutoRegression)语言模型"></a>自回归(AutoRegression)语言模型</h3><p>AR语言模型是一种使用上下文词来预测下一个词的模型，但是上下文单词被限制在两个方向，前向和后向。(例如：GPT，GPT-2)</p>
-<p><img src="https://img-blog.csdnimg.cn/20190810224951812.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNzk0NzE1Ng==,size_16,color_FFFFFF,t_70" alt="img-前向"></p>
-<p><img src="https://img-blog.csdnimg.cn/20190810224951812.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNzk0NzE1Ng==,size_16,color_FFFFFF,t_70" alt="img-后向"></p>
+<p><img src="https://img-blog.csdnimg.cn/20190810224951812.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNzk0NzE1Ng==,size_16,color_FFFFFF,t_70" alt="img-前向后向"></p>
 <p>AR语言模型擅长生成式NLP任务，生成上下文时总是前向的。</p>
 <p>但是AR只能使用前向上下文或后向上下文，这意味着它不能同时使用前向和后向上下文。</p>
 <h3 id="自编码-AutoEncoding-语言模型"><a href="#自编码-AutoEncoding-语言模型" class="headerlink" title="自编码(AutoEncoding)语言模型"></a>自编码(AutoEncoding)语言模型</h3><p>BERT被归类为自编码器语言模型。AE旨在从损坏的输入中重建原始数据。</p>
@@ -138,11 +136,11 @@
 <p>XLNet是用<strong>双流自注意力模型</strong>实现的。一个是内容流自注意力，其实就是标准的Transformer的计算过程，主要引入了Query流自注意力。其实就是用来替代[MASK]标记的，XLNet因为要抛弃[MASK]又不能看到x3的输入，于是Query流就直接忽略掉x3的输入，只保留这个位置信息，用参数w来代表位置的embedding编码。<strong>其实XLNet只是抛弃了[MASK]这个占位符号，内部还是引入Query流来忽略掉被MASK的这个单词。和BERT比只是实现方式不同而已</strong>。</p>
 <p><img src="https://picb.zhimg.com/80/v2-2bb1a60af4fe2fa751647fdce48e337c_1440w.jpg" alt="img-two-stream-attention"></p>
 <p>如图所示，输入序列仍是x1, x2, x3, x4，通过不同的掩码矩阵，让当前单词Xi只能看到被排列组合后的顺序x3-&gt;x2-&gt;x4-&gt;x1中自己前面的单词。</p>
-<h2 id="2-2-XLNet与BERT"><a href="#2-2-XLNet与BERT" class="headerlink" title="2.2 XLNet与BERT"></a>2.2 XLNet与BERT</h2><p>通过改造BERT预训练的过程，其实可以模拟XLNet的PLM过程。</p>
+<h2 id="2-3-XLNet与BERT"><a href="#2-3-XLNet与BERT" class="headerlink" title="2.3 XLNet与BERT"></a>2.3 XLNet与BERT</h2><p>通过改造BERT预训练的过程，其实可以模拟XLNet的PLM过程。</p>
 <p>第一种思路：Bert目前的做法是，给定输入句子X，随机Mask掉15%的单词，然后要求利用剩下的85%的单词去预测任意一个被Mask掉的单词。对于输入句子，随机选择X中的任意i个单词，只用这i个单词去预测被Mask的单词。这个过程理论上可以在Transformer内采用Attention Mask来实现，这样BERT的预训练模型就和XLNet基本等价了。</p>
 <p>第二种思路：假设仍使用BERT目前的Mask机制，将Mask 15%改为，每次一个句子只Mask掉一个单词，利用剩下的单词来预测被Mask掉的单词。因为XLNet在实现的时候，为了提升效率，其实是选择每个句子最后末尾的1/K个单词被预测，假设K=7，意味着一个句子X，只有末尾的1/7的单词会被预测。这样两者基本是等价的。</p>
 <p>XLNet维持了自回归(AR)语言模型的从左向右的模式，这个BERT做不到。明显的好处是，对于生成类的任务，能够在维持表面从左向右的生成过程前提下，模型里隐含了上下文的信息。XLNet貌似应该对于生成类型的NLP任务，会比BERT又明显优势。此外，XLNet还引入了Transformer XL机制，所以对于长文档输入类型的NLP任务，也会比BERT有明显优势。</p>
-<h2 id="2-4-总结"><a href="#2-4-总结" class="headerlink" title="2.4 总结"></a>2.4 总结</h2><p>Permutation Language Model是XLNet的主要理论创新，<strong>它开启了自回归(AR)语言模型如何引入下文的一个思路</strong>。</p>
+<h2 id="3-总结"><a href="#3-总结" class="headerlink" title="3 总结"></a>3 总结</h2><p>Permutation Language Model是XLNet的主要理论创新，<strong>它开启了自回归(AR)语言模型如何引入下文的一个思路</strong>。</p>
 <p>XLNet也相当于是BERT, GPT2.0, Transformer XL的综合体。</p>
 <ul>
 <li>通过Permutation LM 预训练目标，吸收了BERT的双向语言模型；</li>
@@ -159,7 +157,8 @@
 <p>Rreference</p>
 <p><a href="https://zhuanlan.zhihu.com/p/70257427" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/70257427</a></p>
 <p><a href="https://blog.csdn.net/weixin_37947156/article/details/93035607" target="_blank" rel="noopener">https://blog.csdn.net/weixin_37947156/article/details/93035607</a></p>
-<p>// AR AE LM 实现步骤？<br>// TODO AR模型前向后向因式分解顺序？<br>// TODO Transformer分割循环机制 相对编码范式？<br>// TODO BERT 预训练-微调两阶段模式(pretrain fine-tune) 抛弃mask使两阶段保持一致？ fine-tune阶段？<br>// TODO Transformer 较于 RNN？<br>// TODO encoding decoding？<br>// TODO denoising-autoencoder?<br>// TODO Transformer XL??</p>
+<p>// AR AE LM 实现步骤？<br>// TODO Transformer 较于 RNN？<br>// TODO encoding decoding？<br>// TODO denoising-autoencoder?  </p>
+<p>// TODO Transformer-XL 分割循环机制 相对编码范式??<br>// TODO BERT 预训练-微调两阶段模式(pretrain fine-tune) 抛弃mask使两阶段保持一致？ fine-tune阶段？<br>// TODO AR模型前向后向因式分解顺序？  </p>
 
       
     </div>
@@ -172,6 +171,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/blog/2020/09/18/paper/Attention-Transformer/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          paper/Attention-Transformer
+        
+      </div>
+    </a>
   
   
     <a href="/blog/2020/09/16/notebook/implements-extends-2/" id="article-nav-older" class="article-nav-link-wrap">
@@ -213,23 +221,23 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/09/23/nlp/BERT/">nlp/BERT</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/09/23/nlp/Transformer/">nlp/Transformer</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/09/18/paper/Attention-Transformer/">paper/Attention-Transformer</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/09/18/paper/XLNet/">paper/XLNet</a>
           </li>
         
           <li>
             <a href="/blog/2020/09/16/notebook/implements-extends-2/">notebook/implements-extends-2</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/09/15/notebook/docker-lineloss/">notebook/docker-lineloss</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/09/13/paper/Attention/">paper/Attention</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/08/16/notebook/Authentication&Authorization/">notebook/Authentication&amp;Authorization</a>
           </li>
         
       </ul>

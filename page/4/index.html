@@ -68,6 +68,211 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ml/lesson1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/04/15/ml/lesson1/" class="article-date">
+  <time datetime="2020-04-15T14:07:08.873Z" itemprop="datePublished">2020-04-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/04/15/ml/lesson1/">ml/lesson1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="波士顿房价预测"><a href="#波士顿房价预测" class="headerlink" title="波士顿房价预测"></a>波士顿房价预测</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">()</span>:</span></span><br><span class="line">    datafile = <span class="string">'./data/housing.data'</span></span><br><span class="line">    data = np.fromfile(datafile, sep=<span class="string">' '</span>)</span><br><span class="line"></span><br><span class="line">    feature_names = [<span class="string">'CRIM'</span>, <span class="string">'ZN'</span>, <span class="string">'INDUS'</span>, <span class="string">'CHAS'</span>, <span class="string">'NOX'</span>, <span class="string">'RM'</span>, <span class="string">'AGE'</span>, <span class="string">'DIS'</span>,</span><br><span class="line">                     <span class="string">'RAD'</span>, <span class="string">'TAX'</span>, <span class="string">'PTRATIO'</span>, <span class="string">'B'</span>, <span class="string">'LSTAT'</span>, <span class="string">'MEDV'</span>]</span><br><span class="line">    feature_num = len(feature_names)</span><br><span class="line">    data = data.reshape([data.shape[<span class="number">0</span>] // feature_num, feature_num])</span><br><span class="line"></span><br><span class="line">    ratio = <span class="number">0.8</span></span><br><span class="line">    offset = int(data.shape[<span class="number">0</span>] * ratio)</span><br><span class="line">    training_data = data[:offset]</span><br><span class="line"></span><br><span class="line">    maximums, minimums, avgs = training_data.max(axis=<span class="number">0</span>), training_data.min(axis=<span class="number">0</span>), training_data.sum(axis=<span class="number">0</span>) / \</span><br><span class="line">                               training_data.shape[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(feature_num):</span><br><span class="line">        data[:, i] = (data[:, i] - avgs[i]) / (maximums[i] - minimums[i])</span><br><span class="line"></span><br><span class="line">    training_data = data[:offset]</span><br><span class="line">    test_data = data[offset:]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> training_data, test_data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Network</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, num_of_weights)</span>:</span></span><br><span class="line">        <span class="comment"># 随机产生w的初始值</span></span><br><span class="line">        <span class="comment"># 为了保持程序每次运行结果的一致性，此处设置固定的随机数种子</span></span><br><span class="line">        np.random.seed(<span class="number">0</span>)</span><br><span class="line">        self.w = np.random.randn(num_of_weights, <span class="number">1</span>)</span><br><span class="line">        self.b = <span class="number">0.</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        z = np.dot(x, self.w) + self.b</span><br><span class="line">        <span class="keyword">return</span> z</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">loss</span><span class="params">(self, z, y)</span>:</span></span><br><span class="line">        error = z - y</span><br><span class="line">        cost = error * error</span><br><span class="line">        cost = np.mean(cost)</span><br><span class="line">        <span class="keyword">return</span> cost</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">gradient</span><span class="params">(self, x, y)</span>:</span></span><br><span class="line">        z = self.forward(x)</span><br><span class="line">        gradient_w = (z - y) * x</span><br><span class="line">        gradient_w = np.mean(gradient_w, axis=<span class="number">0</span>)</span><br><span class="line">        gradient_w = gradient_w[:, np.newaxis]</span><br><span class="line">        gradient_b = (z - y)</span><br><span class="line">        gradient_b = np.mean(gradient_b)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> gradient_w, gradient_b</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">update</span><span class="params">(self, gradient_w, gradient_b, eta=<span class="number">0.01</span>)</span>:</span></span><br><span class="line">        self.w = self.w - eta * gradient_w</span><br><span class="line">        self.b = self.b - eta * gradient_b</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, x, y, iterations=<span class="number">100</span>, eta=<span class="number">0.01</span>)</span>:</span></span><br><span class="line">        losses = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(iterations):</span><br><span class="line">            z = self.forward(x)</span><br><span class="line">            L = self.loss(z, y)</span><br><span class="line">            gradient_w, gradient_b = self.gradient(x, y)</span><br><span class="line">            self.update(gradient_w, gradient_b, eta)</span><br><span class="line">            losses.append(L)</span><br><span class="line">            <span class="keyword">if</span> (i + <span class="number">1</span>) % <span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">                print(<span class="string">'iter &#123;&#125;, loss &#123;&#125;'</span>.format(i, L))</span><br><span class="line">        <span class="keyword">return</span> losses</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取数据</span></span><br><span class="line">train_data, test_data = load_data()</span><br><span class="line">x = train_data[:, :<span class="number">-1</span>]</span><br><span class="line">y = train_data[:, <span class="number">-1</span>:]</span><br><span class="line"><span class="comment"># 创建网络</span></span><br><span class="line">net = Network(<span class="number">13</span>)</span><br><span class="line">num_iterations=<span class="number">1000</span></span><br><span class="line"><span class="comment"># 启动训练</span></span><br><span class="line">losses = net.train(x,y, iterations=num_iterations, eta=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 画出损失函数的变化趋势</span></span><br><span class="line">plot_x = np.arange(num_iterations)</span><br><span class="line">plot_y = np.array(losses)</span><br><span class="line">plt.plot(plot_x, plot_y)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NetworkOfSGD</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, num_of_weights)</span>:</span></span><br><span class="line">        <span class="comment"># 随机产生w的初始值</span></span><br><span class="line">        <span class="comment"># 为了保持程序每次运行结果的一致性，此处设置固定的随机数种子</span></span><br><span class="line">        <span class="comment"># np.random.seed(0)</span></span><br><span class="line">        self.w = np.random.randn(num_of_weights, <span class="number">1</span>)</span><br><span class="line">        self.b = <span class="number">0.</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        z = np.dot(x, self.w) + self.b</span><br><span class="line">        <span class="keyword">return</span> z</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">loss</span><span class="params">(self, z, y)</span>:</span></span><br><span class="line">        error = z - y</span><br><span class="line">        num_samples = error.shape[<span class="number">0</span>]</span><br><span class="line">        cost = error * error</span><br><span class="line">        cost = np.sum(cost) / num_samples</span><br><span class="line">        <span class="keyword">return</span> cost</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">gradient</span><span class="params">(self, x, y)</span>:</span></span><br><span class="line">        z = self.forward(x)</span><br><span class="line">        N = x.shape[<span class="number">0</span>]</span><br><span class="line">        gradient_w = <span class="number">1.</span> / N * np.sum((z - y) * x, axis=<span class="number">0</span>)</span><br><span class="line">        gradient_w = gradient_w[:, np.newaxis]</span><br><span class="line">        gradient_b = <span class="number">1.</span> / N * np.sum(z - y)</span><br><span class="line">        <span class="keyword">return</span> gradient_w, gradient_b</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">update</span><span class="params">(self, gradient_w, gradient_b, eta=<span class="number">0.01</span>)</span>:</span></span><br><span class="line">        self.w = self.w - eta * gradient_w</span><br><span class="line">        self.b = self.b - eta * gradient_b</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, training_data, num_epoches, batch_size=<span class="number">10</span>, eta=<span class="number">0.01</span>)</span>:</span></span><br><span class="line">        n = len(training_data)</span><br><span class="line">        losses = []</span><br><span class="line">        <span class="keyword">for</span> epoch_id <span class="keyword">in</span> range(num_epoches):</span><br><span class="line">            <span class="comment"># 在每轮迭代开始之前，将训练数据的顺序随机的打乱，</span></span><br><span class="line">            <span class="comment"># 然后再按每次取batch_size条数据的方式取出</span></span><br><span class="line">            np.random.shuffle(training_data)</span><br><span class="line">            <span class="comment"># 将训练数据进行拆分，每个mini_batch包含batch_size条的数据</span></span><br><span class="line">            mini_batches = [training_data[k:k + batch_size] <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">0</span>, n, batch_size)]</span><br><span class="line">            <span class="keyword">for</span> iter_id, mini_batch <span class="keyword">in</span> enumerate(mini_batches):</span><br><span class="line">                <span class="comment"># print(self.w.shape)</span></span><br><span class="line">                <span class="comment"># print(self.b)</span></span><br><span class="line">                x = mini_batch[:, :<span class="number">-1</span>]</span><br><span class="line">                y = mini_batch[:, <span class="number">-1</span>:]</span><br><span class="line">                a = self.forward(x)</span><br><span class="line">                loss = self.loss(a, y)</span><br><span class="line">                gradient_w, gradient_b = self.gradient(x, y)</span><br><span class="line">                self.update(gradient_w, gradient_b, eta)</span><br><span class="line">                losses.append(loss)</span><br><span class="line">                print(<span class="string">'Epoch &#123;:3d&#125; / iter &#123;:3d&#125;, loss = &#123;:.4f&#125;'</span>.</span><br><span class="line">                      format(epoch_id, iter_id, loss))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> losses</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取数据</span></span><br><span class="line">train_data, test_data = load_data()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建网络</span></span><br><span class="line">net = NetworkOfSGD(<span class="number">13</span>)</span><br><span class="line"><span class="comment"># 启动训练</span></span><br><span class="line">losses = net.train(train_data, num_epoches=<span class="number">50</span>, batch_size=<span class="number">100</span>, eta=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 画出损失函数的变化趋势</span></span><br><span class="line">plot_x = np.arange(len(losses))</span><br><span class="line">plot_y = np.array(losses)</span><br><span class="line">plt.plot(plot_x, plot_y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/04/15/ml/lesson1/" data-id="ck91iwv3z000037ojcwvr5plb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-notebook/java-class" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/04/08/notebook/java-class/" class="article-date">
+  <time datetime="2020-04-08T13:27:23.783Z" itemprop="datePublished">2020-04-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/04/08/notebook/java-class/">notebook/java-class</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Java反射"><a href="#Java反射" class="headerlink" title="Java反射"></a>Java反射</h1>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/04/08/notebook/java-class/" data-id="ck91iwv4j000b37ojb5atfdl1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-notebook/v2ray" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/04/03/notebook/v2ray/" class="article-date">
+  <time datetime="2020-04-03T14:44:04.526Z" itemprop="datePublished">2020-04-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/04/03/notebook/v2ray/">notebook/v2ray</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="V2ray"><a href="#V2ray" class="headerlink" title="V2ray"></a>V2ray</h1><h2 id="安装V2ray"><a href="#安装V2ray" class="headerlink" title="安装V2ray"></a>安装V2ray</h2><ul>
+<li>安装脚本</li>
+</ul>
+<p>执行安装脚本</p>
+<p><code>$ wget https://install.direct/go.sh</code></p>
+<p>运行脚本</p>
+<p><code>$ sudo bash go.sh</code></p>
+<ul>
+<li>运行V2ray</li>
+</ul>
+<p><code>$ sudo systemctl start v2ray</code></p>
+<ul>
+<li>V2ray配置文件</li>
+</ul>
+<p><code>/etc/v2ray/config.json</code></p>
+<h2 id="TLS"><a href="#TLS" class="headerlink" title="TLS"></a>TLS</h2><ul>
+<li>安装脚本</li>
+</ul>
+<p>执行以下命令，acme.sh 会安装到 <code>~/.acme.sh</code> 目录下。<br><code>$ curl https://get.acme.sh | sh</code></p>
+<p>安装成功后执行 <code>source ~/.bashrc</code> 以确保脚本所设置的命令别名生效。</p>
+<p>如果安装报错，那么可能是因为系统缺少 acme.sh 所需要的依赖项，acme.sh 的依赖项主要是 socat，我们通过以下命令来安装这些依赖项，然后重新安装一遍 acme.sh:</p>
+<p><code>$ sudo apt-get install openssl cron socat curl</code></p>
+<ul>
+<li>分发证书</li>
+</ul>
+<p>使用Nginx监听80端口进行证书分发</p>
+<p><code>$ acme.sh --issue  -d tunnel.edlison.xyz  --nginx</code></p>
+<p>使用acme自带的standalone进行端口监听</p>
+<p><code>$ acme.sh --issue -d tunnel.edlieon.xyz --standalone</code></p>
+<p>Example</p>
+<p><code>$ acme.sh --issue -d tunnel.edlison.xyz --nginx --keylength ec-256</code></p>
+<p><code>--keylength</code> 表示密钥长度，后面的值可以是 ec-256 、ec-384、2048、3072、4096、8192，带有 ec 表示生成的是 ECC 证书，没有则是 RSA 证书。在安全性上 256 位的 ECC 证书等同于 3072 位的 RSA 证书</p>
+<ul>
+<li>更新证书</li>
+</ul>
+<p><code>$ acme.sh --renew -d tunnel.edlison.xyz --force --ecc</code></p>
+<p>由于 Let’s Encrypt 的证书有效期只有 3 个月，因此需要 90 天至少要更新一次证书，acme.sh 脚本会每 60 天自动更新证书。也可以手动更新。<code>--ecc</code>生成的ECC证书</p>
+<ul>
+<li>安装证书和密钥</li>
+</ul>
+<p>将证书安装到V2ray目录下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ acme.sh --installcert -d tunnel.edlison.xyz --ecc \</span><br><span class="line">                          --fullchain-file /etc/v2ray/v2ray.crt \</span><br><span class="line">                          --key-file /etc/v2ray/v2ray.key</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置文件</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"inbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"port"</span>: <span class="number">443</span>, <span class="comment">// 建议使用 443 端口</span></span><br><span class="line">      <span class="attr">"protocol"</span>: <span class="string">"vmess"</span>,    </span><br><span class="line">      <span class="attr">"settings"</span>: &#123;</span><br><span class="line">        <span class="attr">"clients"</span>: [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">"id"</span>: <span class="string">"23ad6b10-8d1a-40f7-8ad0-e3e35cd38297"</span>,  </span><br><span class="line">            <span class="attr">"alterId"</span>: <span class="number">64</span></span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="attr">"network"</span>: <span class="string">"tcp"</span>,</span><br><span class="line">        <span class="attr">"security"</span>: <span class="string">"tls"</span>, <span class="comment">// security 要设置为 tls 才会启用 TLS</span></span><br><span class="line">        <span class="attr">"tlsSettings"</span>: &#123;</span><br><span class="line">          <span class="attr">"certificates"</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">              <span class="attr">"certificateFile"</span>: <span class="string">"/etc/v2ray/v2ray.crt"</span>, <span class="comment">// 证书文件</span></span><br><span class="line">              <span class="attr">"keyFile"</span>: <span class="string">"/etc/v2ray/v2ray.key"</span> <span class="comment">// 密钥文件</span></span><br><span class="line">            &#125;</span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"outbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">      <span class="attr">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h2><ul>
+<li>Start</li>
+</ul>
+<p>配置文件</p>
+<p><code>$ nginx -c /etc/nginx/nginx.conf</code></p>
+<p>启动Nginx</p>
+<p><code>$ nginx -s reload</code></p>
+<ul>
+<li>config</li>
+</ul>
+<p>Nginx 仅需监听80端口</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span>       <span class="number">80</span>;</span><br><span class="line">        <span class="attribute">listen</span>       [::]:<span class="number">80</span>;</span><br><span class="line">        <span class="attribute">server_name</span>  tunnel.edlison.xyz;</span><br><span class="line"></span><br><span class="line">        <span class="comment">#return  301 https://$server_name$request_uri; // 可以将流量转向https</span></span><br><span class="line"></span><br><span class="line">        <span class="attribute">root</span>         /usr/share/nginx/html;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Load configuration files for the default server block.</span></span><br><span class="line">        <span class="attribute">include</span> /etc/nginx/default.d/<span class="regexp">*.conf</span>;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">location</span> / &#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">error_page</span> <span class="number">404</span> /<span class="number">404</span>.html;</span><br><span class="line">            <span class="attribute">location</span> = /40x.html &#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">error_page</span> <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span> /50x.html;</span><br><span class="line">            <span class="attribute">location</span> = /50x.html &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="WebSocket-TLS-Web"><a href="#WebSocket-TLS-Web" class="headerlink" title="WebSocket + TLS + Web"></a>WebSocket + TLS + Web</h2><p>这次 TLS 的配置将写入 Nginx/Caddy/Apache 配置中，由这些软件来监听 443 端口（443 比较常用，并非 443 不可），然后将流量转发到 V2Ray 的 WebSocket 所监听的内网端口（本例是 10000），V2Ray 服务器端不需要配置 TLS。</p>
+<ul>
+<li>V2ray Settings</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"inbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"port"</span>: <span class="number">10000</span>,</span><br><span class="line">      <span class="attr">"listen"</span>:<span class="string">"127.0.0.1"</span>,<span class="comment">//只监听 127.0.0.1，避免除本机外的机器探测到开放了 10000 端口</span></span><br><span class="line">      <span class="attr">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">      <span class="attr">"settings"</span>: &#123;</span><br><span class="line">        <span class="attr">"clients"</span>: [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">"id"</span>: <span class="string">"b831381d-6324-4d53-ad4f-8cda48b30811"</span>,</span><br><span class="line">            <span class="attr">"alterId"</span>: <span class="number">64</span></span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="attr">"network"</span>: <span class="string">"ws"</span>,</span><br><span class="line">        <span class="attr">"wsSettings"</span>: &#123;</span><br><span class="line">        <span class="attr">"path"</span>: <span class="string">"/ray"</span>  <span class="comment">// 路径</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"outbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">      <span class="attr">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>TLS</li>
+</ul>
+<p>证书生成见上文</p>
+<ul>
+<li>Nginx Setting</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">  <span class="attribute">listen</span> <span class="number">443</span> ssl;</span><br><span class="line">  <span class="attribute">listen</span> [::]:<span class="number">443</span> ssl;</span><br><span class="line">  </span><br><span class="line">  <span class="attribute">ssl_certificate</span>       /etc/v2ray/v2ray.crt;</span><br><span class="line">  <span class="attribute">ssl_certificate_key</span>   /etc/v2ray/v2ray.key;</span><br><span class="line">  <span class="attribute">ssl_session_timeout</span> <span class="number">1d</span>;</span><br><span class="line">  <span class="attribute">ssl_session_cache</span> shared:MozSSL:<span class="number">10m</span>;</span><br><span class="line">  <span class="attribute">ssl_session_tickets</span> <span class="literal">off</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="attribute">ssl_protocols</span>         TLSv1.<span class="number">2</span> TLSv1.<span class="number">3</span>;</span><br><span class="line">  <span class="attribute">ssl_ciphers</span>           ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;</span><br><span class="line">  <span class="attribute">ssl_prefer_server_ciphers</span> <span class="literal">off</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="attribute">server_name</span>           tunnel.edlison.xyz;</span><br><span class="line">  <span class="attribute">location</span> /ray &#123; <span class="comment"># 与 V2Ray 配置中的 path 保持一致</span></span><br><span class="line">    <span class="attribute">if</span> (<span class="variable">$http_upgrade</span> != <span class="string">"websocket"</span>) &#123; <span class="comment"># WebSocket协商失败时返回404</span></span><br><span class="line">        <span class="attribute">return</span> <span class="number">404</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="attribute">proxy_redirect</span> <span class="literal">off</span>;</span><br><span class="line">    <span class="attribute">proxy_pass</span> http://127.0.0.1:10000; <span class="comment"># 假设WebSocket监听在环回地址的10000端口上</span></span><br><span class="line">    <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> Connection <span class="string">"upgrade"</span>;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">    <span class="comment"># Show real IP in v2ray access.log</span></span><br><span class="line">    <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Client Setting</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"inbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"port"</span>: <span class="number">1080</span>,</span><br><span class="line">      <span class="attr">"listen"</span>: <span class="string">"127.0.0.1"</span>,</span><br><span class="line">      <span class="attr">"protocol"</span>: <span class="string">"socks"</span>,</span><br><span class="line">      <span class="attr">"sniffing"</span>: &#123;</span><br><span class="line">        <span class="attr">"enabled"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"destOverride"</span>: [<span class="string">"http"</span>, <span class="string">"tls"</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"settings"</span>: &#123;</span><br><span class="line">        <span class="attr">"auth"</span>: <span class="string">"noauth"</span>,</span><br><span class="line">        <span class="attr">"udp"</span>: <span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"outbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">      <span class="attr">"settings"</span>: &#123;</span><br><span class="line">        <span class="attr">"vnext"</span>: [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">"address"</span>: <span class="string">"mydomain.me"</span>,</span><br><span class="line">            <span class="attr">"port"</span>: <span class="number">443</span>,</span><br><span class="line">            <span class="attr">"users"</span>: [</span><br><span class="line">              &#123;</span><br><span class="line">                <span class="attr">"id"</span>: <span class="string">"b831381d-6324-4d53-ad4f-8cda48b30811"</span>,</span><br><span class="line">                <span class="attr">"alterId"</span>: <span class="number">64</span></span><br><span class="line">              &#125;</span><br><span class="line">            ]</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="attr">"network"</span>: <span class="string">"ws"</span>,</span><br><span class="line">        <span class="attr">"security"</span>: <span class="string">"tls"</span>,</span><br><span class="line">        <span class="attr">"wsSettings"</span>: &#123;</span><br><span class="line">          <span class="attr">"path"</span>: <span class="string">"/ray"</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>注意事项</li>
+</ul>
+<p>注意事项<br>V2Ray 自 4.18.1 后支持 TLS1.3，如果开启并强制 TLS1.3 请注意 v2ray 客户端版本.<br>较低版本的 nginx 的 location 需要写为 /ray/ 才能正常工作<br>如果在设置完成之后不能成功使用，可能是由于 SElinux 机制(如果你是 CentOS 7 的用户请特别留意 SElinux 这一机制)阻止了 Nginx 转发向内网的数据。如果是这样的话，在 V2Ray 的日志里不会有访问信息，在 Nginx 的日志里会出现大量的 “Permission Denied” 字段，要解决这一问题需要在终端下键入以下命令：<br>setsebool -P httpd_can_network_connect 1<br>请保持服务器和客户端的 wsSettings 严格一致，对于 V2Ray，/ray 和 /ray/ 是不一样的<br>较低版本的系统/浏览器可能无法完成握手. 如 Chrome 49/XP SP3, Safari 8/iOS 8.4, Safari 8/OS X 10.10 及更低的版本. 如果你的设备比较旧, 则可以通过在配置中添加较旧的 TLS 协议以完成握手.</p>
+<h2 id="BBR"><a href="#BBR" class="headerlink" title="BBR"></a>BBR</h2><ul>
+<li>一键安装脚本</li>
+</ul>
+<p><code>$ wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh &amp;&amp; chmod +x bbr.sh &amp;&amp; ./bbr.sh</code></p>
+<ul>
+<li>检测内核</li>
+</ul>
+<p><code>$ uname -r</code></p>
+<ul>
+<li>检测安装情况</li>
+</ul>
+<p><code>$ sysctl net.ipv4.tcp_available_congestion_control</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/04/03/notebook/v2ray/" data-id="ck91iwv4k000c37oj716fglnl" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-test" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/04/03/test/" class="article-date">
@@ -428,160 +633,6 @@
 
 
   
-    <article id="post-leetcode/substring" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/26/leetcode/substring/" class="article-date">
-  <time datetime="2020-03-26T05:04:00.758Z" itemprop="datePublished">2020-03-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/26/leetcode/substring/">leetcode/substring</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Is-Subsequence"><a href="#Is-Subsequence" class="headerlink" title="Is Subsequence"></a>Is Subsequence</h1><p>Given a string s and a string t, check if s is subsequence of t.</p>
-<p>You may assume that there is only lower case English letters in both s and t. t is potentially a very long (length ~= 500,000) string, and s is a short string (&lt;=100).</p>
-<p>A subsequence of a string is a new string which is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (ie, “ace” is a subsequence of “abcde” while “aec” is not).</p>
-<p>Example 1:<br>s = “abc”, t = “ahbgdc”</p>
-<p>Return true.</p>
-<p>Example 2:<br>s = “axc”, t = “ahbgdc”</p>
-<p>Return false.</p>
-<p>Follow up:<br>If there are lots of incoming S, say S1, S2, … , Sk where k &gt;= 1B, and you want to check one by one to see if T has its subsequence. In this scenario, how would you change your code?</p>
-<p><em>Overtime</em></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSubsequence</span><span class="params">(String s, String t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s.length() == <span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        </span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; t.length() - s.length(); i++) &#123;</span><br><span class="line">                    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">int</span> cur = i;</span><br><span class="line">                    <span class="keyword">while</span> (cur &lt; t.length() &amp;&amp; res &lt; s.length()) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (t.charAt(cur) == s.charAt(res)) res++;</span><br><span class="line">        </span><br><span class="line">                        cur++;</span><br><span class="line">        </span><br><span class="line">                        <span class="keyword">if</span> (res == s.length()) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        </span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSubsequence</span><span class="params">(String s, String t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++) &#123;</span><br><span class="line">            res = t.indexOf(s.charAt(i), res + <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (res == -<span class="number">1</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">执行用时 :1 ms, 在所有 Java 提交中击败了90.09%的用户</span></span><br><span class="line"><span class="comment">内存消耗 :44.2 MB, 在所有 Java 提交中击败了100.00%的用户</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Reference<br><a href="https://leetcode-cn.com/problems/is-subsequence" target="_blank" rel="noopener">https://leetcode-cn.com/problems/is-subsequence</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/26/leetcode/substring/" data-id="ck8lar4na0011mcoj2hafdifs" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode/buystockii" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/25/leetcode/buystockii/" class="article-date">
-  <time datetime="2020-03-25T13:58:29.303Z" itemprop="datePublished">2020-03-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/25/leetcode/buystockii/">leetcode/buystockii</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Best-Time-to-Buy-and-Sell-Stock-II"><a href="#Best-Time-to-Buy-and-Sell-Stock-II" class="headerlink" title="Best Time to Buy and Sell Stock II"></a>Best Time to Buy and Sell Stock II</h1><p>Say you have an array for which the ith element is the price of a given stock on day i.</p>
-<p>Design an algorithm to find the maximum profit. You may complete as many transactions as you like (i.e., buy one and sell one share of the stock multiple times).</p>
-<p>Note: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).</p>
-<p>Example 1:</p>
-<p>Input: [7,1,5,3,6,4]<br>Output: 7<br>Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.<br>             Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.<br>Example 2:  </p>
-<p>Input: [1,2,3,4,5]<br>Output: 4<br>Explanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.<br>             Note that you cannot buy on day 1, buy on day 2 and sell them later, as you are<br>             engaging multiple transactions at the same time. You must sell before buying again.<br>Example 3:  </p>
-<p>Input: [7,6,4,3,1]<br>Output: 0<br>Explanation: In this case, no transaction is done, i.e. max profit = 0.  </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">        dp[<span class="number">1</span>] = Integer.MIN_VALUE;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> price : prices) &#123;</span><br><span class="line">            dp[<span class="number">0</span>] = Math.max(dp[<span class="number">0</span>], dp[<span class="number">1</span>] + price);</span><br><span class="line">            dp[<span class="number">1</span>] = Math.max(dp[<span class="number">1</span>], dp[<span class="number">0</span>] - price);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">执行用时 :2 ms, 在所有 Java 提交中击败了26.28%的用户</span></span><br><span class="line"><span class="comment">内存消耗 :42.5 MB, 在所有 Java 提交中击败了5.04%的用户</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Reference<br><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/submissions" target="_blank" rel="noopener">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/submissions</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/25/leetcode/buystockii/" data-id="ck8lar4mu000fmcoj5nvg69i4" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode/recoverbinarytree" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/24/leetcode/recoverbinarytree/" class="article-date">
-  <time datetime="2020-03-24T15:09:28.255Z" itemprop="datePublished">2020-03-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/24/leetcode/recoverbinarytree/">leetcode/recoverbinarytree</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Recover-Binary-Search-Tree"><a href="#Recover-Binary-Search-Tree" class="headerlink" title="Recover Binary Search Tree"></a>Recover Binary Search Tree</h1><p>Two elements of a binary search tree (BST) are swapped by mistake.</p>
-<p>Recover the tree without changing its structure.</p>
-<p>Example 1:</p>
-<p>Input: [1,3,null,null,2]</p>
-<p>   1<br>  /<br> 3<br>  <br>   2</p>
-<p>Output: [3,1,null,null,2]</p>
-<p>   3<br>  /<br> 1<br>  <br>   2<br>Example 2:</p>
-<p>Input: [3,1,4,null,null,2]</p>
-<p>  3<br> / <br>1   4<br>   /<br>  2</p>
-<p>Output: [2,1,4,null,null,3]</p>
-<p>  2<br> / <br>1   4<br>   /<br>  3<br>Follow up:</p>
-<p>A solution using O(n) space is pretty straight forward.<br>Could you devise a constant space solution?</p>
-<p><em>Unsolved</em></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">inorder</span><span class="params">(TreeNode root, List&lt;Integer&gt; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">    inorder(root.left, nums);</span><br><span class="line">    nums.add(root.val);</span><br><span class="line">    inorder(root.right, nums);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">int</span>[] findTwoSwapped(List&lt;Integer&gt; nums) &#123;</span><br><span class="line">    <span class="keyword">int</span> n = nums.size();</span><br><span class="line">    <span class="keyword">int</span> x = -<span class="number">1</span>, y = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">      <span class="keyword">if</span> (nums.get(i + <span class="number">1</span>) &lt; nums.get(i)) &#123;</span><br><span class="line">        y = nums.get(i + <span class="number">1</span>);</span><br><span class="line">        <span class="comment">// first swap occurence</span></span><br><span class="line">        <span class="keyword">if</span> (x == -<span class="number">1</span>) x = nums.get(i);</span><br><span class="line">        <span class="comment">// second swap occurence</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;x, y&#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">recover</span><span class="params">(TreeNode r, <span class="keyword">int</span> count, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (r != <span class="keyword">null</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (r.val == x || r.val == y) &#123;</span><br><span class="line">        r.val = r.val == x ? y : x;</span><br><span class="line">        <span class="keyword">if</span> (--count == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      recover(r.left, count, x, y);</span><br><span class="line">      recover(r.right, count, x, y);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">recoverTree</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; nums = <span class="keyword">new</span> ArrayList();</span><br><span class="line">    inorder(root, nums);</span><br><span class="line">    <span class="keyword">int</span>[] swapped = findTwoSwapped(nums);</span><br><span class="line">    recover(root, <span class="number">2</span>, swapped[<span class="number">0</span>], swapped[<span class="number">1</span>]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Reference<br><a href="https://leetcode-cn.com/problems/recover-binary-search-tree" target="_blank" rel="noopener">https://leetcode-cn.com/problems/recover-binary-search-tree</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/24/leetcode/recoverbinarytree/" data-id="ck8lar4n4000tmcoj369z56tt" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -618,23 +669,23 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/09/23/nlp/BERT/">nlp/BERT</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/09/23/nlp/Transformer/">nlp/Transformer</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/09/18/paper/Attention-Transformer/">paper/Attention-Transformer</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/09/18/paper/XLNet/">paper/XLNet</a>
           </li>
         
           <li>
             <a href="/blog/2020/09/16/notebook/implements-extends-2/">notebook/implements-extends-2</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/09/15/notebook/docker-lineloss/">notebook/docker-lineloss</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/09/13/paper/Attention/">paper/Attention</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/08/16/notebook/Authentication&Authorization/">notebook/Authentication&amp;Authorization</a>
           </li>
         
       </ul>
