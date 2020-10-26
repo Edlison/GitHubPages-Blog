@@ -68,6 +68,112 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-notebook/linux-user" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/18/notebook/linux-user/" class="article-date">
+  <time datetime="2020-03-18T12:53:15.929Z" itemprop="datePublished">2020-03-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/18/notebook/linux-user/">notebook/linux-user</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux-创建用户"><a href="#Linux-创建用户" class="headerlink" title="[Linux]创建用户"></a>[Linux]创建用户</h1><h2 id="linux下创建用户-一）"><a href="#linux下创建用户-一）" class="headerlink" title="linux下创建用户(一）"></a>linux下创建用户(一）</h2><p>Linux 系统是一个多用户多任务的分时操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系统。用户的账号一方面可以帮助系统管理员对使用系统的用户进行跟踪，并控制他们对系统资源的访问；另一方面也可以帮助用户组织文件，并为用户提供安全性保护。每个用户账号都拥有一个惟一的用户名和各自的口令。用户在登录时键入正确的用户名和口令后，就能够进入系统和自己的主目录。</p>
+<p>实现用户账号的管理，要完成的工作主要有如下几个方面：<br>· 用户账号的添加、删除与修改。<br>· 用户口令的管理。<br>· 用户组的管理。</p>
+<p>一、Linux系统用户账号的管理</p>
+<p>用户账号的管理工作主要涉及到用户账号的添加、修改和删除。<br>添加用户账号就是在系统中创建一个新账号，然后为新账号分配用户号、用户组、主目录和登录Shell等资源。<br>刚添加的账号是被锁定的，无法使用。</p>
+<p>1、添加新的用户账号使用useradd命令，其语法如下：</p>
+<p>代码:<br>useradd 选项 用户名<br>其中各选项含义如下：  </p>
+<p>代码:<br>-c comment 指定一段注释性描述。<br>-d 目录 指定用户主目录，如果此目录不存在，则同时使用-m选项，可以创建主目录。<br>-g 用户组 指定用户所属的用户组。<br>-G 用户组，用户组 指定用户所属的附加组。<br>-s Shell文件 指定用户的登录Shell。<br>-u 用户号 指定用户的用户号，如果同时有-o选项，则可以重复使用其他用户的标识号。  </p>
+<p>用户名 指定新账号的登录名。</p>
+<p>例1：<br>代码:<br><code># useradd –d /usr/sam -m sam</code><br>此命令创建了一个用户sam，<br>其中-d和-m选项用来为登录名sam产生一个主目录/usr/sam（/usr为默认的用户主目录所在的父目录）。  </p>
+<p>例2：<br>代码:<br><code># useradd -s /bin/sh -g group –G adm,root gem</code><br>此命令新建了一个用户gem，该用户的登录Shell是/bin/sh，它属于group用户组，同时又属于adm和root用户组，其中group用户组是其主组。</p>
+<p>这里可能新建组：#groupadd group及groupadd adm　<br>增加用户账号就是在/etc/passwd文件中为新用户增加一条记录，同时更新其他系统文件如/etc/shadow, /etc/group等。<br>Linux提供了集成的系统管理工具userconf，它可以用来对用户账号进行统一管理。  </p>
+<p>2、删除帐号</p>
+<p>如果一个用户的账号不再使用，可以从系统中删除。删除用户账号就是要将/etc/passwd等系统文件中的该用户记录删除，必要时还删除用户的主目录。删除一个已有的用户账号使用userdel命令，其格式如下：</p>
+<p>代码:<br>userdel 选项 用户名</p>
+<p>常用的选项是-r，它的作用是把用户的主目录一起删除。<br>例如：</p>
+<p>代码:<br><code># userdel sam</code>  </p>
+<p>此命令删除用户sam在系统文件中（主要是/etc/passwd, /etc/shadow, /etc/group等）的记录，同时删除用户的主目录。</p>
+<p>3、修改帐号</p>
+<p>修改用户账号就是根据实际情况更改用户的有关属性，如用户号、主目录、用户组、登录Shell等。<br>修改已有用户的信息使用usermod命令，其格式如下：</p>
+<p>代码:<br>usermod 选项 用户名  </p>
+<p>常用的选项包括-c, -d, -m, -g, -G, -s, -u以及-o等，这些选项的意义与useradd命令中的选项一样，可以为用户指定新的资源值。另外，有些系统可以使用如下选项：</p>
+<p>代码:<br>-l 新用户名  </p>
+<p>这个选项指定一个新的账号，即将原来的用户名改为新的用户名。<br>例如：<br>代码:<br><code># usermod -s /bin/ksh -d /home/z –g developer sam</code><br>此命令将用户sam的登录Shell修改为ksh，主目录改为/home/z，用户组改为developer。</p>
+<p>4、用户口令的管理</p>
+<p>用户管理的一项重要内容是用户口令的管理。用户账号刚创建时没有口令，但是被系统锁定，无法使用，必须为其指定口令后才可以使用，即使是指定空口令。<br>指定和修改用户口令的Shell命令是passwd。超级用户可以为自己和其他用户指定口令，普通用户只能用它修改自己的口令。命令的格式为：<br>代码:  </p>
+<p>passwd 选项 用户名<br>可使用的选项：  </p>
+<p>代码:<br>-l 锁定口令，即禁用账号。<br>-u 口令解锁。<br>-d 使账号无口令。<br>-f 强迫用户下次登录时修改口令。<br>如果默认用户名，则修改当前用户的口令。  </p>
+<p>例如，假设当前用户是sam，则下面的命令修改该用户自己的口令：</p>
+<p>代码:<br><code>$ passwd</code><br>Old password:<strong>**</strong><br>New password:<strong>***</strong><br>Re-enter new password:<strong>***</strong>  </p>
+<p>如果是超级用户，可以用下列形式指定任何用户的口令：</p>
+<p>代码:<br><code># passwd sam</code><br>New password:<strong>***</strong><br>Re-enter new password:<strong>***</strong>  </p>
+<p>普通用户修改自己的口令时，passwd命令会先询问原口令，验证后再要求用户输入两遍新口令，如果两次输入的口令一致，则将这个口令指定给用户；而超级用户为用户指定口令时，就不需要知道原口令。</p>
+<p>为了系统安全起见，用户应该选择比较复杂的口令，例如最好使用8位长的口令，口令中包含有大写、小写字母和数字，并且应该与姓名、生日等不相同。</p>
+<p>为用户指定空口令时，执行下列形式的命令：</p>
+<p>代码:<br><code># passwd -d sam</code></p>
+<p>此命令将用户sam的口令删除，这样用户sam下一次登录时，系统就不再询问口令。  </p>
+<p>passwd命令还可以用-l(lock)选项锁定某一用户，使其不能登录，例如：</p>
+<p>代码:<br><code># passwd -l sam</code></p>
+<h2 id="linux下创建用户-二）"><a href="#linux下创建用户-二）" class="headerlink" title="linux下创建用户(二）"></a>linux下创建用户(二）</h2><p>二、Linux系统用户组的管理</p>
+<p>每个用户都有一个用户组，系统可以对一个用户组中的所有用户进行集中管理。不同Linux 系统对用户组的规定有所不同，如Linux下的用户属于与它同名的用户组，这个用户组在创建用户时同时创建。<br>用户组的管理涉及用户组的添加、删除和修改。组的增加、删除和修改实际上就是对/etc/group文件的更新。</p>
+<p>1、增加一个新的用户组使用groupadd命令。其格式如下：</p>
+<p>代码:<br>groupadd 选项 用户组  </p>
+<p>可以使用的选项有：<br>代码:<br>-g GID 指定新用户组的组标识号（GID）。<br>-o 一般与-g选项同时使用，表示新用户组的GID可以与系统已有用户组的GID相同。</p>
+<p>例1：</p>
+<p>代码:<br><code># groupadd group1</code>  </p>
+<p>此命令向系统中增加了一个新组group1，新组的组标识号是在当前已有的最大组标识号的基础上加1。</p>
+<p>例2：</p>
+<p>代码:<br><code># groupadd -g 101 group2</code></p>
+<p>此命令向系统中增加了一个新组group2，同时指定新组的组标识号是101。</p>
+<p>2、如果要删除一个已有的用户组，使用groupdel命令，其格式如下：</p>
+<p>代码:<br>groupdel 用户组</p>
+<p>例如：</p>
+<p>代码:<br><code># groupdel group1</code></p>
+<p>此命令从系统中删除组group1。</p>
+<p>3、修改用户组的属性使用groupmod命令。其语法如下：</p>
+<p>代码:<br>groupmod 选项 用户组</p>
+<p>常用的选项有：<br>代码:<br>-g GID 为用户组指定新的组标识号。<br>-o 与-g选项同时使用，用户组的新GID可以与系统已有用户组的GID相同。<br>-n新用户组 将用户组的名字改为新名字</p>
+<p>例1：</p>
+<p>代码:<br><code># groupmod -g 102 group2</code></p>
+<p>此命令将组group2的组标识号修改为102。</p>
+<p>例2：</p>
+<p>代码:<br><code># groupmod –g 10000 -n group3 group2</code>  </p>
+<p>此命令将组group2的标识号改为10000，组名修改为group3。</p>
+<p>4、如果一个用户同时属于多个用户组，那么用户可以在用户组之间切换，以便具有其他用户组的权限。用户可以在登录后，使用命令newgrp切换到其他用户组，这个命令的参数就是目的用户组。例如：</p>
+<p>代码:<br><code>$ newgrp root</code></p>
+<p>这条命令将当前用户切换到root用户组，前提条件是root用户组确实是该用户的主组或附加组。类似于用户账号的管理，用户组的管理也可以通过集成的系统管理工具来完成。</p>
+<p>让Linux系统中的普通用户也有超级用户的权限</p>
+<blockquote>
+<p>Reference<br><a href="https://www.cnblogs.com/ylan2009/articles/2321177.h" target="_blank" rel="noopener">https://www.cnblogs.com/ylan2009/articles/2321177.h</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/18/notebook/linux-user/" data-id="ck91iwv4j000a37oj8f4fc4oh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-leetcode/longestpalindromicsubstring" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/03/17/leetcode/longestpalindromicsubstring/" class="article-date">
@@ -596,58 +702,6 @@
 
 
   
-    <article id="post-leetcode/removeend" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/11/leetcode/removeend/" class="article-date">
-  <time datetime="2020-03-11T13:10:04.043Z" itemprop="datePublished">2020-03-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/11/leetcode/removeend/">leetcode/removeend</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Remove-Nth-Node-From-End-of-List"><a href="#Remove-Nth-Node-From-End-of-List" class="headerlink" title="Remove Nth Node From End of List"></a>Remove Nth Node From End of List</h1><p>Given a linked list, remove the n-th node from the end of list and return its head.</p>
-<p><strong>Example</strong>:</p>
-<p>Given linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5, and n = 2.</p>
-<p>After removing the second node from the end, the linked list becomes 1-&gt;2-&gt;3-&gt;5.</p>
-<p><strong>Note</strong>:</p>
-<p>Given n will always be valid.</p>
-<p><strong>Solution One</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">removeNthFromEnd</span><span class="params">(ListNode head, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        ListNode p = head;</span><br><span class="line">        ListNode temp = head;</span><br><span class="line">        <span class="keyword">int</span> len = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (p == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (p.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            len++;</span><br><span class="line">            p = p.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> loc = len - n;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (loc == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> head.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; loc; i++) &#123;</span><br><span class="line">            temp = temp.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        temp.next = temp.next.next;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Pass one time and get the length of LinkedList, so just count <code>length - n - 1</code> times we can find the pre pointer. All we need to do is point pre pointer.next equal the next of which pointer we should delete.</p>
-<p><strong>Solution Two</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">removeNthFromEnd</span><span class="params">(ListNode head, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        List&lt;ListNode&gt; stack = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        ListNode temp = head;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (temp != <span class="keyword">null</span>) &#123;</span><br><span class="line">            stack.add(temp);</span><br><span class="line">            temp = temp.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ListNode[] list = stack.toArray(<span class="keyword">new</span> ListNode[stack.size()]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ((list.length - n - <span class="number">1</span>) &lt; <span class="number">0</span>) <span class="keyword">return</span> head.next;</span><br><span class="line"></span><br><span class="line">        list[list.length - n - <span class="number">1</span>].next = list[list.length - n].next;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Just let the List structure give a help, we can transfer a <code>LinkedList</code> to an <code>Array</code>. So all we need to do is let <code>list[list.length - n - 1].next</code> equals <code>list[list.length - n].next</code>. </p>
-<p>Base case: if delete the head node we just need to return <code>head.next</code>.</p>
-<blockquote>
-<p>Reference<br><a href="https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list" target="_blank" rel="noopener">https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/11/leetcode/removeend/" data-id="ck8lar4n9000zmcojaoib4uye" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -671,7 +725,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a></li></ul>
     </div>
   </div>
 
@@ -682,6 +736,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/blog/2020/10/25/notebook/sql/">notebook/sql</a>
+          </li>
         
           <li>
             <a href="/blog/2020/09/23/nlp/BERT/">nlp/BERT</a>
@@ -697,10 +755,6 @@
         
           <li>
             <a href="/blog/2020/09/18/paper/XLNet/">paper/XLNet</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/09/16/notebook/implements-extends-2/">notebook/implements-extends-2</a>
           </li>
         
       </ul>
