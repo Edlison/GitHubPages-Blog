@@ -68,6 +68,113 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode/sametree" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/19/leetcode/sametree/" class="article-date">
+  <time datetime="2020-03-19T15:28:56.616Z" itemprop="datePublished">2020-03-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/19/leetcode/sametree/">leetcode/sametree</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Same-Tree"><a href="#Same-Tree" class="headerlink" title="Same Tree"></a>Same Tree</h1><p>Given two binary trees, write a function to check if they are the same or not.</p>
+<p>Two binary trees are considered the same if they are structurally identical and the nodes have the same value.</p>
+<p><strong>Example 1:</strong></p>
+<p>Input:     1         1<br>          / \       / <br>         2   3     2   3</p>
+<pre><code>[1,2,3],   [1,2,3]</code></pre><p>Output: true</p>
+<p><strong>Example 2:</strong></p>
+<p>Input:     1         1<br>          /           <br>         2             2</p>
+<pre><code>[1,2],     [1,null,2]</code></pre><p>Output: false</p>
+<p><strong>Example 3:</strong></p>
+<p>Input:     1         1<br>          / \       / <br>         2   1     1   2</p>
+<pre><code>[1,2,1],   [1,1,2]</code></pre><p>Output: false</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSameTree</span><span class="params">(TreeNode p, TreeNode q)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (p == <span class="keyword">null</span> &amp;&amp; q == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (p == <span class="keyword">null</span> || q == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (p.val != q.val) &#123; <span class="comment">// !!!</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> isSameTree(p.left, q.left) &amp;&amp; isSameTree(p.right, q.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/same-tree" target="_blank" rel="noopener">https://leetcode-cn.com/problems/same-tree</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/19/leetcode/sametree/" data-id="ck8lar4nc0014mcojgcdt5ax9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-leetcode/regularexpressionmatching" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/03/18/leetcode/regularexpressionmatching/" class="article-date">
+  <time datetime="2020-03-18T13:40:44.255Z" itemprop="datePublished">2020-03-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/03/18/leetcode/regularexpressionmatching/">leetcode/regularexpressionmatching</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Regular-Expression-Matching"><a href="#Regular-Expression-Matching" class="headerlink" title="Regular Expression Matching"></a>Regular Expression Matching</h1><p>Given an input string (s) and a pattern (p), implement regular expression matching with support for ‘.’ and ‘*’.</p>
+<p>‘.’ Matches any single character.<br>‘*’ Matches zero or more of the preceding element.<br>The matching should cover the entire input string (not partial).</p>
+<p><strong>Note:</strong></p>
+<p>s could be empty and contains only lowercase letters a-z.<br>p could be empty and contains only lowercase letters a-z, and characters like . or <em>.<br>*</em>Example 1:**</p>
+<p>Input:<br>s = “aa”<br>p = “a”<br>Output: false<br>Explanation: “a” does not match the entire string “aa”.  </p>
+<p><strong>Example 2:</strong></p>
+<p>Input:<br>s = “aa”<br>p = “a*”<br>Output: true<br>Explanation: ‘*’ means zero or more of the preceding element, ‘a’. Therefore, by repeating ‘a’ once, it becomes “aa”.    </p>
+<p><strong>Example 3:</strong></p>
+<p>Input:<br>s = “ab”<br>p = “.*”<br>Output: true<br>Explanation: “.*” means “zero or more (*) of any character (.)”.  </p>
+<p><strong>Example 4:</strong></p>
+<p>Input:<br>s = “aab”<br>p = “c<em>a</em>b”<br>Output: true<br>Explanation: c can be repeated 0 times, a can be repeated 1 time. Therefore, it matches “aab”.  </p>
+<p><strong>Example 5:</strong></p>
+<p>Input:<br>s = “mississippi”<br>p = “mis<em>is*p</em>.”<br>Output: false  </p>
+<p><em>Unsolved</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isMatch</span><span class="params">(String text, String pattern)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (pattern.isEmpty()) <span class="keyword">return</span> text.isEmpty();</span><br><span class="line">        <span class="keyword">boolean</span> first_match = (!text.isEmpty() &amp;&amp;</span><br><span class="line">                               (pattern.charAt(<span class="number">0</span>) == text.charAt(<span class="number">0</span>) || pattern.charAt(<span class="number">0</span>) == <span class="string">'.'</span>));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (pattern.length() &gt;= <span class="number">2</span> &amp;&amp; pattern.charAt(<span class="number">1</span>) == <span class="string">'*'</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> (isMatch(text, pattern.substring(<span class="number">2</span>)) ||</span><br><span class="line">                    (first_match &amp;&amp; isMatch(text.substring(<span class="number">1</span>), pattern)));</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> first_match &amp;&amp; isMatch(text.substring(<span class="number">1</span>), pattern.substring(<span class="number">1</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">https://leetcode-cn.com/problems/regular-expression-matching/solution/zheng-ze-biao-da-shi-pi-pei-by-leetcode/</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Reference<br><a href="https://leetcode-cn.com/problems/regular-expression-matching" target="_blank" rel="noopener">https://leetcode-cn.com/problems/regular-expression-matching</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/03/18/leetcode/regularexpressionmatching/" data-id="ck8lar4n9000ymcoj2zu07edh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-notebook/linux-user" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/03/18/notebook/linux-user/" class="article-date">
@@ -562,146 +669,6 @@
 
 
   
-    <article id="post-notebook/innerclass" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/11/notebook/innerclass/" class="article-date">
-  <time datetime="2020-03-11T15:49:48.779Z" itemprop="datePublished">2020-03-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/11/notebook/innerclass/">notebook/innerclass</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="java-内部类和静态内部类的区别"><a href="#java-内部类和静态内部类的区别" class="headerlink" title="java 内部类和静态内部类的区别"></a>java 内部类和静态内部类的区别</h1><p>下面说一说内部类（Inner Class）和静态内部类（Static Nested Class）的区别：<br>定义在一个类内部的类叫内部类，包含内部类的类称为外部类。内部类可以声明public、protected、private等访问限制，可以声明 为abstract的供其他内部类或外部类继承与扩展，或者声明为static、final的，也可以实现特定的接口。外部类按常规的类访问方式使用内部 类，唯一的差别是外部类可以访问内部类的所有方法与属性，包括私有方法与属性。</p>
-<h2 id="一-创建实例"><a href="#一-创建实例" class="headerlink" title="一. 创建实例"></a>一. 创建实例</h2><p>   OutClass.InnerClass obj = outClassInstance.new InnerClass(); //注意是外部类实例.new，内部类</p>
-<p>   AAA.StaticInner in = new AAA.StaticInner();//注意是外部类本身，静态内部类</p>
-<h2 id="二-内部类中的this"><a href="#二-内部类中的this" class="headerlink" title="二. 内部类中的this"></a>二. 内部类中的this</h2><p>   内 部类中的this与其他类一样是指的本身。创建内部类对象时，它会与创造它的外围对象有了某种联系，于是能访问外围类的所有成员，不需任何特殊条件，可理 解为内部类链接到外部类。 用外部类创建内部类对象时，此内部类对象会秘密的捕获一个指向外部类的引用，于是，可以通过这个引用来访问外围类的成员。</p>
-<h2 id="三-外部类访问内部类"><a href="#三-外部类访问内部类" class="headerlink" title="三. 外部类访问内部类"></a>三. 外部类访问内部类</h2><p>   内部类类似外部类的属性，因此访问内部类对象时总是需要一个创建好的外部类对象。内部类对象通过‘外部类名.this.xxx’的形式访问外部类的属性与方法。如：<br>       System.out.println(“Print in inner Outer.index=” + pouter.this.index);<br>       System.out.println(“Print in inner Inner.index=” + this.index);</p>
-<h2 id="四-内部类向上转型"><a href="#四-内部类向上转型" class="headerlink" title="四. 内部类向上转型"></a>四. 内部类向上转型</h2><p>   内部类也可以和普通类一样拥有向上转型的特性。将内部类向上转型为基类型，尤其是接口时，内部类就有了用武之地。如果内部类是private的，只可以被它的外部类问，从而完全隐藏实现的细节。</p>
-<h2 id="五-方法内的类"><a href="#五-方法内的类" class="headerlink" title="五. 方法内的类"></a>五. 方法内的类</h2><p>   方法内创建的类（注意方法中也能定义类），不能加访问修饰符。另外，方法内部的类也不是在调用方法时才会创建的，它们一样也被事先编译了。</p>
-<h2 id="六-静态内部类"><a href="#六-静态内部类" class="headerlink" title="六. 静态内部类"></a>六. 静态内部类</h2><p>   定义静态内部类：在定义内部类的时候，可以在其前面加上一个权限修饰符static。此时这个内部类就变为了静态内部类。</p>
-<p>通常称为嵌套类，当内部类是static时，意味着：</p>
-<p>   [1]要创建嵌套类的对象，并不需要其外围类的对象；</p>
-<p>   [2]不能从嵌套类的对象中访问非静态的外围类对象（不能够从静态内部类的对象中访问外部类的非静态成员）；</p>
-<p>   嵌 套类与普通的内部类还有一个区别：普通内部类的字段与方法，只能放在类的外部层次上，所以普通的内部类不能有static数据和static字段， 也不能包含嵌套类。但是在嵌套类里可以包含所有这些东西。也就是说，在非静态内部类中不可以声明静态成员，只有将某个内部类修饰为静态类，然后才能够在这 个类中定义静态的成员变量与成员方法。</p>
-<p>   另外，在创建静态内部类时不需要将静态内部类的实例绑定在外部类的实例上。普通非静态内部类的 对象是依附在外部类对象之中的，要在一个外部类中定义一个静态的内部类，不需要利用关键字new来创建内部类的实例。静态类和方法只属于类本身，并不属于 该类的对象，更不属于其他外部类的对象。</p>
-<h2 id="七-内部类标识符"><a href="#七-内部类标识符" class="headerlink" title="七. 内部类标识符"></a>七. 内部类标识符</h2><p>   每个类会产生一个.class文件，文件名即为类名。同样，内部类也会产生这么一个.class文件，但是它的名称却不是内部类的类名，而是有着严格的限制：外围类的名字，加上$,再加上内部类名字。</p>
-<h2 id="八-为何要用内部类？"><a href="#八-为何要用内部类？" class="headerlink" title="八. 为何要用内部类？"></a>八. 为何要用内部类？</h2><ol>
-<li><p>内部类一般只为其外部类使用；</p>
-</li>
-<li><p>内部类提供了某种进入外部类的窗户；</p>
-</li>
-<li><p>也是最吸引人的原因，每个内部类都能独立地继承一个接口，而无论外部类是否已经继承了某个接口。因此，内部类使多重继承的解决方案变得更加完整。</p>
-</li>
-</ol>
-<p>加深印象，参考一下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.test.xml;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OutClassTest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> a;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> b;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"outer class static function"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        OutClassTest oc = <span class="keyword">new</span> OutClassTest();</span><br><span class="line">        <span class="comment">// new一个外部类</span></span><br><span class="line">        OutClassTest oc1 = <span class="keyword">new</span> OutClassTest();</span><br><span class="line">        <span class="comment">// 通过外部类的对象new一个非静态的内部类</span></span><br><span class="line">        OutClassTest.InnerClass no_static_inner = oc1.<span class="keyword">new</span> InnerClass();</span><br><span class="line">        <span class="comment">// 调用非静态内部类的方法</span></span><br><span class="line">        System.out.println(no_static_inner.getKey());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 调用静态内部类的静态变量</span></span><br><span class="line">        System.out.println(OutClassTest.InnerStaticClass.static_value);</span><br><span class="line">        <span class="comment">// 不依赖于外部类实例,直接实例化内部静态类</span></span><br><span class="line">        OutClassTest.InnerStaticClass inner = <span class="keyword">new</span> OutClassTest.InnerStaticClass();</span><br><span class="line">        <span class="comment">// 调用静态内部类的非静态方法</span></span><br><span class="line">        System.out.println(inner.getValue());</span><br><span class="line">        <span class="comment">// 调用内部静态类的静态方法</span></span><br><span class="line">        System.out.println(OutClassTest.InnerStaticClass.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">InnerClass</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 只有在静态内部类中才能够声明或定义静态成员</span></span><br><span class="line">        <span class="comment">// private static String tt = "0";</span></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> flag = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">InnerClass</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="comment">// 三.非静态内部类的非静态成员可以访问外部类的非静态变量和静态变量</span></span><br><span class="line">            System.out.println(<span class="string">"InnerClass create a:"</span> + a);</span><br><span class="line">            System.out.println(<span class="string">"InnerClass create b:"</span> + b);</span><br><span class="line">            System.out.println(<span class="string">"InnerClass create flag:"</span> + flag);</span><br><span class="line">            <span class="comment">//</span></span><br><span class="line">            System.out.println(<span class="string">"InnerClass call outer static function"</span>);</span><br><span class="line">            <span class="comment">// 调用外部类的静态方法</span></span><br><span class="line">            test();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span>  String <span class="title">getKey</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"no-static-inner"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">InnerStaticClass</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 静态内部类可以有静态成员，而非静态内部类则不能有静态成员。</span></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> String static_value = <span class="string">"0"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> flag = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">InnerStaticClass</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"InnerClass create a:"</span> + a);</span><br><span class="line">            <span class="comment">// 静态内部类不能够访问外部类的非静态成员</span></span><br><span class="line">            <span class="comment">// System.out.println("InnerClass create b:" + b);</span></span><br><span class="line">            System.out.println(<span class="string">"InnerStaticClass flag is "</span> + flag);</span><br><span class="line">            System.out.println(<span class="string">"InnerStaticClass tt is "</span> + static_value);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="comment">// 静态内部类访问外部类的静态方法</span></span><br><span class="line">            test();</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getMessage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"static-inner"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">OutClassTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// new一个非静态的内部类</span></span><br><span class="line">        InnerClass ic = <span class="keyword">new</span> InnerClass();</span><br><span class="line">        System.out.println(<span class="string">"OuterClass create"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>总结：</strong> </p>
-<ul>
-<li>1.静态内部类可以有静态成员(方法，属性)，而非静态内部类则不能有静态成员(方法，属性)。</li>
-<li>2.静态内部类只能够访问外部类的静态成员,而非静态内部类则可以访问外部类的所有成员(方法，属性)。</li>
-<li>3.实例化一个非静态的内部类的方法：</li>
-<li>a.先生成一个外部类对象实例</li>
-<li>OutClassTest oc1 = new OutClassTest();</li>
-<li>b.通过外部类的对象实例生成内部类对象</li>
-<li>OutClassTest.InnerClass no_static_inner = oc1.new InnerClass();</li>
-<li>4.实例化一个静态内部类的方法：</li>
-<li>a.不依赖于外部类的实例,直接实例化内部类对象</li>
-<li>OutClassTest.InnerStaticClass inner = new OutClassTest.InnerStaticClass();</li>
-<li>b.调用内部静态类的方法或静态变量,通过类名直接调用</li>
-<li>OutClassTest.InnerStaticClass.static_value</li>
-<li>OutClassTest.InnerStaticClass.getMessage()</li>
-</ul>
-<blockquote>
-<p>references:<br><a href="http://hi.baidu.com/zhumulangma/item/bcd478c140427b2cef466532" target="_blank" rel="noopener">http://hi.baidu.com/zhumulangma/item/bcd478c140427b2cef466532</a><br><a href="http://duqiangcise.iteye.com/blog/697476" target="_blank" rel="noopener">http://duqiangcise.iteye.com/blog/697476</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/11/notebook/innerclass/" data-id="ck91iwv4c000437ojal0nevjr" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-notebook/final" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/03/11/notebook/final/" class="article-date">
-  <time datetime="2020-03-11T13:50:04.608Z" itemprop="datePublished">2020-03-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/03/11/notebook/final/">notebook/final</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Final-理解"><a href="#Final-理解" class="headerlink" title="Final 理解"></a>Final 理解</h1><h2 id="一．Final-修饰成员变量的注意事项"><a href="#一．Final-修饰成员变量的注意事项" class="headerlink" title="一．Final 修饰成员变量的注意事项"></a>一．Final 修饰成员变量的注意事项</h2><p>final修饰成员变量，该成员变量必须在创建对象之前进行赋值，否则编译失败<br>final修饰成员变量，固定的不是成员变量拥有的默认值，如果固定的是默认值，那么将导致被final修饰的成员变量的值永远无法修改，只能是默认值，这也不符合语法规则  </p>
-<p>成员变量的赋值有三种实现方式：</p>
-<ul>
-<li>定义成员变量的时候手动赋值</li>
-<li>利用构造器对成员变量进行赋值</li>
-<li>利用set函数进行赋值（也即利用一般的方法进行赋值）</li>
-</ul>
-<p><strong>注意</strong><br>被final修饰的成员变量，只能拥有3中所描述的赋值方法的1，2。3为什么不行？</p>
-<p>解释：如1所描述，被final修饰的成员变量必须在对象创建之前进行赋值，如果方法3可以，那么我们知道对象创建后，才能调用方法3，也就是说成员变量利用方法3进行赋值，会导致成员变量的赋值发生在对象创建之后</p>
-<h2 id="二-为什么被Final修饰的成员变量必须在对象创建之前进行赋值？"><a href="#二-为什么被Final修饰的成员变量必须在对象创建之前进行赋值？" class="headerlink" title="二. 为什么被Final修饰的成员变量必须在对象创建之前进行赋值？"></a>二. 为什么被Final修饰的成员变量必须在对象创建之前进行赋值？</h2><p>理解：<br>被final关键字修饰的东西有一个特点，那就是一旦被修饰，那么它的值也就终生不变，可见final关键字起到了固定的作用，既然起到固定那么，你就要提前告诉final固定的是谁，如果允许被final修饰的成员变量赋值发生在对象创建之后，那么对象创建完成后final固定的值还是未可知的</p>
-<h2 id="三-final修饰成员变量和final修饰局部变量的区别与联系："><a href="#三-final修饰成员变量和final修饰局部变量的区别与联系：" class="headerlink" title="三. final修饰成员变量和final修饰局部变量的区别与联系："></a>三. final修饰成员变量和final修饰局部变量的区别与联系：</h2><ol>
-<li>被final修饰的成员变量与局部变量均具有：一旦赋值，该值就终身不变</li>
-<li>被final修饰的成员变量必须要在创建对象之前进行赋值，否则会编译失败，但是局部变量可以不赋值，但是没有被赋值的局部变量不能够被使用，一旦被使用就会编译失败</li>
-<li>综上：一旦决定使用final关键字来修饰成员变量或者局部变量，一定要做到提前赋值</li>
-</ol>
-<h2 id="四．Final修饰成员方法："><a href="#四．Final修饰成员方法：" class="headerlink" title="四．Final修饰成员方法："></a>四．Final修饰成员方法：</h2><ol>
-<li>final修饰成员方法，该成员方法就不能被子类重写，但是仍然可以被子类继承并可以通过子类对象调用该方法</li>
-</ol>
-<h2 id="五．Final修饰类"><a href="#五．Final修饰类" class="headerlink" title="五．Final修饰类"></a>五．Final修饰类</h2><p>1.final修饰类，该类便不能被其他类继承，但是该类仍然能够创建对象，并且，可以利用该对象调用该类的成员变量或者成员方法</p>
-<h2 id="六．Final使用范围："><a href="#六．Final使用范围：" class="headerlink" title="六．Final使用范围："></a>六．Final使用范围：</h2><p>Final关键字可以修饰类，类的成员变量，类的成员方法，成员方法的局部变量，等等，</p>
-<p>但是final关键字不能用来修饰构造方法？<br>理解：<br>final修饰普通方法，将导致子类无法重写该方法，而构造方法本身就不能够被子类重写，故如果用final修饰，如同多此一举</p>
-<blockquote>
-<p>Reference<br><a href="https://blog.csdn.net/xichengfengyulou/article/details/81155290" target="_blank" rel="noopener">https://blog.csdn.net/xichengfengyulou/article/details/81155290</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/03/11/notebook/final/" data-id="ck91iwv4f000737oj7fub2duw" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -725,7 +692,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a></li></ul>
     </div>
   </div>
 
@@ -738,6 +705,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/11/07/notebook/jupyter-kernel/">notebook/jupyter-kernel</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/11/06/paper/ClusteringGANSiamese/">paper/ClusteringGANSiamese</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/10/25/notebook/sql/">notebook/sql</a>
           </li>
         
@@ -747,14 +722,6 @@
         
           <li>
             <a href="/blog/2020/09/23/nlp/Transformer/">nlp/Transformer</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/09/18/paper/Attention-Transformer/">paper/Attention-Transformer</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/09/18/paper/XLNet/">paper/XLNet</a>
           </li>
         
       </ul>
