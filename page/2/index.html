@@ -68,6 +68,70 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-paper/Attention" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/09/13/paper/Attention/" class="article-date">
+  <time datetime="2020-09-13T12:32:41.635Z" itemprop="datePublished">2020-09-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/09/13/paper/Attention/">paper/Attention</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Attention-Is-All-You-Need"><a href="#Attention-Is-All-You-Need" class="headerlink" title="Attention Is All You Need"></a>Attention Is All You Need</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>我们提出一种全新的简洁的网络架构–Transfomer，它完全基于Attention机制，舍弃了循环与卷积。</p>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 Introduction"></a>1 Introduction</h2><p>Transformer的并行性很好的解决了RNN模型的序列化输入输出。</p>
+<h2 id="2-Background"><a href="#2-Background" class="headerlink" title="2 Background"></a>2 Background</h2><h2 id="3-Model-Architecture"><a href="#3-Model-Architecture" class="headerlink" title="3 Model Architecture"></a>3 Model Architecture</h2><p>大部分序列神经网络模型都具有encoder-decoder结构。</p>
+<h3 id="3-1-Encoder-and-Decoder-Stacks"><a href="#3-1-Encoder-and-Decoder-Stacks" class="headerlink" title="3.1 Encoder and Decoder Stacks"></a>3.1 Encoder and Decoder Stacks</h3><p>encoder由6个相同的层构成，每一层有两个子层。第一个是一个多Attention机制，第二个是一个简单的全连接feed-forward网络。两个子层中间部署一个参差网络，后接一个正则化。</p>
+<p>decoder也是由6个相同的层构成。除了两个子层外中间还加入了一个第三子层Multi-head Attention.</p>
+<h3 id="3-2-Attention"><a href="#3-2-Attention" class="headerlink" title="3.2 Attention"></a>3.2 Attention</h3><p>Attention的核心内容是为输入向量的每个单词(512d)学习一个权重。在self-attention中，每个单词有3个不同的向量，Query，Key，Value，长度均是64. 他们通过3个不同的权值矩阵由嵌入向量X乘以三个不同的权值矩阵WQ，WK，WV(512 * 64)得到。</p>
+<p>Attention计算步骤：</p>
+<ul>
+<li>将输入单词转换成词向量</li>
+<li>根据词向量得到q, k, v三个向量</li>
+<li>为每个向量计算一个score: score = q * kT</li>
+<li>为了梯度的稳定，Transformer使用了score归一化，即除以根号dk</li>
+<li>对score过一遍softmax函数</li>
+<li>softmax点乘value得到每个输入向量的评分v</li>
+<li>想家之后得到最终的输出结果z=∑v</li>
+</ul>
+<h3 id="3-3-Multi-Head-Attention"><a href="#3-3-Multi-Head-Attention" class="headerlink" title="3.3 Multi-Head Attention"></a>3.3 Multi-Head Attention</h3><p>Multi-Head Attention相当于h个不同的self-attention的集成。</p>
+<p>Multi-Head输出分三步</p>
+<ul>
+<li>将X分别输入到8个self-attention中得到8个加权后的特征矩阵Z</li>
+<li>将8个Z按列拼接成一个大的特征矩阵</li>
+<li>将特征矩阵经过一层fc后得到输出Z</li>
+</ul>
+<h3 id="3-4-损失层"><a href="#3-4-损失层" class="headerlink" title="3.4 损失层"></a>3.4 损失层</h3><p>解码器解码后，解码的特征向量通过一层激活函数为softmax的全连接层之后得到反应每个单词概率的输出向量。此时通过CTC等损失函数训练模型。</p>
+<h2 id="4-位置编码"><a href="#4-位置编码" class="headerlink" title="4 位置编码"></a>4 位置编码</h2><p>Transfomer无法捕捉循序序列的能力。论文在编码词向量时引入了位置编码的特征，位置编码会在词向量中加入单词的位置信息。</p>
+<p>在上式中， [公式] 表示单词的位置， [公式] 表示单词的维度。关于位置编码的实现可在Google开源的算法中get_timing_signal_1d()函数找到对应的代码。</p>
+<p>作者这么设计的原因是考虑到在NLP任务重，除了单词的绝对位置，单词的相对位置也非常重要。根据公式 [公式] 以及[公式] ，这表明位置 [公式] 的位置向量可以表示为位置 [公式] 的特征向量的线性变化，这为模型捕捉单词之间的相对位置关系提供了非常大的便利。</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>位置编码对词袋模型等具有普适性？<br>encoder/decoder通过self-attention层所得到的向量即理解为加密/解密？<br>得到最后的Z之后怎么用？</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/09/13/paper/Attention/" data-id="ckf88nxb40000a4oj2yqn0ikm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-notebook/Authentication&amp;Authorization" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/08/16/notebook/Authentication&Authorization/" class="article-date">
@@ -910,351 +974,6 @@ array([[2, 3],
 
 
   
-    <article id="post-mlsec/KNN-鸢尾花数据集" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/05/17/mlsec/KNN-%E9%B8%A2%E5%B0%BE%E8%8A%B1%E6%95%B0%E6%8D%AE%E9%9B%86/" class="article-date">
-  <time datetime="2020-05-17T08:36:25.969Z" itemprop="datePublished">2020-05-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/05/17/mlsec/KNN-%E9%B8%A2%E5%B0%BE%E8%8A%B1%E6%95%B0%E6%8D%AE%E9%9B%86/">mlsec/KNN-鸢尾花数据集</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="KNN-鸢尾花数据集"><a href="#KNN-鸢尾花数据集" class="headerlink" title="KNN-鸢尾花数据集"></a>KNN-鸢尾花数据集</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br></pre></td></tr></table></figure>
-
-<h4 id="使用sklearn本地数据集中的鸢尾花数据集"><a href="#使用sklearn本地数据集中的鸢尾花数据集" class="headerlink" title="使用sklearn本地数据集中的鸢尾花数据集"></a>使用sklearn本地数据集中的鸢尾花数据集</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iris = datasets.load_iris()</span><br><span class="line">iris.keys()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>dict_keys([&apos;data&apos;, &apos;target&apos;, &apos;target_names&apos;, &apos;DESCR&apos;, &apos;feature_names&apos;, &apos;filename&apos;])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X = iris.data</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Y = iris.target</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X.shape</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>(150, 4)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Y.shape</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>(150,)</code></pre><h1 id="手动分离测试数据"><a href="#手动分离测试数据" class="headerlink" title="手动分离测试数据"></a>手动分离测试数据</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">shuffled_indexes = np.random.permutation(len(X))</span><br><span class="line">shuffled_indexes</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>array([ 47,  10, 144,  57, 135,  58,  36, 136,  73, 109,  64,  15, 104,
-       143, 108,  83,  23, 126, 125, 131, 137,  22,  16,  29, 118,  31,
-        33,  52,  32, 132,  45,  38,  78, 139,  30,  37,  61,  97, 122,
-        56, 107,  66, 114,  87,  43,  76,  84,  79, 142,  70,  77,  42,
-         7, 138, 141, 120, 129,  44,  24,  53, 116,  13,  91, 119,  93,
-         6,  60,  50,  67,  20,  54,  71,  89,  68,  21, 133, 148,  81,
-        25,  48, 130, 127,  28,  90,  82, 146, 100, 105,  80,  94,  14,
-        55, 111, 106, 101, 103,  35,  99,   3,  26,  69, 124,  95,  96,
-       140,  46,  19,  34,  75,  59,   1, 117, 121,  49, 110,   0, 115,
-        72,   9,  18, 149,  40, 145,  92, 123,  51,   4,  11,  39,  85,
-        62, 147, 102,  74,   2,  86,   8,  17,   5,  27, 112, 128,  12,
-        65,  41, 134,  63,  88, 113,  98])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">test_ratio = <span class="number">0.2</span></span><br><span class="line">test_size = int(len(X) * test_ratio)</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">test_indexes = shuffled_indexes[:test_size]</span><br><span class="line">train_indexes = shuffled_indexes[test_size:]</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">X_train = X[train_indexes]</span><br><span class="line">Y_train = Y[train_indexes]</span><br><span class="line"></span><br><span class="line">X_test = X[test_indexes]</span><br><span class="line">Y_test = Y[test_indexes]</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(X_train.shape);print(Y_train.shape);print(X_test.shape);print(Y_test.shape)</span><br></pre></td></tr></table></figure>
-
-<pre><code>(120, 4)
-(120,)
-(30, 4)
-(30,)</code></pre><h1 id="使用sklearn分离"><a href="#使用sklearn分离" class="headerlink" title="使用sklearn分离"></a>使用sklearn分离</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">train_test_split?</span><br></pre></td></tr></table></figure>
-
-
-<pre><code>[0;31mSignature:[0m [0mtrain_test_split[0m[0;34m([0m[0;34m*[0m[0marrays[0m[0;34m,[0m [0;34m**[0m[0moptions[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;31mDocstring:[0m
-Split arrays or matrices into random train and test subsets
-
-Quick utility that wraps input validation and
-``next(ShuffleSplit().split(X, y))`` and application to input data
-into a single call for splitting (and optionally subsampling) data in a
-oneliner.
-
-Read more in the :ref:`User Guide &lt;cross_validation&gt;`.
-
-Parameters
-----------
-*arrays : sequence of indexables with same length / shape[0]
-    Allowed inputs are lists, numpy arrays, scipy-sparse
-    matrices or pandas dataframes.
-
-test_size : float, int or None, optional (default=None)
-    If float, should be between 0.0 and 1.0 and represent the proportion
-    of the dataset to include in the test split. If int, represents the
-    absolute number of test samples. If None, the value is set to the
-    complement of the train size. If ``train_size`` is also None, it will
-    be set to 0.25.
-
-train_size : float, int, or None, (default=None)
-    If float, should be between 0.0 and 1.0 and represent the
-    proportion of the dataset to include in the train split. If
-    int, represents the absolute number of train samples. If None,
-    the value is automatically set to the complement of the test size.
-
-random_state : int, RandomState instance or None, optional (default=None)
-    If int, random_state is the seed used by the random number generator;
-    If RandomState instance, random_state is the random number generator;
-    If None, the random number generator is the RandomState instance used
-    by `np.random`.
-
-shuffle : boolean, optional (default=True)
-    Whether or not to shuffle the data before splitting. If shuffle=False
-    then stratify must be None.
-
-stratify : array-like or None (default=None)
-    If not None, data is split in a stratified fashion, using this as
-    the class labels.
-
-Returns
--------
-splitting : list, length=2 * len(arrays)
-    List containing train-test split of inputs.
-
-    .. versionadded:: 0.16
-        If the input is sparse, the output will be a
-        ``scipy.sparse.csr_matrix``. Else, output type is the same as the
-        input type.
-
-Examples
---------
-&gt;&gt;&gt; import numpy as np
-&gt;&gt;&gt; from sklearn.model_selection import train_test_split
-&gt;&gt;&gt; X, y = np.arange(10).reshape((5, 2)), range(5)
-&gt;&gt;&gt; X
-array([[0, 1],
-       [2, 3],
-       [4, 5],
-       [6, 7],
-       [8, 9]])
-&gt;&gt;&gt; list(y)
-[0, 1, 2, 3, 4]
-
-&gt;&gt;&gt; X_train, X_test, y_train, y_test = train_test_split(
-...     X, y, test_size=0.33, random_state=42)
-...
-&gt;&gt;&gt; X_train
-array([[4, 5],
-       [0, 1],
-       [6, 7]])
-&gt;&gt;&gt; y_train
-[2, 0, 3]
-&gt;&gt;&gt; X_test
-array([[2, 3],
-       [8, 9]])
-&gt;&gt;&gt; y_test
-[1, 4]
-
-&gt;&gt;&gt; train_test_split(y, shuffle=False)
-[[0, 1, 2], [3, 4]]
-[0;31mFile:[0m      /Applications/anaconda3/lib/python3.7/site-packages/sklearn/model_selection/_split.py
-[0;31mType:[0m      function</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=<span class="number">0.2</span>, random_state=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">print(X_train.shape)</span><br><span class="line">print(Y_train.shape)</span><br><span class="line">print(X_test.shape)</span><br><span class="line">print(Y_test.shape)</span><br></pre></td></tr></table></figure>
-
-<pre><code>(120, 4)
-(120,)
-(30, 4)
-(30,)</code></pre><h1 id="使用sklearn中的KNN分离器测试"><a href="#使用sklearn中的KNN分离器测试" class="headerlink" title="使用sklearn中的KNN分离器测试"></a>使用sklearn中的KNN分离器测试</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br><span class="line">KNeighborsClassifier?</span><br></pre></td></tr></table></figure>
-
-
-<pre><code>[0;31mInit signature:[0m
-[0mKNeighborsClassifier[0m[0;34m([0m[0;34m[0m
-[0;34m[0m    [0mn_neighbors[0m[0;34m=[0m[0;36m5[0m[0;34m,[0m[0;34m[0m
-[0;34m[0m    [0mweights[0m[0;34m=[0m[0;34m&apos;uniform&apos;[0m[0;34m,[0m[0;34m[0m
-[0;34m[0m    [0malgorithm[0m[0;34m=[0m[0;34m&apos;auto&apos;[0m[0;34m,[0m[0;34m[0m
-[0;34m[0m    [0mleaf_size[0m[0;34m=[0m[0;36m30[0m[0;34m,[0m[0;34m[0m
-[0;34m[0m    [0mp[0m[0;34m=[0m[0;36m2[0m[0;34m,[0m[0;34m[0m
-[0;34m[0m    [0mmetric[0m[0;34m=[0m[0;34m&apos;minkowski&apos;[0m[0;34m,[0m[0;34m[0m
-[0;34m[0m    [0mmetric_params[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m[0;34m[0m
-[0;34m[0m    [0mn_jobs[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m[0;34m[0m
-[0;34m[0m    [0;34m**[0m[0mkwargs[0m[0;34m,[0m[0;34m[0m
-[0;34m[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;31mDocstring:[0m     
-Classifier implementing the k-nearest neighbors vote.
-
-Read more in the :ref:`User Guide &lt;classification&gt;`.
-
-Parameters
-----------
-n_neighbors : int, optional (default = 5)
-    Number of neighbors to use by default for :meth:`kneighbors` queries.
-
-weights : str or callable, optional (default = &apos;uniform&apos;)
-    weight function used in prediction.  Possible values:
-
-    - &apos;uniform&apos; : uniform weights.  All points in each neighborhood
-      are weighted equally.
-    - &apos;distance&apos; : weight points by the inverse of their distance.
-      in this case, closer neighbors of a query point will have a
-      greater influence than neighbors which are further away.
-    - [callable] : a user-defined function which accepts an
-      array of distances, and returns an array of the same shape
-      containing the weights.
-
-algorithm : {&apos;auto&apos;, &apos;ball_tree&apos;, &apos;kd_tree&apos;, &apos;brute&apos;}, optional
-    Algorithm used to compute the nearest neighbors:
-
-    - &apos;ball_tree&apos; will use :class:`BallTree`
-    - &apos;kd_tree&apos; will use :class:`KDTree`
-    - &apos;brute&apos; will use a brute-force search.
-    - &apos;auto&apos; will attempt to decide the most appropriate algorithm
-      based on the values passed to :meth:`fit` method.
-
-    Note: fitting on sparse input will override the setting of
-    this parameter, using brute force.
-
-leaf_size : int, optional (default = 30)
-    Leaf size passed to BallTree or KDTree.  This can affect the
-    speed of the construction and query, as well as the memory
-    required to store the tree.  The optimal value depends on the
-    nature of the problem.
-
-p : integer, optional (default = 2)
-    Power parameter for the Minkowski metric. When p = 1, this is
-    equivalent to using manhattan_distance (l1), and euclidean_distance
-    (l2) for p = 2. For arbitrary p, minkowski_distance (l_p) is used.
-
-metric : string or callable, default &apos;minkowski&apos;
-    the distance metric to use for the tree.  The default metric is
-    minkowski, and with p=2 is equivalent to the standard Euclidean
-    metric. See the documentation of the DistanceMetric class for a
-    list of available metrics.
-    If metric is &quot;precomputed&quot;, X is assumed to be a distance matrix and
-    must be square during fit. X may be a :term:`Glossary &lt;sparse graph&gt;`,
-    in which case only &quot;nonzero&quot; elements may be considered neighbors.
-
-metric_params : dict, optional (default = None)
-    Additional keyword arguments for the metric function.
-
-n_jobs : int or None, optional (default=None)
-    The number of parallel jobs to run for neighbors search.
-    ``None`` means 1 unless in a :obj:`joblib.parallel_backend` context.
-    ``-1`` means using all processors. See :term:`Glossary &lt;n_jobs&gt;`
-    for more details.
-    Doesn&apos;t affect :meth:`fit` method.
-
-Attributes
-----------
-classes_ : array of shape (n_classes,)
-    Class labels known to the classifier
-
-effective_metric_ : string or callble
-    The distance metric used. It will be same as the `metric` parameter
-    or a synonym of it, e.g. &apos;euclidean&apos; if the `metric` parameter set to
-    &apos;minkowski&apos; and `p` parameter set to 2.
-
-effective_metric_params_ : dict
-    Additional keyword arguments for the metric function. For most metrics
-    will be same with `metric_params` parameter, but may also contain the
-    `p` parameter value if the `effective_metric_` attribute is set to
-    &apos;minkowski&apos;.
-
-outputs_2d_ : bool
-    False when `y`&apos;s shape is (n_samples, ) or (n_samples, 1) during fit
-    otherwise True.
-
-Examples
---------
-&gt;&gt;&gt; X = [[0], [1], [2], [3]]
-&gt;&gt;&gt; y = [0, 0, 1, 1]
-&gt;&gt;&gt; from sklearn.neighbors import KNeighborsClassifier
-&gt;&gt;&gt; neigh = KNeighborsClassifier(n_neighbors=3)
-&gt;&gt;&gt; neigh.fit(X, y)
-KNeighborsClassifier(...)
-&gt;&gt;&gt; print(neigh.predict([[1.1]]))
-[0]
-&gt;&gt;&gt; print(neigh.predict_proba([[0.9]]))
-[[0.66666667 0.33333333]]
-
-See also
---------
-RadiusNeighborsClassifier
-KNeighborsRegressor
-RadiusNeighborsRegressor
-NearestNeighbors
-
-Notes
------
-See :ref:`Nearest Neighbors &lt;neighbors&gt;` in the online documentation
-for a discussion of the choice of ``algorithm`` and ``leaf_size``.
-
-.. warning::
-
-   Regarding the Nearest Neighbors algorithms, if it is found that two
-   neighbors, neighbor `k+1` and `k`, have identical distances
-   but different labels, the results will depend on the ordering of the
-   training data.
-
-https://en.wikipedia.org/wiki/K-nearest_neighbor_algorithm
-[0;31mFile:[0m           /Applications/anaconda3/lib/python3.7/site-packages/sklearn/neighbors/_classification.py
-[0;31mType:[0m           ABCMeta
-[0;31mSubclasses:[0m     </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">KNNClf = KNeighborsClassifier(n_neighbors=<span class="number">3</span>)</span><br><span class="line">KNNClf.fit(X_train, Y_train)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>KNeighborsClassifier(algorithm=&apos;auto&apos;, leaf_size=30, metric=&apos;minkowski&apos;,
-                     metric_params=None, n_jobs=None, n_neighbors=3, p=2,
-                     weights=&apos;uniform&apos;)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">res = KNNClf.predict(X_test)</span><br><span class="line">res</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>array([0, 1, 1, 0, 2, 1, 2, 0, 0, 2, 1, 0, 2, 1, 1, 0, 1, 1, 0, 0, 1, 1,
-       1, 0, 2, 1, 0, 0, 1, 2])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Y_test</span><br></pre></td></tr></table></figure>
-
-
-
-
-<pre><code>array([0, 1, 1, 0, 2, 1, 2, 0, 0, 2, 1, 0, 2, 1, 1, 0, 1, 1, 0, 0, 1, 1,
-       1, 0, 2, 1, 0, 0, 1, 2])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acc = sum(res == Y_test)</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'accuracy '</span>, acc / len(Y_test))</span><br></pre></td></tr></table></figure>
-
-<pre><code>accuracy  1.0</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/05/17/mlsec/KNN-%E9%B8%A2%E5%B0%BE%E8%8A%B1%E6%95%B0%E6%8D%AE%E9%9B%86/" data-id="ckaat5boe0002vaojg8iybnjo" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -1291,6 +1010,10 @@ https://en.wikipedia.org/wiki/K-nearest_neighbor_algorithm
       <ul>
         
           <li>
+            <a href="/blog/2020/11/07/notebook/linux-path/">notebook/linux-path</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/11/07/notebook/jupyter-kernel/">notebook/jupyter-kernel</a>
           </li>
         
@@ -1304,10 +1027,6 @@ https://en.wikipedia.org/wiki/K-nearest_neighbor_algorithm
         
           <li>
             <a href="/blog/2020/09/23/nlp/BERT/">nlp/BERT</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/09/23/nlp/Transformer/">nlp/Transformer</a>
           </li>
         
       </ul>

@@ -68,6 +68,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-notebook/linux-path" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/11/07/notebook/linux-path/" class="article-date">
+  <time datetime="2020-11-06T18:09:33.829Z" itemprop="datePublished">2020-11-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/11/07/notebook/linux-path/">notebook/linux-path</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux下修改环境变量"><a href="#Linux下修改环境变量" class="headerlink" title="Linux下修改环境变量"></a>Linux下修改环境变量</h1><h2 id="查看PATH"><a href="#查看PATH" class="headerlink" title="查看PATH"></a>查看PATH</h2><p>echo $PATH<br>以添加mongodb server为列</p>
+<h2 id="修改方法一"><a href="#修改方法一" class="headerlink" title="修改方法一"></a>修改方法一</h2><p>export PATH=/usr/local/mongodb/bin:$PATH<br>//配置完后可以通过echo $PATH查看配置结果。<br>生效方法：立即生效<br>有效期限：临时改变，只能在当前的终端窗口中有效，当前窗口关闭后就会恢复原有的path配置<br>用户局限：仅对当前用户</p>
+<h2 id="修改方法二"><a href="#修改方法二" class="headerlink" title="修改方法二"></a>修改方法二</h2><p>通过修改.bashrc文件:<br>vim ~/.bashrc<br>//在最后一行添上：<br>export PATH=/usr/local/mongodb/bin:$PATH<br>生效方法：（有以下两种）<br>1、关闭当前终端窗口，重新打开一个新终端窗口就能生效<br>2、输入“source ~/.bashrc”命令，立即生效<br>有效期限：永久有效<br>用户局限：仅对当前用户</p>
+<h2 id="修改方法三"><a href="#修改方法三" class="headerlink" title="修改方法三"></a>修改方法三</h2><p>通过修改profile文件:<br>vim /etc/profile<br>/export PATH //找到设置PATH的行，添加<br>export PATH=/usr/local/mongodb/bin:$PATH<br>生效方法：系统重启<br>有效期限：永久有效<br>用户局限：对所有用户</p>
+<h2 id="修改方法四"><a href="#修改方法四" class="headerlink" title="修改方法四"></a>修改方法四</h2><p>通过修改environment文件:<br>vim /etc/environment<br>在PATH=”/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games”中加入“:/usr/local/mongodb/bin”<br>生效方法：系统重启<br>有效期限：永久有效<br>用户局限：对所有用户</p>
+<h2 id="MacOS"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS</h2><p>MAC OS X环境配置的加载顺序</p>
+<ul>
+<li><p>系统级别<br>/etc/profile<br>/etc/paths </p>
+</li>
+<li><p>用户级别<br>~/.bash_profile<br>~/.bash_login<br>~/.profile<br>~/.bashrc  （在打开shell时加载）</p>
+</li>
+</ul>
+<p>/etc/paths 全局建议修改这个文件<br>/etc/profile 不建议修改这个文件，全局共有配置，用户登录时候都会加载该文件<br>/etc/bashrc 一般在这个文件中添加系统级别的环境变量，全局共有配置，bash shell执行时候都会加载</p>
+<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><p>想要立即生效执行<code>source</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/blog/2020/11/07/notebook/linux-path/" data-id="ckhan47vk0000kfojdljqef3n" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-notebook/jupyter-kernel" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/11/07/notebook/jupyter-kernel/" class="article-date">
@@ -675,70 +725,6 @@
 
 
   
-    <article id="post-paper/Attention" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/09/13/paper/Attention/" class="article-date">
-  <time datetime="2020-09-13T12:32:41.635Z" itemprop="datePublished">2020-09-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/09/13/paper/Attention/">paper/Attention</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Attention-Is-All-You-Need"><a href="#Attention-Is-All-You-Need" class="headerlink" title="Attention Is All You Need"></a>Attention Is All You Need</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>我们提出一种全新的简洁的网络架构–Transfomer，它完全基于Attention机制，舍弃了循环与卷积。</p>
-<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 Introduction"></a>1 Introduction</h2><p>Transformer的并行性很好的解决了RNN模型的序列化输入输出。</p>
-<h2 id="2-Background"><a href="#2-Background" class="headerlink" title="2 Background"></a>2 Background</h2><h2 id="3-Model-Architecture"><a href="#3-Model-Architecture" class="headerlink" title="3 Model Architecture"></a>3 Model Architecture</h2><p>大部分序列神经网络模型都具有encoder-decoder结构。</p>
-<h3 id="3-1-Encoder-and-Decoder-Stacks"><a href="#3-1-Encoder-and-Decoder-Stacks" class="headerlink" title="3.1 Encoder and Decoder Stacks"></a>3.1 Encoder and Decoder Stacks</h3><p>encoder由6个相同的层构成，每一层有两个子层。第一个是一个多Attention机制，第二个是一个简单的全连接feed-forward网络。两个子层中间部署一个参差网络，后接一个正则化。</p>
-<p>decoder也是由6个相同的层构成。除了两个子层外中间还加入了一个第三子层Multi-head Attention.</p>
-<h3 id="3-2-Attention"><a href="#3-2-Attention" class="headerlink" title="3.2 Attention"></a>3.2 Attention</h3><p>Attention的核心内容是为输入向量的每个单词(512d)学习一个权重。在self-attention中，每个单词有3个不同的向量，Query，Key，Value，长度均是64. 他们通过3个不同的权值矩阵由嵌入向量X乘以三个不同的权值矩阵WQ，WK，WV(512 * 64)得到。</p>
-<p>Attention计算步骤：</p>
-<ul>
-<li>将输入单词转换成词向量</li>
-<li>根据词向量得到q, k, v三个向量</li>
-<li>为每个向量计算一个score: score = q * kT</li>
-<li>为了梯度的稳定，Transformer使用了score归一化，即除以根号dk</li>
-<li>对score过一遍softmax函数</li>
-<li>softmax点乘value得到每个输入向量的评分v</li>
-<li>想家之后得到最终的输出结果z=∑v</li>
-</ul>
-<h3 id="3-3-Multi-Head-Attention"><a href="#3-3-Multi-Head-Attention" class="headerlink" title="3.3 Multi-Head Attention"></a>3.3 Multi-Head Attention</h3><p>Multi-Head Attention相当于h个不同的self-attention的集成。</p>
-<p>Multi-Head输出分三步</p>
-<ul>
-<li>将X分别输入到8个self-attention中得到8个加权后的特征矩阵Z</li>
-<li>将8个Z按列拼接成一个大的特征矩阵</li>
-<li>将特征矩阵经过一层fc后得到输出Z</li>
-</ul>
-<h3 id="3-4-损失层"><a href="#3-4-损失层" class="headerlink" title="3.4 损失层"></a>3.4 损失层</h3><p>解码器解码后，解码的特征向量通过一层激活函数为softmax的全连接层之后得到反应每个单词概率的输出向量。此时通过CTC等损失函数训练模型。</p>
-<h2 id="4-位置编码"><a href="#4-位置编码" class="headerlink" title="4 位置编码"></a>4 位置编码</h2><p>Transfomer无法捕捉循序序列的能力。论文在编码词向量时引入了位置编码的特征，位置编码会在词向量中加入单词的位置信息。</p>
-<p>在上式中， [公式] 表示单词的位置， [公式] 表示单词的维度。关于位置编码的实现可在Google开源的算法中get_timing_signal_1d()函数找到对应的代码。</p>
-<p>作者这么设计的原因是考虑到在NLP任务重，除了单词的绝对位置，单词的相对位置也非常重要。根据公式 [公式] 以及[公式] ，这表明位置 [公式] 的位置向量可以表示为位置 [公式] 的特征向量的线性变化，这为模型捕捉单词之间的相对位置关系提供了非常大的便利。</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>位置编码对词袋模型等具有普适性？<br>encoder/decoder通过self-attention层所得到的向量即理解为加密/解密？<br>得到最后的Z之后怎么用？</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/blog/2020/09/13/paper/Attention/" data-id="ckf88nxb40000a4oj2yqn0ikm" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -775,6 +761,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/11/07/notebook/linux-path/">notebook/linux-path</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/11/07/notebook/jupyter-kernel/">notebook/jupyter-kernel</a>
           </li>
         
@@ -788,10 +778,6 @@
         
           <li>
             <a href="/blog/2020/09/23/nlp/BERT/">nlp/BERT</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/09/23/nlp/Transformer/">nlp/Transformer</a>
           </li>
         
       </ul>
