@@ -1,3 +1,11 @@
+---
+title: 修改环境变量
+categories:
+- Notebook
+tags:
+- linux
+---
+
 # Linux下修改环境变量
 
 ## 查看PATH
