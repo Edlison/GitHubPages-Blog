@@ -472,6 +472,150 @@
 
 
   
+    <article id="post-nlp/Encoder-Decoder&amp;Seq2Seq" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/23/nlp/Encoder-Decoder&Seq2Seq/" class="article-date">
+  <time datetime="2020-09-23T03:57:03.864Z" itemprop="datePublished">2020-09-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/23/nlp/Encoder-Decoder&Seq2Seq/">nlp/Encoder-Decoder&amp;Seq2Seq</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Encoder-Decoder-和-Seq2Seq-概述"><a href="#Encoder-Decoder-和-Seq2Seq-概述" class="headerlink" title="Encoder-Decoder 和 Seq2Seq 概述"></a>Encoder-Decoder 和 Seq2Seq 概述</h1><h2 id="Encoder-Decoder"><a href="#Encoder-Decoder" class="headerlink" title="Encoder-Decoder"></a>Encoder-Decoder</h2><p><strong>将现实问题转化为数学问题 通过求解数学问题 从而解决现实问题</strong></p>
+<p><img src="https://easy-ai.oss-cn-shanghai.aliyuncs.com/2019-10-28-encoder.png" alt="img-encoder"><br><img src="https://easy-ai.oss-cn-shanghai.aliyuncs.com/2019-10-28-decoder.png" alt="img-decoder"><br><img src="https://easy-ai.oss-cn-shanghai.aliyuncs.com/2019-10-28-Encoder-Decoder.png" alt="img-en-de"></p>
+<p><strong>缺点：</strong></p>
+<p>Encoder 和 Decoder之间只有一个向量C来传递信息，且C的长度固定。</p>
+<p>当输入信息太长时，会丢掉一些信息。</p>
+<p><strong>Attention机制就是为了解决信息过长，信息丢失的问题。</strong></p>
+<p>Attention模型的特点是Encoder不再将整个输入序列编码为固定长度的中间向量C，而是编码成一个向量的序列。</p>
+<p><img src="https://easy-ai.oss-cn-shanghai.aliyuncs.com/2019-10-28-attention.png" alt="img-attention"></p>
+<h2 id="Seq2Seq"><a href="#Seq2Seq" class="headerlink" title="Seq2Seq"></a>Seq2Seq</h2><p>*<em>输入一个序列 输出另一个序列 *</em></p>
+<p>这种结构最重要的地方在于输入序列和输出序列的长度是可变的。</p>
+<h2 id="Encoder-Decoder-and-Seq2Seq"><a href="#Encoder-Decoder-and-Seq2Seq" class="headerlink" title="Encoder-Decoder and Seq2Seq"></a>Encoder-Decoder and Seq2Seq</h2><ul>
+<li>Seq2Seq属于Encoder-Decoder的大范畴</li>
+<li>Seq2Seq更强调目的，Encoder-Decoder更强调方法</li>
+</ul>
+<p>Rreference</p>
+<p>Encoder-Decoder 和 Seq2Seq</p>
+<p><a href="https://easyai.tech/ai-definition/encoder-decoder-seq2seq/" target="_blank" rel="noopener">https://easyai.tech/ai-definition/encoder-decoder-seq2seq/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/2020/09/23/nlp/Encoder-Decoder&Seq2Seq/" data-id="ckhdmd02q000057oj5nq3c5eh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-nlp/文本表示" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/23/nlp/%E6%96%87%E6%9C%AC%E8%A1%A8%E7%A4%BA/" class="article-date">
+  <time datetime="2020-09-23T03:47:08.165Z" itemprop="datePublished">2020-09-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/23/nlp/%E6%96%87%E6%9C%AC%E8%A1%A8%E7%A4%BA/">nlp/文本表示</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="NLP中处理文本方法"><a href="#NLP中处理文本方法" class="headerlink" title="NLP中处理文本方法"></a>NLP中处理文本方法</h1><p>由于文本是一种非架构化的数据，我们要将这种非结构化的数据转化为结构化的信息，这样我们才能对其进行处理。</p>
+<p>现在文本表示大致有三种方式。</p>
+<p><img src="https://easy-ai.oss-cn-shanghai.aliyuncs.com/2020-02-17-guanxi.png" alt="img"></p>
+<h2 id="One-Hot"><a href="#One-Hot" class="headerlink" title="One-Hot"></a>One-Hot</h2><p><strong>向量中每一个位置代表一个词</strong></p>
+<p><strong>one-hot的缺点：</strong></p>
+<ul>
+<li>无法表达词语之间的关系</li>
+<li>这种过于稀疏的向量，导致计算和存储的效率不高</li>
+</ul>
+<h2 id="整数编码"><a href="#整数编码" class="headerlink" title="整数编码"></a>整数编码</h2><p><strong>整数编码的缺点</strong></p>
+<ul>
+<li>无法表达词语之间的关系</li>
+<li>对于模型解释而言，整数编码可能具有挑战性</li>
+</ul>
+<h2 id="Word-Embedding-词嵌入"><a href="#Word-Embedding-词嵌入" class="headerlink" title="Word Embedding (词嵌入)"></a>Word Embedding (词嵌入)</h2><p>优点：</p>
+<ul>
+<li>可以将文本通过一个低维向量来表达，不像one-hot长</li>
+<li>语义相似的词在向量空间上比较相近</li>
+<li>通用性强，可用在不同的任务中</li>
+</ul>
+<h3 id="Word2Vec"><a href="#Word2Vec" class="headerlink" title="Word2Vec"></a>Word2Vec</h3><p>基于统计方法来获得词向量的方法。</p>
+<p>两种训练模式：</p>
+<ul>
+<li>通过上下文来预测当前词(CBOW)</li>
+<li>通过当前词来预测上下文(Skip-gram)</li>
+</ul>
+<p>提高速度的优化方法：</p>
+<ul>
+<li>Negtive Sample (负采样)</li>
+<li>Hierarchical Softmax</li>
+</ul>
+<p>优点：</p>
+<ul>
+<li>由于Word2Vec会考虑上下文，跟之前的Embedding方法相比，效果要更好</li>
+<li>比之前的Embedding方法维度更少，速度更快</li>
+<li>通用性强，用于各种NLP任务</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>由于词和向量是一对一的关系，所以多义词的问题无法解决</li>
+<li>Word2Vec是一种静态的方式，虽然通用性强，但是无法针对特定任务做动态优化</li>
+</ul>
+<h3 id="GloVe"><a href="#GloVe" class="headerlink" title="GloVe"></a>GloVe</h3><p>实现有三步：</p>
+<ul>
+<li>根据语料库构建一个共现矩阵，矩阵中的每一个元素代表单词和上下文单词在特定大小的上下文窗口内共同出现的次数。</li>
+<li>构建词向量和共现矩阵之间的近似关系。</li>
+<li>loss function</li>
+</ul>
+<p>Reference</p>
+<p>词嵌入 | Word embedding</p>
+<p><a href="https://easyai.tech/ai-definition/word-embedding/" target="_blank" rel="noopener">https://easyai.tech/ai-definition/word-embedding/</a></p>
+<p>Word2vec</p>
+<p><a href="https://easyai.tech/ai-definition/word2vec/" target="_blank" rel="noopener">https://easyai.tech/ai-definition/word2vec/</a></p>
+<p>GloVe详解</p>
+<p><a href="http://www.fanyeong.com/2018/02/19/glove-in-detail/" target="_blank" rel="noopener">http://www.fanyeong.com/2018/02/19/glove-in-detail/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/2020/09/23/nlp/%E6%96%87%E6%9C%AC%E8%A1%A8%E7%A4%BA/" data-id="ckhdme2kb00007nojaewl5863" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-paper/Attention-Transformer" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/09/18/paper/Attention-Transformer/" class="article-date">
@@ -606,130 +750,11 @@
 
 
   
-    <article id="post-notebook/implements-extends-2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/09/16/notebook/implements-extends-2/" class="article-date">
-  <time datetime="2020-09-16T03:31:35.238Z" itemprop="datePublished">2020-09-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/16/notebook/implements-extends-2/">notebook/implements-extends-2</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Java中继承与实现的思考"><a href="#Java中继承与实现的思考" class="headerlink" title="Java中继承与实现的思考"></a>Java中继承与实现的思考</h1><p>继承(extend): 继承传达的意思是is-a, 比如Cat is an Animal.</p>
-<p>实现(Implement): 实现传达的意思是able一种能力, 比如Cat is swimmable.</p>
-<h2 id="extend"><a href="#extend" class="headerlink" title="extend"></a>extend</h2><p>比较灵活可以继承抽象类，也可以继承实体类。<br>抽象类可以定义非抽象方法与抽象方法，如果有抽象方法则子类必须继承，如果子类没有重写非抽象方法则子类的实例使用的是父类的方法。</p>
-<p><strong>多态</strong><br>如果实例化一个子类赋给一个父类(例: Animal cat = new Cat())， 则只能够使用父类中的field与method，如果method被子类重写则会调用子类的method。</p>
-<h2 id="implement"><a href="#implement" class="headerlink" title="implement"></a>implement</h2><p>比较严格，若实现则必须实现所有方法。<br>其中的field都是static final修饰的，且只能被实现的子类获取。method不能有body，但是如果static修饰则可以有body(怎么用？)。</p>
-<p><strong>多态</strong><br>如果实例化一个子类赋给一个接口(例: Swimmable cat = new Cat())，则只能够使用该接口的field并且无法获得field。<br>如果一个子类继承了一个实现了该接口的父类则可以重写方法，如果没有重写则(Swimmable cat = new Cat())中cat获取的方法则是父类中实现的方法。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/2020/09/16/notebook/implements-extends-2/" data-id="ckf4vgmyv0000giojf19p23kp" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-notebook/docker-lineloss" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/09/15/notebook/docker-lineloss/" class="article-date">
-  <time datetime="2020-09-15T04:11:47.114Z" itemprop="datePublished">2020-09-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/15/notebook/docker-lineloss/">notebook/docker-lineloss</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Docker-部署-Lineloss"><a href="#Docker-部署-Lineloss" class="headerlink" title="Docker 部署 Lineloss"></a>Docker 部署 Lineloss</h1><h2 id="1-拉取redhat镜像"><a href="#1-拉取redhat镜像" class="headerlink" title="1 拉取redhat镜像"></a>1 拉取redhat镜像</h2><p><code>docker pull yjjy0921/redhat7.2</code></p>
-<h2 id="2-进入镜像换yum源"><a href="#2-进入镜像换yum源" class="headerlink" title="2 进入镜像换yum源"></a>2 进入镜像换yum源</h2><ul>
-<li>rpm安装wget(docker cp host.path cotainer:container.path)</li>
-<li>wget下载yum相关包</li>
-<li>rpm安装下载的相关包</li>
-</ul>
-<p><strong>报错：</strong><br>python-urlgrabber &gt;= 3.10-8 is needed by yum-3.4.3-167.el7.centos.noarch<br>rpm &gt;= 0:4.11.3-22 is needed by yum-3.4.3-167.el7.centos.noarch</p>
-<p>查询存在的python-urlgrabber包<br><code>rpm -q python-urlgrabber</code>~~</p>
-<p>删除python-urlgrabber包<br><code>rpm -e python-urlgrabber</code></p>
-<p>更新rpm包<br><code>rpm -Uvh rpm-4.11.3-43.el7.x86_64.rpm --nodeps</code></p>
-<h2 id="3-创建aliyun-repo"><a href="#3-创建aliyun-repo" class="headerlink" title="3 创建aliyun.repo"></a>3 创建aliyun.repo</h2><p><code>cd /etc/yum.repo.d/</code><br><code>vim aliyun.repo</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[base]</span><br><span class="line">name&#x3D;CentOS-$releasever - Base</span><br><span class="line">baseurl&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;centos&#x2F;7.8.2003&#x2F;os&#x2F;$basearch&#x2F;</span><br><span class="line">gpgcheck&#x3D;1</span><br><span class="line">gpgkey&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;centos&#x2F;7.8.2003&#x2F;os&#x2F;x86_64&#x2F;RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#released updates</span><br><span class="line">[updates]</span><br><span class="line">name&#x3D;CentOS-$releasever - Updates</span><br><span class="line">baseurl&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;centos&#x2F;7.8.2003&#x2F;updates&#x2F;$basearch&#x2F;</span><br><span class="line">gpgcheck&#x3D;1</span><br><span class="line">gpgkey&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;centos&#x2F;7.8.2003&#x2F;os&#x2F;x86_64&#x2F;RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[extras]</span><br><span class="line">name&#x3D;CentOS-$releasever - Extras</span><br><span class="line">baseurl&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;centos&#x2F;7.8.2003&#x2F;extras&#x2F;&#x2F;$basearch&#x2F;</span><br><span class="line">gpgcheck&#x3D;1</span><br><span class="line">gpgkey&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;centos&#x2F;7.8.2003&#x2F;os&#x2F;x86_64&#x2F;RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line">[centosplus]</span><br><span class="line">name&#x3D;CentOS-$releasever - Plus</span><br><span class="line">baseurl&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;centos&#x2F;7.8.2003&#x2F;centosplus&#x2F;&#x2F;$basearch&#x2F;</span><br><span class="line">gpgcheck&#x3D;1</span><br><span class="line">enabled&#x3D;0</span><br></pre></td></tr></table></figure>
-
-<p>清除redhat.repo<br><code>mv redhat.repo redhat.temp</code></p>
-<p>检验yum配置成功<br><code>yum update -y --skip-broken</code></p>
-<h2 id="4-安装mariadb"><a href="#4-安装mariadb" class="headerlink" title="4 安装mariadb"></a>4 安装mariadb</h2><p>安装<br><code>yum install -y mysql</code></p>
-<p><strong>注意</strong><br>docker无法使用systemctl指令使mysql后台运行</p>
-<p>查看容器配置文件<br><code>docker inspect containerID</code></p>
-<p><em>修改已经运行的容器配置文件</em><br><code>/usr/lib/docker...</code></p>
-<p>运行镜像时需要<br><code>docker run --privileged --name=lineloss -d -it edlison/lineloss /usr/sbin/init</code></p>
-<p><code>--privileged</code>赋予额外权限<br><code>/usr/sbin/init</code>将cmd设置为这个 dbus服务就会运行</p>
-<p><code>systemctl start mariadb</code> 启动服务<br><code>systemctl enable mariadb</code> 设置开机启动<br><code>systemctl restart mariadb</code> 重新启动<br><code>systemctl stop mariadb.service</code> 停止MariaDB</p>
-<p>初始化数据库<br><code>mysql_secure_installation</code></p>
-<p>设置密码<br><code>mysqladmin -u root password &#39;newpassword&#39;</code></p>
-<p>导入数据<br><code>create database lineloss;</code><br><code>use lineloss;</code><br><code>source /home/xs_project/sql/lineloss.sql</code></p>
-<h2 id="5-Java环境"><a href="#5-Java环境" class="headerlink" title="5 Java环境"></a>5 Java环境</h2><p>安装Java<br><code>yum install java</code></p>
-<h2 id="6-Python环境"><a href="#6-Python环境" class="headerlink" title="6 Python环境"></a>6 Python环境</h2><p>安装python3<br><code>yum install python3</code></p>
-<p>安装依赖<br><code>pip3 install Flask</code><br><code>pip3 install flask_sqlalchemy</code><br><code>pip3 install pymysql</code><br><code>pip3 install numpy</code><br><code>pip3 install sklearn</code><br><code>pip3 install jieba</code><br><code>pip3 install pandas</code><br><code>pip3 install statsmodels</code></p>
-<h2 id="7-运行测试"><a href="#7-运行测试" class="headerlink" title="7 运行测试"></a>7 运行测试</h2><p>运行镜像<br><code>docker run --privileged --name=lineloss -d -p 18084:18084 -it edlison/lineloss /usr/sbin/init</code></p>
-<p>Java<br><code>cd /home/xs_project/java</code><br><code>java -jar RuoYi.jar</code></p>
-<p>Python<br><code>cd /home/xs_project/python/LineLoss</code><br><code>python3 service.py</code></p>
-<h2 id="8-Dockerfile"><a href="#8-Dockerfile" class="headerlink" title="8 Dockerfile"></a>8 Dockerfile</h2><p>只是构建镜像？？？不便于执行镜像内程序？？？</p>
-<h2 id="9-其他"><a href="#9-其他" class="headerlink" title="9 其他"></a>9 其他</h2><h2 id="复制文件"><a href="#复制文件" class="headerlink" title="复制文件"></a>复制文件</h2><p>容器内新建文件夹<br><code>mkdir /home/xs_project/java</code><br><code>mkdir /home/xs_project/python</code><br><code>mkdir /home/xs_project/sql</code></p>
-<p>将文件复制到容器内<br><code>cp RuoYi.jar containerID:/home/xs_project/java</code><br><code>cp LineLoss.zip containerID:/home/xs_project/python</code><br><code>cp lineloss.sql containerID:/home/xs_project/sql</code></p>
-<h2 id="容器提交成镜像"><a href="#容器提交成镜像" class="headerlink" title="容器提交成镜像"></a>容器提交成镜像</h2><p><code>docker commit -a &quot;userid&quot; -m &quot;comment&quot; containerID imageName:tag</code></p>
-<h2 id="镜像上传仓库"><a href="#镜像上传仓库" class="headerlink" title="镜像上传仓库"></a>镜像上传仓库</h2><p><code>docker push userName/imageName</code></p>
-<p><strong>注意</strong></p>
-<p>tag命令修改为规范的镜像名<br><code>docker tag lineloss:latest edlison/lineloss</code></p>
-<p>push到用户仓库<br><code>docker push edlison/lineloss</code></p>
-<h2 id="镜像导出导入"><a href="#镜像导出导入" class="headerlink" title="镜像导出导入"></a>镜像导出导入</h2><p>导出镜像<br><code>docker save -o lineloss.tar edlison/lineloss</code>或<br><code>docker save edlison/lineloss&gt;/home/lineloss.tar</code></p>
-<p>导入镜像<br><code>docker load&lt;lineloss.tar</code></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/2020/09/15/notebook/docker-lineloss/" data-id="ckf3hvm1t0000mwojfov2dxlc" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">下一页 &amp;raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">下一页 &amp;raquo;</a>
   </nav>
 
 </section>

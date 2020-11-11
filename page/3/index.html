@@ -68,6 +68,275 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-notebook/docker-compose" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/28/notebook/docker-compose/" class="article-date">
+  <time datetime="2020-05-28T14:21:43.661Z" itemprop="datePublished">2020-05-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/28/notebook/docker-compose/">notebook/docker-compose</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker-Compose"></a>Docker-Compose</h1><h2 id="运行指令"><a href="#运行指令" class="headerlink" title="运行指令"></a>运行指令</h2><p><code>docker-compose</code>指令执行当前文件夹下docker-compose.yml文件</p>
+<p>项目运行<br><code>docker-compose up -d</code></p>
+<p>项目停止<br><code>docker-compose down</code></p>
+<h2 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h2><p>volumes声明过的名称才能用在镜像的volumes挂载<br>镜像中volumes挂载地址也可以使用相对路径</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/2020/05/28/notebook/docker-compose/" data-id="ckar2gyvz0000x2oj620zb72r" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mlsec/KNN-手写体数字数据集" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/17/mlsec/KNN-%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E6%95%B0%E6%8D%AE%E9%9B%86/" class="article-date">
+  <time datetime="2020-05-17T08:37:20.000Z" itemprop="datePublished">2020-05-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/17/mlsec/KNN-%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E6%95%B0%E6%8D%AE%E9%9B%86/">mlsec/KNN-手写体数字数据集</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="KNN-手写体数字数据集"><a href="#KNN-手写体数字数据集" class="headerlink" title="KNN-手写体数字数据集"></a>KNN-手写体数字数据集</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">digits = datasets.load_digits()</span><br><span class="line">X = digits.data</span><br><span class="line">X.shape</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>(1797, 64)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y = digits.target</span><br><span class="line">y.shape</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>(1797,)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">one = X[<span class="number">100</span>]</span><br><span class="line">one = one.reshape(<span class="number">8</span>, <span class="number">8</span>)</span><br><span class="line">one</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([[ 0.,  0.,  0.,  2., 13.,  0.,  0.,  0.],
+       [ 0.,  0.,  0.,  8., 15.,  0.,  0.,  0.],
+       [ 0.,  0.,  5., 16.,  5.,  2.,  0.,  0.],
+       [ 0.,  0., 15., 12.,  1., 16.,  4.,  0.],
+       [ 0.,  4., 16.,  2.,  9., 16.,  8.,  0.],
+       [ 0.,  0., 10., 14., 16., 16.,  4.,  0.],
+       [ 0.,  0.,  0.,  0., 13.,  8.,  0.,  0.],
+       [ 0.,  0.,  0.,  0., 13.,  6.,  0.,  0.]])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.imshow(one)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>&lt;matplotlib.image.AxesImage at 0x1a203a9ad0&gt;</code></pre><p><img src="data/output_5_1.png" alt="png"></p>
+<h1 id="分离训练测试集"><a href="#分离训练测试集" class="headerlink" title="分离训练测试集"></a>分离训练测试集</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">train_test_split?</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>[0;31mSignature:[0m [0mtrain_test_split[0m[0;34m([0m[0;34m*[0m[0marrays[0m[0;34m,[0m [0;34m**[0m[0moptions[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;31mDocstring:[0m
+Split arrays or matrices into random train and test subsets
+
+Quick utility that wraps input validation and
+``next(ShuffleSplit().split(X, y))`` and application to input data
+into a single call for splitting (and optionally subsampling) data in a
+oneliner.
+
+Read more in the :ref:`User Guide &lt;cross_validation&gt;`.
+
+Parameters
+----------
+*arrays : sequence of indexables with same length / shape[0]
+    Allowed inputs are lists, numpy arrays, scipy-sparse
+    matrices or pandas dataframes.
+
+test_size : float, int or None, optional (default=None)
+    If float, should be between 0.0 and 1.0 and represent the proportion
+    of the dataset to include in the test split. If int, represents the
+    absolute number of test samples. If None, the value is set to the
+    complement of the train size. If ``train_size`` is also None, it will
+    be set to 0.25.
+
+train_size : float, int, or None, (default=None)
+    If float, should be between 0.0 and 1.0 and represent the
+    proportion of the dataset to include in the train split. If
+    int, represents the absolute number of train samples. If None,
+    the value is automatically set to the complement of the test size.
+
+random_state : int, RandomState instance or None, optional (default=None)
+    If int, random_state is the seed used by the random number generator;
+    If RandomState instance, random_state is the random number generator;
+    If None, the random number generator is the RandomState instance used
+    by `np.random`.
+
+shuffle : boolean, optional (default=True)
+    Whether or not to shuffle the data before splitting. If shuffle=False
+    then stratify must be None.
+
+stratify : array-like or None (default=None)
+    If not None, data is split in a stratified fashion, using this as
+    the class labels.
+
+Returns
+-------
+splitting : list, length=2 * len(arrays)
+    List containing train-test split of inputs.
+
+    .. versionadded:: 0.16
+        If the input is sparse, the output will be a
+        ``scipy.sparse.csr_matrix``. Else, output type is the same as the
+        input type.
+
+Examples
+--------
+&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; from sklearn.model_selection import train_test_split
+&gt;&gt;&gt; X, y = np.arange(10).reshape((5, 2)), range(5)
+&gt;&gt;&gt; X
+array([[0, 1],
+       [2, 3],
+       [4, 5],
+       [6, 7],
+       [8, 9]])
+&gt;&gt;&gt; list(y)
+[0, 1, 2, 3, 4]
+
+&gt;&gt;&gt; X_train, X_test, y_train, y_test = train_test_split(
+...     X, y, test_size=0.33, random_state=42)
+...
+&gt;&gt;&gt; X_train
+array([[4, 5],
+       [0, 1],
+       [6, 7]])
+&gt;&gt;&gt; y_train
+[2, 0, 3]
+&gt;&gt;&gt; X_test
+array([[2, 3],
+       [8, 9]])
+&gt;&gt;&gt; y_test
+[1, 4]
+
+&gt;&gt;&gt; train_test_split(y, shuffle=False)
+[[0, 1, 2], [3, 4]]
+[0;31mFile:[0m      /Applications/anaconda3/lib/python3.7/site-packages/sklearn/model_selection/_split.py
+[0;31mType:[0m      function</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.2</span>)</span><br><span class="line">print(X_train.shape)</span><br><span class="line">print(y_train.shape)</span><br><span class="line">print(X_test.shape)</span><br><span class="line">print(y_test.shape)</span><br></pre></td></tr></table></figure>
+
+<pre><code>(1437, 64)
+(1437,)
+(360, 64)
+(360,)</code></pre><h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KNNClf = KNeighborsClassifier(n_neighbors=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KNNClf.fit(X_train, y_train)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>KNeighborsClassifier(algorithm=&apos;auto&apos;, leaf_size=30, metric=&apos;minkowski&apos;,
+                     metric_params=None, n_jobs=None, n_neighbors=3, p=2,
+                     weights=&apos;uniform&apos;)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">res = KNNClf.predict(X_test)</span><br><span class="line">res</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([3, 4, 8, 5, 5, 7, 0, 3, 1, 4, 7, 5, 5, 8, 0, 7, 4, 7, 1, 7, 9, 4,
+       4, 7, 6, 1, 2, 9, 1, 3, 3, 3, 7, 0, 7, 0, 2, 8, 9, 1, 1, 5, 4, 8,
+       9, 0, 4, 9, 4, 9, 7, 2, 7, 3, 3, 4, 1, 9, 9, 9, 0, 4, 0, 6, 1, 0,
+       0, 3, 6, 2, 3, 2, 8, 5, 9, 3, 1, 1, 6, 9, 8, 1, 2, 3, 2, 6, 8, 8,
+       4, 6, 8, 6, 3, 9, 2, 8, 3, 6, 5, 7, 1, 7, 3, 8, 8, 8, 0, 0, 9, 1,
+       9, 8, 5, 1, 1, 0, 1, 6, 5, 1, 7, 6, 5, 7, 7, 2, 2, 7, 3, 1, 9, 5,
+       9, 5, 5, 3, 8, 4, 9, 5, 4, 6, 0, 5, 4, 8, 6, 1, 2, 8, 0, 9, 0, 9,
+       7, 9, 7, 0, 2, 8, 2, 4, 0, 6, 2, 6, 7, 5, 6, 3, 8, 8, 0, 3, 2, 0,
+       6, 1, 0, 6, 0, 5, 9, 3, 3, 0, 4, 0, 4, 2, 4, 9, 0, 6, 7, 4, 6, 5,
+       9, 7, 2, 2, 3, 3, 0, 3, 9, 4, 9, 8, 5, 6, 9, 0, 1, 3, 5, 0, 5, 1,
+       6, 4, 6, 6, 6, 7, 9, 1, 0, 7, 6, 6, 7, 8, 0, 3, 8, 5, 6, 8, 1, 3,
+       0, 3, 6, 0, 3, 5, 6, 7, 0, 6, 9, 7, 0, 0, 2, 1, 6, 6, 9, 1, 6, 9,
+       8, 7, 0, 2, 5, 1, 8, 6, 4, 3, 8, 2, 9, 2, 8, 4, 6, 4, 8, 9, 3, 1,
+       1, 5, 0, 7, 8, 2, 3, 8, 4, 7, 7, 7, 7, 9, 4, 1, 7, 0, 2, 9, 1, 8,
+       2, 4, 1, 0, 7, 5, 6, 0, 7, 1, 1, 5, 7, 1, 1, 6, 5, 6, 2, 2, 3, 9,
+       7, 5, 3, 1, 5, 9, 9, 2, 5, 1, 6, 8, 2, 2, 4, 2, 1, 0, 6, 1, 2, 9,
+       7, 5, 3, 5, 6, 1, 8, 1])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y_test</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([3, 4, 8, 5, 5, 7, 0, 3, 1, 4, 7, 5, 5, 8, 0, 7, 4, 7, 1, 7, 9, 4,
+       4, 7, 6, 1, 2, 9, 1, 3, 3, 3, 7, 0, 7, 0, 2, 8, 9, 1, 1, 5, 4, 8,
+       9, 0, 4, 9, 4, 9, 7, 2, 7, 8, 3, 4, 1, 9, 9, 9, 0, 4, 0, 6, 1, 0,
+       0, 3, 6, 2, 3, 2, 8, 5, 9, 3, 1, 1, 6, 9, 8, 1, 2, 3, 2, 6, 8, 8,
+       4, 6, 8, 6, 3, 9, 2, 8, 3, 6, 5, 7, 1, 7, 9, 8, 8, 8, 0, 0, 9, 1,
+       4, 8, 5, 1, 1, 0, 1, 6, 5, 1, 7, 6, 5, 7, 7, 2, 2, 7, 3, 1, 9, 5,
+       9, 5, 5, 3, 8, 4, 9, 5, 4, 6, 0, 5, 4, 8, 6, 1, 2, 8, 0, 9, 0, 9,
+       7, 9, 7, 0, 2, 8, 2, 4, 0, 6, 2, 6, 7, 5, 6, 3, 8, 8, 0, 3, 2, 0,
+       6, 1, 0, 6, 0, 5, 9, 3, 3, 0, 4, 0, 4, 2, 4, 9, 0, 6, 7, 4, 6, 5,
+       9, 7, 2, 2, 3, 3, 0, 3, 9, 4, 9, 8, 5, 6, 9, 0, 1, 3, 5, 0, 5, 1,
+       6, 4, 6, 6, 6, 7, 9, 1, 0, 7, 6, 6, 7, 8, 0, 3, 8, 5, 6, 8, 1, 3,
+       0, 3, 6, 0, 3, 5, 6, 7, 0, 6, 9, 7, 0, 0, 2, 1, 6, 6, 9, 1, 6, 9,
+       8, 7, 0, 2, 5, 1, 8, 6, 4, 3, 8, 2, 9, 2, 8, 4, 6, 4, 8, 9, 3, 1,
+       1, 5, 0, 7, 8, 2, 3, 8, 4, 7, 7, 7, 7, 7, 4, 1, 3, 0, 2, 9, 1, 8,
+       2, 4, 1, 0, 7, 5, 6, 0, 7, 1, 1, 5, 7, 1, 1, 6, 5, 6, 2, 2, 3, 9,
+       7, 5, 3, 1, 5, 9, 9, 2, 5, 1, 6, 8, 2, 2, 4, 2, 1, 0, 6, 1, 2, 9,
+       7, 5, 3, 5, 6, 1, 8, 8])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num = sum(res == y_test)</span><br><span class="line">num</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>354</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'accuracy '</span>, num / len(y_test))</span><br></pre></td></tr></table></figure>
+
+<pre><code>accuracy  0.9833333333333333</code></pre><h4 id="使用sklearn中封装的计算精确度的方法"><a href="#使用sklearn中封装的计算精确度的方法" class="headerlink" title="使用sklearn中封装的计算精确度的方法"></a>使用sklearn中封装的计算精确度的方法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score <span class="keyword">as</span> accuracy</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">accuracy(res, y_test)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>0.9833333333333333</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://edlison.com/2020/05/17/mlsec/KNN-%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E6%95%B0%E6%8D%AE%E9%9B%86/" data-id="ckaat5bo70000vaojc0re40jq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-mlsec/KNN-鸢尾花数据集" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/05/17/mlsec/KNN-%E9%B8%A2%E5%B0%BE%E8%8A%B1%E6%95%B0%E6%8D%AE%E9%9B%86/" class="article-date">
@@ -3921,102 +4190,11 @@ dtype: object</code></pre><p><code>apply()</code> 方法也可以应用函数至
 
 
   
-    <article id="post-notebook/docker-anaconda" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/05/11/notebook/docker-anaconda/" class="article-date">
-  <time datetime="2020-05-11T09:32:03.053Z" itemprop="datePublished">2020-05-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/11/notebook/docker-anaconda/">notebook/docker-anaconda</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="使用Docker配置Anaconda环境运行Jupyter"><a href="#使用Docker配置Anaconda环境运行Jupyter" class="headerlink" title="使用Docker配置Anaconda环境运行Jupyter"></a>使用Docker配置Anaconda环境运行Jupyter</h1><h2 id="配置Anaconda环境"><a href="#配置Anaconda环境" class="headerlink" title="配置Anaconda环境"></a>配置Anaconda环境</h2><p><strong>挂载</strong></p>
-<ul>
-<li><p>文件夹挂载<br><code>-v /root/notebook:/notebook</code><br>(宿主机目录:镜像内挂载目录)</p>
-</li>
-<li><p><em>配置文件挂载</em>(生成的文件夹)<br><code>-v /root/docker/config/anaconda3/jupyter_notebook_config.json:/root/.jupyter/jupyter_notebook_config.json</code></p>
-</li>
-</ul>
-<p><strong>Example</strong><br><code>docker run -i -t -p 11000:8888 -v ~/notebook:/notebook -v ~/docker/config/jupyter:/root/.jupyter continuumio/anaconda3 /bin/bash</code><br>挂载参数要在容器前</p>
-<h2 id="配置Jupyter-Notebook"><a href="#配置Jupyter-Notebook" class="headerlink" title="配置Jupyter Notebook"></a>配置Jupyter Notebook</h2><p><code>jupyter notebook --allow-root</code></p>
-<p>启动Notebook<br><code>jupyter notebook --port 8888 --ip 0.0.0.0 --allow-root</code></p>
-<p>后台运行Notebook<br><code>nohup jupyter notebook --port 8888 --ip 0.0.0.0 --allow-root &amp;</code></p>
-<p><strong>相关配置</strong></p>
-<p>配置文件</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">c = get_config()</span><br><span class="line">c.IPKernelApp.pylab = <span class="string">"inline"</span></span><br><span class="line">c.NotebookApp.ip = <span class="string">"*"</span></span><br><span class="line">c.NotebookAPp.open_browser = <span class="literal">False</span></span><br><span class="line">c.NotebookApp.password = <span class="string">'sha1:5295d47ebd06:cdca9499f90b4b4616c935fdff61dda71e1e4393'</span></span><br><span class="line"><span class="comment"># c.NotebookApp.certfile = u'/root/.jupyter/mycert.pem'</span></span><br><span class="line">c.NotebookApp.port= <span class="number">8888</span></span><br><span class="line">c.NotebookApp.notebook_dir = <span class="string">"/"</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><em>docker-compose配置出问题？</em></p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">notebook:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">continuumio/anaconda3</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">"no"</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">~/notebook:/notebook</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">~/docker/config/jupyter:/root/.jupyter</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"11000:80"</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/2020/05/11/notebook/docker-anaconda/" data-id="cka2g01nt0000vaojalhw1r0q" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-algorithm/[DP]MSM" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/28/algorithm/%5BDP%5DMSM/" class="article-date">
-  <time datetime="2020-04-28T13:22:24.685Z" itemprop="datePublished">2020-04-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/28/algorithm/%5BDP%5DMSM/">algorithm/[DP]MSM</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="矩阵连乘-Multiplying-a-sequence-of-matrices"><a href="#矩阵连乘-Multiplying-a-sequence-of-matrices" class="headerlink" title="矩阵连乘 (Multiplying a sequence of matrices)"></a>矩阵连乘 (Multiplying a sequence of matrices)</h1><p>我们想从两个以上矩阵连乘的式子中得到最佳的次序，使得计算时乘法运算最少。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DynamicProgramming</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> N = <span class="number">5</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span>[][] C = <span class="keyword">new</span> <span class="keyword">int</span>[N][N];</span><br><span class="line">		<span class="keyword">int</span>[][] S = <span class="keyword">new</span> <span class="keyword">int</span>[N][N];</span><br><span class="line">		<span class="keyword">int</span>[] r = &#123;<span class="number">4</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;<span class="comment">// 初始化 最小乘运算数组</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">				C[i][j] = <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;<span class="comment">// 初始化 分割位置</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">				S[i][j] = <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> p = <span class="number">2</span>; p &lt;= N; p++) &#123;<span class="comment">// P 为间隔</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, j; i &lt; N - p + <span class="number">1</span>; i++) &#123;<span class="comment">// i 为起始值</span></span><br><span class="line">				j = i + p - <span class="number">1</span>;<span class="comment">// j 为终止值</span></span><br><span class="line">				C[i][j] = C[i][i] + C[i + <span class="number">1</span>][j] + r[i] * r[i + <span class="number">1</span>] * r[j + <span class="number">1</span>];<span class="comment">// 赋 C[i][j] 的初值方便下文比较取得最小值</span></span><br><span class="line">				S[i][j] = i;</span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> k = i; k&lt; j; k++) &#123;<span class="comment">// k 为中间分割值 </span></span><br><span class="line">					<span class="keyword">int</span> temp = C[i][k] + C[k + <span class="number">1</span>][j] + r[i] * r[k + <span class="number">1</span>] * r[j + <span class="number">1</span>];</span><br><span class="line">					</span><br><span class="line">					<span class="keyword">if</span> (temp &lt; C[i][j]) &#123;<span class="comment">// 取得每次分割后的最小值</span></span><br><span class="line">						C[i][j] = temp;</span><br><span class="line">						S[i][j] = k;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">				System.out.print(C[i][j] + <span class="string">"\t"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		System.out.println();</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">				<span class="keyword">if</span> (j &gt; i) System.out.print(S[i][j] + <span class="number">1</span> + <span class="string">"\t"</span>);</span><br><span class="line">				<span class="keyword">else</span> System.out.print(<span class="number">0</span> + <span class="string">"\t"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* result</span></span><br><span class="line"><span class="comment">0	60	132	180	252	</span></span><br><span class="line"><span class="comment">0	0	90	132	207	</span></span><br><span class="line"><span class="comment">0	0	0	72	132	</span></span><br><span class="line"><span class="comment">0	0	0	0	120	</span></span><br><span class="line"><span class="comment">0	0	0	0	0	</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">0	1	2	2	2	</span></span><br><span class="line"><span class="comment">0	0	2	2	2	</span></span><br><span class="line"><span class="comment">0	0	0	3	4	</span></span><br><span class="line"><span class="comment">0	0	0	0	4	</span></span><br><span class="line"><span class="comment">0	0	0	0	0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">(A1 * A2) * ((A3 * A4) * A5)</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://edlison.com/2020/04/28/algorithm/[DP]MSM/" data-id="ck9k4jk4z000098ojhezxhldm" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/">下一页 &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/">下一页 &amp;raquo;</a>
   </nav>
 
 </section>
