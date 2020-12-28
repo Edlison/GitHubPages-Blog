@@ -159,7 +159,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-count">81</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -170,7 +170,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -210,6 +210,171 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/12/29/notebook/flask-start/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/29/notebook/flask-start/" class="post-title-link" itemprop="url">Flask入门</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-12-29 00:14:51 / 修改时间：01:22:31" itemprop="dateCreated datePublished" datetime="2020-12-29T00:14:51+08:00">2020-12-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notebook/" itemprop="url" rel="index"><span itemprop="name">Notebook</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="Flask模块化管理"><a href="#Flask模块化管理" class="headerlink" title="Flask模块化管理"></a>Flask模块化管理</h2><p>Bluepoint可以实现Flask的模块化管理，在每个包的<code>__init__</code>文件中可以定义对应的蓝图。蓝图仅是静态的，需要在应用运行时，对其进行装载。</p>
+<p><strong>注意</strong></p>
+<ol>
+<li><code>__init__</code>文件中定义好蓝图后一定要将包含路由的文件import进来，否则不能识别相应的路由。</li>
+<li>import文件时不能使用通配符*进行导入。</li>
+</ol>
+<h2 id="Flask中的request与respond"><a href="#Flask中的request与respond" class="headerlink" title="Flask中的request与respond"></a>Flask中的request与respond</h2><h3 id="request"><a href="#request" class="headerlink" title="request"></a>request</h3><p><code>from flask import request</code></p>
+<ol>
+<li><p>param传参<br>使用request.args.get(‘argname’)获取键值对。</p>
+</li>
+<li><p>body传参<br>使用request.form.get(‘argname’)获取form格式传参键值对。<br>使用request.get_data()获取全部raw格式内容。<br>使用request.get_json()获取全部raw格式内容，且必须为json格式。</p>
+</li>
+</ol>
+<p><strong>注意</strong><br>form-data: 可以传键值对和文件。<br>x-www-form-urlencodes: 只能传键值对。</p>
+<h3 id="respond"><a href="#respond" class="headerlink" title="respond"></a>respond</h3><p><code>from flask import jsoniify</code><br><code>import json</code></p>
+<ol>
+<li>直接返回json</li>
+</ol>
+<ul>
+<li>jsonofy()可以直接制作json返回</li>
+<li>json.dumps()可以将dict生成json</li>
+</ul>
+<ol start="2">
+<li>简易定义make_respond</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>args</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>respond</code></td>
+<td>返回的内容data</td>
+</tr>
+<tr>
+<td><code>status_code</code></td>
+<td>返回状态码</td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>返回头部信息为键值对</td>
+</tr>
+</tbody></table>
+<ol start="3">
+<li>详细定义Respond</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>args</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>respond</code></td>
+<td>返回的内容data</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>返回状态 格式为’200 OK’</td>
+</tr>
+<tr>
+<td><code>status_code</code></td>
+<td>返回状态码</td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>返回头部信息为键值对</td>
+</tr>
+<tr>
+<td><code>set_cookie</code></td>
+<td>设置cookie</td>
+</tr>
+<tr>
+<td><code>del_cookie</code></td>
+<td>删除cookie</td>
+</tr>
+</tbody></table>
+<h2 id="Flask中的session"><a href="#Flask中的session" class="headerlink" title="Flask中的session"></a>Flask中的session</h2><p><code>from flask import session</code></p>
+<ol>
+<li><p>使用session需要设置config<br>app.config[‘SECRET_KEY’]=os.urandom(24)</p>
+</li>
+<li><p>Flask提供的session是储存在cookie中的<br>session[‘username’] = data[‘username’]<br>此时的cookie中存储了加密过的username。</p>
+</li>
+<li><p>获取session<br>session.get(‘key’)或session[‘key’]<br>但是后者如果没有这个key会报错。<br>获取到的session自动经过了解密。</p>
+</li>
+<li><p>删除session<br>session.pop(‘key’)或session[‘key’]=False<br>session.clear清除session中所有数据。</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
