@@ -32,9 +32,10 @@
 <meta property="og:description" content="Flask模块化管理Bluepoint可以实现Flask的模块化管理，在每个包的__init__文件中可以定义对应的蓝图。蓝图仅是静态的，需要在应用运行时，对其进行装载。 注意  __init__文件中定义好蓝图后一定要将包含路由的文件import进来，否则不能识别相应的路由。 import文件时不能使用通配符*进行导入。  Flask中的request与respondrequestfrom fl">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-12-28T16:14:51.755Z">
-<meta property="article:modified_time" content="2020-12-28T17:22:31.807Z">
+<meta property="article:modified_time" content="2020-12-30T15:22:15.178Z">
 <meta property="article:author" content="Bolin Shen">
 <meta property="article:tag" content="flask">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
 
 
@@ -152,7 +153,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Flask模块化管理"><span class="nav-number">1.</span> <span class="nav-text">Flask模块化管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flask中的request与respond"><span class="nav-number">2.</span> <span class="nav-text">Flask中的request与respond</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#request"><span class="nav-number">2.1.</span> <span class="nav-text">request</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#respond"><span class="nav-number">2.2.</span> <span class="nav-text">respond</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flask中的session"><span class="nav-number">3.</span> <span class="nav-text">Flask中的session</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Flask模块化管理"><span class="nav-number">1.</span> <span class="nav-text">Flask模块化管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flask中的request与respond"><span class="nav-number">2.</span> <span class="nav-text">Flask中的request与respond</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#request"><span class="nav-number">2.1.</span> <span class="nav-text">request</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#respond"><span class="nav-number">2.2.</span> <span class="nav-text">respond</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flask中的session"><span class="nav-number">3.</span> <span class="nav-text">Flask中的session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flask-SQLAlechemy"><span class="nav-number">4.</span> <span class="nav-text">Flask_SQLAlechemy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flask-g"><span class="nav-number">5.</span> <span class="nav-text">Flask g</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -165,7 +166,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-count">83</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -176,7 +177,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -248,10 +249,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2020-12-29 00:14:51 / 修改时间：01:22:31" itemprop="dateCreated datePublished" datetime="2020-12-29T00:14:51+08:00">2020-12-29</time>
+      <time title="创建时间：2020-12-29 00:14:51" itemprop="dateCreated datePublished" datetime="2020-12-29T00:14:51+08:00">2020-12-29</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-12-30 23:22:15" itemprop="dateModified" datetime="2020-12-30T23:22:15+08:00">2020-12-30</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -291,8 +298,8 @@
 <li>直接返回json</li>
 </ol>
 <ul>
-<li>jsonofy()可以直接制作json返回</li>
-<li>json.dumps()可以将dict生成json</li>
+<li>jsonify()可以直接制作json返回 (返回的格式也定义为application/json)</li>
+<li>json.dumps()可以将dict生成json (返回的格式默认为text)</li>
 </ul>
 <ol start="2">
 <li>简易定义make_respond</li>
@@ -363,6 +370,29 @@
 <li><p>删除session<br>session.pop(‘key’)或session[‘key’]=False<br>session.clear清除session中所有数据。</p>
 </li>
 </ol>
+<h2 id="Flask-SQLAlechemy"><a href="#Flask-SQLAlechemy" class="headerlink" title="Flask_SQLAlechemy"></a>Flask_SQLAlechemy</h2><p><strong>注意</strong></p>
+<ol>
+<li><p>如果蓝图中有用到db，则一定要在db创建后import蓝图！！！</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">db = SQLAlchemy()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_app</span><span class="params">()</span>:</span></span><br><span class="line">    app = Flask(__name__)</span><br><span class="line">    app.config[<span class="string">'SECRET_KEY'</span>] = os.urandom(<span class="number">24</span>)</span><br><span class="line">    app.config[<span class="string">'SQLALCHEMY_DATABASE_URI'</span>] = <span class="string">'mysql+pymysql://library:library@119.23.107.61:3306/library'</span></span><br><span class="line">    app.config[<span class="string">'SQLALCHEMY_TRACK_MODIFICATIONS'</span>] = <span class="literal">True</span></span><br><span class="line">    db.init_app(app)</span><br><span class="line">    <span class="keyword">from</span> .user <span class="keyword">import</span> user_blu</span><br><span class="line">    app.register_blueprint(user_blu)</span><br><span class="line">    print(app.url_map)</span><br><span class="line">    <span class="keyword">return</span> app</span><br></pre></td></tr></table></figure>
+<p>因为代码是按照顺序执行的，当你从其他模块导入蓝图的时候就需要 db 了，但是这个时候db 还没有生成，所以会报出错误 提示不可以从当中导入相应的模块。</p>
+</li>
+<li><p>如果db=SQLAlechemy()中没有传app，则后面需要先<code>db.app=app</code>然后再<code>db.init_app(app)</code>???</p>
+</li>
+</ol>
+<h2 id="Flask-g"><a href="#Flask-g" class="headerlink" title="Flask g"></a>Flask g</h2><ol>
+<li>g对象</li>
+</ol>
+<ul>
+<li>专门用来存储用户信息</li>
+<li>g只在一次请求中的所有代码有用</li>
+</ul>
+<ol start="2">
+<li>g与session的区别</li>
+</ol>
+<ul>
+<li>session只要未失效，不同的request请求都可以获得session，由cookie决定</li>
+<li>每一次请求都会改变g对象</li>
+</ul>
 
     </div>
 
@@ -373,6 +403,7 @@
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/flask/" rel="tag"># flask</a>
+              <a href="/tags/python/" rel="tag"># python</a>
           </div>
 
         
@@ -384,6 +415,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2020/12/30/notebook/py-decorator/" rel="next" title="Python装饰器(Decorator)">
+                  Python装饰器(Decorator) <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
