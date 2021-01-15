@@ -159,18 +159,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-count">84</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -210,6 +210,90 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/15/paper/AnomalyDetectionViaRobust/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/15/paper/AnomalyDetectionViaRobust/" class="post-title-link" itemprop="url">Multi-view Anomaly Detection via Robust Probabilistic Latent Variable Models</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-15 13:24:35 / 修改时间：16:29:14" itemprop="dateCreated datePublished" datetime="2021-01-15T13:24:35+08:00">2021-01-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Paper/" itemprop="url" rel="index"><span itemprop="name">Paper</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>对于多视图的异常检测提出了概率隐变量模型。</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>多视图的异常检测与传统的单视图的异常检测不同。单视图的异常检测发现那些与预期行为不符的实例。图1显示了在一个2个视图的数据上，一个多视图异常与一个单视图异常的不同。M是一个多视图异常，M在不同的视图上属于不同的聚类，且M的视图不连续。S是一个单视图异常，S在任何视图上与其它实例都很远。然而，视图S与其它实例有相同的关系。</p>
+<p>S不是一个多视图的异常。单视图的异常检测方法，例如SVM或是基于张量的异常检测，就认为S是异常的。另一方面我们想开发一个多视图的异常检测方法去检测M是否为异常而不是S。尽管单视图的异常不是普遍的实例，如果他们是不连续的跨了多个视图，多视图的异常检测会是主要的成分。</p>
+<p>我们针对多视图的异常检测提出了一个概率隐空间变量模型。有一个隐空间跨了所有视图。我们假设正常实例的所有视图都是用一个单一隐向量生成。另一方面，一个异常实例被假设有多个隐向量，它的不同视图使用不同的隐向量生成。</p>
+<p>每一个非多视图的两个视图的异常(?)可以由隐向量生成。另一方面，两个视图的多视图异常M不是连续的，由两个视图使用映射向量生成。</p>
+<p>对于每个实例的隐向量的数量是未知的，我们根据数据使用Dirichlet priors自动的推测。预测模型是基于EM算法。</p>
+<p>在E-step中…</p>
+<p>在M-step中…</p>
+<p>通过迭代E,M-steps我们推测每一个实例使用的隐向量，并计算它的异常分数通过使用多余一个隐向量的可能性。</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>先生成隐向量，只要拿到隐向量，就可以通过<strong>EM算法</strong>，对类别进行判断。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
