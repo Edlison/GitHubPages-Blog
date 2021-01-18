@@ -159,7 +159,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-count">86</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -170,7 +170,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -210,6 +210,184 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/18/notebook/Fluent-Python-1.18-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/18/notebook/Fluent-Python-1.18-1/" class="post-title-link" itemprop="url">Fluent-Python-PartIII-Functions as Objects</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-18 15:00:10 / 修改时间：16:49:14" itemprop="dateCreated datePublished" datetime="2021-01-18T15:00:10+08:00">2021-01-18</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="5-First-Class-Functions"><a href="#5-First-Class-Functions" class="headerlink" title="5-First-Class Functions"></a>5-First-Class Functions</h1><p>Python中所有的函数都是first-class对象（一级对象？）</p>
+<ul>
+<li>在运行时创建</li>
+<li>赋值给数据结构中的变量或元素</li>
+<li>作为参数传递给函数</li>
+<li>作为函数的结果返回</li>
+</ul>
+<h2 id="可调用对象的7中风格"><a href="#可调用对象的7中风格" class="headerlink" title="可调用对象的7中风格"></a>可调用对象的7中风格</h2><ol>
+<li>用户定义方程</li>
+</ol>
+<p>使用<code>def</code>语句或<code>lambda</code>表达式创建。</p>
+<ol start="2">
+<li>内建函数</li>
+</ol>
+<p><code>len</code></p>
+<ol start="3">
+<li>内建方法</li>
+</ol>
+<p>Dice.get</p>
+<ol start="4">
+<li>方法</li>
+</ol>
+<p>定义在类内部的函数</p>
+<ol start="5">
+<li>类</li>
+</ol>
+<p>可以调用<code>__new__</code>方法去生成实例的类，然后通过<code>__init__</code>方法来初始化它。</p>
+<ol start="6">
+<li>类实例</li>
+</ol>
+<p>如果一个类定义了一个<code>__call__</code>方法，那这个实例就会当作函数被调用。</p>
+<ol start="7">
+<li>生成器函数</li>
+</ol>
+<p>函数或方法使用<code>yield</code>关键字，当调用的时候，生成器函数返回一个生成器对象。</p>
+<h2 id="User-Defined-Callable-Types用户定义的可调用类型"><a href="#User-Defined-Callable-Types用户定义的可调用类型" class="headerlink" title="User-Defined Callable Types用户定义的可调用类型"></a>User-Defined Callable Types用户定义的可调用类型</h2><p>Python函数不仅是真正的对象，而且任意的Python对象也可以表现的像函数一样。只要实现<code>__call__</code>实例方法。</p>
+<h1 id="6-Design-Patterns-with-First-Class-Functions"><a href="#6-Design-Patterns-with-First-Class-Functions" class="headerlink" title="6-Design Patterns with First-Class Functions"></a>6-Design Patterns with First-Class Functions</h1><p>项目实例</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/18/notebook/Fluent-Python-1.18/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/18/notebook/Fluent-Python-1.18/" class="post-title-link" itemprop="url">Fluent-Python-PartI-Prologue</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-18 09:15:46 / 修改时间：15:02:39" itemprop="dateCreated datePublished" datetime="2021-01-18T09:15:46+08:00">2021-01-18</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="开始Fluent-Python"><a href="#开始Fluent-Python" class="headerlink" title="开始Fluent-Python"></a>开始Fluent-Python</h1><p>前言：</p>
+<p>Here’s the plan: when someone uses a feature you don’t understand, simply shoot them.</p>
+<h1 id="1-The-Python-Data-Model"><a href="#1-The-Python-Data-Model" class="headerlink" title="1-The Python Data Model"></a>1-The Python Data Model</h1><p>魔术方法也叫做Dunder方法，一般under-under-getitem-under-under也可以叫做dunder-getitem.</p>
+<p>Example 1-1</p>
+<p>我们可以通过重写<code>__len__</code>方法与<code>__getitem__</code>方法实现对象的获取书长度，与获取数据。</p>
+<p>特殊方法的调用时隐式的，例如<code>for i in x:</code>就隐式的调用了iter(x).</p>
+<p>代码中不应该有很多对特殊方法的直接调用，除非你在进行元编程。</p>
+<p>Example 1-2</p>
+<p><code>__repr__</code>与<code>__str__</code>方法类似，但是在打印一个实例的信息时会调用<code>__repr</code>方法。如果没有重写该方法console会显示类似<code>&lt;Vector object at 0x10e100070&gt;</code>的信息。</p>
+<p><code>__str__</code>由str()函数调用，强烈建议重写<code>__repr__</code>如果没有<code>__str__</code>则会调用<code>__repr__</code>.</p>
+<p><code>bool()</code>调用<code>__bool__</code>的结果，如果没有实现<code>__bool__</code>那么会调用<code>__len__</code>如果长度为0则返回<code>False</code>.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 

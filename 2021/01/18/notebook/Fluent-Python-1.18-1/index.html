@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"edlison.com","root":"/","images":"/images","scheme":"Muse","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="5-First-Class FunctionsPython中所有的函数都是first-class对象（一级对象？）  在运行时创建 赋值给数据结构中的变量或元素 作为参数传递给函数 作为函数的结果返回  可调用对象的7中风格 用户定义方程  使用def语句或lambda表达式创建。  内建函数  len  内建方法  Dice.get  方法  定义在类内部的函数  类  可以调用__new__方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fluent-Python-PartIII-Functions as Objects">
+<meta property="og:url" content="http://edlison.com/2021/01/18/notebook/Fluent-Python-1.18-1/index.html">
+<meta property="og:site_name" content="Edlison is talking here.">
+<meta property="og:description" content="5-First-Class FunctionsPython中所有的函数都是first-class对象（一级对象？）  在运行时创建 赋值给数据结构中的变量或元素 作为参数传递给函数 作为函数的结果返回  可调用对象的7中风格 用户定义方程  使用def语句或lambda表达式创建。  内建函数  len  内建方法  Dice.get  方法  定义在类内部的函数  类  可以调用__new__方">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-18T07:00:10.101Z">
+<meta property="article:modified_time" content="2021-01-18T08:49:14.710Z">
+<meta property="article:author" content="Bolin Shen">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="design-pattern">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://edlison.com/2021/01/18/notebook/Fluent-Python-1.18-1/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Fluent-Python-PartIII-Functions as Objects | Edlison is talking here.</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Edlison is talking here.</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#5-First-Class-Functions"><span class="nav-number">1.</span> <span class="nav-text">5-First-Class Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#可调用对象的7中风格"><span class="nav-number">1.1.</span> <span class="nav-text">可调用对象的7中风格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#User-Defined-Callable-Types用户定义的可调用类型"><span class="nav-number">1.2.</span> <span class="nav-text">User-Defined Callable Types用户定义的可调用类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-Design-Patterns-with-First-Class-Functions"><span class="nav-number">2.</span> <span class="nav-text">6-Design Patterns with First-Class Functions</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Bolin Shen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/edlison" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;edlison" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bolin.edlison.shen@gmail.com" title="E-Mail → mailto:bolin.edlison.shen@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/18/notebook/Fluent-Python-1.18-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Fluent-Python-PartIII-Functions as Objects
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-18 15:00:10 / 修改时间：16:49:14" itemprop="dateCreated datePublished" datetime="2021-01-18T15:00:10+08:00">2021-01-18</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="5-First-Class-Functions"><a href="#5-First-Class-Functions" class="headerlink" title="5-First-Class Functions"></a>5-First-Class Functions</h1><p>Python中所有的函数都是first-class对象（一级对象？）</p>
+<ul>
+<li>在运行时创建</li>
+<li>赋值给数据结构中的变量或元素</li>
+<li>作为参数传递给函数</li>
+<li>作为函数的结果返回</li>
+</ul>
+<h2 id="可调用对象的7中风格"><a href="#可调用对象的7中风格" class="headerlink" title="可调用对象的7中风格"></a>可调用对象的7中风格</h2><ol>
+<li>用户定义方程</li>
+</ol>
+<p>使用<code>def</code>语句或<code>lambda</code>表达式创建。</p>
+<ol start="2">
+<li>内建函数</li>
+</ol>
+<p><code>len</code></p>
+<ol start="3">
+<li>内建方法</li>
+</ol>
+<p>Dice.get</p>
+<ol start="4">
+<li>方法</li>
+</ol>
+<p>定义在类内部的函数</p>
+<ol start="5">
+<li>类</li>
+</ol>
+<p>可以调用<code>__new__</code>方法去生成实例的类，然后通过<code>__init__</code>方法来初始化它。</p>
+<ol start="6">
+<li>类实例</li>
+</ol>
+<p>如果一个类定义了一个<code>__call__</code>方法，那这个实例就会当作函数被调用。</p>
+<ol start="7">
+<li>生成器函数</li>
+</ol>
+<p>函数或方法使用<code>yield</code>关键字，当调用的时候，生成器函数返回一个生成器对象。</p>
+<h2 id="User-Defined-Callable-Types用户定义的可调用类型"><a href="#User-Defined-Callable-Types用户定义的可调用类型" class="headerlink" title="User-Defined Callable Types用户定义的可调用类型"></a>User-Defined Callable Types用户定义的可调用类型</h2><p>Python函数不仅是真正的对象，而且任意的Python对象也可以表现的像函数一样。只要实现<code>__call__</code>实例方法。</p>
+<h1 id="6-Design-Patterns-with-First-Class-Functions"><a href="#6-Design-Patterns-with-First-Class-Functions" class="headerlink" title="6-Design Patterns with First-Class Functions"></a>6-Design Patterns with First-Class Functions</h1><p>项目实例</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/design-pattern/" rel="tag"># design-pattern</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/01/18/notebook/Fluent-Python-1.18/" rel="prev" title="Fluent-Python-PartI-Prologue">
+                  <i class="fa fa-chevron-left"></i> Fluent-Python-PartI-Prologue
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bolin Shen</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
