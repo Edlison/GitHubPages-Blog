@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"edlison.com","root":"/","images":"/images","scheme":"Muse","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="NLP文本分类引导en1. 数据读取python原生读取txt文件1f &#x3D; open(filedir, mode&#x3D;&#39;r&#39;)   f.read()一次读取全部数据。 f.readline()分行读取，一次读取一行。 f.readlines()读取全部数据，保留\n换行符。  pandas读取txt文件pd.read_table(filedir, splitsign, header&#x3D;指定第几行为列名,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NLP文本分类引导">
+<meta property="og:url" content="http://edlison.com/2020/07/14/nlp/week-1/index.html">
+<meta property="og:site_name" content="Edlison is talking here.">
+<meta property="og:description" content="NLP文本分类引导en1. 数据读取python原生读取txt文件1f &#x3D; open(filedir, mode&#x3D;&#39;r&#39;)   f.read()一次读取全部数据。 f.readline()分行读取，一次读取一行。 f.readlines()读取全部数据，保留\n换行符。  pandas读取txt文件pd.read_table(filedir, splitsign, header&#x3D;指定第几行为列名,">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-14T15:31:04.196Z">
+<meta property="article:modified_time" content="2021-01-26T09:25:12.987Z">
+<meta property="article:author" content="Bolin Shen">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="nlp">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://edlison.com/2020/07/14/nlp/week-1/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>NLP文本分类引导 | Edlison is talking here.</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Edlison is talking here.</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NLP文本分类引导"><span class="nav-number">1.</span> <span class="nav-text">NLP文本分类引导</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#en"><span class="nav-number">1.1.</span> <span class="nav-text">en</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-数据读取"><span class="nav-number">1.2.</span> <span class="nav-text">1. 数据读取</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#python原生读取txt文件"><span class="nav-number">1.2.1.</span> <span class="nav-text">python原生读取txt文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pandas读取txt文件"><span class="nav-number">1.2.2.</span> <span class="nav-text">pandas读取txt文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-数据预处理"><span class="nav-number">1.3.</span> <span class="nav-text">2. 数据预处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分词"><span class="nav-number">1.3.1.</span> <span class="nav-text">分词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#去除停词-去除低频词"><span class="nav-number">1.3.2.</span> <span class="nav-text">去除停词 去除低频词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过TF-IDF算法筛选单词"><span class="nav-number">1.3.3.</span> <span class="nav-text">通过TF-IDF算法筛选单词</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-建立词典"><span class="nav-number">1.4.</span> <span class="nav-text">3. 建立词典</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-提取特征"><span class="nav-number">1.5.</span> <span class="nav-text">4. 提取特征</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#词袋模型（BOW）"><span class="nav-number">1.5.1.</span> <span class="nav-text">词袋模型（BOW）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#独热编码（One-Hot）"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">独热编码（One-Hot）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zh"><span class="nav-number">1.6.</span> <span class="nav-text">zh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-数据处理"><span class="nav-number">1.7.</span> <span class="nav-text">1. 数据处理</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Bolin Shen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/edlison" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;edlison" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bolin.edlison.shen@gmail.com" title="E-Mail → mailto:bolin.edlison.shen@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/07/14/nlp/week-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NLP文本分类引导
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-07-14 23:31:04" itemprop="dateCreated datePublished" datetime="2020-07-14T23:31:04+08:00">2020-07-14</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-26 17:25:12" itemprop="dateModified" datetime="2021-01-26T17:25:12+08:00">2021-01-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notebook/" itemprop="url" rel="index"><span itemprop="name">Notebook</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="NLP文本分类引导"><a href="#NLP文本分类引导" class="headerlink" title="NLP文本分类引导"></a>NLP文本分类引导</h1><h2 id="en"><a href="#en" class="headerlink" title="en"></a>en</h2><h2 id="1-数据读取"><a href="#1-数据读取" class="headerlink" title="1. 数据读取"></a>1. 数据读取</h2><h3 id="python原生读取txt文件"><a href="#python原生读取txt文件" class="headerlink" title="python原生读取txt文件"></a>python原生读取txt文件</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f = open(filedir, mode=<span class="string">'r'</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>f.read()</code>一次读取全部数据。</li>
+<li><code>f.readline()</code>分行读取，一次读取一行。</li>
+<li><code>f.readlines()</code>读取全部数据，保留<code>\n</code>换行符。</li>
+</ul>
+<h3 id="pandas读取txt文件"><a href="#pandas读取txt文件" class="headerlink" title="pandas读取txt文件"></a>pandas读取txt文件</h3><p>pd.read_table(filedir, splitsign, header=指定第几行为列名, names=如果没有列名手动指定[‘x’, ‘y’])</p>
+<h2 id="2-数据预处理"><a href="#2-数据预处理" class="headerlink" title="2. 数据预处理"></a>2. 数据预处理</h2><h3 id="分词"><a href="#分词" class="headerlink" title="分词"></a>分词</h3><h3 id="去除停词-去除低频词"><a href="#去除停词-去除低频词" class="headerlink" title="去除停词 去除低频词"></a>去除停词 去除低频词</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">optimize_words_dict</span><span class="params">(self, data, stop_words, threshold)</span>:</span></span><br><span class="line">    freq_dict = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> data:  <span class="comment"># 去除停词 + 计算词频</span></span><br><span class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> line:</span><br><span class="line">            <span class="keyword">if</span> word <span class="keyword">in</span> stop_words:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> word <span class="keyword">not</span> <span class="keyword">in</span> freq_dict:</span><br><span class="line">                freq_dict[word] = <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                freq_dict[word] += <span class="number">1</span></span><br><span class="line">    words_list = []</span><br><span class="line">    values = sorted(list(set(freq_dict.values())), reverse=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">for</span> w <span class="keyword">in</span> values:  <span class="comment"># 通过阈值筛选词表 算法可以优化？？？</span></span><br><span class="line">        <span class="keyword">if</span> w &lt; threshold:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> freq_dict.items():</span><br><span class="line">            <span class="keyword">if</span> v == w:</span><br><span class="line">                words_list.append((k, v))</span><br><span class="line">    <span class="keyword">return</span> words_list</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过TF-IDF算法筛选单词"><a href="#通过TF-IDF算法筛选单词" class="headerlink" title="通过TF-IDF算法筛选单词"></a>通过TF-IDF算法筛选单词</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tf_idf</span><span class="params">(self, data)</span>:</span></span><br><span class="line">    doc_num = len(data)</span><br><span class="line">    df = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> sample <span class="keyword">in</span> data:</span><br><span class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> set(sample):  <span class="comment"># 避免一个单词在一个Sample里出现多次</span></span><br><span class="line">            <span class="keyword">if</span> word <span class="keyword">not</span> <span class="keyword">in</span> df:</span><br><span class="line">                df[word] = <span class="number">1.0</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                df[word] += <span class="number">1.0</span></span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> df:  <span class="comment"># 计算document frequency 文档总数/单词出现过的文档数</span></span><br><span class="line">        df[word] = log10(doc_num / df[word])</span><br><span class="line">    res = &#123;&#125;</span><br><span class="line">    index = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> sample <span class="keyword">in</span> data:</span><br><span class="line">        res[index] = &#123;&#125;</span><br><span class="line">        tf = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> sample:  <span class="comment"># 计算term frequency 一个样本里单词的频率</span></span><br><span class="line">            <span class="keyword">if</span> word <span class="keyword">not</span> <span class="keyword">in</span> tf:</span><br><span class="line">                tf[word] = <span class="number">1.0</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                tf[word] += <span class="number">1.0</span></span><br><span class="line">        sample_len = len(sample)</span><br><span class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> sample:  <span class="comment"># 计算tf * idf 一个样本中各单词的tf_idf</span></span><br><span class="line">            tf_idf = tf[word] / sample_len * df[word]</span><br><span class="line">            res[index][word] = tf_idf</span><br><span class="line">        index += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res  <span class="comment"># res格式为每一个样本中每一个单词对应的tf_idf值</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>在预处理时，因为是要为生成词典做准备，所以TF-IDF应该是以整个corpus计算TF，而提取特征时建立词袋模型中的TF-IDF方法则是对每个Sample的单词计算TF-IDF值。</strong></p>
+<h2 id="3-建立词典"><a href="#3-建立词典" class="headerlink" title="3. 建立词典"></a>3. 建立词典</h2><p>词典 = {‘单词’:索引}</p>
+<h2 id="4-提取特征"><a href="#4-提取特征" class="headerlink" title="4. 提取特征"></a>4. 提取特征</h2><h3 id="词袋模型（BOW）"><a href="#词袋模型（BOW）" class="headerlink" title="词袋模型（BOW）"></a>词袋模型（BOW）</h3><p>假设建立的词典有1000维，那么我们将为数据集中的每一个Sample建立一个1000维的向量。</p>
+<p>词袋模型有三种形式：</p>
+<ul>
+<li>对于每个Smaple单词是否出现</li>
+<li>对于每个Sample单词出现次数</li>
+<li>对于每个Smaple单词的TF-IDF值</li>
+</ul>
+<p><strong>在预处理时，因为是要为生成词典做准备，所以TF-IDF应该是以整个corpus计算TF，而提取特征时建立词袋模型中的TF-IDF方法则是对每个Sample的单词计算TF-IDF值。</strong></p>
+<p>例：<br>词典：1000. [北京，天气，真，好，北京] = [0, 1, 0, …,0], 或 [0, 2, 0, …,0]，或 [0, 0.4, 0, …, 0]</p>
+<h4 id="独热编码（One-Hot）"><a href="#独热编码（One-Hot）" class="headerlink" title="独热编码（One-Hot）"></a>独热编码（One-Hot）</h4><p>对于一个特征有N个状态则可以用N位来表示</p>
+<p>例：Feature_2有2个状态</p>
+<p>Sample_1 = [0, 1], Sample_2 = [1, 0] …</p>
+<p>例：Feature_1有4个状态</p>
+<p>Sample_1 = [0, 0, 1, 0], Sample_2 = [0, 1, 0, 0] …</p>
+<p>当一个样本有多个状态时</p>
+<p>Sample_1 = [0, 1, 0, 0, 1, 0], Sample_2 = [1, 0, 0, 1, 0, 0] …</p>
+<hr>
+<p>一点想法<br>不确定应该建立多大的词典时，可以考虑Corpus的大小或是每个Sample中Word的个数<br>词典的大小就与Corpus或Sample中Word的个数成某个比例</p>
+<h2 id="zh"><a href="#zh" class="headerlink" title="zh"></a>zh</h2><h2 id="1-数据处理"><a href="#1-数据处理" class="headerlink" title="1. 数据处理"></a>1. 数据处理</h2><ul>
+<li>去除空格</li>
+<li>符号转换（省略号-&gt;句号）？</li>
+<li>去除无意义符号</li>
+<li>繁体转换简体</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/nlp/" rel="tag"># nlp</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/05/17/mlsec/KNN-%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E6%95%B0%E6%8D%AE%E9%9B%86/" rel="prev" title="mlsec/KNN-手写体数字数据集">
+                  <i class="fa fa-chevron-left"></i> mlsec/KNN-手写体数字数据集
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/07/14/notebook/docker-chevereto/" rel="next" title="notebook/docker-chevereto">
+                  notebook/docker-chevereto <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bolin Shen</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

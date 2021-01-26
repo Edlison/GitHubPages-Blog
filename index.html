@@ -159,7 +159,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-count">97</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -170,7 +170,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -210,6 +210,693 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/26/design/abstractfactory/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/26/design/abstractfactory/" class="post-title-link" itemprop="url">AbstractFactory抽象工厂模式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-26 14:57:30 / 修改时间：17:23:34" itemprop="dateCreated datePublished" datetime="2021-01-26T14:57:30+08:00">2021-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notebook/" itemprop="url" rel="index"><span itemprop="name">Notebook</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="项目架构"><a href="#项目架构" class="headerlink" title="项目架构"></a>项目架构</h1><p><strong>抽象产品</strong></p>
+<p>每一种产品都有一个产品的声明接口。</p>
+<p><strong>具体产品</strong></p>
+<p>每一个产品下有不同类型的实现，每一个产品都实现对应的产品接口。</p>
+<p><strong>抽象工厂</strong></p>
+<p>用于创建所有产品的声明接口。</p>
+<p><strong>具体工厂</strong></p>
+<p>具体的工厂对应产生具体的产品，用于创建这种产品。</p>
+<p><strong>客户端类</strong></p>
+<p>抽象工厂作为数据成员，其中可以执行各种抽象工厂定义的方法，及各种客户端需要处理的业务。</p>
+<p><strong>运行类</strong></p>
+<p>首先需要准备配置（具体工厂类），在配置文件中根据当前的需求实例话对应的具体工厂。</p>
+<p>在运行时实例化客户端类，并对其传入配置文件（具体工厂类）。</p>
+<p>此时客户端就可以根据当前的实际情况运行。</p>
+<hr>
+<p>Reference</p>
+<p><a href="https://refactoringguru.cn/design-patterns/abstract-factory" target="_blank" rel="noopener">https://refactoringguru.cn/design-patterns/abstract-factory</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/26/notebook/linux-nohup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/26/notebook/linux-nohup/" class="post-title-link" itemprop="url">Linux中的nohup</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-26 09:53:14 / 修改时间：09:59:40" itemprop="dateCreated datePublished" datetime="2021-01-26T09:53:14+08:00">2021-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notebook/" itemprop="url" rel="index"><span itemprop="name">Notebook</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="nohup输出到指定文件"><a href="#nohup输出到指定文件" class="headerlink" title="nohup输出到指定文件"></a>nohup输出到指定文件</h1><p>输出到默认文件<code>nohup.out</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup python train.py&amp;</span><br></pre></td></tr></table></figure>
+
+<p>输出到指定文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup python train.py&amp;&gt; train.out&amp;</span><br></pre></td></tr></table></figure>
+
+<h1 id="实时监控输出内容"><a href="#实时监控输出内容" class="headerlink" title="实时监控输出内容"></a>实时监控输出内容</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -f nohup.out</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="查看程序进程"><a href="#查看程序进程" class="headerlink" title="查看程序进程"></a>查看程序进程</h1><p><code>ps</code>显示当前进程状态，及其启动时的命令行参数</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep cmd</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/22/notebook/websocket-start/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/22/notebook/websocket-start/" class="post-title-link" itemprop="url">websocket入门</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-22 15:26:15 / 修改时间：18:03:39" itemprop="dateCreated datePublished" datetime="2021-01-22T15:26:15+08:00">2021-01-22</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id=""><a href="#" class="headerlink" title=""></a></h1>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/22/notebook/Schedule/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/22/notebook/Schedule/" class="post-title-link" itemprop="url">Java中的定时任务</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-22 10:39:41 / 修改时间：13:46:21" itemprop="dateCreated datePublished" datetime="2021-01-22T10:39:41+08:00">2021-01-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notebook/" itemprop="url" rel="index"><span itemprop="name">Notebook</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Schedule"><a href="#Schedule" class="headerlink" title="Schedule"></a>Schedule</h1><p>只适合处理简单的计划任务，不能处理分布式计划任务。优势：是spring框架提供的计划任务，开发简单，执行效率比较高。且在计划任务数量太多的时候，可能出现阻塞，崩溃，延迟启动等问题。</p>
+<p>例子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span>      <span class="comment">//1.主要用于标记配置类，兼备Component的效果。</span></span><br><span class="line"><span class="meta">@EnableScheduling</span>   <span class="comment">// 2.开启定时任务</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DynamicScheduleTask</span> <span class="keyword">implements</span> <span class="title">SchedulingConfigurer</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 执行定时任务.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configureTasks</span><span class="params">(ScheduledTaskRegistrar taskRegistrar)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        taskRegistrar.addTriggerTask(</span><br><span class="line">                <span class="comment">//1.添加任务内容(Runnable)</span></span><br><span class="line">                () -&gt; System.out.println(<span class="string">"执行动态定时任务: "</span> + LocalDateTime.now().toLocalTime()),</span><br><span class="line">                <span class="comment">//2.设置执行周期(Trigger)</span></span><br><span class="line">                triggerContext -&gt; &#123;</span><br><span class="line">                    <span class="comment">//2.1 从数据库获取执行周期</span></span><br><span class="line">                    String cron = cronMapper.getCron();</span><br><span class="line">                    <span class="comment">//2.2 合法性校验.</span></span><br><span class="line">                    <span class="keyword">if</span> (StringUtils.isEmpty(cron)) &#123;</span><br><span class="line">                        <span class="comment">// Omitted Code ..</span></span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">//2.3 返回执行周期(Date)</span></span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">new</span> CronTrigger(cron).nextExecutionTime(triggerContext);</span><br><span class="line">                &#125;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Cron表达式"><a href="#Cron表达式" class="headerlink" title="Cron表达式"></a>Cron表达式</h2><p>Cron = “seconds minutes hours day month week”</p>
+<p>或</p>
+<p>cron = “seconds minutes hours day month week year”</p>
+<table>
+<thead>
+<tr>
+<th>位置</th>
+<th>时间</th>
+<th>允许值</th>
+<th>允许的特殊字符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>秒</td>
+<td>0-59</td>
+<td>, - * /</td>
+</tr>
+<tr>
+<td>2</td>
+<td>分钟</td>
+<td>0-59</td>
+<td>, - * /</td>
+</tr>
+<tr>
+<td>3</td>
+<td>小时</td>
+<td>0-23</td>
+<td>, - * /</td>
+</tr>
+<tr>
+<td>4</td>
+<td>日</td>
+<td>1-31</td>
+<td>, - * / L W C</td>
+</tr>
+<tr>
+<td>5</td>
+<td>月</td>
+<td>1-12</td>
+<td>, - * /</td>
+</tr>
+<tr>
+<td>6</td>
+<td>星期</td>
+<td>1-7</td>
+<td>, - * ? / L C #</td>
+</tr>
+<tr>
+<td>7</td>
+<td>年（可选）</td>
+<td>1970-2099</td>
+<td>, - * /</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>星号(<em>)：可用在所有字段中，表示对应时间域的每一个时刻，例如，</em>在分钟字段时，表示“每分钟”；</p>
+<p>问号（?）：该字符只在日期和星期字段中使用，它通常指定为“无意义的值”，相当于占位符；</p>
+<p>减号(-)：表达一个范围，如在小时字段中使用“10-12”，则表示从10到12点，即10,11,12；</p>
+<p>逗号(,)：表达一个列表值，如在星期字段中使用“MON,WED,FRI”，则表示星期一，星期三和星期五；</p>
+<p>斜杠(/)：x/y表达一个等步长序列，x为起始值，y为增量步长值。如在秒数字段中使用0/15，则表示为0,15,30和45秒，而5/15在分钟字段中表示5,20,35,50，你也可以使用*/y，它等同于0/y；</p>
+<p>L：该字符只在日期和星期字段中使用，代表“Last”的意思，但它在两个字段中意思不同。L在日期字段中，表示这个月份的最后一天，如一月的31号，非闰年二月的28号；如果L用在星期中，则表示星期六，等同于7。但是，如果L出现在星期字段里，而且在前面有一个数值X，则表示“这个月的最后X天”，例如，6L表示该月的最后星期五；</p>
+<p>W：该字符只能出现在日期字段里，是对前导日期的修饰，表示离该日期最近的工作日。例如15W表示离该月15号最近的工作日，如果该月15号是星期六，则匹配14号星期五；如果15日是星期日，则匹配16号星期一；如果15号是星期二，那结果就是15号星期二。但必须注意关联的匹配日期不能够跨月，如你指定1W，如果1号是星期六，结果匹配的是3号星期一，而非上个月最后的那天。W字符串只能指定单一日期，而不能指定日期范围；</p>
+<p>LW组合：在日期字段可以组合使用LW，它的意思是当月的最后一个工作日；</p>
+<p>井号(#)：该字符只能在星期字段中使用，表示当月某个工作日。如6#3表示当月的第三个星期五(6表示星期五，#3表示当前的第三个)，而4#5表示当月的第五个星期三，假设当月没有第五个星期三，忽略不触发；</p>
+<p>C：该字符只在日期和星期字段中使用，代表“Calendar”的意思。它的意思是计划所关联的日期，如果日期没有被关联，则相当于日历中所有日期。例如5C在日期字段中就相当于日历5日以后的第一天。1C在星期字段中相当于星期日后的第一天。</p>
+</blockquote>
+<p><strong>Cron表达式对特殊字符的大小写不敏感，对代表星期的缩写英文大小写也不敏感。</strong></p>
+<h1 id="Qurtz"><a href="#Qurtz" class="headerlink" title="Qurtz"></a>Qurtz</h1><p>Quartz是OpenSymphony开源组织在Job scheduling领域又一个开源项目，它可以与J2EE与J2SE应用程序相结合也可以单独使用。Quartz可以用来创建简单或为运行十个，百个，甚至是好几万个Jobs这样复杂的程序。</p>
+<p>　　Quartz是一个完全由java编写的开源作业调度框架。不要让作业调度这个术语吓着你。尽管Quartz框架整合了许多额外功能， 但就其简易形式看，你会发现它易用得简直让人受不了！<br>在开发Quartz相关应用时，只要定义了Job（任务），Trigger（触发器）和Scheduler（调度器），即可实现一个定时调度能力。其中Scheduler是Quartz中的核心，Scheduler负责管理Quartz应用运行时环境，Scheduler不是靠自己完成所有的工作，是根据Trigger的触发标准，调用Job中的任务执行逻辑，来完成完整的定时任务调度。</p>
+<ul>
+<li>Job - 定时任务内容是什么。</li>
+<li>Trigger - 在什么时间上执行job。</li>
+<li>Scheduler - 维护定时任务环境，并让触发器生效。</li>
+<li>在SpringBoot中应用Quartz，需要依赖下述资源：</li>
+</ul>
+<ol>
+<li>创建定时任务</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTask</span> <span class="keyword">extends</span> <span class="title">QuartzJobBean</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">executeInternal</span><span class="params">(JobExecutionContext jobExecutionContext)</span> <span class="keyword">throws</span> JobExecutionException </span>&#123;</span><br><span class="line">        <span class="comment">//TODO 这里写定时任务的执行逻辑</span></span><br><span class="line">        System.out.println(<span class="string">"简单的定时任务执行时间："</span>+<span class="keyword">new</span> Date().toLocaleString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>创建配置类将定时任务添加到调度中</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuartzConfig</span> </span>&#123;</span><br><span class="line">	<span class="comment">//指定具体的定时任务类</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> JobDetail <span class="title">uploadTaskDetail</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        return JobBuilder.newJob(MyTask.class).withIdentity("MyTask").storeDurably().build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Trigger <span class="title">uploadTaskTrigger</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//TODO 这里设定执行方式</span></span><br><span class="line">        CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(<span class="string">"*/5 * * * * ?"</span>);</span><br><span class="line">        <span class="comment">// 返回任务触发器</span></span><br><span class="line">        <span class="keyword">return</span> TriggerBuilder.newTrigger().forJob(uploadTaskDetail())</span><br><span class="line">                .withIdentity(<span class="string">"MyTask"</span>)</span><br><span class="line">                .withSchedule(scheduleBuilder)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>还可以对定时任务进行动态暂停，修改，启动，单次执行等操作。</strong></p>
+<p>见文章：</p>
+<p><a href="https://cloud.tencent.com/developer/article/1640190" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1640190</a></p>
+<hr>
+<p>References</p>
+<p><a href="https://www.cnblogs.com/jing99/p/11546559.html" target="_blank" rel="noopener">https://www.cnblogs.com/jing99/p/11546559.html</a></p>
+<p><a href="https://cloud.tencent.com/developer/article/1640190" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1640190</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/21/notebook/linux-redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/21/notebook/linux-redis/" class="post-title-link" itemprop="url">Linux安装Redis</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-21 17:29:40 / 修改时间：17:41:34" itemprop="dateCreated datePublished" datetime="2021-01-21T17:29:40+08:00">2021-01-21</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Linux版安装流程"><a href="#Linux版安装流程" class="headerlink" title="Linux版安装流程"></a>Linux版安装流程</h1><ol>
+<li>获取最新的版本</li>
+</ol>
+<p><a href="https://redis.io/download" target="_blank" rel="noopener">https://redis.io/download</a></p>
+<ol start="2">
+<li>下载，解压，编译</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://download.redis.io/releases/redis-6.0.10.tar.gz</span><br><span class="line">$ tar xzf redis-6.0.10.tar.gz</span><br><span class="line">$ <span class="built_in">cd</span> redis-6.0.10</span><br><span class="line">$ make</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>测试</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ src/redis-cli</span><br><span class="line">redis&gt; <span class="built_in">set</span> foo bar</span><br><span class="line">OK</span><br><span class="line">redis&gt; get foo</span><br><span class="line"><span class="string">"bar"</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><ol>
+<li>Redis 6需要gcc的版本为5.3以上</li>
+</ol>
+<ul>
+<li>查看gcc版本</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -v</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>升级</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#升级到 5.3及以上版本</span></span><br><span class="line">yum -y install centos-release-scl</span><br><span class="line">yum -y install devtoolset-9-gcc devtoolset-9-gcc-c++ devtoolset-9-binutils</span><br><span class="line"></span><br><span class="line">scl <span class="built_in">enable</span> devtoolset-9 bash</span><br></pre></td></tr></table></figure>
+
+<p>scl命令启用只是临时的，推出xshell或者重启就会恢复到原来的gcc版本。<br>如果要长期生效的话，执行如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"source /opt/rh/devtoolset-9/enable"</span> &gt;&gt;/etc/profile</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>遇到fatal error</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make MALLOC=libc</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>Reference</p>
+<p><a href="https://blog.csdn.net/hello_cmy/article/details/106062327" target="_blank" rel="noopener">https://blog.csdn.net/hello_cmy/article/details/106062327</a></p>
+<p><a href="https://blog.csdn.net/libra_ts/article/details/71195128" target="_blank" rel="noopener">https://blog.csdn.net/libra_ts/article/details/71195128</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/21/paper/ClusterGAN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/21/paper/ClusterGAN/" class="post-title-link" itemprop="url">ClusterGAN代码实现</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-01-21 10:12:58" itemprop="dateCreated datePublished" datetime="2021-01-21T10:12:58+08:00">2021-01-21</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-25 13:43:24" itemprop="dateModified" datetime="2021-01-25T13:43:24+08:00">2021-01-25</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="ClusterGAN-Pytorch-Implement"><a href="#ClusterGAN-Pytorch-Implement" class="headerlink" title="ClusterGAN-Pytorch Implement"></a>ClusterGAN-Pytorch Implement</h1><h2 id="跑通源代码"><a href="#跑通源代码" class="headerlink" title="跑通源代码"></a>跑通源代码</h2><p><a href="https://github.com/zhampel/clusterGAN" target="_blank" rel="noopener">https://github.com/zhampel/clusterGAN</a></p>
+<h3 id="cuDNN-error-CUDNN-STATUS-EXECUTION-FAILED"><a href="#cuDNN-error-CUDNN-STATUS-EXECUTION-FAILED" class="headerlink" title="cuDNN error: CUDNN_STATUS_EXECUTION_FAILED"></a>cuDNN error: CUDNN_STATUS_EXECUTION_FAILED</h3><p>可能由于Python, Pytorch, cuda, cudnn版本之间匹配问题导致。</p>
+<p><strong>方案1:</strong></p>
+<p>直接关闭cudnn加速</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.backends.cudnn.enabled = <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="matplotlib报错no-display-name-and-no-DISPLAY-environment-variable"><a href="#matplotlib报错no-display-name-and-no-DISPLAY-environment-variable" class="headerlink" title="matplotlib报错no display name and no $DISPLAY environment variable."></a>matplotlib报错no display name and no $DISPLAY environment variable.</h3><p>在matplotlib<strong>首次</strong>import之后进行配置</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">matplotlib.use(<span class="string">'Agg'</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="理解源代码"><a href="#理解源代码" class="headerlink" title="理解源代码"></a>理解源代码</h1><p>跑完一个epoch需要每一次迭代一个batch直到迭代全部的数据集。而参数的更新需要在每个batch迭代完后更新。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/21/notebook/server-info/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/21/notebook/server-info/" class="post-title-link" itemprop="url">查看服务器各种属性</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-21 08:58:11 / 修改时间：10:11:15" itemprop="dateCreated datePublished" datetime="2021-01-21T08:58:11+08:00">2021-01-21</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="CPU属性"><a href="#CPU属性" class="headerlink" title="CPU属性"></a>CPU属性</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">user@server:~$ lscpu</span><br><span class="line"></span><br><span class="line">Architecture:        x86_64</span><br><span class="line">CPU op-mode(s):      32-bit, 64-bit</span><br><span class="line">Byte Order:          Little Endian</span><br><span class="line">CPU(s):              72</span><br><span class="line">On-line CPU(s) list: 0-71</span><br><span class="line">Thread(s) per core:  2</span><br><span class="line">Core(s) per socket:  18</span><br><span class="line">Socket(s):           2</span><br><span class="line">NUMA node(s):        2</span><br><span class="line">Vendor ID:           GenuineIntel</span><br><span class="line">CPU family:          6</span><br><span class="line">Model:               85</span><br><span class="line">Model name:          Intel(R) Xeon(R) Gold 5220 CPU @ 2.20GHz</span><br><span class="line">Stepping:            7</span><br><span class="line">CPU MHz:             999.916</span><br><span class="line">CPU max MHz:         3900.0000</span><br><span class="line">CPU min MHz:         1000.0000</span><br><span class="line">BogoMIPS:            4400.00</span><br><span class="line">Virtualization:      VT-x</span><br><span class="line">L1d cache:           32K</span><br><span class="line">L1i cache:           32K</span><br><span class="line">L2 cache:            1024K</span><br><span class="line">L3 cache:            25344K</span><br><span class="line">NUMA node0 CPU(s):   0-17,36-53</span><br><span class="line">NUMA node1 CPU(s):   18-35,54-71</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="查看内存"><a href="#查看内存" class="headerlink" title="查看内存"></a>查看内存</h1><p>-g是指以GB为单位，-m是以MB为单位。</p>
+<p><code>free -g</code></p>
+<p>详细信息</p>
+<p><code>cat /proc/meminfo</code></p>
+<h1 id="查看硬盘"><a href="#查看硬盘" class="headerlink" title="查看硬盘"></a>查看硬盘</h1><p>硬盘和分区分布</p>
+<p><code>lsblk</code></p>
+<p>硬盘和分区详细</p>
+<p><code>fdisk -l</code></p>
+<h1 id="查看显卡"><a href="#查看显卡" class="headerlink" title="查看显卡"></a>查看显卡</h1><p><code>nvidia-smi</code></p>
+<h1 id="根据PID查看进程详细信息"><a href="#根据PID查看进程详细信息" class="headerlink" title="根据PID查看进程详细信息"></a>根据PID查看进程详细信息</h1><p><code>ls -l /proc/${pid}</code></p>
+<p><code>ps -ef | grep ${pid}</code></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -1645,6 +2332,119 @@
 <hr>
 <p>Reference</p>
 <p>BERT | Bidirectional Encoder Representation from Transformers<br><a href="https://easyai.tech/ai-definition/bert/" target="_blank" rel="noopener">https://easyai.tech/ai-definition/bert/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/09/23/nlp/Transformer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/23/nlp/Transformer/" class="post-title-link" itemprop="url">nlp/Transformer</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-23 11:57:22" itemprop="dateCreated datePublished" datetime="2020-09-23T11:57:22+08:00">2020-09-23</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-26 17:35:43" itemprop="dateModified" datetime="2021-01-26T17:35:43+08:00">2021-01-26</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Transfomer-概述"><a href="#Transfomer-概述" class="headerlink" title="Transfomer 概述"></a>Transfomer 概述</h1><p>和经典的 seq2seq 模型一样，Transformer 模型中也采用了 encoer-decoder 架构。上图的左半边用 NX 框出来的，就代表一层 encoder，其中论文里面的 encoder 一共有6层这样的结构。上图的右半边用 NX 框出来的，则代表一层 decoder，同样也有6层。</p>
+<p>定义输入序列首先经过 word embedding，再和 positional encoding 相加后，输入到 encoder 中。输出序列经过的处理和输入序列一样，然后输入到 decoder。</p>
+<p>最后，decoder 的输出经过一个线性层，再接 Softmax。</p>
+<p>于上便是 Transformer 的整体框架，下面先来介绍 encoder 和 decoder。</p>
+<p><strong>Encoder</strong></p>
+<p>由 6 层相同的层组成，每一层分别由两部分组成：</p>
+<ul>
+<li><p>第一部分是 multi-head self-attention</p>
+</li>
+<li><p>第二部分是 position-wise feed-forward network，是一个全连接层</p>
+</li>
+</ul>
+<p>两个部分，都有一个残差连接(residual connection)，然后接着一个 Layer Normalization。</p>
+<p><strong>Decoder</strong></p>
+<p>和 encoder 类似，decoder 也是由6个相同的层组成，每一层由三个部分组成：</p>
+<ul>
+<li>第一个部分是 multi-head self-attention mechanism</li>
+<li>第二部分是 multi-head context-attention mechanism</li>
+<li>第三部分是一个 position-wise feed-forward network和encoder 一样，上面三个部分的每一个部分，都有一个残差连接，后接一个 Layer Normalization。</li>
+</ul>
+<p>decoder 和 encoder 不同的地方在 multi-head context-attention mechanism</p>
+<p><strong>Attention</strong></p>
+<p>Attention用一句话来描述，就是encoder层的输出经过加权平均后再输入到decoder层中。它主要应用在seq2seq模型中，这个加权可以用矩阵来表示，也叫Attention矩阵。它表示对于某个时刻的输出y，他在输入x上各个部分的注意力。这个注意力就是加权。</p>
+<p><strong>Self-Attention</strong></p>
+<p>attention有两个隐状态，hi和st。前者是输入序列第i个位置产生的隐状态，后者是输出序列在第t个位置产生的隐状态。self-attention就是，输出序列就是输入序列。自己计算自己的attention得分。</p>
+<p><strong>Context-Attention</strong></p>
+<p>context-attention是encoder和decoder之间的attention，是两个不同序列之间的attention，与来源于自身的self-attention相区别。</p>
+<p>计算attention权重的方法：</p>
+<ul>
+<li>additive attention</li>
+<li>local-base</li>
+<li>general</li>
+<li>dot-product</li>
+<li>scaled dot-product</li>
+</ul>
+<p><strong>Scaled Dot-Product Attention</strong></p>
+<p>通过query和key的相似性程度来确定value的权重分布。</p>
+<p><img src="https://pic4.zhimg.com/80/v2-e2bc3a470b359e8bdce750843140897e_720w.jpg" alt="img-scaled-dot-attention"></p>
+<hr>
+<p>Reference</p>
+<p>Transformer<br><a href="https://easyai.tech/ai-definition/transformer/" target="_blank" rel="noopener">https://easyai.tech/ai-definition/transformer/</a></p>
+<p>Attention<br><a href="https://easyai.tech/ai-definition/attention/" target="_blank" rel="noopener">https://easyai.tech/ai-definition/attention/</a></p>
 
       
     </div>
@@ -3413,6 +4213,124 @@
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">memory_limit</span> = <span class="number">256</span>M<span class="comment">;</span></span><br><span class="line"><span class="attr">upload_max_filesize</span> = <span class="number">100</span>M<span class="comment">;</span></span><br><span class="line"><span class="attr">post_max_size</span> = <span class="number">100</span>M<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 
 <p>运行Docker-Compose<br><code>docker-compose up -d</code></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/07/14/nlp/week-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/14/nlp/week-1/" class="post-title-link" itemprop="url">NLP文本分类引导</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-07-14 23:31:04" itemprop="dateCreated datePublished" datetime="2020-07-14T23:31:04+08:00">2020-07-14</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-26 17:25:12" itemprop="dateModified" datetime="2021-01-26T17:25:12+08:00">2021-01-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notebook/" itemprop="url" rel="index"><span itemprop="name">Notebook</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="NLP文本分类引导"><a href="#NLP文本分类引导" class="headerlink" title="NLP文本分类引导"></a>NLP文本分类引导</h1><h2 id="en"><a href="#en" class="headerlink" title="en"></a>en</h2><h2 id="1-数据读取"><a href="#1-数据读取" class="headerlink" title="1. 数据读取"></a>1. 数据读取</h2><h3 id="python原生读取txt文件"><a href="#python原生读取txt文件" class="headerlink" title="python原生读取txt文件"></a>python原生读取txt文件</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f = open(filedir, mode=<span class="string">'r'</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>f.read()</code>一次读取全部数据。</li>
+<li><code>f.readline()</code>分行读取，一次读取一行。</li>
+<li><code>f.readlines()</code>读取全部数据，保留<code>\n</code>换行符。</li>
+</ul>
+<h3 id="pandas读取txt文件"><a href="#pandas读取txt文件" class="headerlink" title="pandas读取txt文件"></a>pandas读取txt文件</h3><p>pd.read_table(filedir, splitsign, header=指定第几行为列名, names=如果没有列名手动指定[‘x’, ‘y’])</p>
+<h2 id="2-数据预处理"><a href="#2-数据预处理" class="headerlink" title="2. 数据预处理"></a>2. 数据预处理</h2><h3 id="分词"><a href="#分词" class="headerlink" title="分词"></a>分词</h3><h3 id="去除停词-去除低频词"><a href="#去除停词-去除低频词" class="headerlink" title="去除停词 去除低频词"></a>去除停词 去除低频词</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">optimize_words_dict</span><span class="params">(self, data, stop_words, threshold)</span>:</span></span><br><span class="line">    freq_dict = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> data:  <span class="comment"># 去除停词 + 计算词频</span></span><br><span class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> line:</span><br><span class="line">            <span class="keyword">if</span> word <span class="keyword">in</span> stop_words:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> word <span class="keyword">not</span> <span class="keyword">in</span> freq_dict:</span><br><span class="line">                freq_dict[word] = <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                freq_dict[word] += <span class="number">1</span></span><br><span class="line">    words_list = []</span><br><span class="line">    values = sorted(list(set(freq_dict.values())), reverse=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">for</span> w <span class="keyword">in</span> values:  <span class="comment"># 通过阈值筛选词表 算法可以优化？？？</span></span><br><span class="line">        <span class="keyword">if</span> w &lt; threshold:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> freq_dict.items():</span><br><span class="line">            <span class="keyword">if</span> v == w:</span><br><span class="line">                words_list.append((k, v))</span><br><span class="line">    <span class="keyword">return</span> words_list</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过TF-IDF算法筛选单词"><a href="#通过TF-IDF算法筛选单词" class="headerlink" title="通过TF-IDF算法筛选单词"></a>通过TF-IDF算法筛选单词</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tf_idf</span><span class="params">(self, data)</span>:</span></span><br><span class="line">    doc_num = len(data)</span><br><span class="line">    df = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> sample <span class="keyword">in</span> data:</span><br><span class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> set(sample):  <span class="comment"># 避免一个单词在一个Sample里出现多次</span></span><br><span class="line">            <span class="keyword">if</span> word <span class="keyword">not</span> <span class="keyword">in</span> df:</span><br><span class="line">                df[word] = <span class="number">1.0</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                df[word] += <span class="number">1.0</span></span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> df:  <span class="comment"># 计算document frequency 文档总数/单词出现过的文档数</span></span><br><span class="line">        df[word] = log10(doc_num / df[word])</span><br><span class="line">    res = &#123;&#125;</span><br><span class="line">    index = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> sample <span class="keyword">in</span> data:</span><br><span class="line">        res[index] = &#123;&#125;</span><br><span class="line">        tf = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> sample:  <span class="comment"># 计算term frequency 一个样本里单词的频率</span></span><br><span class="line">            <span class="keyword">if</span> word <span class="keyword">not</span> <span class="keyword">in</span> tf:</span><br><span class="line">                tf[word] = <span class="number">1.0</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                tf[word] += <span class="number">1.0</span></span><br><span class="line">        sample_len = len(sample)</span><br><span class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> sample:  <span class="comment"># 计算tf * idf 一个样本中各单词的tf_idf</span></span><br><span class="line">            tf_idf = tf[word] / sample_len * df[word]</span><br><span class="line">            res[index][word] = tf_idf</span><br><span class="line">        index += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res  <span class="comment"># res格式为每一个样本中每一个单词对应的tf_idf值</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>在预处理时，因为是要为生成词典做准备，所以TF-IDF应该是以整个corpus计算TF，而提取特征时建立词袋模型中的TF-IDF方法则是对每个Sample的单词计算TF-IDF值。</strong></p>
+<h2 id="3-建立词典"><a href="#3-建立词典" class="headerlink" title="3. 建立词典"></a>3. 建立词典</h2><p>词典 = {‘单词’:索引}</p>
+<h2 id="4-提取特征"><a href="#4-提取特征" class="headerlink" title="4. 提取特征"></a>4. 提取特征</h2><h3 id="词袋模型（BOW）"><a href="#词袋模型（BOW）" class="headerlink" title="词袋模型（BOW）"></a>词袋模型（BOW）</h3><p>假设建立的词典有1000维，那么我们将为数据集中的每一个Sample建立一个1000维的向量。</p>
+<p>词袋模型有三种形式：</p>
+<ul>
+<li>对于每个Smaple单词是否出现</li>
+<li>对于每个Sample单词出现次数</li>
+<li>对于每个Smaple单词的TF-IDF值</li>
+</ul>
+<p><strong>在预处理时，因为是要为生成词典做准备，所以TF-IDF应该是以整个corpus计算TF，而提取特征时建立词袋模型中的TF-IDF方法则是对每个Sample的单词计算TF-IDF值。</strong></p>
+<p>例：<br>词典：1000. [北京，天气，真，好，北京] = [0, 1, 0, …,0], 或 [0, 2, 0, …,0]，或 [0, 0.4, 0, …, 0]</p>
+<h4 id="独热编码（One-Hot）"><a href="#独热编码（One-Hot）" class="headerlink" title="独热编码（One-Hot）"></a>独热编码（One-Hot）</h4><p>对于一个特征有N个状态则可以用N位来表示</p>
+<p>例：Feature_2有2个状态</p>
+<p>Sample_1 = [0, 1], Sample_2 = [1, 0] …</p>
+<p>例：Feature_1有4个状态</p>
+<p>Sample_1 = [0, 0, 1, 0], Sample_2 = [0, 1, 0, 0] …</p>
+<p>当一个样本有多个状态时</p>
+<p>Sample_1 = [0, 1, 0, 0, 1, 0], Sample_2 = [1, 0, 0, 1, 0, 0] …</p>
+<hr>
+<p>一点想法<br>不确定应该建立多大的词典时，可以考虑Corpus的大小或是每个Sample中Word的个数<br>词典的大小就与Corpus或Sample中Word的个数成某个比例</p>
+<h2 id="zh"><a href="#zh" class="headerlink" title="zh"></a>zh</h2><h2 id="1-数据处理"><a href="#1-数据处理" class="headerlink" title="1. 数据处理"></a>1. 数据处理</h2><ul>
+<li>去除空格</li>
+<li>符号转换（省略号-&gt;句号）？</li>
+<li>去除无意义符号</li>
+<li>繁体转换简体</li>
+</ul>
 
       
     </div>
