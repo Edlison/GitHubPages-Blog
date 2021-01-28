@@ -24,14 +24,17 @@
     var CONFIG = {"hostname":"edlison.com","root":"/","images":"/images","scheme":"Muse","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta property="og:type" content="article">
-<meta property="og:title" content="spark&#x2F;start">
+  <meta name="description" content="简介Spark是一个集群计算的框架，类似于Hadoop. 其最大的优化是让计算任务的中间结果存储在内存中，不需要每次都写入HDFS。 Spark是基于RDD的核心编程，使用内存进行计算，比死板的MapReduce模型的性能大大提高。 Spark RDDs 弹性分布式数据集一个可并行操作的有容错机制的数据集合。 Spark Streaming对事实数据流进行处理，处理后的数据再应用。 一个处理过程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark - start">
 <meta property="og:url" content="http://edlison.com/2021/01/27/spark/start/index.html">
 <meta property="og:site_name" content="Edlison is talking here.">
+<meta property="og:description" content="简介Spark是一个集群计算的框架，类似于Hadoop. 其最大的优化是让计算任务的中间结果存储在内存中，不需要每次都写入HDFS。 Spark是基于RDD的核心编程，使用内存进行计算，比死板的MapReduce模型的性能大大提高。 Spark RDDs 弹性分布式数据集一个可并行操作的有容错机制的数据集合。 Spark Streaming对事实数据流进行处理，处理后的数据再应用。 一个处理过程。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-27T03:48:52.551Z">
-<meta property="article:modified_time" content="2021-01-27T03:48:55.907Z">
+<meta property="article:modified_time" content="2021-01-28T08:39:54.346Z">
 <meta property="article:author" content="Bolin Shen">
+<meta property="article:tag" content="spark">
 <meta name="twitter:card" content="summary">
 
 
@@ -48,7 +51,7 @@
   };
 </script>
 
-  <title>spark/start | Edlison is talking here.</title>
+  <title>Spark - start | Edlison is talking here.</title>
   
 
 
@@ -136,7 +139,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -149,6 +152,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-RDDs-弹性分布式数据集"><span class="nav-number">2.</span> <span class="nav-text">Spark RDDs 弹性分布式数据集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-Streaming"><span class="nav-number">3.</span> <span class="nav-text">Spark Streaming</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-SQL"><span class="nav-number">4.</span> <span class="nav-text">Spark SQL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GraphX"><span class="nav-number">5.</span> <span class="nav-text">GraphX</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -161,7 +165,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-count">108</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -172,7 +176,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -234,7 +238,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          spark/start
+          Spark - start
         </h1>
 
         <div class="post-meta-container">
@@ -244,9 +248,24 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-01-27 11:48:52 / 修改时间：11:48:55" itemprop="dateCreated datePublished" datetime="2021-01-27T11:48:52+08:00">2021-01-27</time>
+      <time title="创建时间：2021-01-27 11:48:52" itemprop="dateCreated datePublished" datetime="2021-01-27T11:48:52+08:00">2021-01-27</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-28 16:39:54" itemprop="dateModified" datetime="2021-01-28T16:39:54+08:00">2021-01-28</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notebook/" itemprop="url" rel="index"><span itemprop="name">Notebook</span></a>
+        </span>
     </span>
 
   
@@ -259,7 +278,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Spark是一个集群计算的框架，类似于Hadoop. 其最大的优化是让计算任务的中间结果存储在内存中，不需要每次都写入HDFS。</p>
+<p>Spark是基于RDD的核心编程，使用内存进行计算，比死板的MapReduce模型的性能大大提高。</p>
+<h1 id="Spark-RDDs-弹性分布式数据集"><a href="#Spark-RDDs-弹性分布式数据集" class="headerlink" title="Spark RDDs 弹性分布式数据集"></a>Spark RDDs 弹性分布式数据集</h1><p>一个可并行操作的有容错机制的数据集合。</p>
+<h1 id="Spark-Streaming"><a href="#Spark-Streaming" class="headerlink" title="Spark Streaming"></a>Spark Streaming</h1><p>对事实数据流进行处理，处理后的数据再应用。</p>
+<p>一个处理过程。</p>
+<h1 id="Spark-SQL"><a href="#Spark-SQL" class="headerlink" title="Spark SQL"></a>Spark SQL</h1><p>允许Spark执行用SQL, Scala等表示的关系查询。</p>
+<h1 id="GraphX"><a href="#GraphX" class="headerlink" title="GraphX"></a>GraphX</h1><p>用于图和并行图计算。</p>
+<hr>
+<p>Reference</p>
+<p><a href="https://www.w3cschool.cn/spark" target="_blank" rel="noopener">https://www.w3cschool.cn/spark</a></p>
+
     </div>
 
     
@@ -267,6 +296,9 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/spark/" rel="tag"># spark</a>
+          </div>
 
         
 
@@ -277,8 +309,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/01/27/notebook/linux-ftp/" rel="next" title="notebook/linux-ftp">
-                  notebook/linux-ftp <i class="fa fa-chevron-right"></i>
+                <a href="/2021/01/27/linux/linux-ftp/" rel="next" title="linux/linux-ftp">
+                  linux/linux-ftp <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

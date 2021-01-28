@@ -159,7 +159,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-count">108</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -170,7 +170,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -218,7 +218,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/27/notebook/linux-path-1/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/28/design/builder/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -232,7 +232,455 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/27/notebook/linux-path-1/" class="post-title-link" itemprop="url">Linux Path 环境变量设置</a>
+            <a href="/2021/01/28/design/builder/" class="post-title-link" itemprop="url">builder生产器模式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-28 18:10:38 / 修改时间：18:41:05" itemprop="dateCreated datePublished" datetime="2021-01-28T18:10:38+08:00">2021-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notebook/" itemprop="url" rel="index"><span itemprop="name">Notebook</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>用于复杂对象的初始化工作，其通常有诸多的成员变量，嵌套对象。</p>
+<h1 id="模式架构"><a href="#模式架构" class="headerlink" title="模式架构"></a>模式架构</h1><h2 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h2><p>一个通用的产品构造器，接口中的步骤都需要进行构造。</p>
+<h2 id="具体生成器"><a href="#具体生成器" class="headerlink" title="具体生成器"></a>具体生成器</h2><p>提供具体的实现，生成器<strong>亦</strong>可以构造<strong>不遵循接口的产品</strong>，取决于生成器内的getRes()方法返回的对象。</p>
+<h2 id="产品"><a href="#产品" class="headerlink" title="产品"></a>产品</h2><p>最终生成的产品，<strong>不需要属于同一类层次结构或接口</strong>。</p>
+<h2 id="主管"><a href="#主管" class="headerlink" title="主管"></a>主管</h2><p>这里定义所有的产品的生产(初始化)步骤，传参可以是通用的接口，也可以传自定义的接口。</p>
+<p>可以都是<code>void</code>方法，<strong>重点是传的接口类型以及方法内初始化的步骤</strong>。</p>
+<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><p>首先需要初始化一个主管。只需要关心让主管使用哪一个生产(初始化)步骤，以及传给主管的生成器，而生成器决定了最终生产的产品类型。</p>
+<p>只需要初始化<strong>一次</strong>主管，和<strong>一个</strong>生成器就可以通过主管的不同生产方法，产生不同的对象。<strong>每一次调用都会产生一个新的对象</strong>。</p>
+<hr>
+<p>Reference</p>
+<p><a href="https://refactoringguru.cn/design-patterns/builder" target="_blank" rel="noopener">https://refactoringguru.cn/design-patterns/builder</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/28/linux/linux-link/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/28/linux/linux-link/" class="post-title-link" itemprop="url">Linux硬连接和软连接</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-28 15:10:21 / 修改时间：15:30:48" itemprop="dateCreated datePublished" datetime="2021-01-28T15:10:21+08:00">2021-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notebook/" itemprop="url" rel="index"><span itemprop="name">Notebook</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Linux下的快捷方式称作硬连接(hard link)或软连接(symbolic link).</p>
+<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p>创建一个文件<code>file.txt</code></p>
+<p><code>echo &#39;hello world.&#39; &gt; file.txt</code></p>
+<p>创建硬连接</p>
+<p><code>ln file.txt hardlink</code></p>
+<p>创建软连接</p>
+<p><code>ln -s file.txt softlink</code></p>
+<p>查看文件属性</p>
+<p><code>ls -li</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">262781 -rw-rw-r-- 2 ubuntu ubuntu 13 Jan 28 15:18 file.txt</span><br><span class="line">262781 -rw-rw-r-- 2 ubuntu ubuntu 13 Jan 28 15:18 hardlink</span><br><span class="line">262991 lrwxrwxrwx 1 ubuntu ubuntu  8 Jan 28 15:19 softlink -&gt; file.txt</span><br></pre></td></tr></table></figure>
+
+
+
+<p>可以看到<code>softlink</code>指向源文件</p>
+<p>而<code>hardlink</code>与源文件共享一个<code>inode</code></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>删除源文件，硬连接不受影响，仍可读取源文件的内容；软连接无法访问源文件的内容。</p>
+<p>硬连接类似于一个文件的备份。</p>
+<p>硬连接限制多，无法给文件夹创建硬连接。</p>
+<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>控制同一个软件的不同版本。</p>
+<hr>
+<p>Reference</p>
+<p><a href="https://cloud.tencent.com/developer/article/1683660" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1683660</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/28/hadoop/mapreduce/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/28/hadoop/mapreduce/" class="post-title-link" itemprop="url">Hadoop - mapreduce</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-28 10:44:48 / 修改时间：11:09:44" itemprop="dateCreated datePublished" datetime="2021-01-28T10:44:48+08:00">2021-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notebook/" itemprop="url" rel="index"><span itemprop="name">Notebook</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>MapReduce就是一个分布式的计算框架，用于并行处理数据。</p>
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><p>分为两步Map和Reduce</p>
+<ul>
+<li>Map阶段：处理输入数据，从HDFS读取数据，映射器处理该数据，并创建中间数据。</li>
+<li>Reduce阶段：Shuffle+Reduce处理映射器中的数据，产生输出，存储在HDFS中。</li>
+</ul>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><ol>
+<li>写MapReduce程序</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ProcessUnits.java</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>编译该Java类</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javac -classpath xxx -d folder xxx.java</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>将需要处理的数据存入HDFS</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -put xxx</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>运行MapReduce程序</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop jar xxx input_folder output_folder</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li><code>hadoop</code>可以操作MapReduce等其它工作及设置</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop cmd</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/28/hadoop/hdfs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/28/hadoop/hdfs/" class="post-title-link" itemprop="url">Hadoop - hdfs</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-28 09:57:08 / 修改时间：10:43:48" itemprop="dateCreated datePublished" datetime="2021-01-28T09:57:08+08:00">2021-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notebook/" itemprop="url" rel="index"><span itemprop="name">Notebook</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h1><p>HDFS是Master和Slave结构，分为NameNode, Secondary NameNode, DataNode.</p>
+<ul>
+<li>NameNode: 在Hadoop中只有一个，管理HDF的名称空间，数据块映射信息等。</li>
+<li>Secondary: 辅助NameNode, 分担NameNode的工作，可以辅助恢复NameNode.</li>
+<li>DataNode: Slave节点，实际存储数据，执行数据块的读写并汇报存储信息给NameNode。</li>
+</ul>
+<h1 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h1><h2 id="将数据插入到HDFS"><a href="#将数据插入到HDFS" class="headerlink" title="将数据插入到HDFS"></a>将数据插入到HDFS</h2><p><code>hadoop fs -mkdir</code></p>
+<p><code>hadoop fs -put</code></p>
+<p>…</p>
+<h2 id="从HDFS获取数据到本地文件系统"><a href="#从HDFS获取数据到本地文件系统" class="headerlink" title="从HDFS获取数据到本地文件系统"></a>从HDFS获取数据到本地文件系统</h2><p><code>hadoop fs -get</code></p>
+<p>…</p>
+<h2 id="命令参考"><a href="#命令参考" class="headerlink" title="命令参考"></a>命令参考</h2><p><a href="https://www.yiibai.com/hadoop/hadoop_command_reference.html" target="_blank" rel="noopener">https://www.yiibai.com/hadoop/hadoop_command_reference.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/28/notebook/tx-ubuntu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/28/notebook/tx-ubuntu/" class="post-title-link" itemprop="url">从0开始配置Ubuntu系统</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-28 09:11:39 / 修改时间：15:55:18" itemprop="dateCreated datePublished" datetime="2021-01-28T09:11:39+08:00">2021-01-28</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="创建Ubuntu系统镜像"><a href="#创建Ubuntu系统镜像" class="headerlink" title="创建Ubuntu系统镜像"></a>创建Ubuntu系统镜像</h1><p>Ubuntu默认的账号是ubuntu，腾讯云创建的密码也是ubuntu对应的密码。</p>
+<p>默认情况下，不能通过root使用密码远程登录。</p>
+<p>执行一下操作获取root用户远程密码登录的权限。</p>
+<ul>
+<li>设置root密码<code>sudo passwd root</code></li>
+<li>设置ssh配置文件<code>sudo vim /etc/ssh/sshd_config</code>修改<code>PermitRootLogin yes</code></li>
+<li>重启服务<code>sudo service ssh restart</code></li>
+</ul>
+<hr>
+<p>Reference</p>
+<p><a href="https://cloud.tencent.com/developer/article/1405735" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1405735</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/27/linux/linux-path-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/27/linux/linux-path-1/" class="post-title-link" itemprop="url">Linux Path 环境变量设置</a>
         </h2>
 
         <div class="post-meta-container">
@@ -305,7 +753,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/27/notebook/linux-chmod/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/27/linux/linux-chmod/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -319,7 +767,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/27/notebook/linux-chmod/" class="post-title-link" itemprop="url">notebook/linux-chmod</a>
+            <a href="/2021/01/27/linux/linux-chmod/" class="post-title-link" itemprop="url">linux/linux-chmod</a>
         </h2>
 
         <div class="post-meta-container">
@@ -380,7 +828,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/27/notebook/linux-systemd/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/27/linux/linux-systemd/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -394,7 +842,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/27/notebook/linux-systemd/" class="post-title-link" itemprop="url">notebook/linux-systemd</a>
+            <a href="/2021/01/27/linux/linux-systemd/" class="post-title-link" itemprop="url">linux/linux-systemd</a>
         </h2>
 
         <div class="post-meta-container">
@@ -464,7 +912,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/27/notebook/linux-ftp/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/27/linux/linux-ftp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -478,7 +926,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/27/notebook/linux-ftp/" class="post-title-link" itemprop="url">notebook/linux-ftp</a>
+            <a href="/2021/01/27/linux/linux-ftp/" class="post-title-link" itemprop="url">linux/linux-ftp</a>
         </h2>
 
         <div class="post-meta-container">
@@ -585,7 +1033,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/27/spark/start/" class="post-title-link" itemprop="url">spark/start</a>
+            <a href="/2021/01/27/spark/start/" class="post-title-link" itemprop="url">Spark - start</a>
         </h2>
 
         <div class="post-meta-container">
@@ -595,9 +1043,24 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-01-27 11:48:52 / 修改时间：11:48:55" itemprop="dateCreated datePublished" datetime="2021-01-27T11:48:52+08:00">2021-01-27</time>
+      <time title="创建时间：2021-01-27 11:48:52" itemprop="dateCreated datePublished" datetime="2021-01-27T11:48:52+08:00">2021-01-27</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-28 16:39:54" itemprop="dateModified" datetime="2021-01-28T16:39:54+08:00">2021-01-28</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notebook/" itemprop="url" rel="index"><span itemprop="name">Notebook</span></a>
+        </span>
     </span>
 
   
@@ -610,7 +1073,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          
+          <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Spark是一个集群计算的框架，类似于Hadoop. 其最大的优化是让计算任务的中间结果存储在内存中，不需要每次都写入HDFS。</p>
+<p>Spark是基于RDD的核心编程，使用内存进行计算，比死板的MapReduce模型的性能大大提高。</p>
+<h1 id="Spark-RDDs-弹性分布式数据集"><a href="#Spark-RDDs-弹性分布式数据集" class="headerlink" title="Spark RDDs 弹性分布式数据集"></a>Spark RDDs 弹性分布式数据集</h1><p>一个可并行操作的有容错机制的数据集合。</p>
+<h1 id="Spark-Streaming"><a href="#Spark-Streaming" class="headerlink" title="Spark Streaming"></a>Spark Streaming</h1><p>对事实数据流进行处理，处理后的数据再应用。</p>
+<p>一个处理过程。</p>
+<h1 id="Spark-SQL"><a href="#Spark-SQL" class="headerlink" title="Spark SQL"></a>Spark SQL</h1><p>允许Spark执行用SQL, Scala等表示的关系查询。</p>
+<h1 id="GraphX"><a href="#GraphX" class="headerlink" title="GraphX"></a>GraphX</h1><p>用于图和并行图计算。</p>
+<hr>
+<p>Reference</p>
+<p><a href="https://www.w3cschool.cn/spark" target="_blank" rel="noopener">https://www.w3cschool.cn/spark</a></p>
+
       
     </div>
 
@@ -805,10 +1278,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-01-26 14:57:30 / 修改时间：17:23:34" itemprop="dateCreated datePublished" datetime="2021-01-26T14:57:30+08:00">2021-01-26</time>
+      <time title="创建时间：2021-01-26 14:57:30" itemprop="dateCreated datePublished" datetime="2021-01-26T14:57:30+08:00">2021-01-26</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-28 18:12:00" itemprop="dateModified" datetime="2021-01-28T18:12:00+08:00">2021-01-28</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -872,7 +1351,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/26/notebook/linux-nohup/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/26/linux/linux-nohup/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -886,7 +1365,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/26/notebook/linux-nohup/" class="post-title-link" itemprop="url">Linux中的nohup</a>
+            <a href="/2021/01/26/linux/linux-nohup/" class="post-title-link" itemprop="url">Linux中的nohup</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1199,7 +1678,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/21/notebook/linux-redis/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/21/linux/linux-redis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1213,7 +1692,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/21/notebook/linux-redis/" class="post-title-link" itemprop="url">Linux安装Redis</a>
+            <a href="/2021/01/21/linux/linux-redis/" class="post-title-link" itemprop="url">Linux安装Redis</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1388,7 +1867,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/21/notebook/linux-info/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/21/linux/linux-info/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1402,7 +1881,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/21/notebook/linux-info/" class="post-title-link" itemprop="url">查看服务器各种属性</a>
+            <a href="/2021/01/21/linux/linux-info/" class="post-title-link" itemprop="url">查看服务器各种属性</a>
         </h2>
 
         <div class="post-meta-container">
@@ -2404,7 +2883,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/11/07/notebook/linux-path/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/11/07/linux/linux-path/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -2418,7 +2897,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/07/notebook/linux-path/" class="post-title-link" itemprop="url">修改环境变量</a>
+            <a href="/2020/11/07/linux/linux-path/" class="post-title-link" itemprop="url">修改环境变量</a>
         </h2>
 
         <div class="post-meta-container">
@@ -3530,7 +4009,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/09/15/notebook/docker-lineloss/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/09/15/docker/docker-lineloss/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -3544,7 +4023,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/09/15/notebook/docker-lineloss/" class="post-title-link" itemprop="url">notebook/docker-lineloss</a>
+            <a href="/2020/09/15/docker/docker-lineloss/" class="post-title-link" itemprop="url">docker/docker-lineloss</a>
         </h2>
 
         <div class="post-meta-container">
@@ -4237,7 +4716,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/07/26/notebook/docker-nextcloud/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/07/26/docker/docker-nextcloud/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -4251,7 +4730,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/07/26/notebook/docker-nextcloud/" class="post-title-link" itemprop="url">notebook/docker-nextcloud</a>
+            <a href="/2020/07/26/docker/docker-nextcloud/" class="post-title-link" itemprop="url">docker/docker-nextcloud</a>
         </h2>
 
         <div class="post-meta-container">
@@ -4441,7 +4920,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/07/14/notebook/docker-compose/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/07/14/docker/docker-compose/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -4455,7 +4934,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/07/14/notebook/docker-compose/" class="post-title-link" itemprop="url">notebook/docker-compose</a>
+            <a href="/2020/07/14/docker/docker-compose/" class="post-title-link" itemprop="url">docker/docker-compose</a>
         </h2>
 
         <div class="post-meta-container">
@@ -4509,7 +4988,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/07/14/notebook/docker-gitlab/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/07/14/docker/docker-gitlab/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -4523,7 +5002,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/07/14/notebook/docker-gitlab/" class="post-title-link" itemprop="url">notebook/docker-gitlab</a>
+            <a href="/2020/07/14/docker/docker-gitlab/" class="post-title-link" itemprop="url">docker/docker-gitlab</a>
         </h2>
 
         <div class="post-meta-container">
@@ -4575,7 +5054,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/07/14/notebook/docker/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/07/14/docker/docker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -4589,7 +5068,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/07/14/notebook/docker/" class="post-title-link" itemprop="url">notebook/docker</a>
+            <a href="/2020/07/14/docker/docker/" class="post-title-link" itemprop="url">docker/docker</a>
         </h2>
 
         <div class="post-meta-container">
@@ -4632,163 +5111,6 @@
 <p>格式是(dockerhub用户名/仓库名:tag)  ，需要自己有一个dockerhub账号，v0.1就是自定义的版本号码</p>
 <p>然后记得登录在服务器上dockerhub，否则推送会报错：</p>
 <p><code>docker login</code></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/07/14/notebook/docker-anaconda/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Bolin Shen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Edlison is talking here.">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/14/notebook/docker-anaconda/" class="post-title-link" itemprop="url">notebook/docker-anaconda</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-07-14 23:31:04" itemprop="dateCreated datePublished" datetime="2020-07-14T23:31:04+08:00">2020-07-14</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="使用Docker配置Anaconda环境运行Jupyter"><a href="#使用Docker配置Anaconda环境运行Jupyter" class="headerlink" title="使用Docker配置Anaconda环境运行Jupyter"></a>使用Docker配置Anaconda环境运行Jupyter</h1><h2 id="配置Anaconda环境"><a href="#配置Anaconda环境" class="headerlink" title="配置Anaconda环境"></a>配置Anaconda环境</h2><p><strong>挂载</strong></p>
-<ul>
-<li><p>文件夹挂载<br><code>-v /root/notebook:/notebook</code><br>(宿主机目录:镜像内挂载目录)</p>
-</li>
-<li><p><em>配置文件挂载</em>(生成的文件夹)<br><code>-v /root/docker/config/anaconda3/jupyter_notebook_config.json:/root/.jupyter/jupyter_notebook_config.json</code></p>
-</li>
-</ul>
-<p><strong>Example</strong><br><code>docker run -i -t -p 11000:8888 -v ~/notebook:/notebook -v ~/docker/config/jupyter:/root/.jupyter continuumio/anaconda3 /bin/bash</code><br>挂载参数要在容器前</p>
-<h2 id="配置Jupyter-Notebook"><a href="#配置Jupyter-Notebook" class="headerlink" title="配置Jupyter Notebook"></a>配置Jupyter Notebook</h2><p><code>jupyter notebook --allow-root</code></p>
-<p>启动Notebook<br><code>jupyter notebook --port 8888 --ip 0.0.0.0 --allow-root</code></p>
-<p>后台运行Notebook<br><code>nohup jupyter notebook --port 8888 --ip 0.0.0.0 --allow-root &amp;</code></p>
-<p><strong>相关配置</strong></p>
-<p>配置文件</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">c = get_config()</span><br><span class="line">c.IPKernelApp.pylab = <span class="string">"inline"</span></span><br><span class="line">c.NotebookApp.ip = <span class="string">"*"</span></span><br><span class="line">c.NotebookAPp.open_browser = <span class="literal">False</span></span><br><span class="line">c.NotebookApp.password = <span class="string">'sha1:5295d47ebd06:cdca9499f90b4b4616c935fdff61dda71e1e4393'</span></span><br><span class="line"><span class="comment"># c.NotebookApp.certfile = u'/root/.jupyter/mycert.pem'</span></span><br><span class="line">c.NotebookApp.port= <span class="number">8888</span></span><br><span class="line">c.NotebookApp.notebook_dir = <span class="string">"/"</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><em>docker-compose配置出问题？</em></p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">notebook:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">continuumio/anaconda3</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">"no"</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">~/notebook:/notebook</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">~/docker/config/jupyter:/root/.jupyter</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"11000:80"</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/07/14/notebook/docker-chevereto/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Bolin Shen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Edlison is talking here.">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/14/notebook/docker-chevereto/" class="post-title-link" itemprop="url">notebook/docker-chevereto</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-07-14 23:31:04" itemprop="dateCreated datePublished" datetime="2020-07-14T23:31:04+08:00">2020-07-14</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="使用Docker搭建图床"><a href="#使用Docker搭建图床" class="headerlink" title="使用Docker搭建图床"></a>使用Docker搭建图床</h1><p>安装容器编排工具Compose<br><code>pip3 install docker-compose</code></p>
-<p>pull镜像<br><code>docker pull mariadb:latest</code><br><code>docker pull nmtan/chevereto:latest</code>  </p>
-<p>使用Docker-Compose启动<br><code>mkdir cheverto/</code><br><code>cd cheverto</code><br><code>touch docker-compose.yaml</code></p>
-<p>docker-compose.yaml配置文件</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">db:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mariadb</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">database:/var/lib/mysql:rw</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">private</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">MYSQL_ROOT_PASSWORD:</span> <span class="string">chevereto_root</span></span><br><span class="line">      <span class="attr">MYSQL_DATABASE:</span> <span class="string">chevereto</span></span><br><span class="line">      <span class="attr">MYSQL_USER:</span> <span class="string">chevereto</span></span><br><span class="line">      <span class="attr">MYSQL_PASSWORD:</span> <span class="string">chevereto</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">chevereto:</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">db</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nmtan/chevereto</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">private</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">CHEVERETO_DB_HOST:</span> <span class="string">db</span></span><br><span class="line">      <span class="attr">CHEVERETO_DB_USERNAME:</span> <span class="string">chevereto</span></span><br><span class="line">      <span class="attr">CHEVERETO_DB_PASSWORD:</span> <span class="string">chevereto</span></span><br><span class="line">      <span class="attr">CHEVERETO_DB_NAME:</span> <span class="string">chevereto</span></span><br><span class="line">      <span class="attr">CHEVERETO_DB_PREFIX:</span> <span class="string">chv_</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">chevereto_images:/var/www/html/images:rw</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">chevereto_php_config:/usr/local/etc/php:rw</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">12000</span><span class="string">:80</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">private:</span></span><br><span class="line"><span class="attr">volumes:</span></span><br><span class="line">  <span class="attr">database:</span></span><br><span class="line">  <span class="attr">chevereto_images:</span></span><br><span class="line">  <span class="attr">chevereto_php_config:</span></span><br></pre></td></tr></table></figure>
-
-<p>对应挂载到当前文件夹中的php.ini文件(<strong>注意</strong> php.ini文件需要先创建 否则docker会自动创建同名文件夹)<br><code>- ./php.ini:/usr/local/etc/php/php.ini:rw</code></p>
-<p>php.ini</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">memory_limit</span> = <span class="number">256</span>M<span class="comment">;</span></span><br><span class="line"><span class="attr">upload_max_filesize</span> = <span class="number">100</span>M<span class="comment">;</span></span><br><span class="line"><span class="attr">post_max_size</span> = <span class="number">100</span>M<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-
-<p>运行Docker-Compose<br><code>docker-compose up -d</code></p>
 
       
     </div>
@@ -4907,6 +5229,163 @@
 <li>去除无意义符号</li>
 <li>繁体转换简体</li>
 </ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/07/14/docker/docker-anaconda/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/14/docker/docker-anaconda/" class="post-title-link" itemprop="url">docker/docker-anaconda</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-07-14 23:31:04" itemprop="dateCreated datePublished" datetime="2020-07-14T23:31:04+08:00">2020-07-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="使用Docker配置Anaconda环境运行Jupyter"><a href="#使用Docker配置Anaconda环境运行Jupyter" class="headerlink" title="使用Docker配置Anaconda环境运行Jupyter"></a>使用Docker配置Anaconda环境运行Jupyter</h1><h2 id="配置Anaconda环境"><a href="#配置Anaconda环境" class="headerlink" title="配置Anaconda环境"></a>配置Anaconda环境</h2><p><strong>挂载</strong></p>
+<ul>
+<li><p>文件夹挂载<br><code>-v /root/notebook:/notebook</code><br>(宿主机目录:镜像内挂载目录)</p>
+</li>
+<li><p><em>配置文件挂载</em>(生成的文件夹)<br><code>-v /root/docker/config/anaconda3/jupyter_notebook_config.json:/root/.jupyter/jupyter_notebook_config.json</code></p>
+</li>
+</ul>
+<p><strong>Example</strong><br><code>docker run -i -t -p 11000:8888 -v ~/notebook:/notebook -v ~/docker/config/jupyter:/root/.jupyter continuumio/anaconda3 /bin/bash</code><br>挂载参数要在容器前</p>
+<h2 id="配置Jupyter-Notebook"><a href="#配置Jupyter-Notebook" class="headerlink" title="配置Jupyter Notebook"></a>配置Jupyter Notebook</h2><p><code>jupyter notebook --allow-root</code></p>
+<p>启动Notebook<br><code>jupyter notebook --port 8888 --ip 0.0.0.0 --allow-root</code></p>
+<p>后台运行Notebook<br><code>nohup jupyter notebook --port 8888 --ip 0.0.0.0 --allow-root &amp;</code></p>
+<p><strong>相关配置</strong></p>
+<p>配置文件</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">c = get_config()</span><br><span class="line">c.IPKernelApp.pylab = <span class="string">"inline"</span></span><br><span class="line">c.NotebookApp.ip = <span class="string">"*"</span></span><br><span class="line">c.NotebookAPp.open_browser = <span class="literal">False</span></span><br><span class="line">c.NotebookApp.password = <span class="string">'sha1:5295d47ebd06:cdca9499f90b4b4616c935fdff61dda71e1e4393'</span></span><br><span class="line"><span class="comment"># c.NotebookApp.certfile = u'/root/.jupyter/mycert.pem'</span></span><br><span class="line">c.NotebookApp.port= <span class="number">8888</span></span><br><span class="line">c.NotebookApp.notebook_dir = <span class="string">"/"</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><em>docker-compose配置出问题？</em></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">notebook:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">continuumio/anaconda3</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">"no"</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">~/notebook:/notebook</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">~/docker/config/jupyter:/root/.jupyter</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"11000:80"</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/07/14/docker/docker-chevereto/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/14/docker/docker-chevereto/" class="post-title-link" itemprop="url">docker/docker-chevereto</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-07-14 23:31:04" itemprop="dateCreated datePublished" datetime="2020-07-14T23:31:04+08:00">2020-07-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="使用Docker搭建图床"><a href="#使用Docker搭建图床" class="headerlink" title="使用Docker搭建图床"></a>使用Docker搭建图床</h1><p>安装容器编排工具Compose<br><code>pip3 install docker-compose</code></p>
+<p>pull镜像<br><code>docker pull mariadb:latest</code><br><code>docker pull nmtan/chevereto:latest</code>  </p>
+<p>使用Docker-Compose启动<br><code>mkdir cheverto/</code><br><code>cd cheverto</code><br><code>touch docker-compose.yaml</code></p>
+<p>docker-compose.yaml配置文件</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">db:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mariadb</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">database:/var/lib/mysql:rw</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">private</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">MYSQL_ROOT_PASSWORD:</span> <span class="string">chevereto_root</span></span><br><span class="line">      <span class="attr">MYSQL_DATABASE:</span> <span class="string">chevereto</span></span><br><span class="line">      <span class="attr">MYSQL_USER:</span> <span class="string">chevereto</span></span><br><span class="line">      <span class="attr">MYSQL_PASSWORD:</span> <span class="string">chevereto</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">chevereto:</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">db</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nmtan/chevereto</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">private</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">CHEVERETO_DB_HOST:</span> <span class="string">db</span></span><br><span class="line">      <span class="attr">CHEVERETO_DB_USERNAME:</span> <span class="string">chevereto</span></span><br><span class="line">      <span class="attr">CHEVERETO_DB_PASSWORD:</span> <span class="string">chevereto</span></span><br><span class="line">      <span class="attr">CHEVERETO_DB_NAME:</span> <span class="string">chevereto</span></span><br><span class="line">      <span class="attr">CHEVERETO_DB_PREFIX:</span> <span class="string">chv_</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">chevereto_images:/var/www/html/images:rw</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">chevereto_php_config:/usr/local/etc/php:rw</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">12000</span><span class="string">:80</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">private:</span></span><br><span class="line"><span class="attr">volumes:</span></span><br><span class="line">  <span class="attr">database:</span></span><br><span class="line">  <span class="attr">chevereto_images:</span></span><br><span class="line">  <span class="attr">chevereto_php_config:</span></span><br></pre></td></tr></table></figure>
+
+<p>对应挂载到当前文件夹中的php.ini文件(<strong>注意</strong> php.ini文件需要先创建 否则docker会自动创建同名文件夹)<br><code>- ./php.ini:/usr/local/etc/php/php.ini:rw</code></p>
+<p>php.ini</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">memory_limit</span> = <span class="number">256</span>M<span class="comment">;</span></span><br><span class="line"><span class="attr">upload_max_filesize</span> = <span class="number">100</span>M<span class="comment">;</span></span><br><span class="line"><span class="attr">post_max_size</span> = <span class="number">100</span>M<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<p>运行Docker-Compose<br><code>docker-compose up -d</code></p>
 
       
     </div>
@@ -9271,7 +9750,7 @@ dtype: object</code></pre><p><code>apply()</code> 方法也可以应用函数至
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/04/17/notebook/linux-mariadb/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/04/17/linux/linux-mariadb/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -9285,7 +9764,7 @@ dtype: object</code></pre><p><code>apply()</code> 方法也可以应用函数至
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/17/notebook/linux-mariadb/" class="post-title-link" itemprop="url">notebook/linux-mariadb</a>
+            <a href="/2020/04/17/linux/linux-mariadb/" class="post-title-link" itemprop="url">linux/linux-mariadb</a>
         </h2>
 
         <div class="post-meta-container">
@@ -9347,7 +9826,7 @@ dtype: object</code></pre><p><code>apply()</code> 方法也可以应用函数至
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/04/17/notebook/linux-java/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/04/17/linux/linux-java/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -9361,7 +9840,7 @@ dtype: object</code></pre><p><code>apply()</code> 方法也可以应用函数至
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/17/notebook/linux-java/" class="post-title-link" itemprop="url">notebook/linux-java</a>
+            <a href="/2020/04/17/linux/linux-java/" class="post-title-link" itemprop="url">linux/linux-java</a>
         </h2>
 
         <div class="post-meta-container">
@@ -10997,7 +11476,7 @@ dtype: object</code></pre><p><code>apply()</code> 方法也可以应用函数至
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/03/18/notebook/linux-user/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/03/18/linux/linux-user/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -11011,7 +11490,7 @@ dtype: object</code></pre><p><code>apply()</code> 方法也可以应用函数至
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/18/notebook/linux-user/" class="post-title-link" itemprop="url">notebook/linux-user</a>
+            <a href="/2020/03/18/linux/linux-user/" class="post-title-link" itemprop="url">linux/linux-user</a>
         </h2>
 
         <div class="post-meta-container">
