@@ -1,3 +1,12 @@
+---
+title: NLP文本分类引导
+categories:
+- Notebook
+tags:
+- python
+- nlp
+---
+
 # NLP文本分类引导
 
 ## en
@@ -21,7 +30,7 @@ pd.read_table(filedir, splitsign, header=指定第几行为列名, names=如果�
 ### 分词
 
 ### 去除停词 去除低频词
-```py
+```python
     def optimize_words_dict(self, data, stop_words, threshold):
         freq_dict = {}
         for line in data:  # 去除停词 + 计算词频
@@ -45,7 +54,7 @@ pd.read_table(filedir, splitsign, header=指定第几行为列名, names=如果�
 
 ### 通过TF-IDF算法筛选单词
 
-```py
+```python
     def tf_idf(self, data):
         doc_num = len(data)
         df = {}

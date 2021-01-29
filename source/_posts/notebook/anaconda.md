@@ -42,6 +42,9 @@
 pip安装tf  
 `pip install -i https://pypi.tuna.tsinghua.edu.cn/simple tensorflow`
 
+指定版本安装  
+`conda install tensorflow=1.4`  
+`pip install tensorflow==1.4`
 
 
 ## 卸载
