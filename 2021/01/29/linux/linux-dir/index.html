@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"edlison.com","root":"/","images":"/images","scheme":"Muse","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="常用目录 &#x2F;根目录 &#x2F;bin&#x2F;bin, &#x2F;sbin, &#x2F;usr&#x2F;bin, &#x2F;usr&#x2F;sbin这些都是存放可执行文件的，sbin下只有root才可以执行。 &#x2F;boot启动系统时候用的 &#x2F;dev设备文件 &#x2F;etc系统的配置文件等 &#x2F;home家目录 &#x2F;lib系统库 &#x2F;mnt挂载目录，挂在别的文件系统 &#x2F;media挂载目录 &#x2F;rootroot用户的家目录 &#x2F;tmp存放临时文件 &#x2F;sys里面的东西直接写入内">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux&#x2F;linux-dir">
+<meta property="og:url" content="http://edlison.com/2021/01/29/linux/linux-dir/index.html">
+<meta property="og:site_name" content="Edlison is talking here.">
+<meta property="og:description" content="常用目录 &#x2F;根目录 &#x2F;bin&#x2F;bin, &#x2F;sbin, &#x2F;usr&#x2F;bin, &#x2F;usr&#x2F;sbin这些都是存放可执行文件的，sbin下只有root才可以执行。 &#x2F;boot启动系统时候用的 &#x2F;dev设备文件 &#x2F;etc系统的配置文件等 &#x2F;home家目录 &#x2F;lib系统库 &#x2F;mnt挂载目录，挂在别的文件系统 &#x2F;media挂载目录 &#x2F;rootroot用户的家目录 &#x2F;tmp存放临时文件 &#x2F;sys里面的东西直接写入内">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-29T02:13:30.760Z">
+<meta property="article:modified_time" content="2021-01-29T02:47:35.889Z">
+<meta property="article:author" content="Bolin Shen">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://edlison.com/2021/01/29/linux/linux-dir/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>linux/linux-dir | Edlison is talking here.</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Edlison is talking here.</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">&#x2F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bin"><span class="nav-number">2.</span> <span class="nav-text">&#x2F;bin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#boot"><span class="nav-number">3.</span> <span class="nav-text">&#x2F;boot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dev"><span class="nav-number">4.</span> <span class="nav-text">&#x2F;dev</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#etc"><span class="nav-number">5.</span> <span class="nav-text">&#x2F;etc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#home"><span class="nav-number">6.</span> <span class="nav-text">&#x2F;home</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lib"><span class="nav-number">7.</span> <span class="nav-text">&#x2F;lib</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mnt"><span class="nav-number">8.</span> <span class="nav-text">&#x2F;mnt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#media"><span class="nav-number">9.</span> <span class="nav-text">&#x2F;media</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#root"><span class="nav-number">10.</span> <span class="nav-text">&#x2F;root</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tmp"><span class="nav-number">11.</span> <span class="nav-text">&#x2F;tmp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sys"><span class="nav-number">12.</span> <span class="nav-text">&#x2F;sys</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#proc"><span class="nav-number">13.</span> <span class="nav-text">&#x2F;proc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#usr"><span class="nav-number">14.</span> <span class="nav-text">&#x2F;usr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#var"><span class="nav-number">15.</span> <span class="nav-text">&#x2F;var</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#opt"><span class="nav-number">16.</span> <span class="nav-text">&#x2F;opt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#srv"><span class="nav-number">17.</span> <span class="nav-text">&#x2F;srv</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Bolin Shen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">112</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/edlison" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;edlison" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bolin.edlison.shen@gmail.com" title="E-Mail → mailto:bolin.edlison.shen@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/29/linux/linux-dir/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          linux/linux-dir
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-29 10:13:30 / 修改时间：10:47:35" itemprop="dateCreated datePublished" datetime="2021-01-29T10:13:30+08:00">2021-01-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notebook/" itemprop="url" rel="index"><span itemprop="name">Notebook</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><strong>常用目录</strong></p>
+<h2 id=""><a href="#" class="headerlink" title="/"></a>/</h2><p>根目录</p>
+<h2 id="bin"><a href="#bin" class="headerlink" title="/bin"></a>/bin</h2><p>/bin, /sbin, /usr/bin, /usr/sbin这些都是存放可执行文件的，sbin下只有root才可以执行。</p>
+<h2 id="boot"><a href="#boot" class="headerlink" title="/boot"></a>/boot</h2><p>启动系统时候用的</p>
+<h2 id="dev"><a href="#dev" class="headerlink" title="/dev"></a>/dev</h2><p>设备文件</p>
+<h2 id="etc"><a href="#etc" class="headerlink" title="/etc"></a>/etc</h2><p>系统的配置文件等</p>
+<h2 id="home"><a href="#home" class="headerlink" title="/home"></a>/home</h2><p>家目录</p>
+<h2 id="lib"><a href="#lib" class="headerlink" title="/lib"></a>/lib</h2><p>系统库</p>
+<h2 id="mnt"><a href="#mnt" class="headerlink" title="/mnt"></a>/mnt</h2><p>挂载目录，挂在别的文件系统</p>
+<h2 id="media"><a href="#media" class="headerlink" title="/media"></a>/media</h2><p>挂载目录</p>
+<h2 id="root"><a href="#root" class="headerlink" title="/root"></a>/root</h2><p>root用户的家目录</p>
+<h2 id="tmp"><a href="#tmp" class="headerlink" title="/tmp"></a>/tmp</h2><p>存放临时文件</p>
+<h2 id="sys"><a href="#sys" class="headerlink" title="/sys"></a>/sys</h2><p>里面的东西直接写入内存的东西，内核，驱动…</p>
+<h2 id="proc"><a href="#proc" class="headerlink" title="/proc"></a>/proc</h2><p>里面的东西直接写入内存</p>
+<h2 id="usr"><a href="#usr" class="headerlink" title="/usr"></a>/usr</h2><p>存放应用程序和文件</p>
+<h2 id="var"><a href="#var" class="headerlink" title="/var"></a>/var</h2><p>系统文档，比如/var/log</p>
+<h2 id="opt"><a href="#opt" class="headerlink" title="/opt"></a>/opt</h2><p>安装附加软件包，/opt/custom_package/bin下是软件目录</p>
+<h2 id="srv"><a href="#srv" class="headerlink" title="/srv"></a>/srv</h2><p>用于存储本机提供的服务或数据，比如/srv/www, /srv/ftp等</p>
+<hr>
+<p>References</p>
+<p><a href="https://zhuanlan.zhihu.com/p/343554675" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/343554675</a></p>
+<p><a href="http://www.linuxidc.com/Linux/2015-04/116032.htm" target="_blank" rel="noopener">http://www.linuxidc.com/Linux/2015-04/116032.htm</a></p>
+<p><a href="https://blog.csdn.net/u012107143/article/details/54972544" target="_blank" rel="noopener">https://blog.csdn.net/u012107143/article/details/54972544</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/01/28/design/builder/" rel="prev" title="builder生产器模式">
+                  <i class="fa fa-chevron-left"></i> builder生产器模式
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/01/29/spark/deploy/" rel="next" title="Spark - 部署">
+                  Spark - 部署 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bolin Shen</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

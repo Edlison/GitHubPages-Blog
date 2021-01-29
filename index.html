@@ -159,7 +159,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">108</span>
+          <span class="site-state-item-count">112</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -170,7 +170,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -210,6 +210,398 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/29/notebook/scala-start/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/29/notebook/scala-start/" class="post-title-link" itemprop="url">Scala - Start</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-29 16:42:38 / 修改时间：16:59:49" itemprop="dateCreated datePublished" datetime="2021-01-29T16:42:38+08:00">2021-01-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notebook/" itemprop="url" rel="index"><span itemprop="name">Notebook</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>从官网下载二进制文件</p>
+<p><code>mv scala /opt/scala</code></p>
+<p>打开Idea指定SDK之后就可以创建Scala项目了</p>
+<h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><p>在Idea中新建一个Scala项目</p>
+<p>创建一个<code>scala object</code></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;  </span><br><span class="line">    print(<span class="string">"hello world!"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以直接运行</p>
+<p>也可以使用命令行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scala Test.scala</span><br></pre></td></tr></table></figure>
+
+<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>Scala中的object相当于静态类，main只能处于object中。</p>
+<p>class只有在被实例化的时候才会被加载。</p>
+<hr>
+<p>Reference</p>
+<p><a href="https://www.jianshu.com/p/e0fc0ab7a9d2" target="_blank" rel="noopener">https://www.jianshu.com/p/e0fc0ab7a9d2</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/29/linux/linux-ssh/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/29/linux/linux-ssh/" class="post-title-link" itemprop="url">Linux下的ssh密钥</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-29 13:58:35 / 修改时间：15:14:11" itemprop="dateCreated datePublished" datetime="2021-01-29T13:58:35+08:00">2021-01-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="创建SSH-Key"><a href="#创建SSH-Key" class="headerlink" title="创建SSH Key"></a>创建SSH Key</h1><h2 id="生成"><a href="#生成" class="headerlink" title="生成"></a>生成</h2><p>创建一对公钥与私钥</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -C <span class="string">"description"</span></span><br></pre></td></tr></table></figure>
+
+<p><code>-C</code>可以对Key进行描述，描述内容将在公钥(.pub)的最后显示.</p>
+<ul>
+<li>输入Key的名称</li>
+<li>输入Key的密码（如果不需要，可以不输入）</li>
+</ul>
+<h2 id="复制公钥"><a href="#复制公钥" class="headerlink" title="复制公钥"></a>复制公钥</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id user@hostname</span><br></pre></td></tr></table></figure>
+
+<p><code>-i</code>指定公钥文件</p>
+<h2 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -i privateKey user@hostname</span><br></pre></td></tr></table></figure>
+
+<p><code>-i</code>指定私钥文件</p>
+<h1 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h1><h2 id="管理多个私钥"><a href="#管理多个私钥" class="headerlink" title="管理多个私钥"></a>管理多个私钥</h2><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>修改<code>~/.ssh/config</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host host_alias</span><br><span class="line">HostName host</span><br><span class="line">Port 22</span><br><span class="line">User ubuntu</span><br><span class="line">IdentityFile id_rsa_common</span><br></pre></td></tr></table></figure>
+
+<p>有多个私钥只需要追加在后面即可。</p>
+<p>通过配置后可以直接</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh host_alias</span><br></pre></td></tr></table></figure>
+
+<p>进行登录</p>
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ssh-agent</span></span><br><span class="line"><span class="comment"># 不输可能出错？</span></span><br><span class="line"><span class="comment"># 添加私钥</span></span><br><span class="line">ssh-add id_rsa_common</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看私钥列表</span></span><br><span class="line">ssh-add -l</span><br><span class="line"><span class="comment"># 清空私钥</span></span><br><span class="line">ssh-add -D</span><br></pre></td></tr></table></figure>
+
+<h1 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h1><h2 id="管理多个公钥"><a href="#管理多个公钥" class="headerlink" title="管理多个公钥"></a>管理多个公钥</h2><p>只要将公钥中的内容直接复制到<code>authorized_keys</code>文件中即可。</p>
+<h2 id="SSH配置"><a href="#SSH配置" class="headerlink" title="SSH配置"></a>SSH配置</h2><p>开启鉴权</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RSAAuthentication yes</span><br><span class="line">PubkeyAuthentication yes</span><br><span class="line"></span><br><span class="line"><span class="comment">#PermitRootLogin no</span></span><br><span class="line"><span class="comment">#PasswordAuthentication yes</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h2><p>将公钥直接复制到用户下的SSH中</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
+<p>使用这种测试时必须<code>ssh-add</code>，否则它只会查找目录下默认的私钥名，如果自定义了名字则找不到。并且如果使用的是第一种添加私钥的方法也不行，因为此时请求的是git账号。</p>
+<hr>
+<p>Reference</p>
+<p><a href="https://www.cnblogs.com/yanglang/p/9563496.html" target="_blank" rel="noopener">https://www.cnblogs.com/yanglang/p/9563496.html</a></p>
+<p><a href="https://blog.csdn.net/zyaiwmy/article/details/54313283" target="_blank" rel="noopener">https://blog.csdn.net/zyaiwmy/article/details/54313283</a></p>
+<p><a href="https://www.jianshu.com/p/fe215c52c534" target="_blank" rel="noopener">https://www.jianshu.com/p/fe215c52c534</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/29/spark/deploy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/29/spark/deploy/" class="post-title-link" itemprop="url">Spark - 部署</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-29 11:32:37 / 修改时间：15:19:33" itemprop="dateCreated datePublished" datetime="2021-01-29T11:32:37+08:00">2021-01-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notebook/" itemprop="url" rel="index"><span itemprop="name">Notebook</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>从腾讯云镜像安装(这是内网地址)</p>
+<p><code>wget http://mirrors.tencentyun.com/apache/xxx</code></p>
+<p>解压到<code>~/applications</code></p>
+<p>创建软连接，方便管理不同版本。</p>
+<p><code>ln -s spark-3.0.1-bin-hadoop2.7 spark</code></p>
+<p><code>export SPARK_HOME=/home/ubuntu/applications/spark</code></p>
+<p>以后只要将软连接的指向改动到新版本，不需要改动环境变量。</p>
+<h1 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h1><h2 id="安装JDK"><a href="#安装JDK" class="headerlink" title="安装JDK"></a>安装JDK</h2><p><code>sudo apt install openjdk-11-jdk</code></p>
+<h2 id="使用Scala-Shell启动Spark"><a href="#使用Scala-Shell启动Spark" class="headerlink" title="使用Scala Shell启动Spark"></a>使用Scala Shell启动Spark</h2><p><code>spark-shell</code></p>
+<h2 id="简单的例子"><a href="#简单的例子" class="headerlink" title="简单的例子"></a>简单的例子</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> file = sc.textFile(<span class="string">"/home/ubuntu/documents/xxx.txt"</span>)</span><br><span class="line"><span class="comment">// 打印行数</span></span><br><span class="line">file.count()</span><br><span class="line"><span class="comment">// 打印第一行</span></span><br><span class="line">file.first()</span><br><span class="line"><span class="comment">// 过滤打印</span></span><br><span class="line">file.filter(line =&gt; line.contains(<span class="string">"spark"</span>)).count()</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动节点"><a href="#启动节点" class="headerlink" title="启动节点"></a>启动节点</h2><h3 id="主节点"><a href="#主节点" class="headerlink" title="主节点"></a>主节点</h3><p><code>cd $SPARK_HOME/sbin</code></p>
+<p><code>./start-master.sh</code></p>
+<p>通过<code>ip:8080</code>可以web访问</p>
+<p>获取Master节点的Url</p>
+<p><code>spark://localhost.localdomain:7077</code></p>
+<h3 id="从节点"><a href="#从节点" class="headerlink" title="从节点"></a>从节点</h3><p><code>./start-slave.sh spark://localhost.localdomain:7077</code></p>
+<p>可以通过<code>jps</code>（显示当前的Java进程）查看启动的服务</p>
+<p>Web端可以看到有了Workers</p>
+<h3 id="用Shell连接Master"><a href="#用Shell连接Master" class="headerlink" title="用Shell连接Master"></a>用Shell连接Master</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MASTER=spark://localhost.localdomain:7077 spark-shell</span><br></pre></td></tr></table></figure>
+
+<p>Web端可以看到RunningApplications有了Shell</p>
+<h3 id="停止服务"><a href="#停止服务" class="headerlink" title="停止服务"></a>停止服务</h3><p><code>./stop-all.sh</code></p>
+<p><code>jps</code>查看</p>
+<h1 id="集群部署"><a href="#集群部署" class="headerlink" title="集群部署"></a>集群部署</h1><h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>主节点配置环境变量<code>conf/spark-env.sh</code></p>
+<p>主节点配置从节点的主机名<code>conf/slaves</code>, 此时主机名要写入hosts中</p>
+<p>将spark整体文件拷贝到所有从节点，路径与主节点一致</p>
+<p>配置<strong>主节点到从节点</strong>的SSH Key无密码登录</p>
+<p>启动集群<code>sbin/start-all.sh</code></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/29/linux/linux-dir/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/29/linux/linux-dir/" class="post-title-link" itemprop="url">linux/linux-dir</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-29 10:13:30 / 修改时间：10:47:35" itemprop="dateCreated datePublished" datetime="2021-01-29T10:13:30+08:00">2021-01-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notebook/" itemprop="url" rel="index"><span itemprop="name">Notebook</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>常用目录</strong></p>
+<h2 id=""><a href="#" class="headerlink" title="/"></a>/</h2><p>根目录</p>
+<h2 id="bin"><a href="#bin" class="headerlink" title="/bin"></a>/bin</h2><p>/bin, /sbin, /usr/bin, /usr/sbin这些都是存放可执行文件的，sbin下只有root才可以执行。</p>
+<h2 id="boot"><a href="#boot" class="headerlink" title="/boot"></a>/boot</h2><p>启动系统时候用的</p>
+<h2 id="dev"><a href="#dev" class="headerlink" title="/dev"></a>/dev</h2><p>设备文件</p>
+<h2 id="etc"><a href="#etc" class="headerlink" title="/etc"></a>/etc</h2><p>系统的配置文件等</p>
+<h2 id="home"><a href="#home" class="headerlink" title="/home"></a>/home</h2><p>家目录</p>
+<h2 id="lib"><a href="#lib" class="headerlink" title="/lib"></a>/lib</h2><p>系统库</p>
+<h2 id="mnt"><a href="#mnt" class="headerlink" title="/mnt"></a>/mnt</h2><p>挂载目录，挂在别的文件系统</p>
+<h2 id="media"><a href="#media" class="headerlink" title="/media"></a>/media</h2><p>挂载目录</p>
+<h2 id="root"><a href="#root" class="headerlink" title="/root"></a>/root</h2><p>root用户的家目录</p>
+<h2 id="tmp"><a href="#tmp" class="headerlink" title="/tmp"></a>/tmp</h2><p>存放临时文件</p>
+<h2 id="sys"><a href="#sys" class="headerlink" title="/sys"></a>/sys</h2><p>里面的东西直接写入内存的东西，内核，驱动…</p>
+<h2 id="proc"><a href="#proc" class="headerlink" title="/proc"></a>/proc</h2><p>里面的东西直接写入内存</p>
+<h2 id="usr"><a href="#usr" class="headerlink" title="/usr"></a>/usr</h2><p>存放应用程序和文件</p>
+<h2 id="var"><a href="#var" class="headerlink" title="/var"></a>/var</h2><p>系统文档，比如/var/log</p>
+<h2 id="opt"><a href="#opt" class="headerlink" title="/opt"></a>/opt</h2><p>安装附加软件包，/opt/custom_package/bin下是软件目录</p>
+<h2 id="srv"><a href="#srv" class="headerlink" title="/srv"></a>/srv</h2><p>用于存储本机提供的服务或数据，比如/srv/www, /srv/ftp等</p>
+<hr>
+<p>References</p>
+<p><a href="https://zhuanlan.zhihu.com/p/343554675" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/343554675</a></p>
+<p><a href="http://www.linuxidc.com/Linux/2015-04/116032.htm" target="_blank" rel="noopener">http://www.linuxidc.com/Linux/2015-04/116032.htm</a></p>
+<p><a href="https://blog.csdn.net/u012107143/article/details/54972544" target="_blank" rel="noopener">https://blog.csdn.net/u012107143/article/details/54972544</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -614,10 +1006,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-01-28 09:11:39 / 修改时间：15:55:18" itemprop="dateCreated datePublished" datetime="2021-01-28T09:11:39+08:00">2021-01-28</time>
+      <time title="创建时间：2021-01-28 09:11:39" itemprop="dateCreated datePublished" datetime="2021-01-28T09:11:39+08:00">2021-01-28</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-29 11:32:26" itemprop="dateModified" datetime="2021-01-29T11:32:26+08:00">2021-01-29</time>
+      </span>
 
   
 </div>
@@ -637,6 +1035,8 @@
 <li>设置ssh配置文件<code>sudo vim /etc/ssh/sshd_config</code>修改<code>PermitRootLogin yes</code></li>
 <li>重启服务<code>sudo service ssh restart</code></li>
 </ul>
+<h1 id="Ubuntu用户"><a href="#Ubuntu用户" class="headerlink" title="Ubuntu用户"></a>Ubuntu用户</h1><p>用户默认使用Ubuntu，在执行特殊操作时使用<code>sudo</code>指令。</p>
+<p>需要新建<code>.bashrc</code>来存储用户的<code>bash</code>配置文件。</p>
 <hr>
 <p>Reference</p>
 <p><a href="https://cloud.tencent.com/developer/article/1405735" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1405735</a></p>
