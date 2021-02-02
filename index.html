@@ -159,7 +159,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">123</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -170,7 +170,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -218,6 +218,589 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/02/02/anno&reflect/reflect-anno/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/02/anno&reflect/reflect-anno/" class="post-title-link" itemprop="url">Java反射 - 通过反射获取注解的值</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-02-02 16:07:01 / 修改时间：16:11:17" itemprop="dateCreated datePublished" datetime="2021-02-02T16:07:01+08:00">2021-02-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notebook/" itemprop="url" rel="index"><span itemprop="name">Notebook</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="一个ORM例子"><a href="#一个ORM例子" class="headerlink" title="一个ORM例子"></a>一个ORM例子</h1><h2 id="定义注解"><a href="#定义注解" class="headerlink" title="定义注解"></a>定义注解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.TYPE)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@interface</span> Table &#123;</span><br><span class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Target</span>(ElementType.FIELD)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@interface</span> Field &#123;</span><br><span class="line">    <span class="function">String <span class="title">colName</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function">String <span class="title">type</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">length</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="实体类"><a href="#实体类" class="headerlink" title="实体类"></a>实体类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Table</span>(<span class="string">"user"</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Field</span>(colName = <span class="string">"user_id"</span>, type = <span class="string">"int"</span>, length = <span class="number">10</span>)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="meta">@Field</span>(colName = <span class="string">"user_name"</span>, type = <span class="string">"varchar"</span>, length = <span class="number">10</span>)</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="meta">@Field</span>(colName = <span class="string">"user_password"</span>, type = <span class="string">"varchar"</span>, length = <span class="number">64</span>)</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取注解进行处理"><a href="#获取注解进行处理" class="headerlink" title="获取注解进行处理"></a>获取注解进行处理</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectAnno</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchFieldException, NoSuchMethodException </span>&#123;</span><br><span class="line">        Class&lt;User&gt; c = User<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获得类上的注解</span></span><br><span class="line">        Annotation[] annotations = c.getAnnotations();</span><br><span class="line">        <span class="keyword">for</span> (Annotation annotation : annotations) &#123;</span><br><span class="line">            System.out.println(<span class="string">"annotation = "</span> + annotation);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取注解的值</span></span><br><span class="line">        Table target = c.getAnnotation(Table<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        System.out.println(target.value());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取类的Field</span></span><br><span class="line">        java.lang.reflect.Field name = c.getDeclaredField(<span class="string">"name"</span>);</span><br><span class="line">        <span class="comment">// 获取Field上的注解</span></span><br><span class="line">        Field nameAnnotation = name.getAnnotation(Field<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        <span class="comment">// 获取注解的值</span></span><br><span class="line">        System.out.println(<span class="string">"nameAnnotation.colName() = "</span> + nameAnnotation.colName());</span><br><span class="line">        System.out.println(<span class="string">"nameAnnotation.type() = "</span> + nameAnnotation.type());</span><br><span class="line">        System.out.println(<span class="string">"nameAnnotation.length() = "</span> + nameAnnotation.length());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取类的Method</span></span><br><span class="line">        Method setPassword = c.getDeclaredMethod(<span class="string">"setPassword"</span>, String<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        <span class="comment">// 获取Method上的注解</span></span><br><span class="line">        setPassword.getAnnotations();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/02/02/anno&reflect/reflect-class/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/02/anno&reflect/reflect-class/" class="post-title-link" itemprop="url">Java反射 - 获取及使用属性与方法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-02-02 14:44:51 / 修改时间：15:37:22" itemprop="dateCreated datePublished" datetime="2021-02-02T14:44:51+08:00">2021-02-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notebook/" itemprop="url" rel="index"><span itemprop="name">Notebook</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="获取"><a href="#获取" class="headerlink" title="获取"></a>获取</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectGet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line">        Class c = Person<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获得类名</span></span><br><span class="line">        System.out.println(<span class="string">"c.getName() = "</span> + c.getName());</span><br><span class="line">        System.out.println(<span class="string">"c.getSimpleName() = "</span> + c.getSimpleName());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获得类的属性</span></span><br><span class="line">        Field[] fields = c.getFields();  <span class="comment">// public属性</span></span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            System.out.println(<span class="string">"field = "</span> + field);</span><br><span class="line">        &#125;</span><br><span class="line">        fields = c.getDeclaredFields();  <span class="comment">// 所有属性</span></span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            System.out.println(<span class="string">"declaredField = "</span> + field);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获得类的方法</span></span><br><span class="line">        Method[] methods = c.getMethods();  <span class="comment">// 本类及父类全部的public方法</span></span><br><span class="line">        <span class="keyword">for</span> (Method method : methods) &#123;</span><br><span class="line">            System.out.println(<span class="string">"method = "</span> + method);</span><br><span class="line">        &#125;</span><br><span class="line">        methods = c.getDeclaredMethods();  <span class="comment">// 本类的所有方法</span></span><br><span class="line">        <span class="keyword">for</span> (Method method : methods) &#123;</span><br><span class="line">            System.out.println(<span class="string">"method = "</span> + method);</span><br><span class="line">        &#125;</span><br><span class="line">        Method method = c.getMethod(<span class="string">"setAge"</span>, <span class="keyword">int</span><span class="class">.<span class="keyword">class</span>)</span>;  <span class="comment">// 需要指定形参的类型，因为可能会重载！！！</span></span><br><span class="line">        System.out.println(<span class="string">"method = "</span> + method);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获得构造器</span></span><br><span class="line">        Constructor[] constructors = c.getConstructors();  <span class="comment">// 获得public方法</span></span><br><span class="line">        <span class="keyword">for</span> (Constructor constructor : constructors) &#123;</span><br><span class="line">            System.out.println(<span class="string">"constructor = "</span> + constructor);</span><br><span class="line">        &#125;</span><br><span class="line">        constructors = c.getDeclaredConstructors();  <span class="comment">// 获得本类全部</span></span><br><span class="line">        <span class="keyword">for</span> (Constructor constructor : constructors) &#123;</span><br><span class="line">            System.out.println(<span class="string">"constructor = "</span> + constructor);</span><br><span class="line">        &#125;</span><br><span class="line">        Constructor constructor = c.getConstructor(String<span class="class">.<span class="keyword">class</span>, <span class="title">int</span>.<span class="title">class</span>)</span>;  <span class="comment">// 获取指定构造器，同样需要传形参的class类，可能会重载！！！</span></span><br><span class="line">        System.out.println(<span class="string">"constructor = "</span> + constructor);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectUse</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException </span>&#123;</span><br><span class="line">        <span class="comment">// 拿到类的Class对象</span></span><br><span class="line">        Class c = Person<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取构造器（在Java9后使用Class对象直接创建实例的方法已经被抛弃了）</span></span><br><span class="line">        Constructor constructorA = c.getDeclaredConstructor(<span class="keyword">null</span>);</span><br><span class="line">        Constructor constructorB = c.getDeclaredConstructor(String<span class="class">.<span class="keyword">class</span>, <span class="title">int</span>.<span class="title">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 通过构造器创建实例</span></span><br><span class="line">        Person person = (Person) constructorA.newInstance(<span class="keyword">null</span>);</span><br><span class="line">        System.out.println(<span class="string">"person = "</span> + person);</span><br><span class="line">        Person personB = (Person) constructorB.newInstance(<span class="string">"Edlison"</span>, <span class="number">18</span>);</span><br><span class="line">        System.out.println(<span class="string">"personB = "</span> + personB);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 通过Class对象获取其中的方法</span></span><br><span class="line">        Method setName = c.getMethod(<span class="string">"setName"</span>, String<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 执行该方法： 执行的对象 形参</span></span><br><span class="line">        setName.invoke(personB, <span class="string">"edlison"</span>);</span><br><span class="line">        System.out.println(<span class="string">"personB = "</span> + personB);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 通过Class对象获取其中的属性</span></span><br><span class="line">        Field age = c.getDeclaredField(<span class="string">"age"</span>);</span><br><span class="line">        age.setAccessible(<span class="keyword">true</span>);  <span class="comment">// 由于private限制 需要先设置Accessible才可以对其进行操作</span></span><br><span class="line">        age.set(personB, <span class="number">10</span>);</span><br><span class="line">        System.out.println(<span class="string">"personB = "</span> + personB);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：</p>
+<ul>
+<li>通过<code>invoke</code>执行获得的类的方法：(需要执行的对象，形参…)</li>
+<li>通过<code>set</code>对类的属性进行赋值：(需要赋值的对象，形参)</li>
+<li>如果属性或方法的可见性为<code>private</code>，可以通过设置<code>setAccessible(true)</code>来访问。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/02/02/anno&reflect/reflect-start/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/02/anno&reflect/reflect-start/" class="post-title-link" itemprop="url">反射 - Start</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-02-02 13:22:59 / 修改时间：14:36:21" itemprop="dateCreated datePublished" datetime="2021-02-02T13:22:59+08:00">2021-02-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notebook/" itemprop="url" rel="index"><span itemprop="name">Notebook</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Java是静态语言。</p>
+<p>反射机制的引入，使Java能在执行期借助反射API<strong>获取任何类</strong>的内部信息，并能直接操作任何类的内部属性及方法。</p>
+<p>正常方法：</p>
+<p>引入’包类’名称 -&gt; new实例化 -&gt; 获得实例化对象</p>
+<p>反射方法：</p>
+<p>实例化对象 -&gt; <code>getClass()</code>方法 -&gt; 得到’包类’名称</p>
+<p><strong>优点</strong>：实现动态创建对象和编译。</p>
+<p><strong>缺点</strong>：性能有影响。</p>
+<h1 id="获得反射对象"><a href="#获得反射对象" class="headerlink" title="获得反射对象"></a>获得反射对象</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Class c1 = Class.forName(<span class="string">"com.edlison.design.v1.reflection.User"</span>);</span><br><span class="line">Class c2 = Class.forName(<span class="string">"com.edlison.design.v1.reflection.User"</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(c1 == c2);  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>一个类</strong>在内存中只有<strong>一个</strong><code>Class</code>对象</li>
+<li>类被加载后，类的<strong>所有信息</strong>都封装在<code>Class</code>对象中</li>
+</ul>
+<h2 id="1-通过对象获得"><a href="#1-通过对象获得" class="headerlink" title="1. 通过对象获得"></a>1. 通过对象获得</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class c1 = person.getClass();</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-通过forName获得"><a href="#2-通过forName获得" class="headerlink" title="2. 通过forName获得"></a>2. 通过<code>forName</code>获得</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class c2=Class.forName(<span class="string">"com.edlison.design.v1.reflection.Student"</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-通过类-class获得"><a href="#3-通过类-class获得" class="headerlink" title="3. 通过类.class获得"></a>3. 通过类.class获得</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class c3 = Student<span class="class">.<span class="keyword">class</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-内置类型的Type属性"><a href="#4-内置类型的Type属性" class="headerlink" title="4. 内置类型的Type属性"></a>4. 内置类型的Type属性</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class c4 = Integer.TYPE;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-通过子类获取父类"><a href="#5-通过子类获取父类" class="headerlink" title="5. 通过子类获取父类"></a>5. 通过子类获取父类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class c5 = Student<span class="class">.<span class="keyword">class</span>.<span class="title">getSuperclass</span>()</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="类的初始化"><a href="#类的初始化" class="headerlink" title="类的初始化"></a>类的初始化</h1><h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>加载 -&gt; 链接 -&gt; 初始化</p>
+<ul>
+<li>类的主动引用（一定会发生类的初始化）</li>
+<li>类的被动引用（不会发生类的初始化）</li>
+</ul>
+<p>结合JVM进行理解。</p>
+<h1 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h1><p>类加载器是用来把类(Class)装载进内存的，JVM自顶向下定义了如下加载器。</p>
+<ul>
+<li>引导类加载器：C++编写，负责Java核心库，<strong>类加载器获取不到</strong>。</li>
+<li>扩展类加载器：负责<code>jre/lib/ext</code>下的Jar包的导入。</li>
+<li>系统类加载器：负责<code>java --classpath</code>所指目录下类与Jar包的导入。</li>
+</ul>
+<p>系统类加载器 -父类&gt; 扩展类加载器 -父类&gt; 引导类加载器</p>
+<p>可以依次根据<code>ClassLoader.getParent()</code>取得其父类。</p>
+<p><strong>注意</strong>：</p>
+<ul>
+<li>只有类加载器加载的路径下的Jar包才可以使用。</li>
+<li>双亲委派机制。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/02/02/anno&reflect/anno-start/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/02/anno&reflect/anno-start/" class="post-title-link" itemprop="url">注解 - Start</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-02-02 11:40:10 / 修改时间：13:23:51" itemprop="dateCreated datePublished" datetime="2021-02-02T11:40:10+08:00">2021-02-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notebook/" itemprop="url" rel="index"><span itemprop="name">Notebook</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h1><p>Java内置了几个元注解</p>
+<ul>
+<li><code>@Target</code>定义了<strong>作用域</strong>，可以使用的范围。</li>
+<li><code>@Retention</code>定义了注解的<strong>生命周期</strong>。</li>
+<li><code>@Document</code>定义注解将被包含在JavaDoc中。</li>
+<li><code>@Inherited</code>说明子类可以<strong>继承</strong>父类的注解。</li>
+</ul>
+<h1 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h1><p>注解内可以规定要传哪些值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(value = &#123;ElementType.METHOD, ElementType.TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(value = RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@interface</span> MyAnnoPlus &#123;</span><br><span class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function">String <span class="title">name</span><span class="params">()</span> <span class="keyword">default</span> "edlison"</span>;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">id</span><span class="params">()</span> <span class="keyword">default</span> -1</span>;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">age</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>value</code>对应的可以不用写<code>value = &quot;&quot;</code>, 可以直接传值。</li>
+<li><code>default</code>默认则可以不传值。</li>
+<li>传值的顺序没有要求。</li>
+</ul>
+<h1 id="用处"><a href="#用处" class="headerlink" title="用处"></a>用处</h1><p>注解可以添加在package, class, method, field上，相当于给他们<strong>添加了额外的信息</strong>，我们可以通过<strong>反射机制</strong>编程来实现对这些元数据的访问。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/02/02/spring/aop-start/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/02/spring/aop-start/" class="post-title-link" itemprop="url">SpringAOP - Start</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-02-02 09:34:03 / 修改时间：11:15:50" itemprop="dateCreated datePublished" datetime="2021-02-02T09:34:03+08:00">2021-02-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notebook/" itemprop="url" rel="index"><span itemprop="name">Notebook</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="静态代理模式"><a href="#静态代理模式" class="headerlink" title="静态代理模式"></a>静态代理模式</h1><p>![image-20210202095609829](/Users/edlison/Library/Application Support/typora-user-images/image-20210202095609829.png)</p>
+<h2 id="架构分析"><a href="#架构分析" class="headerlink" title="架构分析"></a>架构分析</h2><ul>
+<li>抽象角色：用于设计被代理角色的方法。一般使用抽象类或接口。</li>
+<li>真实角色：被代理的角色。</li>
+<li>代理角色：对真实角色进行代理，一般还会有一些代理角色附加的业务。</li>
+<li>客户：访问代理。</li>
+</ul>
+<h2 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h2><ul>
+<li>真实角色只需要专注他需要处理的业务，更加纯粹。</li>
+<li>公共业务交给代理，实现了<strong>业务分工</strong>。</li>
+<li>业务<strong>扩展方便</strong>，方便<strong>集中管理</strong>。</li>
+</ul>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ul>
+<li>一个真实角色就会产生一个代理角色。<strong>代码量</strong>翻倍。</li>
+</ul>
+<h1 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h1><p>TODO</p>
+<h2 id="InvocationHandler"><a href="#InvocationHandler" class="headerlink" title="InvocationHandler"></a>InvocationHandler</h2><h2 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h2><p>问题：</p>
+<p>组合，扩展</p>
+<p>实现，继承</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/02/01/design/singleton/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/01/design/singleton/" class="post-title-link" itemprop="url">Singleton单例模式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-02-01 17:06:47 / 修改时间：18:21:03" itemprop="dateCreated datePublished" datetime="2021-02-01T17:06:47+08:00">2021-02-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notebook/" itemprop="url" rel="index"><span itemprop="name">Notebook</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="饿汉模式"><a href="#饿汉模式" class="headerlink" title="饿汉模式"></a>饿汉模式</h1><p>在项目一开始就初始化对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hungry</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> Hungry HUNGRY = <span class="keyword">new</span> Hungry();</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Hungry</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Hungry <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> HUNGRY;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用私有的构造方式确保对象无法在外部被实例化。使用一个静态方法获取内部的静态实例。</p>
+<p><strong>不足</strong>：的是如果对象太大，会造成大量资源被占用。</p>
+<h1 id="懒汉模式"><a href="#懒汉模式" class="headerlink" title="懒汉模式"></a>懒汉模式</h1><p>在需要时实例化对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Lazy</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Lazy LAZY;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Lazy</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Lazy <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (LAZY == <span class="keyword">null</span>) &#123;</span><br><span class="line">            LAZY = <span class="keyword">new</span> Lazy();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> LAZY;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时线程不安全</p>
+<h1 id="双重检验锁的懒汉模式"><a href="#双重检验锁的懒汉模式" class="headerlink" title="双重检验锁的懒汉模式"></a>双重检验锁的懒汉模式</h1><p>Double-Checked locking Lazy Mode</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LazyDCL</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> LazyDCL LAZYDCL;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">LazyDCL</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> LazyDCL <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (LAZYDCL == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (LazyDCL<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (LAZYDCL == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    LAZYDCL = <span class="keyword">new</span> LazyDCL();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> LAZYDCL;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时线程安全，但<strong>还是有问题</strong>，<code>new LazyDCL()</code>的时候不是<strong>原子操作</strong>。</p>
+<p>实例化需要经过的步骤：</p>
+<ol>
+<li>分配内存空间</li>
+<li>执行构造方法 初始化对象</li>
+<li>把这个对象指向这个空间</li>
+</ol>
+<p>也就会在底层，CPU执行时发生<strong>指令重排</strong>的错误。</p>
+<p>1-&gt;2-&gt;3（正确）</p>
+<p>1-&gt;3-&gt;2</p>
+<p>如果有以上的顺序，当线程A执行到3步骤，此时如果有线程B进来，则会误判<code>LAZYDCL==null</code>从而直接返回。由于线程A并没有完成实例化的操作，因此可能会发生错误。</p>
+<p><strong>注意</strong>：此时必须对<code>LAZYDCL</code>加上<code>volatile</code>从而避免指令重排而产生的错误！！！</p>
+<h1 id="终极懒汉模式"><a href="#终极懒汉模式" class="headerlink" title="终极懒汉模式"></a>终极懒汉模式</h1><h2 id="1-0"><a href="#1-0" class="headerlink" title="1.0"></a>1.0</h2><p><strong>破坏方式</strong>：通过<strong>反射</strong>可以强行改变构造器的可视性。以此再来新建一个对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UltimateLazy</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> UltimateLazy ULTIMATELAZY;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">UltimateLazy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (UltimateLazy<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (ULTIMATELAZY != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"error"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> UltimateLazy <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决方案</strong>：但是可以再在私有的构造方法里<strong>再加一层判断</strong>。</p>
+<h2 id="2-0"><a href="#2-0" class="headerlink" title="2.0"></a>2.0</h2><p><strong>破坏方式</strong>：如果<strong>都使用反射</strong>来破坏单例模式。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UltimateLazy</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> UltimateLazy ULTIMATELAZY;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">UltimateLazy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (UltimateLazy<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (flag == <span class="keyword">false</span>) &#123;</span><br><span class="line">                flag = <span class="keyword">true</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"error"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> UltimateLazy <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决方案</strong>：可以加一个标志位来确保单例。</p>
+<h2 id="3-0-终极解决方案"><a href="#3-0-终极解决方案" class="headerlink" title="3.0 终极解决方案"></a>3.0 终极解决方案</h2><p><strong>破坏方式</strong>：使用<strong>反射</strong>来改变标志位的值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> EnumLazy &#123;</span><br><span class="line">    INSTANCE;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> EnumLazy <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException </span>&#123;</span><br><span class="line">        EnumLazy instanceA = EnumLazy.INSTANCE;</span><br><span class="line">        Constructor&lt;EnumLazy&gt; constructor = EnumLazy<span class="class">.<span class="keyword">class</span>.<span class="title">getDeclaredConstructor</span>(<span class="title">String</span>.<span class="title">class</span>, <span class="title">int</span>.<span class="title">class</span>)</span>;</span><br><span class="line">        constructor.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">        EnumLazy instanceB = constructor.newInstance();</span><br><span class="line"></span><br><span class="line">        System.out.println(instanceA == instanceB);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决方案</strong>：使用单例模式来解决。看源码可以得知，<strong>不能使用反射来构建枚举类</strong>。</p>
+<hr>
+<p>Reference</p>
+<p><a href="https://www.bilibili.com/video/BV1K54y197iS" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1K54y197iS</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/02/01/spring/ioc-bean/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -242,10 +825,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-02-01 11:53:07 / 修改时间：16:32:47" itemprop="dateCreated datePublished" datetime="2021-02-01T11:53:07+08:00">2021-02-01</time>
+      <time title="创建时间：2021-02-01 11:53:07" itemprop="dateCreated datePublished" datetime="2021-02-01T11:53:07+08:00">2021-02-01</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-02-02 09:20:14" itemprop="dateModified" datetime="2021-02-02T09:20:14+08:00">2021-02-02</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -345,6 +934,7 @@
 <p>也可以直接获取<code>config</code>类，通过其方法获取实例。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Spring的IOC机制实质上就是一个容器，统一管理项目开发中的各种类型，可以很方便的控制其是单例模型还是远行模型。</p>
 <p><strong>自动装配</strong>机制很大的简化了<strong>依赖注入</strong>，可以直接匹配名称或类型，使得开发进一步简化。</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>如果一个对象有一个复杂的数据成员对象，且该对象已经装配为<code>Bean</code>，也可以用<code>@Autowired</code>对其进行自动装配？与<code>@Value</code>功能/实质一样？</p>
 
       
     </div>
@@ -1149,7 +1739,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/28/design/builder/" class="post-title-link" itemprop="url">builder生产器模式</a>
+            <a href="/2021/01/28/design/builder/" class="post-title-link" itemprop="url">Builder生产器模式</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1159,10 +1749,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-01-28 18:10:38 / 修改时间：18:41:05" itemprop="dateCreated datePublished" datetime="2021-01-28T18:10:38+08:00">2021-01-28</time>
+      <time title="创建时间：2021-01-28 18:10:38" itemprop="dateCreated datePublished" datetime="2021-01-28T18:10:38+08:00">2021-01-28</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-02-01 17:07:27" itemprop="dateModified" datetime="2021-02-01T17:07:27+08:00">2021-02-01</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
