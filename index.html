@@ -159,18 +159,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">128</span>
+          <span class="site-state-item-count">132</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">41</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -210,6 +210,359 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/02/09/paper_exp/batch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/09/paper_exp/batch/" class="post-title-link" itemprop="url">Batch Size</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-02-09 02:19:12 / 修改时间：02:23:09" itemprop="dateCreated datePublished" datetime="2021-02-09T02:19:12+08:00">2021-02-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Paper/" itemprop="url" rel="index"><span itemprop="name">Paper</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="对Batch-size与lr的认识"><a href="#对Batch-size与lr的认识" class="headerlink" title="对Batch_size与lr的认识"></a>对Batch_size与lr的认识</h1><h2 id="大Batch-Batch-gt-Full-："><a href="#大Batch-Batch-gt-Full-：" class="headerlink" title="大Batch(Batch -&gt; Full)："></a>大Batch(Batch -&gt; Full)：</h2><p>好处：</p>
+<ul>
+<li>更好的代表样本总体，更准确指向极值。</li>
+<li>不同权重梯度差别大，学习率不统一。</li>
+</ul>
+<p>坏处：</p>
+<ul>
+<li>内存局限，无法一次性载入全部样本。</li>
+<li>每个Batch，由于<strong>采样性差异</strong>，梯度修正值<strong>相互抵消</strong>。</li>
+</ul>
+<h2 id="小Batch-Batch-gt-1-："><a href="#小Batch-Batch-gt-1-：" class="headerlink" title="小Batch(Batch -&gt; 1)："></a>小Batch(Batch -&gt; 1)：</h2><p>好处：</p>
+<ul>
+<li>可以在一个epoch上迭代很多次，参数更新多次。</li>
+</ul>
+<p>坏处：</p>
+<ul>
+<li>每次修正都向各自样本的梯度方向修正，<strong>难收敛</strong>。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/02/09/paper_exp/tensor_inplace/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/09/paper_exp/tensor_inplace/" class="post-title-link" itemprop="url">paper_exp/tensor_inplace</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-02-09 02:18:39 / 修改时间：02:18:45" itemprop="dateCreated datePublished" datetime="2021-02-09T02:18:39+08:00">2021-02-09</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/02/04/paper_exp/gan/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/04/paper_exp/gan/" class="post-title-link" itemprop="url">GAN</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-02-04 10:50:20" itemprop="dateCreated datePublished" datetime="2021-02-04T10:50:20+08:00">2021-02-04</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-02-09 02:31:59" itemprop="dateModified" datetime="2021-02-09T02:31:59+08:00">2021-02-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Paper/" itemprop="url" rel="index"><span itemprop="name">Paper</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="图片Img数组的取值范围及含义"><a href="#图片Img数组的取值范围及含义" class="headerlink" title="图片Img数组的取值范围及含义"></a>图片Img数组的取值范围及含义</h1><p>Loader返回的值形式为[batch, channel, row, col]. (N * C * H * W)</p>
+<p>channel：通道数，<strong>通道的维度上就保存了各个通道上的值</strong>，如RGB。</p>
+<p>torchvision.transforms中的<code>.toTensor()</code>就是将图片的[0, 255]范围转换为了Tensor上的[0.0, 1.0]。因此mnist数据集中每个像素点上的值在[0, 1]区间上。</p>
+<h1 id="G-与-D-进行两次前向传播"><a href="#G-与-D-进行两次前向传播" class="headerlink" title="G 与 D 进行两次前向传播"></a>G 与 D 进行两次前向传播</h1><p><strong>两次的参数均独立生成。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># G的前向传播</span></span><br><span class="line">noise = torch.autograd.Variable(torch.randn(imgs_batch, self.latent_dim)).cuda()</span><br><span class="line">gen_imgs = self.G(noise)</span><br><span class="line">d_fake = self.D(gen_imgs)</span><br><span class="line">g_loss = sef.bce_loss(d_fake, real_label)</span><br><span class="line"><span class="comment"># 训练G</span></span><br><span class="line">...</span><br><span class="line"><span class="comment"># D的前向传播</span></span><br><span class="line">gen_imgs = self.G(noise)</span><br><span class="line">d_fake = self.D(gen_imgs)</span><br><span class="line">d_real = self.D(real_imgs)</span><br><span class="line">d_loss_fake = self.bce_loss(d_fake, fake_label)</span><br><span class="line">d_loss_real = self.bce_loss(d_real, real_label)</span><br><span class="line">d_loss = d_loss_fake + d_loss_real</span><br><span class="line"><span class="comment"># 训练D</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<p>每一次进行前向计算的参数都是独立的参数，在生成计算图时都是独立的。因此，如果计算后一个网络的时候还传的是一开始的<code>gen_imgs</code>其实没有变化，指向的还是同一个参数。但是如果再次让<code>noise</code>经过G生成一个<code>gen_imgs</code>，因为G已经更新过了，此时的<code>gen_imgs</code>也发生了变化，因此再进行前向传播，生成的就是另外一个计算图了。</p>
+<p>因此这种情况根本不需要再第一次反向传播的时候设置<code>retain_graph=True</code>.</p>
+<h1 id="G-与-D-只进行一次前向传播"><a href="#G-与-D-只进行一次前向传播" class="headerlink" title="G 与 D 只进行一次前向传播"></a>G 与 D 只进行一次前向传播</h1><p><strong>共用一次前向计算的参数。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 参数只进行一次前向传播</span></span><br><span class="line">noise = torch.autograd.Variable(torch.randn(imgs_batch, self.latent_dim)).cuda()</span><br><span class="line">gen_imgs = self.G(noise)</span><br><span class="line">d_fake = self.D(gen_imgs)</span><br><span class="line">d_real = self.D(real_imgs)</span><br><span class="line"></span><br><span class="line">g_loss = self.bce_loss(d_fake, real_label)</span><br><span class="line">d_loss_fake = self.bce_loss(d_fake, fake_label)</span><br><span class="line">d_loss_real = self.bce_loss(d_real, real_label)</span><br><span class="line">d_loss = d_loss_fake + d_loss_real</span><br><span class="line"><span class="comment"># 同时训练</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="方法一（错误的）"><a href="#方法一（错误的）" class="headerlink" title="方法一（错误的）"></a>方法一（错误的）</h2><p>两个网络<strong>同时训练</strong>的参数的优化器同时梯度清零-&gt;损失反向传播-&gt;梯度下降，此时的网络无法得到优化。而且此时因为两个loss的反向传播有重合的部分，必须要<code>retain_graph=True</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">self.optimizer_G.zero_grad()</span><br><span class="line">self.optimizer_D.zero_grad()</span><br><span class="line">g_loss.backward(retain_graph=<span class="literal">True</span>)</span><br><span class="line">d_loss.backward()</span><br><span class="line">self.optimizer_G.step()</span><br><span class="line">self.optimizer_D.step()</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<p>此时根本不会对网络有优化的作用，并没有产生‘对抗’的效果。</p>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>两个网络<strong>先后训练</strong>，先优化G，后优化D。但是此时loss反向传播时，仍然会有参数重复计算梯度且没有更新的部分（网络D中的参数）。必须要在先进行反向传播的loss加上<code>retain_graph=True</code>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">self.optimizer_G.zero_grad()</span><br><span class="line">g_loss.backward(retain_graph=<span class="literal">True</span>)</span><br><span class="line">self.optimizer_G.step()</span><br><span class="line"></span><br><span class="line">self.optimizer_D.zero_grad()</span><br><span class="line">d_loss.backward()</span><br><span class="line">self.optimizer_D.step()</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<p>这种方法更注重的是<strong>二次</strong>求导，也就是原计算图保存的是<code>g_loss</code>对网络D中参数的梯度，然后叠加上<code>d_loss</code>对网络D中参数的梯度。一并对网络D的参数进行更新。</p>
+<h1 id="Conv2d"><a href="#Conv2d" class="headerlink" title="Conv2d"></a>Conv2d</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nn.Conv2d(in_channels, out_channels, kernel_size, stride, padding)</span><br></pre></td></tr></table></figure>
+
+<p>in_channels: 输入通道数。</p>
+<p>out_channels: 输出通道数。</p>
+<p>kernel_size: 卷积核大小。（如果长宽不一样，传一个tuple）</p>
+<p>stride: 卷积核移动步长。</p>
+<p>padding: 图片上下左右的填充。</p>
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>GAN这种结构最大的问题就是虽然<strong>可以生成很相似的东西</strong>，但是如果生成的东西有很强的类别属性，<strong>无法指定生成的类别</strong>。</p>
+<p>Optimizer<strong>优化器就是训练网络</strong>，虽然进入网络的样本也被装入了<code>Variable</code>计算图中，其实际上不会被更新，如果没有设置<code>requires_grad=False</code>本质上还是会被计算梯度的，因此对非网络中的参数指定不计算梯度，可以提升运行效率。</p>
+<p><code>retain_graph</code>实质上是<strong>对计算图进行保留</strong>，由于训练基本上是不断生成一个计算图然后反向传播，默认在反向传播后就抛弃掉了这个计算图结构。</p>
+<p>只进行一次前向计算就是<strong>同时训练两个网络</strong>（训练网络D并不是在更新了网络G的基础上）；进行两次前向计算就是<strong>分别训练两个网络</strong>（训练网络D是在网络G更新的基础上）。</p>
+<p>保留计算图或不保留计算图的本质就在于，对网络D的更新是否<strong>叠加</strong>上了网络G更新时反向传播的<code>g_loss</code>对网络D中参数的梯度。（<strong>不是计算二阶导数！</strong>）</p>
+<p>网络的最后一层要在[0, 1]上，由于没有用卷积，在数字意外部分多还是噪声的影响大，因此造成了数字以外区域黑白。</p>
+<p>batch大小的调整直接影响到了权重的迭代。（问题就出在batch=10000忘记调回来了！！！）：很大的一个作用是可以在一个epoch上迭代很多次！！！</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>两个维度上的数值拼接的时候，是拼接到行or列？unzip的时候是怎么展开？</p>
+<p>shape操作 flatten</p>
+<p>共享内存 如(a.view(-1, 1)/ b = a.view(-1, 1)) a内存中的tensor都会变吗，还是只有b拿到了？inplace</p>
+<hr>
+<p>Reference</p>
+<p><a href="https://www.zhihu.com/search?q=batch%20size&amp;utm_content=search_suggestion&amp;type=content" target="_blank" rel="noopener">https://www.zhihu.com/search?q=batch%20size&amp;utm_content=search_suggestion&amp;type=content</a></p>
+<p><a href="https://blog.csdn.net/weixin_43202635/article/details/84204180" target="_blank" rel="noopener">https://blog.csdn.net/weixin_43202635/article/details/84204180</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/02/04/paper_exp/tensor_shape/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/04/paper_exp/tensor_shape/" class="post-title-link" itemprop="url">paper_exp/tensor_shape</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-02-04 10:49:48" itemprop="dateCreated datePublished" datetime="2021-02-04T10:49:48+08:00">2021-02-04</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-02-09 02:19:01" itemprop="dateModified" datetime="2021-02-09T02:19:01+08:00">2021-02-09</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -3778,7 +4131,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/21/paper/ClusterGAN/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/21/paper_reprod/ClusterGAN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -3792,7 +4145,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/21/paper/ClusterGAN/" class="post-title-link" itemprop="url">ClusterGAN代码实现</a>
+            <a href="/2021/01/21/paper_reprod/ClusterGAN/" class="post-title-link" itemprop="url">ClusterGAN代码实现</a>
         </h2>
 
         <div class="post-meta-container">
@@ -3810,7 +4163,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-01-25 13:43:24" itemprop="dateModified" datetime="2021-01-25T13:43:24+08:00">2021-01-25</time>
+        <time title="修改时间：2021-02-04 13:48:06" itemprop="dateModified" datetime="2021-02-04T13:48:06+08:00">2021-02-04</time>
       </span>
 
   
@@ -4316,7 +4669,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/15/paper/AnomalyDetectionViaRobust/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/01/15/paper_read/AnomalyDetectionViaRobust/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -4330,7 +4683,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/15/paper/AnomalyDetectionViaRobust/" class="post-title-link" itemprop="url">Multi-view Anomaly Detection via Robust Probabilistic Latent Variable Models</a>
+            <a href="/2021/01/15/paper_read/AnomalyDetectionViaRobust/" class="post-title-link" itemprop="url">Multi-view Anomaly Detection via Robust Probabilistic Latent Variable Models</a>
         </h2>
 
         <div class="post-meta-container">
@@ -4340,10 +4693,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-01-15 13:24:35 / 修改时间：16:29:14" itemprop="dateCreated datePublished" datetime="2021-01-15T13:24:35+08:00">2021-01-15</time>
+      <time title="创建时间：2021-01-15 13:24:35" itemprop="dateCreated datePublished" datetime="2021-01-15T13:24:35+08:00">2021-01-15</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-02-04 13:49:35" itemprop="dateModified" datetime="2021-02-04T13:49:35+08:00">2021-02-04</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -5046,7 +5405,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/11/06/paper/ClusteringGANSiamese/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/11/06/paper_reprod/ClusteringGANSiamese/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -5060,7 +5419,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/06/paper/ClusteringGANSiamese/" class="post-title-link" itemprop="url">paper/ClusteringGANSiamese</a>
+            <a href="/2020/11/06/paper_reprod/ClusteringGANSiamese/" class="post-title-link" itemprop="url">CluasteringGANSiamese</a>
         </h2>
 
         <div class="post-meta-container">
@@ -5070,10 +5429,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2020-11-06 20:25:17 / 修改时间：23:44:24" itemprop="dateCreated datePublished" datetime="2020-11-06T20:25:17+08:00">2020-11-06</time>
+      <time title="创建时间：2020-11-06 20:25:17" itemprop="dateCreated datePublished" datetime="2020-11-06T20:25:17+08:00">2020-11-06</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-02-04 13:47:55" itemprop="dateModified" datetime="2021-02-04T13:47:55+08:00">2021-02-04</time>
+      </span>
 
   
 </div>
@@ -5734,7 +6099,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/09/18/paper/Attention-Transformer/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/09/18/paper_read/Attention-Transformer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -5748,7 +6113,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/09/18/paper/Attention-Transformer/" class="post-title-link" itemprop="url">paper/Attention-Transformer</a>
+            <a href="/2020/09/18/paper_read/Attention-Transformer/" class="post-title-link" itemprop="url">paper_read/Attention-Transformer</a>
         </h2>
 
         <div class="post-meta-container">
@@ -5799,7 +6164,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/09/18/paper/XLNet/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/09/18/paper_read/XLNet/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -5813,7 +6178,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/09/18/paper/XLNet/" class="post-title-link" itemprop="url">paper/XLNet</a>
+            <a href="/2020/09/18/paper_read/XLNet/" class="post-title-link" itemprop="url">XLNet</a>
         </h2>
 
         <div class="post-meta-container">
@@ -5831,8 +6196,21 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-19 00:58:28" itemprop="dateModified" datetime="2020-09-19T00:58:28+08:00">2020-09-19</time>
+        <time title="修改时间：2021-02-04 13:49:16" itemprop="dateModified" datetime="2021-02-04T13:49:16+08:00">2021-02-04</time>
       </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Paper/" itemprop="url" rel="index"><span itemprop="name">Paper</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Paper/NLP/" itemprop="url" rel="index"><span itemprop="name">NLP</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -6115,7 +6493,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/09/13/paper/Attention/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/09/13/paper_read/Attention/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -6129,7 +6507,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/09/13/paper/Attention/" class="post-title-link" itemprop="url">paper/Attention</a>
+            <a href="/2020/09/13/paper_read/Attention/" class="post-title-link" itemprop="url">Attention Is All You Need</a>
         </h2>
 
         <div class="post-meta-container">
@@ -6147,8 +6525,17 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-18 17:36:03" itemprop="dateModified" datetime="2020-09-18T17:36:03+08:00">2020-09-18</time>
+        <time title="修改时间：2021-02-04 13:49:28" itemprop="dateModified" datetime="2021-02-04T13:49:28+08:00">2021-02-04</time>
       </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Paper/" itemprop="url" rel="index"><span itemprop="name">Paper</span></a>
+        </span>
+    </span>
 
   
 </div>

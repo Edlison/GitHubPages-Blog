@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"edlison.com","root":"/","images":"/images","scheme":"Muse","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="图片Img数组的取值范围及含义Loader返回的值形式为[batch, channel, row, col]. (N * C * H * W) channel：通道数，通道的维度上就保存了各个通道上的值，如RGB。 torchvision.transforms中的.toTensor()就是将图片的[0, 255]范围转换为了Tensor上的[0.0, 1.0]。因此mnist数据集中每个像素点上的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GAN">
+<meta property="og:url" content="http://edlison.com/2021/02/04/paper_exp/gan/index.html">
+<meta property="og:site_name" content="Edlison is talking here.">
+<meta property="og:description" content="图片Img数组的取值范围及含义Loader返回的值形式为[batch, channel, row, col]. (N * C * H * W) channel：通道数，通道的维度上就保存了各个通道上的值，如RGB。 torchvision.transforms中的.toTensor()就是将图片的[0, 255]范围转换为了Tensor上的[0.0, 1.0]。因此mnist数据集中每个像素点上的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-04T02:50:20.323Z">
+<meta property="article:modified_time" content="2021-02-08T18:31:59.193Z">
+<meta property="article:author" content="Bolin Shen">
+<meta property="article:tag" content="gan">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://edlison.com/2021/02/04/paper_exp/gan/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>GAN | Edlison is talking here.</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Edlison is talking here.</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#图片Img数组的取值范围及含义"><span class="nav-number">1.</span> <span class="nav-text">图片Img数组的取值范围及含义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#G-与-D-进行两次前向传播"><span class="nav-number">2.</span> <span class="nav-text">G 与 D 进行两次前向传播</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#G-与-D-只进行一次前向传播"><span class="nav-number">3.</span> <span class="nav-text">G 与 D 只进行一次前向传播</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一（错误的）"><span class="nav-number">3.1.</span> <span class="nav-text">方法一（错误的）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二"><span class="nav-number">3.2.</span> <span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conv2d"><span class="nav-number">4.</span> <span class="nav-text">Conv2d</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思考"><span class="nav-number">5.</span> <span class="nav-text">思考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">6.</span> <span class="nav-text">问题</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Bolin Shen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">132</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/edlison" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;edlison" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bolin.edlison.shen@gmail.com" title="E-Mail → mailto:bolin.edlison.shen@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/02/04/paper_exp/gan/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GAN
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-02-04 10:50:20" itemprop="dateCreated datePublished" datetime="2021-02-04T10:50:20+08:00">2021-02-04</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-02-09 02:31:59" itemprop="dateModified" datetime="2021-02-09T02:31:59+08:00">2021-02-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Paper/" itemprop="url" rel="index"><span itemprop="name">Paper</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="图片Img数组的取值范围及含义"><a href="#图片Img数组的取值范围及含义" class="headerlink" title="图片Img数组的取值范围及含义"></a>图片Img数组的取值范围及含义</h1><p>Loader返回的值形式为[batch, channel, row, col]. (N * C * H * W)</p>
+<p>channel：通道数，<strong>通道的维度上就保存了各个通道上的值</strong>，如RGB。</p>
+<p>torchvision.transforms中的<code>.toTensor()</code>就是将图片的[0, 255]范围转换为了Tensor上的[0.0, 1.0]。因此mnist数据集中每个像素点上的值在[0, 1]区间上。</p>
+<h1 id="G-与-D-进行两次前向传播"><a href="#G-与-D-进行两次前向传播" class="headerlink" title="G 与 D 进行两次前向传播"></a>G 与 D 进行两次前向传播</h1><p><strong>两次的参数均独立生成。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># G的前向传播</span></span><br><span class="line">noise = torch.autograd.Variable(torch.randn(imgs_batch, self.latent_dim)).cuda()</span><br><span class="line">gen_imgs = self.G(noise)</span><br><span class="line">d_fake = self.D(gen_imgs)</span><br><span class="line">g_loss = sef.bce_loss(d_fake, real_label)</span><br><span class="line"><span class="comment"># 训练G</span></span><br><span class="line">...</span><br><span class="line"><span class="comment"># D的前向传播</span></span><br><span class="line">gen_imgs = self.G(noise)</span><br><span class="line">d_fake = self.D(gen_imgs)</span><br><span class="line">d_real = self.D(real_imgs)</span><br><span class="line">d_loss_fake = self.bce_loss(d_fake, fake_label)</span><br><span class="line">d_loss_real = self.bce_loss(d_real, real_label)</span><br><span class="line">d_loss = d_loss_fake + d_loss_real</span><br><span class="line"><span class="comment"># 训练D</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<p>每一次进行前向计算的参数都是独立的参数，在生成计算图时都是独立的。因此，如果计算后一个网络的时候还传的是一开始的<code>gen_imgs</code>其实没有变化，指向的还是同一个参数。但是如果再次让<code>noise</code>经过G生成一个<code>gen_imgs</code>，因为G已经更新过了，此时的<code>gen_imgs</code>也发生了变化，因此再进行前向传播，生成的就是另外一个计算图了。</p>
+<p>因此这种情况根本不需要再第一次反向传播的时候设置<code>retain_graph=True</code>.</p>
+<h1 id="G-与-D-只进行一次前向传播"><a href="#G-与-D-只进行一次前向传播" class="headerlink" title="G 与 D 只进行一次前向传播"></a>G 与 D 只进行一次前向传播</h1><p><strong>共用一次前向计算的参数。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 参数只进行一次前向传播</span></span><br><span class="line">noise = torch.autograd.Variable(torch.randn(imgs_batch, self.latent_dim)).cuda()</span><br><span class="line">gen_imgs = self.G(noise)</span><br><span class="line">d_fake = self.D(gen_imgs)</span><br><span class="line">d_real = self.D(real_imgs)</span><br><span class="line"></span><br><span class="line">g_loss = self.bce_loss(d_fake, real_label)</span><br><span class="line">d_loss_fake = self.bce_loss(d_fake, fake_label)</span><br><span class="line">d_loss_real = self.bce_loss(d_real, real_label)</span><br><span class="line">d_loss = d_loss_fake + d_loss_real</span><br><span class="line"><span class="comment"># 同时训练</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="方法一（错误的）"><a href="#方法一（错误的）" class="headerlink" title="方法一（错误的）"></a>方法一（错误的）</h2><p>两个网络<strong>同时训练</strong>的参数的优化器同时梯度清零-&gt;损失反向传播-&gt;梯度下降，此时的网络无法得到优化。而且此时因为两个loss的反向传播有重合的部分，必须要<code>retain_graph=True</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">self.optimizer_G.zero_grad()</span><br><span class="line">self.optimizer_D.zero_grad()</span><br><span class="line">g_loss.backward(retain_graph=<span class="literal">True</span>)</span><br><span class="line">d_loss.backward()</span><br><span class="line">self.optimizer_G.step()</span><br><span class="line">self.optimizer_D.step()</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<p>此时根本不会对网络有优化的作用，并没有产生‘对抗’的效果。</p>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>两个网络<strong>先后训练</strong>，先优化G，后优化D。但是此时loss反向传播时，仍然会有参数重复计算梯度且没有更新的部分（网络D中的参数）。必须要在先进行反向传播的loss加上<code>retain_graph=True</code>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">self.optimizer_G.zero_grad()</span><br><span class="line">g_loss.backward(retain_graph=<span class="literal">True</span>)</span><br><span class="line">self.optimizer_G.step()</span><br><span class="line"></span><br><span class="line">self.optimizer_D.zero_grad()</span><br><span class="line">d_loss.backward()</span><br><span class="line">self.optimizer_D.step()</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<p>这种方法更注重的是<strong>二次</strong>求导，也就是原计算图保存的是<code>g_loss</code>对网络D中参数的梯度，然后叠加上<code>d_loss</code>对网络D中参数的梯度。一并对网络D的参数进行更新。</p>
+<h1 id="Conv2d"><a href="#Conv2d" class="headerlink" title="Conv2d"></a>Conv2d</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nn.Conv2d(in_channels, out_channels, kernel_size, stride, padding)</span><br></pre></td></tr></table></figure>
+
+<p>in_channels: 输入通道数。</p>
+<p>out_channels: 输出通道数。</p>
+<p>kernel_size: 卷积核大小。（如果长宽不一样，传一个tuple）</p>
+<p>stride: 卷积核移动步长。</p>
+<p>padding: 图片上下左右的填充。</p>
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>GAN这种结构最大的问题就是虽然<strong>可以生成很相似的东西</strong>，但是如果生成的东西有很强的类别属性，<strong>无法指定生成的类别</strong>。</p>
+<p>Optimizer<strong>优化器就是训练网络</strong>，虽然进入网络的样本也被装入了<code>Variable</code>计算图中，其实际上不会被更新，如果没有设置<code>requires_grad=False</code>本质上还是会被计算梯度的，因此对非网络中的参数指定不计算梯度，可以提升运行效率。</p>
+<p><code>retain_graph</code>实质上是<strong>对计算图进行保留</strong>，由于训练基本上是不断生成一个计算图然后反向传播，默认在反向传播后就抛弃掉了这个计算图结构。</p>
+<p>只进行一次前向计算就是<strong>同时训练两个网络</strong>（训练网络D并不是在更新了网络G的基础上）；进行两次前向计算就是<strong>分别训练两个网络</strong>（训练网络D是在网络G更新的基础上）。</p>
+<p>保留计算图或不保留计算图的本质就在于，对网络D的更新是否<strong>叠加</strong>上了网络G更新时反向传播的<code>g_loss</code>对网络D中参数的梯度。（<strong>不是计算二阶导数！</strong>）</p>
+<p>网络的最后一层要在[0, 1]上，由于没有用卷积，在数字意外部分多还是噪声的影响大，因此造成了数字以外区域黑白。</p>
+<p>batch大小的调整直接影响到了权重的迭代。（问题就出在batch=10000忘记调回来了！！！）：很大的一个作用是可以在一个epoch上迭代很多次！！！</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>两个维度上的数值拼接的时候，是拼接到行or列？unzip的时候是怎么展开？</p>
+<p>shape操作 flatten</p>
+<p>共享内存 如(a.view(-1, 1)/ b = a.view(-1, 1)) a内存中的tensor都会变吗，还是只有b拿到了？inplace</p>
+<hr>
+<p>Reference</p>
+<p><a href="https://www.zhihu.com/search?q=batch%20size&amp;utm_content=search_suggestion&amp;type=content" target="_blank" rel="noopener">https://www.zhihu.com/search?q=batch%20size&amp;utm_content=search_suggestion&amp;type=content</a></p>
+<p><a href="https://blog.csdn.net/weixin_43202635/article/details/84204180" target="_blank" rel="noopener">https://blog.csdn.net/weixin_43202635/article/details/84204180</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/gan/" rel="tag"># gan</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/02/04/paper_exp/tensor_shape/" rel="prev" title="paper_exp/tensor_shape">
+                  <i class="fa fa-chevron-left"></i> paper_exp/tensor_shape
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/02/09/paper_exp/tensor_inplace/" rel="next" title="paper_exp/tensor_inplace">
+                  paper_exp/tensor_inplace <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bolin Shen</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

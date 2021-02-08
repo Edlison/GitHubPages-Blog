@@ -26,8 +26,8 @@
 
   <meta name="description" content="XLNet Generalized Autoregressive Pretraining for Language UnderstandingAbstractBert基于去噪自编码器的预训练模型，性能优于自回归语言模型的预训练方法。而由于mask一部分输入，bert忽略了被mask位置之间的依赖关系。 XLNet基于此优缺点可以  通过最大化所有可能的因式分解顺序的对数似然，学习双向语境信息 用自">
 <meta property="og:type" content="article">
-<meta property="og:title" content="paper&#x2F;XLNet">
-<meta property="og:url" content="http://edlison.com/2020/09/18/paper/XLNet/index.html">
+<meta property="og:title" content="XLNet">
+<meta property="og:url" content="http://edlison.com/2020/09/18/paper_read/XLNet/index.html">
 <meta property="og:site_name" content="Edlison is talking here.">
 <meta property="og:description" content="XLNet Generalized Autoregressive Pretraining for Language UnderstandingAbstractBert基于去噪自编码器的预训练模型，性能优于自回归语言模型的预训练方法。而由于mask一部分输入，bert忽略了被mask位置之间的依赖关系。 XLNet基于此优缺点可以  通过最大化所有可能的因式分解顺序的对数似然，学习双向语境信息 用自">
 <meta property="og:locale" content="zh_CN">
@@ -36,13 +36,14 @@
 <meta property="og:image" content="https://pic3.zhimg.com/80/v2-05d785e9d8f810d118e4fa93f8e9b39f_1440w.jpg">
 <meta property="og:image" content="https://picb.zhimg.com/80/v2-2bb1a60af4fe2fa751647fdce48e337c_1440w.jpg">
 <meta property="article:published_time" content="2020-09-18T09:33:11.939Z">
-<meta property="article:modified_time" content="2020-09-18T16:58:28.103Z">
+<meta property="article:modified_time" content="2021-02-04T05:49:16.689Z">
 <meta property="article:author" content="Bolin Shen">
+<meta property="article:tag" content="XLNet">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190810224951812.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNzk0NzE1Ng==,size_16,color_FFFFFF,t_70">
 
 
-<link rel="canonical" href="http://edlison.com/2020/09/18/paper/XLNet/">
+<link rel="canonical" href="http://edlison.com/2020/09/18/paper_read/XLNet/">
 
 
 <script class="page-configurations">
@@ -55,7 +56,7 @@
   };
 </script>
 
-  <title>paper/XLNet | Edlison is talking here.</title>
+  <title>XLNet | Edlison is talking here.</title>
   
 
 
@@ -169,18 +170,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">128</span>
+          <span class="site-state-item-count">132</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">41</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -229,7 +230,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/09/18/paper/XLNet/">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2020/09/18/paper_read/XLNet/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -242,7 +243,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          paper/XLNet
+          XLNet
         </h1>
 
         <div class="post-meta-container">
@@ -260,8 +261,21 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-19 00:58:28" itemprop="dateModified" datetime="2020-09-19T00:58:28+08:00">2020-09-19</time>
+        <time title="修改时间：2021-02-04 13:49:16" itemprop="dateModified" datetime="2021-02-04T13:49:16+08:00">2021-02-04</time>
       </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Paper/" itemprop="url" rel="index"><span itemprop="name">Paper</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Paper/NLP/" itemprop="url" rel="index"><span itemprop="name">NLP</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -343,6 +357,9 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/XLNet/" rel="tag"># XLNet</a>
+          </div>
 
         
 
@@ -353,8 +370,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2020/09/18/paper/Attention-Transformer/" rel="next" title="paper/Attention-Transformer">
-                  paper/Attention-Transformer <i class="fa fa-chevron-right"></i>
+                <a href="/2020/09/18/paper_read/Attention-Transformer/" rel="next" title="paper_read/Attention-Transformer">
+                  paper_read/Attention-Transformer <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
