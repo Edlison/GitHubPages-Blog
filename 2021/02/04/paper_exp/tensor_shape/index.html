@@ -24,14 +24,18 @@
     var CONFIG = {"hostname":"edlison.com","root":"/","images":"/images","scheme":"Muse","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta property="og:type" content="article">
-<meta property="og:title" content="paper_exp&#x2F;tensor_shape">
+  <meta name="description" content="改变Tensor形状改变Tensor形状时，原Tensor中的数据是如何重构的。 Tensor数据形状的变化同一维度每一行往前或往后拼接，直到满足这个维度要求的值。 1234567x &#x3D; torch.autograd.Variable(torch.Tensor([[1, 2], [3, 4], [5, 6]]), requires_grad&#x3D;True)tensor([[1., 2.],">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tensor的Shape操作">
 <meta property="og:url" content="http://edlison.com/2021/02/04/paper_exp/tensor_shape/index.html">
 <meta property="og:site_name" content="Edlison is talking here.">
+<meta property="og:description" content="改变Tensor形状改变Tensor形状时，原Tensor中的数据是如何重构的。 Tensor数据形状的变化同一维度每一行往前或往后拼接，直到满足这个维度要求的值。 1234567x &#x3D; torch.autograd.Variable(torch.Tensor([[1, 2], [3, 4], [5, 6]]), requires_grad&#x3D;True)tensor([[1., 2.],">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-04T02:49:48.656Z">
-<meta property="article:modified_time" content="2021-02-08T18:19:01.281Z">
+<meta property="article:modified_time" content="2021-02-09T18:07:23.699Z">
 <meta property="article:author" content="Bolin Shen">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="pytorch">
 <meta name="twitter:card" content="summary">
 
 
@@ -48,7 +52,7 @@
   };
 </script>
 
-  <title>paper_exp/tensor_shape | Edlison is talking here.</title>
+  <title>Tensor的Shape操作 | Edlison is talking here.</title>
   
 
 
@@ -136,7 +140,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -149,6 +153,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#改变Tensor形状"><span class="nav-number">1.</span> <span class="nav-text">改变Tensor形状</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tensor数据形状的变化"><span class="nav-number">1.1.</span> <span class="nav-text">Tensor数据形状的变化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#同一维度"><span class="nav-number">1.1.1.</span> <span class="nav-text">同一维度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跨维度"><span class="nav-number">1.1.2.</span> <span class="nav-text">跨维度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看形状的方式"><span class="nav-number">1.2.</span> <span class="nav-text">查看形状的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-shape"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. shape</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-size"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. size</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#改变形状的方式"><span class="nav-number">1.3.</span> <span class="nav-text">改变形状的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-reshape"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. reshape</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-view"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. view</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-squeeze-unsqueeze"><span class="nav-number">1.3.3.</span> <span class="nav-text">3. squeeze&#x2F;unsqueeze</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensor的拼接"><span class="nav-number">2.</span> <span class="nav-text">Tensor的拼接</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -161,7 +166,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">132</span>
+          <span class="site-state-item-count">134</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -172,7 +177,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-count">44</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -234,7 +239,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          paper_exp/tensor_shape
+          Tensor的Shape操作
         </h1>
 
         <div class="post-meta-container">
@@ -252,8 +257,17 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-02-09 02:19:01" itemprop="dateModified" datetime="2021-02-09T02:19:01+08:00">2021-02-09</time>
+        <time title="修改时间：2021-02-10 02:07:23" itemprop="dateModified" datetime="2021-02-10T02:07:23+08:00">2021-02-10</time>
       </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Paper/" itemprop="url" rel="index"><span itemprop="name">Paper</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -265,7 +279,45 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        
+        <h1 id="改变Tensor形状"><a href="#改变Tensor形状" class="headerlink" title="改变Tensor形状"></a>改变Tensor形状</h1><p>改变Tensor形状时，原Tensor中的数据是如何重构的。</p>
+<h2 id="Tensor数据形状的变化"><a href="#Tensor数据形状的变化" class="headerlink" title="Tensor数据形状的变化"></a>Tensor数据形状的变化</h2><h3 id="同一维度"><a href="#同一维度" class="headerlink" title="同一维度"></a>同一维度</h3><p>每一行往前或往后拼接，直到满足这个维度要求的值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x = torch.autograd.Variable(torch.Tensor([[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>], [<span class="number">5</span>, <span class="number">6</span>]]), requires_grad=<span class="literal">True</span>)</span><br><span class="line">tensor([[<span class="number">1.</span>, <span class="number">2.</span>],</span><br><span class="line">        [<span class="number">3.</span>, <span class="number">4.</span>],</span><br><span class="line">        [<span class="number">5.</span>, <span class="number">6.</span>]], requires_grad=<span class="literal">True</span>)</span><br><span class="line">x = x.view(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">tensor([[<span class="number">1.</span>, <span class="number">2.</span>, <span class="number">3.</span>],</span><br><span class="line">        [<span class="number">4.</span>, <span class="number">5.</span>, <span class="number">6.</span>]], grad_fn=&lt;ViewBackward&gt;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="跨维度"><a href="#跨维度" class="headerlink" title="跨维度"></a>跨维度</h3><p>从最低维上的数值一直到高纬进行拼接，不同维度上不够的会跨维度进行拼接。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">x = torch.autograd.Variable(torch.Tensor([[[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>], [<span class="number">5</span>, <span class="number">6</span>]], [[<span class="number">7</span>, <span class="number">8</span>], [<span class="number">9</span>, <span class="number">10</span>], [<span class="number">11</span>, <span class="number">12</span>]]]), requires_grad=<span class="literal">True</span>)</span><br><span class="line">tensor([[[ <span class="number">1.</span>,  <span class="number">2.</span>],</span><br><span class="line">         [ <span class="number">3.</span>,  <span class="number">4.</span>],</span><br><span class="line">         [ <span class="number">5.</span>,  <span class="number">6.</span>]],</span><br><span class="line"></span><br><span class="line">        [[ <span class="number">7.</span>,  <span class="number">8.</span>],</span><br><span class="line">         [ <span class="number">9.</span>, <span class="number">10.</span>],</span><br><span class="line">         [<span class="number">11.</span>, <span class="number">12.</span>]]], requires_grad=<span class="literal">True</span>)</span><br><span class="line">x = x.view(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">tensor([[ <span class="number">1.</span>,  <span class="number">2.</span>,  <span class="number">3.</span>,  <span class="number">4.</span>],</span><br><span class="line">        [ <span class="number">5.</span>,  <span class="number">6.</span>,  <span class="number">7.</span>,  <span class="number">8.</span>],</span><br><span class="line">        [ <span class="number">9.</span>, <span class="number">10.</span>, <span class="number">11.</span>, <span class="number">12.</span>]], grad_fn=&lt;ViewBackward&gt;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看形状的方式"><a href="#查看形状的方式" class="headerlink" title="查看形状的方式"></a>查看形状的方式</h2><h3 id="1-shape"><a href="#1-shape" class="headerlink" title="1. shape"></a>1. shape</h3><p>通过<code>Tensor.shape</code>可以获取该Tensor的形状信息。这里的<code>shape</code>属于Field，它是一个数组。</p>
+<p>使用方法：想要获取某个维度的大小只需要<code>.shape[0]</code>就可以了。</p>
+<h3 id="2-size"><a href="#2-size" class="headerlink" title="2. size"></a>2. size</h3><p>通过<code>Tensor.size()</code>可以获取该Tensor<strong>某个维度上</strong>的信息。这里的<code>size</code>属于Method，它是一个方法，需要传dim信息。</p>
+<p>使用方法：<code>.size(0)</code></p>
+<h2 id="改变形状的方式"><a href="#改变形状的方式" class="headerlink" title="改变形状的方式"></a>改变形状的方式</h2><h3 id="1-reshape"><a href="#1-reshape" class="headerlink" title="1. reshape"></a>1. reshape</h3><ul>
+<li><p>不受该Tensor是否是连续的影响。</p>
+</li>
+<li><p>返回的<strong>可能是</strong>Tensor的copy，<strong>也可能不是</strong>。</p>
+</li>
+</ul>
+<h3 id="2-view"><a href="#2-view" class="headerlink" title="2. view"></a>2. view</h3><ul>
+<li>只能改变连续的Tensor（没有调用过<code>transpose</code>, <code>permute</code>等）。</li>
+<li>与原Tensor共享存储器（不是内存）。</li>
+</ul>
+<h3 id="3-squeeze-unsqueeze"><a href="#3-squeeze-unsqueeze" class="headerlink" title="3. squeeze/unsqueeze"></a>3. squeeze/unsqueeze</h3><p>对Tensor维度值为1的维度进行删除或增加。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = Tensor(<span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">1</span>)</span><br><span class="line"><span class="comment"># torch.Size([2, 1, 3, 1])</span></span><br><span class="line">a = a.squeeze(<span class="number">1</span>)</span><br><span class="line"><span class="comment"># torch.Size([2, 3, 1])</span></span><br><span class="line">a = a.unsqueeze(<span class="number">0</span>)</span><br><span class="line"><span class="comment"># torch.Size([1, 2, 3, 1])</span></span><br><span class="line">a = a.squeeze()</span><br><span class="line"><span class="comment"># torch.Size([2, 3])</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ul>
+<li>不传参删除所有维度值为1的维度。</li>
+<li>不在原本的存储空间上操作，<strong>只是显示改变样子</strong>，想要获取需要赋值。</li>
+</ul>
+<h1 id="Tensor的拼接"><a href="#Tensor的拼接" class="headerlink" title="Tensor的拼接"></a>Tensor的拼接</h1><p>将多个Tensor进行拼接，使用<code>torch.cat(inputs, dim=0)</code>.</p>
+<p>将输入在dim维度上进行拼接。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">x = Tensor([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line"><span class="comment"># x:  tensor([[1., 2., 3.],</span></span><br><span class="line"><span class="comment">#         [4., 5., 6.]], device='cuda:7')</span></span><br><span class="line">y = Tensor([[<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br><span class="line"><span class="comment"># y:  tensor([[4., 5., 6.],</span></span><br><span class="line"><span class="comment">#         [7., 8., 9.]], device='cuda:7')</span></span><br><span class="line">z = torch.cat([x, y], dim=<span class="number">0</span>)</span><br><span class="line"><span class="comment"># tensor([[1., 2., 3.],</span></span><br><span class="line"><span class="comment">#         [4., 5., 6.],</span></span><br><span class="line"><span class="comment">#         [4., 5., 6.],</span></span><br><span class="line"><span class="comment">#         [7., 8., 9.]], device='cuda:7') torch.Size([4, 3])</span></span><br><span class="line">z = torch.cat([x, y], dim=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># tensor([[1., 2., 3., 4., 5., 6.],</span></span><br><span class="line"><span class="comment">#         [4., 5., 6., 7., 8., 9.]], device='cuda:7') torch.Size([2, 6])</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ul>
+<li>传入的inputs是一个序列，<code>list</code>或<code>tuple</code>.</li>
+<li>传入的inputs在需要拼接的dim上shape必须一致。</li>
+</ul>
+
     </div>
 
     
@@ -273,6 +325,10 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/pytorch/" rel="tag"># pytorch</a>
+          </div>
 
         
 
