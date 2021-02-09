@@ -244,7 +244,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2021-02-10 00:47:50 / 修改时间：02:11:40" itemprop="dateCreated datePublished" datetime="2021-02-10T00:47:50+08:00">2021-02-10</time>
+      <time title="创建时间：2021-02-10 00:47:50 / 修改时间：03:40:30" itemprop="dateCreated datePublished" datetime="2021-02-10T00:47:50+08:00">2021-02-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -285,6 +285,10 @@
 </ul>
 <p>进行反向传播时，需要是一个<strong>标量</strong>。</p>
 <h1 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h1><p>就是在求得了grad的叶子结点，使用<code>Tensor.data + Tensor.grad.data</code>实现梯度下降。</p>
+<h1 id="Tensor在cuda上的转移"><a href="#Tensor在cuda上的转移" class="headerlink" title="Tensor在cuda上的转移"></a>Tensor在cuda上的转移</h1><p>所有需要使用GPU训练的参数以及关联的参数都需要放到cuda上。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cuda = <span class="literal">True</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="literal">False</span></span><br><span class="line">device_id = <span class="number">7</span></span><br><span class="line"><span class="keyword">if</span> cuda:</span><br><span class="line">    torch.cuda.set_device(device_id)</span><br><span class="line">Tensor = torch.cuda.FloatTensor <span class="keyword">if</span> cuda <span class="keyword">else</span> torch.FloatTensor</span><br></pre></td></tr></table></figure>
+
+<p>如果已经是在<code>torch.FloatTensor</code>中的参数，可以通过<code>.type(Tensor)</code>来转移参数。</p>
 <hr>
 <p>Reference</p>
 <p><a href="https://pytorch.org/docs/stable/tensors.html" target="_blank" rel="noopener">https://pytorch.org/docs/stable/tensors.html</a></p>
@@ -347,7 +351,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-02-10 02:21:31" itemprop="dateModified" datetime="2021-02-10T02:21:31+08:00">2021-02-10</time>
+        <time title="修改时间：2021-02-10 02:58:33" itemprop="dateModified" datetime="2021-02-10T02:58:33+08:00">2021-02-10</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -369,9 +373,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="网络的组合"><a href="#网络的组合" class="headerlink" title="网络的组合"></a>网络的组合</h1><p>用列表的数据结构，存储Module。</p>
+          <h1 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a>遇到的坑</h1><h2 id="网络的组合"><a href="#网络的组合" class="headerlink" title="网络的组合"></a>网络的组合</h2><p>用列表的数据结构，存储Module。</p>
 <p>使用 Python 的 list 添加的全连接层和它们的 parameters 并没有自动注册到我们的网络中。</p>
 <p>如果想要继承了nn.Module的网络组合多个子网络，需要通过<code>nn.Sequential</code>, <code>nn.ModuleList</code>等对网络参数进行注册。</p>
+<h2 id="计算Loss的两个Tensor形状不一致"><a href="#计算Loss的两个Tensor形状不一致" class="headerlink" title="计算Loss的两个Tensor形状不一致"></a>计算Loss的两个Tensor形状不一致</h2><p>由于通过网络经过各种矩阵相乘，最后得到的结果是一个二维的Tensor。自己定义的real_label是一个一维的Tensor。<code>torch.Size([256])</code> 不等于 <code>torch.Size([256, 1])</code>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g_loss = self.losser.get_loss(d_fake, real_label)</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决方案：</strong>在网络D最后的输出使用<code>.squeeze()</code>对维度值为1的维度进行挤压。</p>
 <h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><hr>
 <p>Reference</p>
 <p><a href="https://discuss.pytorch.org/t/when-should-i-use-nn-modulelist-and-when-should-i-use-nn-sequential/5463" target="_blank" rel="noopener">https://discuss.pytorch.org/t/when-should-i-use-nn-modulelist-and-when-should-i-use-nn-sequential/5463</a></p>

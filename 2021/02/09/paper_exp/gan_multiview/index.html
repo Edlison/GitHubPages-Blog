@@ -24,15 +24,15 @@
     var CONFIG = {"hostname":"edlison.com","root":"/","images":"/images","scheme":"Muse","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="网络的组合用列表的数据结构，存储Module。 使用 Python 的 list 添加的全连接层和它们的 parameters 并没有自动注册到我们的网络中。 如果想要继承了nn.Module的网络组合多个子网络，需要通过nn.Sequential, nn.ModuleList等对网络参数进行注册。 思考 Reference https:&#x2F;&#x2F;discuss.pytorch.org&#x2F;t&#x2F;when-s">
+  <meta name="description" content="遇到的坑网络的组合用列表的数据结构，存储Module。 使用 Python 的 list 添加的全连接层和它们的 parameters 并没有自动注册到我们的网络中。 如果想要继承了nn.Module的网络组合多个子网络，需要通过nn.Sequential, nn.ModuleList等对网络参数进行注册。 计算Loss的两个Tensor形状不一致由于通过网络经过各种矩阵相乘，最后得到的结果是一个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在GAN上实现Multi-View">
 <meta property="og:url" content="http://edlison.com/2021/02/09/paper_exp/gan_multiview/index.html">
 <meta property="og:site_name" content="Edlison is talking here.">
-<meta property="og:description" content="网络的组合用列表的数据结构，存储Module。 使用 Python 的 list 添加的全连接层和它们的 parameters 并没有自动注册到我们的网络中。 如果想要继承了nn.Module的网络组合多个子网络，需要通过nn.Sequential, nn.ModuleList等对网络参数进行注册。 思考 Reference https:&#x2F;&#x2F;discuss.pytorch.org&#x2F;t&#x2F;when-s">
+<meta property="og:description" content="遇到的坑网络的组合用列表的数据结构，存储Module。 使用 Python 的 list 添加的全连接层和它们的 parameters 并没有自动注册到我们的网络中。 如果想要继承了nn.Module的网络组合多个子网络，需要通过nn.Sequential, nn.ModuleList等对网络参数进行注册。 计算Loss的两个Tensor形状不一致由于通过网络经过各种矩阵相乘，最后得到的结果是一个">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-09T10:52:45.139Z">
-<meta property="article:modified_time" content="2021-02-09T18:21:31.900Z">
+<meta property="article:modified_time" content="2021-02-09T18:58:33.370Z">
 <meta property="article:author" content="Bolin Shen">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="gan">
@@ -155,7 +155,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络的组合"><span class="nav-number">1.</span> <span class="nav-text">网络的组合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思考"><span class="nav-number">2.</span> <span class="nav-text">思考</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#遇到的坑"><span class="nav-number">1.</span> <span class="nav-text">遇到的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#网络的组合"><span class="nav-number">1.1.</span> <span class="nav-text">网络的组合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算Loss的两个Tensor形状不一致"><span class="nav-number">1.2.</span> <span class="nav-text">计算Loss的两个Tensor形状不一致</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思考"><span class="nav-number">2.</span> <span class="nav-text">思考</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -259,7 +259,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-02-10 02:21:31" itemprop="dateModified" datetime="2021-02-10T02:21:31+08:00">2021-02-10</time>
+        <time title="修改时间：2021-02-10 02:58:33" itemprop="dateModified" datetime="2021-02-10T02:58:33+08:00">2021-02-10</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -281,9 +281,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="网络的组合"><a href="#网络的组合" class="headerlink" title="网络的组合"></a>网络的组合</h1><p>用列表的数据结构，存储Module。</p>
+        <h1 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a>遇到的坑</h1><h2 id="网络的组合"><a href="#网络的组合" class="headerlink" title="网络的组合"></a>网络的组合</h2><p>用列表的数据结构，存储Module。</p>
 <p>使用 Python 的 list 添加的全连接层和它们的 parameters 并没有自动注册到我们的网络中。</p>
 <p>如果想要继承了nn.Module的网络组合多个子网络，需要通过<code>nn.Sequential</code>, <code>nn.ModuleList</code>等对网络参数进行注册。</p>
+<h2 id="计算Loss的两个Tensor形状不一致"><a href="#计算Loss的两个Tensor形状不一致" class="headerlink" title="计算Loss的两个Tensor形状不一致"></a>计算Loss的两个Tensor形状不一致</h2><p>由于通过网络经过各种矩阵相乘，最后得到的结果是一个二维的Tensor。自己定义的real_label是一个一维的Tensor。<code>torch.Size([256])</code> 不等于 <code>torch.Size([256, 1])</code>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g_loss = self.losser.get_loss(d_fake, real_label)</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决方案：</strong>在网络D最后的输出使用<code>.squeeze()</code>对维度值为1的维度进行挤压。</p>
 <h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><hr>
 <p>Reference</p>
 <p><a href="https://discuss.pytorch.org/t/when-should-i-use-nn-modulelist-and-when-should-i-use-nn-sequential/5463" target="_blank" rel="noopener">https://discuss.pytorch.org/t/when-should-i-use-nn-modulelist-and-when-should-i-use-nn-sequential/5463</a></p>
