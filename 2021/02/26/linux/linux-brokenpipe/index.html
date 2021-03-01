@@ -24,15 +24,15 @@
     var CONFIG = {"hostname":"edlison.com","root":"/","images":"/images","scheme":"Muse","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="修改ssh_config法11sudo vim &#x2F;etc&#x2F;ssh&#x2F;ssh_config  最后添加 12ClientAliveInterval 60ClientAliveCountMax 1  重启sshd 1systemctl restart sshd    法2最后添加 1IPQoS&#x3D;throughput  重启sshd 1systemctl restart sshd">
+  <meta name="description" content="修改ssh_config法11sudo vim &#x2F;etc&#x2F;ssh&#x2F;ssh_config  最后添加 12ClientAliveInterval 60ClientAliveCountMax 1  重启sshd 1systemctl restart sshd    法2最后添加 1IPQoS&#x3D;throughput  重启sshd 1systemctl restart sshd    好像没用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux ssh 保持连接">
 <meta property="og:url" content="http://edlison.com/2021/02/26/linux/linux-brokenpipe/index.html">
 <meta property="og:site_name" content="Edlison is talking here.">
-<meta property="og:description" content="修改ssh_config法11sudo vim &#x2F;etc&#x2F;ssh&#x2F;ssh_config  最后添加 12ClientAliveInterval 60ClientAliveCountMax 1  重启sshd 1systemctl restart sshd    法2最后添加 1IPQoS&#x3D;throughput  重启sshd 1systemctl restart sshd">
+<meta property="og:description" content="修改ssh_config法11sudo vim &#x2F;etc&#x2F;ssh&#x2F;ssh_config  最后添加 12ClientAliveInterval 60ClientAliveCountMax 1  重启sshd 1systemctl restart sshd    法2最后添加 1IPQoS&#x3D;throughput  重启sshd 1systemctl restart sshd    好像没用">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-26T05:38:40.469Z">
-<meta property="article:modified_time" content="2021-02-26T05:41:53.552Z">
+<meta property="article:modified_time" content="2021-03-01T06:58:11.542Z">
 <meta property="article:author" content="Bolin Shen">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="ssh">
@@ -166,7 +166,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">159</span>
+          <span class="site-state-item-count">161</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -177,7 +177,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">66</span>
+        <span class="site-state-item-count">68</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -249,10 +249,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-02-26 13:38:40 / 修改时间：13:41:53" itemprop="dateCreated datePublished" datetime="2021-02-26T13:38:40+08:00">2021-02-26</time>
+      <time title="创建时间：2021-02-26 13:38:40" itemprop="dateCreated datePublished" datetime="2021-02-26T13:38:40+08:00">2021-02-26</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-03-01 14:58:11" itemprop="dateModified" datetime="2021-03-01T14:58:11+08:00">2021-03-01</time>
+      </span>
 
   
 </div>
@@ -280,6 +286,9 @@
 <p>重启sshd</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
 
+
+
+<p>好像没用…</p>
 
     </div>
 
