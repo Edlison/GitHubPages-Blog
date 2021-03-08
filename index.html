@@ -159,7 +159,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -210,6 +210,153 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/03/08/notebook/druid-pwd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/08/notebook/druid-pwd/" class="post-title-link" itemprop="url">Druid连接池加密</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-03-08 22:03:38 / 修改时间：22:10:42" itemprop="dateCreated datePublished" datetime="2021-03-08T22:03:38+08:00">2021-03-08</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="数据库连接加密"><a href="#数据库连接加密" class="headerlink" title="数据库连接加密"></a>数据库连接加密</h1><p>项目有需求连接数据库的信息需要加密。</p>
+<p>刚好Druid可以通过拦截器使用秘文和公钥将密码还原成真实的密码。</p>
+<h1 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h1><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>durid过滤器一直没起作用</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>由于项目配置文件里有区分主从数据库，因此在对主数据库的加密解密要写在<code>spring.datasource.druid.master</code>配置下。不能配置在<code>spring.datasource.druid</code>下。</p>
+<hr>
+<p>Reference</p>
+<p><a href="https://www.cnblogs.com/vipstone/p/14467140.html" target="_blank" rel="noopener">https://www.cnblogs.com/vipstone/p/14467140.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/03/08/network/tcpip/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/08/network/tcpip/" class="post-title-link" itemprop="url">Network TCP/IP</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-03-08 16:39:08" itemprop="dateCreated datePublished" datetime="2021-03-08T16:39:08+08:00">2021-03-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-03-09 01:41:05" itemprop="dateModified" datetime="2021-03-09T01:41:05+08:00">2021-03-09</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><p><img src="https://pic3.zhimg.com/80/v2-4fe0b5f06fc89af2f98ebd2690bc87ea_720w.jpg" alt="img"></p>
+<hr>
+<p>Reference</p>
+<p><a href="https://zhuanlan.zhihu.com/p/33889997" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/33889997</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -2725,7 +2872,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-03-06 01:12:58" itemprop="dateModified" datetime="2021-03-06T01:12:58+08:00">2021-03-06</time>
+        <time title="修改时间：2021-03-09 00:52:25" itemprop="dateModified" datetime="2021-03-09T00:52:25+08:00">2021-03-09</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2900,10 +3047,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-02-10 00:47:50 / 修改时间：03:40:30" itemprop="dateCreated datePublished" datetime="2021-02-10T00:47:50+08:00">2021-02-10</time>
+      <time title="创建时间：2021-02-10 00:47:50" itemprop="dateCreated datePublished" datetime="2021-02-10T00:47:50+08:00">2021-02-10</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-03-09 00:53:47" itemprop="dateModified" datetime="2021-03-09T00:53:47+08:00">2021-03-09</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -2933,6 +3086,7 @@
 <p><code>torch.ones(4, 5)</code></p>
 <h2 id="对Tensor内部属性的操作："><a href="#对Tensor内部属性的操作：" class="headerlink" title="对Tensor内部属性的操作："></a>对Tensor内部属性的操作：</h2><p>Tensor是一个对象，如果对其操作需要通过<code>.requires_grad_()</code>等方法对Field进行赋值。</p>
 <p><code>torch.ones(2, 3)</code>等，是一个方法，其中可以通过传<code>requires_grad=True</code>等字典对Field进行赋值，由于返回的仍是一个Tensor类型的对象，也可以使用<code>.requires_grad_()</code>等方法进行赋值。</p>
+<h2 id="浮点型"><a href="#浮点型" class="headerlink" title="浮点型"></a>浮点型</h2><p>可以通过<code>tensor.to(torch.float64)</code>将<code>Tensor</code>类型的数据转换成<code>FloatTensor</code>类型的数据。</p>
 <h1 id="梯度"><a href="#梯度" class="headerlink" title="梯度"></a>梯度</h1><p>Pytorch计算图中有两种元素：数据（Tensor）和运算（可求导运算）。</p>
 <p>Tensor分为两类：叶子结点，非叶子结点。</p>
 <p>计算Tensor梯度（即grad属性被赋值）的条件：</p>
