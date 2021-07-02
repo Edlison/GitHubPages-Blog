@@ -802,7 +802,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-05-13 08:57:23" itemprop="dateModified" datetime="2021-05-13T08:57:23+08:00">2021-05-13</time>
+        <time title="修改时间：2021-06-08 15:04:54" itemprop="dateModified" datetime="2021-06-08T15:04:54+08:00">2021-06-08</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -829,6 +829,7 @@
 <h1 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h1><p>注意分<strong>连续数据</strong>与<strong>离散数据</strong>。</p>
 <p>连续数据注意<strong>归一化</strong></p>
 <p>离散数据处理成<strong>one_hot</strong></p>
+<p>图像一定要归一化！！！</p>
 <h1 id="网络设计"><a href="#网络设计" class="headerlink" title="网络设计"></a>网络设计</h1><p>归一化后的数据要与选择的<strong>激活函数相对应</strong></p>
 <p>离散数据最后一层改成<strong>softmax</strong></p>
 <h1 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h1><p>Discriminator可以设定clamp防止训练发散</p>
@@ -2447,7 +2448,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-03-06 02:02:05" itemprop="dateModified" datetime="2021-03-06T02:02:05+08:00">2021-03-06</time>
+        <time title="修改时间：2021-06-08 16:23:32" itemprop="dateModified" datetime="2021-06-08T16:23:32+08:00">2021-06-08</time>
       </span>
 
   
@@ -2465,7 +2466,8 @@
 <p>新数据 = (数值 - 最小值) / (最大值 - 最小值)</p>
 <h1 id="Z-Score-标准化"><a href="#Z-Score-标准化" class="headerlink" title="Z-Score(标准化)"></a>Z-Score(标准化)</h1><p>处理后的数据均值为0，方差为1</p>
 <p>新数据 = (数据 - 均值) / 标准差</p>
-<h1 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h1><h1 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h1><p><code>int</code>是带符号数</p>
+<h1 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h1><p><strong>正则化是为了防止过拟合</strong></p>
+<h1 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h1><p><code>int</code>是带符号数</p>
 <p><code>uint</code>是不带符号数</p>
 <hr>
 <p>Reference</p>
