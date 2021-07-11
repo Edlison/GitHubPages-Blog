@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"edlison.com","root":"/","images":"/images","scheme":"Muse","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="Start123from flask_socketio import SocketIOsocketio &#x3D; SocketIO(app)  Receiving MessagesThe event name is determined. &#39;message&#39;, &#39;json&#39;, &#39;xxx event&#39;, you can determine these nam">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flask-Socktio">
+<meta property="og:url" content="http://edlison.com/2021/07/10/web/socketio/index.html">
+<meta property="og:site_name" content="Edlison is talking here.">
+<meta property="og:description" content="Start123from flask_socketio import SocketIOsocketio &#x3D; SocketIO(app)  Receiving MessagesThe event name is determined. &#39;message&#39;, &#39;json&#39;, &#39;xxx event&#39;, you can determine these nam">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-10T08:28:05.854Z">
+<meta property="article:modified_time" content="2021-07-11T04:33:59.880Z">
+<meta property="article:author" content="Bolin Shen">
+<meta property="article:tag" content="flask">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="socket">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://edlison.com/2021/07/10/web/socketio/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Flask-Socktio | Edlison is talking here.</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Edlison is talking here.</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Start"><span class="nav-number">1.</span> <span class="nav-text">Start</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Receiving-Messages"><span class="nav-number">2.</span> <span class="nav-text">Receiving Messages</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sending-Messages"><span class="nav-number">3.</span> <span class="nav-text">Sending Messages</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Broadcasting"><span class="nav-number">4.</span> <span class="nav-text">Broadcasting</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Rooms"><span class="nav-number">5.</span> <span class="nav-text">Rooms</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Class-Based-Events"><span class="nav-number">6.</span> <span class="nav-text">Class-Based Events</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Bolin Shen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">200</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">91</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/edlison" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;edlison" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bolin.edlison.shen@gmail.com" title="E-Mail → mailto:bolin.edlison.shen@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/07/10/web/socketio/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Flask-Socktio
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-07-10 16:28:05" itemprop="dateCreated datePublished" datetime="2021-07-10T16:28:05+08:00">2021-07-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-07-11 12:33:59" itemprop="dateModified" datetime="2021-07-11T12:33:59+08:00">2021-07-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask_socketio <span class="keyword">import</span> SocketIO</span><br><span class="line"></span><br><span class="line">socketio = SocketIO(app)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Receiving-Messages"><a href="#Receiving-Messages" class="headerlink" title="Receiving Messages"></a>Receiving Messages</h1><p>The event name is determined. <code>&#39;message&#39;, &#39;json&#39;, &#39;xxx event&#39;</code>, you can determine these name as socket name. Particularly <code>&#39;connect&#39;, &#39;disconnecte&#39;</code> can be called when connecting or disconnecting.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@socketio.on('xxx event', namespace='/test')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">handler</span><span class="params">(json)</span>:</span></span><br><span class="line">  print(<span class="string">'receive json: '</span>, str(json))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">	<span class="keyword">var</span> socket = io.connect(<span class="string">'http://0.0.0.0:5001'</span>)</span></span><br><span class="line"><span class="actionscript">  socket.on(<span class="string">'connect'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">    socket.emit(<span class="string">'xxx event'</span>, &#123;<span class="string">'data'</span>: <span class="string">'connected.'</span>&#125;)</span></span><br><span class="line">  &#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Sending-Messages"><a href="#Sending-Messages" class="headerlink" title="Sending Messages"></a>Sending Messages</h1><p><code>emit()</code> used for named events , <code>send()</code> used for unamed events.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@socketio.on('xxx event', namespace='/chatroom')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">xxx_event</span><span class="params">()</span>:</span></span><br><span class="line">  emit(<span class="string">'xxx event'</span>, &#123;<span class="string">'data'</span>: <span class="string">'xxx'</span>&#125;, namespace=<span class="string">'/chatroom'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>Important</strong></p>
+<p>You can emit message in a router with <code>socketio.emit(&#39;xxx event&#39;, resp, namespace=&#39;/chatroom&#39;)</code>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.rout('/send')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send</span><span class="params">()</span>:</span></span><br><span class="line">	socketio.emit(<span class="string">'xxx event'</span>, resp, namespace=<span class="string">'/chatroom'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>You can’t use <code>emit()</code> without context of <code>socketio</code>, you should use <code>socketio.emit()</code>.</p>
+<h1 id="Broadcasting"><a href="#Broadcasting" class="headerlink" title="Broadcasting"></a>Broadcasting</h1><p>If broadcasting is enabled, all the clients connected to the namespace will receive the message.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@socketio.on('xxx event', namespace='/chatroom')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">xxx_event</span><span class="params">()</span>:</span></span><br><span class="line">  emit(<span class="string">'xxx event'</span>, &#123;<span class="string">'data'</span>: <span class="string">'xxx'</span>&#125;, namespace=<span class="string">'/chatroom'</span>, broadcast=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Rooms"><a href="#Rooms" class="headerlink" title="Rooms"></a>Rooms</h1><p>Users can receive messages from the room they are in.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@socketio.on('join')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_join</span><span class="params">(data)</span>:</span></span><br><span class="line">    username = data[<span class="string">'username'</span>]</span><br><span class="line">    room = data[<span class="string">'room'</span>]</span><br><span class="line">    join_room(room)</span><br><span class="line">    send(username + <span class="string">' has entered the room.'</span>, to=room)</span><br><span class="line"></span><br><span class="line"><span class="meta">@socketio.on('leave')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_leave</span><span class="params">(data)</span>:</span></span><br><span class="line">    username = data[<span class="string">'username'</span>]</span><br><span class="line">    room = data[<span class="string">'room'</span>]</span><br><span class="line">    leave_room(room)</span><br><span class="line">    send(username + <span class="string">' has left the room.'</span>, to=room)</span><br></pre></td></tr></table></figure>
+
+<p>Use <code>to</code> argument set which room the message should be sent to.</p>
+<h1 id="Class-Based-Events"><a href="#Class-Based-Events" class="headerlink" title="Class-Based Events"></a>Class-Based Events</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask_socketio <span class="keyword">import</span> Namespace, emit</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyCustomNamespace</span><span class="params">(Namespace)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">on_connect</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">on_disconnect</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">on_my_event</span><span class="params">(self, data)</span>:</span></span><br><span class="line">        emit(<span class="string">'my_response'</span>, data)</span><br><span class="line"></span><br><span class="line">socketio.on_namespace(MyCustomNamespace(<span class="string">'/test'</span>))  <span class="comment"># Assign namespace</span></span><br></pre></td></tr></table></figure>
+
+<p>All the event is defined by the methods with <code>on_</code> prefix.</p>
+<hr>
+<p>Reference</p>
+<p><a href="https://flask-socketio.readthedocs.io" target="_blank" rel="noopener">https://flask-socketio.readthedocs.io</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/flask/" rel="tag"># flask</a>
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/socket/" rel="tag"># socket</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/07/07/web/data-trans-form/" rel="prev" title="web/data-trans-form">
+                  <i class="fa fa-chevron-left"></i> web/data-trans-form
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bolin Shen</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

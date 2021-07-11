@@ -159,18 +159,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">193</span>
+          <span class="site-state-item-count">200</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">90</span>
+        <span class="site-state-item-count">91</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -218,6 +218,563 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/07/10/web/socketio/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/10/web/socketio/" class="post-title-link" itemprop="url">Flask-Socktio</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-07-10 16:28:05" itemprop="dateCreated datePublished" datetime="2021-07-10T16:28:05+08:00">2021-07-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-07-11 12:33:59" itemprop="dateModified" datetime="2021-07-11T12:33:59+08:00">2021-07-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask_socketio <span class="keyword">import</span> SocketIO</span><br><span class="line"></span><br><span class="line">socketio = SocketIO(app)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Receiving-Messages"><a href="#Receiving-Messages" class="headerlink" title="Receiving Messages"></a>Receiving Messages</h1><p>The event name is determined. <code>&#39;message&#39;, &#39;json&#39;, &#39;xxx event&#39;</code>, you can determine these name as socket name. Particularly <code>&#39;connect&#39;, &#39;disconnecte&#39;</code> can be called when connecting or disconnecting.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@socketio.on('xxx event', namespace='/test')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">handler</span><span class="params">(json)</span>:</span></span><br><span class="line">  print(<span class="string">'receive json: '</span>, str(json))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">	<span class="keyword">var</span> socket = io.connect(<span class="string">'http://0.0.0.0:5001'</span>)</span></span><br><span class="line"><span class="actionscript">  socket.on(<span class="string">'connect'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">    socket.emit(<span class="string">'xxx event'</span>, &#123;<span class="string">'data'</span>: <span class="string">'connected.'</span>&#125;)</span></span><br><span class="line">  &#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Sending-Messages"><a href="#Sending-Messages" class="headerlink" title="Sending Messages"></a>Sending Messages</h1><p><code>emit()</code> used for named events , <code>send()</code> used for unamed events.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@socketio.on('xxx event', namespace='/chatroom')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">xxx_event</span><span class="params">()</span>:</span></span><br><span class="line">  emit(<span class="string">'xxx event'</span>, &#123;<span class="string">'data'</span>: <span class="string">'xxx'</span>&#125;, namespace=<span class="string">'/chatroom'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>Important</strong></p>
+<p>You can emit message in a router with <code>socketio.emit(&#39;xxx event&#39;, resp, namespace=&#39;/chatroom&#39;)</code>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.rout('/send')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send</span><span class="params">()</span>:</span></span><br><span class="line">	socketio.emit(<span class="string">'xxx event'</span>, resp, namespace=<span class="string">'/chatroom'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>You can’t use <code>emit()</code> without context of <code>socketio</code>, you should use <code>socketio.emit()</code>.</p>
+<h1 id="Broadcasting"><a href="#Broadcasting" class="headerlink" title="Broadcasting"></a>Broadcasting</h1><p>If broadcasting is enabled, all the clients connected to the namespace will receive the message.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@socketio.on('xxx event', namespace='/chatroom')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">xxx_event</span><span class="params">()</span>:</span></span><br><span class="line">  emit(<span class="string">'xxx event'</span>, &#123;<span class="string">'data'</span>: <span class="string">'xxx'</span>&#125;, namespace=<span class="string">'/chatroom'</span>, broadcast=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Rooms"><a href="#Rooms" class="headerlink" title="Rooms"></a>Rooms</h1><p>Users can receive messages from the room they are in.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@socketio.on('join')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_join</span><span class="params">(data)</span>:</span></span><br><span class="line">    username = data[<span class="string">'username'</span>]</span><br><span class="line">    room = data[<span class="string">'room'</span>]</span><br><span class="line">    join_room(room)</span><br><span class="line">    send(username + <span class="string">' has entered the room.'</span>, to=room)</span><br><span class="line"></span><br><span class="line"><span class="meta">@socketio.on('leave')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_leave</span><span class="params">(data)</span>:</span></span><br><span class="line">    username = data[<span class="string">'username'</span>]</span><br><span class="line">    room = data[<span class="string">'room'</span>]</span><br><span class="line">    leave_room(room)</span><br><span class="line">    send(username + <span class="string">' has left the room.'</span>, to=room)</span><br></pre></td></tr></table></figure>
+
+<p>Use <code>to</code> argument set which room the message should be sent to.</p>
+<h1 id="Class-Based-Events"><a href="#Class-Based-Events" class="headerlink" title="Class-Based Events"></a>Class-Based Events</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask_socketio <span class="keyword">import</span> Namespace, emit</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyCustomNamespace</span><span class="params">(Namespace)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">on_connect</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">on_disconnect</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">on_my_event</span><span class="params">(self, data)</span>:</span></span><br><span class="line">        emit(<span class="string">'my_response'</span>, data)</span><br><span class="line"></span><br><span class="line">socketio.on_namespace(MyCustomNamespace(<span class="string">'/test'</span>))  <span class="comment"># Assign namespace</span></span><br></pre></td></tr></table></figure>
+
+<p>All the event is defined by the methods with <code>on_</code> prefix.</p>
+<hr>
+<p>Reference</p>
+<p><a href="https://flask-socketio.readthedocs.io" target="_blank" rel="noopener">https://flask-socketio.readthedocs.io</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/07/07/web/data-trans-form/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/07/web/data-trans-form/" class="post-title-link" itemprop="url">web/data-trans-form</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-07-07 21:59:11 / 修改时间：21:59:26" itemprop="dateCreated datePublished" datetime="2021-07-07T21:59:11+08:00">2021-07-07</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/07/07/web/http/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/07/web/http/" class="post-title-link" itemprop="url">web/http</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-07-07 21:59:04 / 修改时间：21:59:05" itemprop="dateCreated datePublished" datetime="2021-07-07T21:59:04+08:00">2021-07-07</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/07/07/deep_learning/Dropout/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/07/deep_learning/Dropout/" class="post-title-link" itemprop="url">Dropout</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-07-07 20:49:37 / 修改时间：22:59:59" itemprop="dateCreated datePublished" datetime="2021-07-07T20:49:37+08:00">2021-07-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Deeplearning/" itemprop="url" rel="index"><span itemprop="name">Deeplearning</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Dropout-Layer"><a href="#Dropout-Layer" class="headerlink" title="Dropout Layer"></a>Dropout Layer</h1><p>To avoid two main defects in training deep network, overfit and time consuming.</p>
+<p>It has the ability to achieve regulation.</p>
+<p>The process of Dropout layer is that hide a part of the node i one layer and start forward and backward. So only a part of nodes that didn’t be hidden are updated. Repeat this process.</p>
+<hr>
+<p>Reference</p>
+<p><a href="https://zhuanlan.zhihu.com/p/38200980" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/38200980</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/07/07/deep_learning/BatchNorm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/07/deep_learning/BatchNorm/" class="post-title-link" itemprop="url">Batch Normalization</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-07-07 20:49:26 / 修改时间：22:52:32" itemprop="dateCreated datePublished" datetime="2021-07-07T20:49:26+08:00">2021-07-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Deeplearning/" itemprop="url" rel="index"><span itemprop="name">Deeplearning</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Batch-Normalization-Layer"><a href="#Batch-Normalization-Layer" class="headerlink" title="Batch Normalization Layer"></a>Batch Normalization Layer</h1><p>It is usually used before the activation node. The most important improvement is that the speed of convergence is faster, and the model is more stable, avoiding the exploading and vanishing of grad.</p>
+<p>Algorithmn of BN is calculating the mean and variance of each batch and transfering the value of all batch to mean 0, variance 1.</p>
+<hr>
+<p>Reference</p>
+<p><a href="https://www.zhihu.com/search?q=batch%20normalization&amp;utm_content=search_suggestion&amp;type=content" target="_blank" rel="noopener">https://www.zhihu.com/search?q=batch%20normalization&amp;utm_content=search_suggestion&amp;type=content</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/07/07/deep_learning/term/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/07/deep_learning/term/" class="post-title-link" itemprop="url">Terms in Deep Learning</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-07-07 20:34:04 / 修改时间：20:49:23" itemprop="dateCreated datePublished" datetime="2021-07-07T20:34:04+08:00">2021-07-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Deeplearning/" itemprop="url" rel="index"><span itemprop="name">Deeplearning</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Term"><a href="#Term" class="headerlink" title="Term"></a>Term</h1><h2 id="SOTA"><a href="#SOTA" class="headerlink" title="SOTA"></a>SOTA</h2><p>state of the art</p>
+<p>To illustrate the best model in the paticular task.</p>
+<h2 id="Baseline"><a href="#Baseline" class="headerlink" title="Baseline"></a>Baseline</h2><p>The experiment part that you need to compete with.</p>
+<h2 id="Benchmark"><a href="#Benchmark" class="headerlink" title="Benchmark"></a>Benchmark</h2><p>The target value of the experiment that you need to compete with.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/07/07/deep_learning/Conv/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bolin Shen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edlison is talking here.">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/07/deep_learning/Conv/" class="post-title-link" itemprop="url">Convolutional Neural Network</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-07-07 20:16:45 / 修改时间：22:36:04" itemprop="dateCreated datePublished" datetime="2021-07-07T20:16:45+08:00">2021-07-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Deeplearning/" itemprop="url" rel="index"><span itemprop="name">Deeplearning</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Convolutional-Layer"><a href="#Convolutional-Layer" class="headerlink" title="Convolutional Layer"></a>Convolutional Layer</h1><p>There are many conv_kernels in a Conv layer. In my perspective, one paticular kernel’s size is [kernel_size, kernel_size, in_channel]. The output of the calculation computed by the kernel is sum of all channel’s results. So you need to define filter’s num, which determine the output feature map.</p>
+<p>Parameters: filters, kernel_size, stride, padding</p>
+<h1 id="Pooling-Layer"><a href="#Pooling-Layer" class="headerlink" title="Pooling Layer"></a>Pooling Layer</h1><p>Usually a Pooling layer is after a Conv layer. It is a common use to do downsampling by calculate the value in filter of Pooling.</p>
+<p>There are 3 method in common use in Pooling layer, MaxPooling, MinPooling, AvgPooling.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://edlison.com/2021/07/07/notebook/git-ssl/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -244,7 +801,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2021-07-07 02:00:32 / 修改时间：02:03:02" itemprop="dateCreated datePublished" datetime="2021-07-07T02:00:32+08:00">2021-07-07</time>
+      <time title="创建时间：2021-07-07 02:00:32 / 修改时间：20:23:46" itemprop="dateCreated datePublished" datetime="2021-07-07T02:00:32+08:00">2021-07-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -268,9 +825,11 @@
     <div class="post-body" itemprop="articleBody">
           <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p><code>LibreSSL SSL_connect: SSL_ERROR_SYSCALL in connection to github.com:443</code></p>
 <h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p><code>git config --global http.sslBackend &quot;openssl&quot;</code></p>
-<p>或（未验证）</p>
 <p>配置<code>~/.gitconfig</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[http]</span><br><span class="line">        sslVerify &#x3D; false</span><br><span class="line">[https]</span><br><span class="line">        sslVerify &#x3D; false</span><br></pre></td></tr></table></figure>
+
+<p>或者直接输入指令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.sslVerify false</span><br><span class="line">git config --global https.sslVerify false</span><br></pre></td></tr></table></figure>
 
 
       
